@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>D:\BiliStart\BiliStart\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Dialog\LoginDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Login\PasswordLogin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Login\QRLogin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\PlayerPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\RecommendPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Animations.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="DateTemplates\HomeVideoTestDT.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialog\LoginDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Login\PasswordLogin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Login\QRLogin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Home.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\PlayerPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\RecommendPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,19 @@
+﻿<Application
+    x:Class="BiliStart.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:BiliStart"
+    StartupUri="Home.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--  引用默认资源  -->
+                <ResourceDictionary Source="pack://application:,,,/ZUDesignControl;component/DefaultStyle.xaml" />
+
+                <!--  颜色文件  -->
+                <ResourceDictionary Source="pack://application:,,,/ZUDesignControl;component/Colors/Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/BiliStart;component/Animations.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
