@@ -7,27 +7,21 @@
     xmlns:vm="clr-namespace:BiliStart.ViewModel">
     <convert:TextLengthConvert x:Key="TextLength" />
     <DataTemplate x:Key="DefaultHomeVideo" DataType="{x:Type vm:HomeVideoVM}">
-        <Grid Margin="10" ClipToBounds="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            <Border ClipToBounds="True" CornerRadius="5">
+        <Grid ClipToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Row="0"
+                ClipToBounds="True"
+                CornerRadius="40">
                 <Image
                     x:Name="image"
-                    Width="200"
-                    Height="150"
-                    HorizontalAlignment="Left"
                     extend:ImageExtend.AnimationType="Opacity"
                     extend:ImageExtend.Source="{Binding _Item.Cover}"
                     RenderTransformOrigin="0.5,0.5"
                     Stretch="UniformToFill">
-                    <Image.Clip>
-                        <RectangleGeometry
-                            RadiusX="10"
-                            RadiusY="10"
-                            Rect="0,0,200,150" />
-                    </Image.Clip>
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform />
@@ -47,7 +41,10 @@
                     </Image.Triggers>
                 </Image>
             </Border>
-            <StackPanel Grid.Column="1" Margin="15,0,0,0">
+            <StackPanel
+                Grid.Row="1"
+                Margin="10"
+                VerticalAlignment="Bottom">
                 <TextBlock
                     x:Name="text"
                     VerticalAlignment="Top"
@@ -55,55 +52,24 @@
                     FontWeight="Bold"
                     Text="{Binding _Item.Title, Converter={StaticResource TextLength}}"
                     TextWrapping="Wrap" />
-                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <TextBlock
-                        Padding="5"
-                        FontSize="15"
-                        FontWeight="Light">
-                        <Run Text="播放数：" />
-                        <Run Text="{Binding _Item.PlayerCount}" />
-                    </TextBlock>
-                    <TextBlock
-                        Padding="5"
-                        FontSize="15"
-                        FontWeight="Light">
-                        <Run Text="弹幕：" />
-                        <Run Text="{Binding _Item.LeftText}" />
-                    </TextBlock>
-                    <TextBlock
-                        Padding="5"
-                        FontSize="15"
-                        FontWeight="Light">
-                        <Run Text="时长:" />
-                        <Run Text="{Binding _Item.DurationText}" />
-                    </TextBlock>
-                </StackPanel>
+
             </StackPanel>
 
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="Px100" DataType="{x:Type vm:HomeVideoVM}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+
+    <DataTemplate x:Key="HomeVideo700" DataType="{x:Type vm:HomeVideoVM}">
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Image
                 x:Name="image"
-                Grid.RowSpan="2"
-                Width="200"
-                Height="150"
                 HorizontalAlignment="Left"
                 extend:ImageExtend.AnimationType="Opacity"
                 extend:ImageExtend.Source="{Binding _Item.Cover}"
-                RenderTransformOrigin="0.5,0.5"
-                Stretch="UniformToFill">
-                <Image.Clip>
-                    <RectangleGeometry
-                        RadiusX="10"
-                        RadiusY="10"
-                        Rect="0,0,200,150" />
-                </Image.Clip>
+                RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform />
@@ -122,6 +88,35 @@
                     </EventTrigger>
                 </Image.Triggers>
             </Image>
+            <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                <TextBlock
+                    FontSize="15"
+                    FontWeight="Light"
+                    Text="{Binding _Item.Title}" />
+                <TextBlock TextWrapping="Wrap">
+                    <Run Text="播放数:" />
+                    <Run Text="{Binding _Item.PlayerCount}" />
+                    <Run Text="  弹幕数:" />
+                    <Run Text="{Binding _Item.LeftText}" />
+                    <Run Text="  时长:" />
+                    <Run Text="{Binding _Item.DurationText}" />
+                </TextBlock>
+            </StackPanel>
         </Grid>
     </DataTemplate>
+
+    <ItemsPanelTemplate x:Key="DefaultHomeVideoPanel">
+        <UniformGrid Columns="5" />
+    </ItemsPanelTemplate>
+
+    <ItemsPanelTemplate x:Key="DefaultHomeVideoPanelPx1000">
+        <UniformGrid Columns="4" />
+    </ItemsPanelTemplate>
+
+    <ItemsPanelTemplate x:Key="DefaultHomeVideoPanelPx700">
+        <UniformGrid Columns="1" />
+    </ItemsPanelTemplate>
+
+
+
 </ResourceDictionary>

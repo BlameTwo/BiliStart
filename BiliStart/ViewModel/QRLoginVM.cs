@@ -18,7 +18,7 @@ using BiliStart.Event;
 
 namespace BiliStart.ViewModel
 {
-    public class QRLoginVM: ObservableRecipient
+    public class QRLoginVM: ObservableRecipient, IRecipient<LoginedEvent>
     {
         DispatcherTimer time = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
         AccountQRLogin QRLogin = new AccountQRLogin();
@@ -28,7 +28,6 @@ namespace BiliStart.ViewModel
 
             Loaded = new RelayCommand(() =>
             {
-                RefQR();
             });
 
             RefererQR = new RelayCommand(() =>
@@ -58,23 +57,45 @@ namespace BiliStart.ViewModel
                 case Checkenum.OnTime:
                     Debug.WriteLine("二维码已经失效");
                     break;
-                //case Checkenum.Post:
-                //    break;
                 case Checkenum.NULL:
                     Debug.WriteLine("未收录的code状态");
                     break;
                 case Checkenum.Yes:
                     Debug.WriteLine($"登录成功！携带的返回值为:\n{result.Body}");
+                    time.Stop();
                     var result2 = WebFormat.GoToken(result.Body);
                     //写入到本地保存
-                    WeakReferenceMessenger.Default.Send(new LoginedEvent() {  Event = LoginState.Login});
-
-                   AccountSettings.Write(result2);
+                    AccountSettings.Write(result2);
                     BiliBiliArgs.TokenSESSDATA = result2;
-                    time.Stop();
+                    if(time != null)
+                    {
+                        time.Stop();
+                        time.Tick -= Time_Tick;
+                        time = null;
+                    }
+                    WeakReferenceMessenger.Default.Send(new LoginedEvent() { Event = LoginState.Login });
                     break;
                 case Checkenum.No:
                     Debug.WriteLine($"二维码尚未确认");
+                    break;
+            }
+        }
+
+        public void Receive(LoginedEvent message)
+        {
+            switch (message.Event)
+            {
+                case LoginState.Login:
+                    if(time != null)
+                    {
+                        time.Stop();
+                        time.Tick -= Time_Tick;
+                        time = null;
+                    }
+                    break;
+                case LoginState.UnLogin:
+                    break;
+                default:
                     break;
             }
         }
