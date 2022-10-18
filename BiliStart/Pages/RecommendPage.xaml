@@ -43,6 +43,7 @@
             BorderBrush="Transparent"
             ItemContainerStyle="{DynamicResource GridListViewItem}"
             ItemsSource="{Binding _Item}"
+            ScrollViewer.CanContentScroll="True"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <des:ListView.Style>
                 <Style BasedOn="{StaticResource ItemsControlStyle}" TargetType="{x:Type ItemsControl}">

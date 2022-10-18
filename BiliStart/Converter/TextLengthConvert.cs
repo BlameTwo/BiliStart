@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -13,9 +14,10 @@ namespace BiliStart.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string str = value.ToString()!;
-            if(str.Length > 40)
+            int value2 = int.Parse(parameter.ToString()!);
+            if (str.Length > value2 )
             {
-                return str.Substring(0,40)+"...";
+                return str.Substring(0, value2) +"...";
             }
             return str;
         }
@@ -23,6 +25,20 @@ namespace BiliStart.Converter
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+
+    internal class TickConvert : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return true;
         }
     }
 }

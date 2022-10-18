@@ -9,6 +9,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Controls\PlayMediaElment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Dialog\LoginDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -27,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Animations.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\PlayMediaElment.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="DateTemplates\HomeVideoTestDT.xaml">

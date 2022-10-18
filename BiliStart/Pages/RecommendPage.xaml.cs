@@ -29,6 +29,7 @@ namespace BiliStart.Pages
             Loaded += RecommendPage_Loaded;
         }
 
+
         private void RecommendPage_Loaded(object sender, RoutedEventArgs e)
         {
             var value = this.ActualWidth;
