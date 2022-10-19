@@ -17,7 +17,7 @@
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding Loaded}" />
+            <i:InvokeCommandAction Command="{Binding Loaded}" CommandParameter="{Binding ElementName=navigation}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <des:MicaWindow.Foreground>
@@ -33,12 +33,15 @@
             Pic_Uri="{Binding _LoginResult.Face_Image}" />
     </des:MicaWindow.HeaderContent>
     <des:NavigationView
+        x:Name="navigation"
         Cache="Close"
         FrameBase="{Binding ElementName=RootFrame}"
-        IsMenuOpen="True"
         MenuHeader="BStart"
         MenuOpenLength="160"
         PanelTitle="欢迎使用哔哩Start">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded" />
+        </i:Interaction.Triggers>
         <des:NavigationView.Items>
             <des:NavigationItem
                 Cache="Close"
@@ -46,12 +49,6 @@
                 Icon="&#xEA8A;"
                 NavigationPage="{x:Type pages:RecommendPage}"
                 Tag="首页" />
-            <des:NavigationItem
-                Cache="Close"
-                Content="播放页"
-                Icon="&#xE768;"
-                NavigationPage="{x:Type pages:PlayerPage}"
-                Tag="播放" />
         </des:NavigationView.Items>
         <Frame x:Name="RootFrame" />
     </des:NavigationView>

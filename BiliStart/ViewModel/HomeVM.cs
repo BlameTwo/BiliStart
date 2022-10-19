@@ -13,10 +13,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZUDesignControl.Controls;
 
 namespace BiliStart.ViewModel
 {
-    internal class HomeVM: ObservableRecipient, IRecipient<LoginedEvent>
+    internal class HomeVM: ObservableRecipient, IRecipient<LoginedEvent>,IRecipient<FrameBaseNavigtion>
     {
         Logins Logins = new Logins();
 
@@ -24,8 +25,9 @@ namespace BiliStart.ViewModel
         public HomeVM()
         {
             IsActive = true;
-            Loaded = new RelayCommand(() =>
+            Loaded = new RelayCommand<NavigationView>((arg) =>
             {
+                this._NavigationView = arg;
                 loaded();
             });
             LoginOrOpen = new RelayCommand(() =>
@@ -40,6 +42,7 @@ namespace BiliStart.ViewModel
                     dialog.Show();
                 }
             });
+
         }
         bool IsLogin { get; set; }
         async void loaded()
@@ -62,7 +65,13 @@ namespace BiliStart.ViewModel
             loaded();
         }
 
+        public void Receive(FrameBaseNavigtion message)
+        {
+            _NavigationView!.NavigationService.NavigateToType(message.Page);
+        }
+
         private AccountLoginResultData LoginResult;
+        private NavigationView? _NavigationView;
 
         public AccountLoginResultData _LoginResult
         {
@@ -70,7 +79,7 @@ namespace BiliStart.ViewModel
             set => SetProperty(ref LoginResult, value);
         }
 
-        public RelayCommand Loaded { get;private  set; }
+        public RelayCommand<NavigationView> Loaded { get;private  set; }
         public RelayCommand LoginOrOpen { get; private set; }
     }
 }

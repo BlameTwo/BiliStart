@@ -13,6 +13,9 @@ using CommunityToolkit.Mvvm.Input;
 using System.Security.Policy;
 using System.Windows.Media.Animation;
 using System.Windows.Controls;
+using BiliStart.Event;
+using CommunityToolkit.Mvvm.Messaging;
+using BiliStart.Pages;
 
 namespace BiliStart.ViewModel
 {
@@ -25,9 +28,14 @@ namespace BiliStart.ViewModel
             _Item = new ObservableCollection<HomeVideoVM>();
             Loaded = new RelayCommand(update);
             AddData = new RelayCommand(adddate);
+            SelectChanged = new RelayCommand<HomeVideoVM>((arg) => selected(arg));
         }
 
-       
+        private void selected(HomeVideoVM? arg)
+        {
+            PlayerPage page = new PlayerPage(arg!);
+            WeakReferenceMessenger.Default.Send(new FrameBaseNavigtion() {  Event = NavigtionEvent.Navigation, Page = page });
+        }
 
         private async void adddate()
         {
@@ -55,7 +63,7 @@ namespace BiliStart.ViewModel
         }
 
 
-
+        public RelayCommand<HomeVideoVM> SelectChanged { get; private set; }
         public RelayCommand AddData { get; private set; }
         public RelayCommand Loaded { get; private set; }
     }

@@ -37,6 +37,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <des:ListView
+            x:Name="homevideos"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
             Background="Transparent"
@@ -45,6 +46,11 @@
             ItemsSource="{Binding _Item}"
             ScrollViewer.CanContentScroll="True"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectChanged}" CommandParameter="{Binding ElementName=homevideos, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <des:ListView.Style>
                 <Style BasedOn="{StaticResource ItemsControlStyle}" TargetType="{x:Type ItemsControl}">
                     <Setter Property="ItemTemplate" Value="{DynamicResource DefaultHomeVideo}" />

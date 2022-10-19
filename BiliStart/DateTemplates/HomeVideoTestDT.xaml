@@ -16,7 +16,7 @@
             </Grid.RowDefinitions>
             <Border
                 Width="250"
-                Height="150"
+                Height="170"
                 extend:BorderImageSoureExtend.AnimationType="Opacity"
                 extend:BorderImageSoureExtend.Source="{Binding _Item.Cover}"
                 CornerRadius="10" />
@@ -180,7 +180,7 @@
     </ItemsPanelTemplate>
 
     <ItemsPanelTemplate x:Key="DefaultHomeVideoPanelPx1000">
-        <UniformGrid Columns="4" />
+        <UniformGrid Columns="3" />
     </ItemsPanelTemplate>
 
     <ItemsPanelTemplate x:Key="DefaultHomeVideoPanelPx700">
