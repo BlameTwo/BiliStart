@@ -69,7 +69,7 @@ namespace BiliStart.Controls
             DankumuText text = CreateText(style,Text);
             Canvas.SetTop(text, slot * style.Size);
             Canvas.SetLeft(text, scroll.ActualWidth - text.ActualWidth);
-            DoubleAnimation doubleAnimation = new DoubleAnimation() { Duration = new Duration(TimeSpan.FromSeconds(10))};
+            DoubleAnimation doubleAnimation = new DoubleAnimation() { Duration = new Duration(TimeSpan.FromSeconds(8))};
             doubleAnimation.From = scroll.ActualWidth - text.ActualWidth;
             doubleAnimation.To =  -scroll.ActualWidth;
             Storyboard.SetTarget(doubleAnimation,text);

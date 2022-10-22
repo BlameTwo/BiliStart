@@ -67,6 +67,7 @@ namespace BiliStart.ViewModel
 
         public void Receive(FrameBaseNavigtion message)
         {
+            _NavigationView!.PanelTitle = message.Page.Tag.ToString();
             _NavigationView!.NavigationService.NavigateToType(message.Page);
         }
 

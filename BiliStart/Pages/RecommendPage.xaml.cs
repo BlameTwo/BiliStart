@@ -25,22 +25,17 @@ namespace BiliStart.Pages
         {
             InitializeComponent();
             this.DataContext = new RecommendVM();
-            this.SizeChanged += RecommendPage_SizeChanged;
             Loaded += RecommendPage_Loaded;
         }
 
+        private void RecommendPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+        }
 
         private void RecommendPage_Loaded(object sender, RoutedEventArgs e)
         {
             var value = this.ActualWidth;
         }
 
-        private void RecommendPage_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if(this.ActualWidth < 100)
-            {
-                string a = "小于100";
-            }
-        }
     }
 }

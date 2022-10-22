@@ -31,9 +31,10 @@ namespace BiliStart.ViewModel
             SelectChanged = new RelayCommand<HomeVideoVM>((arg) => selected(arg));
         }
 
-        private void selected(HomeVideoVM? arg)
+        private async void selected(HomeVideoVM? arg)
         {
-            PlayerPage page = new PlayerPage(arg!);
+            var value =  await video.GetVideosContent(arg!._Item.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV);
+            PlayerPage page = new PlayerPage(value.Data!) { Tag = arg._Item.Title};
             WeakReferenceMessenger.Default.Send(new FrameBaseNavigtion() {  Event = NavigtionEvent.Navigation, Page = page });
         }
 
