@@ -1,4 +1,7 @@
-﻿using BiliStart.ViewModel;
+﻿using BilibiliAPI.Video;
+using BiliStart.Event;
+using BiliStart.ViewModel;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZUDesignControl.Controls;
+using ListView = ZUDesignControl.Controls.ListView;
 
 namespace BiliStart.Pages
 {
@@ -36,6 +41,6 @@ namespace BiliStart.Pages
         {
             var value = this.ActualWidth;
         }
-
+        
     }
 }

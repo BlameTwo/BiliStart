@@ -21,10 +21,16 @@
     <Compile Update="Login\QRLogin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\HotPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\PlayerPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\RecommendPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Test.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -53,10 +59,16 @@
     <Page Update="Home.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Pages\HotPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\PlayerPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\RecommendPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Test.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

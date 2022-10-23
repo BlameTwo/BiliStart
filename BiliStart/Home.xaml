@@ -34,7 +34,7 @@
     </des:MicaWindow.HeaderContent>
     <des:NavigationView
         x:Name="navigation"
-        Cache="Close"
+        Cache="Open"
         FrameBase="{Binding ElementName=RootFrame}"
         MenuHeader="BStart"
         MenuOpenLength="160"
@@ -45,10 +45,22 @@
         <des:NavigationView.Items>
             <des:NavigationItem
                 Cache="Close"
-                Content="首页"
+                Content="推荐"
                 Icon="&#xEA8A;"
                 NavigationPage="{x:Type pages:RecommendPage}"
-                Tag="首页" />
+                Tag="推荐" />
+            <des:NavigationItem
+                Cache="Close"
+                Content="热门"
+                Icon="&#xE8F0;"
+                NavigationPage="{x:Type pages:HotPage}"
+                Tag="热门" />
+            <des:NavigationItem
+                Cache="Close"
+                Content="测试"
+                Icon="&#xE8F0;"
+                NavigationPage="{x:Type pages:Test}"
+                Tag="测试" />
         </des:NavigationView.Items>
         <Frame x:Name="RootFrame" />
     </des:NavigationView>

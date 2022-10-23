@@ -29,6 +29,8 @@ namespace BiliStart.Controls
         VideosContent VC { get; set; }
         VideoInfo VideoInfo { get; set; }
         bool IsPlay { get; set; }
+        DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(30) };
+
         public PlayerMediaControl()
         {
             InitializeComponent();
@@ -38,6 +40,25 @@ namespace BiliStart.Controls
             timer.Tick += Timer_Tick;
             media.MediaOpened += Media_MediaOpened;
             Unloaded += PlayerMediaControl_Unloaded;
+            timer.Tick += Timer_Tick1;
+            timer.Start();
+        }
+
+        UserVideo userVideo = new UserVideo();
+        private double OldTick { get; set; } = 0;
+        private void Timer_Tick1(object? sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(async() =>
+            {
+
+                var value = media.Position.Ticks;
+                if (value > 0 && OldTick != value)
+                {
+                    OldTick = value;
+
+                    var result = await userVideo.PostProgress(int.Parse(VC.Aid), VC.First_Cid, media.Position);
+                }
+            }));
         }
 
         private async void Media_MediaOpened(object? sender, MediaOpenedEventArgs e)
@@ -48,8 +69,6 @@ namespace BiliStart.Controls
 
         private async void PlayerMediaControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            UserVideo userVideo = new UserVideo();
-            var value = await userVideo.PostProgress(int.Parse(VC.Aid),VC.First_Cid,media.Position);
             await media.Close();
             await mediavideo.Close(); 
             Loaded -= PlayerMediaCotrol_Loaded;
