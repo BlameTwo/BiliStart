@@ -18,7 +18,7 @@ namespace BiliStart.Pages
     /// <summary>
     /// HotPage.xaml 的交互逻辑
     /// </summary>
-    public partial class HotPage : Page
+    public partial class HotPage : UserControl
     {
         public HotPage()
         {

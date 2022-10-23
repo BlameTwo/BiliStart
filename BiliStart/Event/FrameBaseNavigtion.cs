@@ -9,7 +9,7 @@ namespace BiliStart.Event
 {
     public class FrameBaseNavigtion
     {
-        public Page Page { get; set; }
+        public UserControl Page { get; set; }
         public NavigtionEvent Event { get; set; }
     }
 

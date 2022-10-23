@@ -24,7 +24,7 @@ namespace BiliStart.Pages
     /// <summary>
     /// RecommendPage.xaml 的交互逻辑
     /// </summary>
-    public partial class RecommendPage : Page
+    public partial class RecommendPage : UserControl
     {
         public RecommendPage()
         {

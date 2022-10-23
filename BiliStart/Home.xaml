@@ -45,12 +45,14 @@
         <des:NavigationView.Items>
             <des:NavigationItem
                 Cache="Close"
+                Click="NavigationItem_Click_1"
                 Content="推荐"
                 Icon="&#xEA8A;"
                 NavigationPage="{x:Type pages:RecommendPage}"
                 Tag="推荐" />
             <des:NavigationItem
                 Cache="Close"
+                Click="NavigationItem_Click"
                 Content="热门"
                 Icon="&#xE8F0;"
                 NavigationPage="{x:Type pages:HotPage}"
@@ -62,6 +64,10 @@
                 NavigationPage="{x:Type pages:Test}"
                 Tag="测试" />
         </des:NavigationView.Items>
-        <Frame x:Name="RootFrame" />
+        <Grid>
+
+            <Frame x:Name="RootFrame" Visibility="Collapsed" />
+            <ContentControl x:Name="MyContent" />
+        </Grid>
     </des:NavigationView>
 </des:MicaWindow>

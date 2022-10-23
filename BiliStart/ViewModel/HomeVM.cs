@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using ZUDesignControl.Controls;
 
 namespace BiliStart.ViewModel
@@ -65,10 +66,12 @@ namespace BiliStart.ViewModel
             loaded();
         }
 
+        public ContentControl ContentControl { get; set; }
+
         public void Receive(FrameBaseNavigtion message)
         {
             _NavigationView!.PanelTitle = message.Page.Tag.ToString();
-            _NavigationView!.NavigationService.NavigateToType(message.Page);
+            ContentControl.Content = message.Page;
         }
 
         private AccountLoginResultData LoginResult;

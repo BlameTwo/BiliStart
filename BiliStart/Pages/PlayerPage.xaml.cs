@@ -32,7 +32,7 @@ namespace BiliStart.Pages
     /// <summary>
     /// Player.xaml 的交互逻辑
     /// </summary>
-    public partial class PlayerPage : Page
+    public partial class PlayerPage : UserControl
     {
         private VideosContent item;
         UserVideo userVideo = new UserVideo();

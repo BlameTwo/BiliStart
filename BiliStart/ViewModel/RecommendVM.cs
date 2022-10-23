@@ -49,11 +49,11 @@ namespace BiliStart.ViewModel
 
         async void update()
         {
-            //var value = (await video.GetHomeVideo()).Data.Item.ToObservableCollection();
-            //foreach (var item in value)
-            //{
-            //    _Item.Add(new HomeVideoVM() { _Item = item });
-            //}
+            var value = (await video.GetHomeVideo()).Data.Item.ToObservableCollection();
+            foreach (var item in value)
+            {
+                _Item.Add(new HomeVideoVM() { _Item = item });
+            }
         }
 
         private ObservableCollection<HomeVideoVM> Item;
