@@ -39,7 +39,7 @@ namespace BiliStart.Controls
             Loaded += PlayerMediaCotrol_Loaded;
             timer.Tick += Timer_Tick;
             media.MediaOpened += Media_MediaOpened;
-            Unloaded += PlayerMediaControl_Unloaded;
+            //Unloaded += PlayerMediaControl_Unloaded;
             timer.Tick += Timer_Tick1;
             timer.Start();
         }
@@ -73,7 +73,7 @@ namespace BiliStart.Controls
             await mediavideo.Close(); 
             Loaded -= PlayerMediaCotrol_Loaded;
             timer.Tick -= Timer_Tick;
-            Unloaded += PlayerMediaControl_Unloaded;
+            //Unloaded += PlayerMediaControl_Unloaded;
             timer = null;
         }
 

@@ -18,7 +18,7 @@ namespace BiliStart.Pages
     /// <summary>
     /// Test.xaml 的交互逻辑
     /// </summary>
-    public partial class Test : UserControl
+    public partial class Test : Page
     {
         public Test()
         {

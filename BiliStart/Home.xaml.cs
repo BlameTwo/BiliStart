@@ -35,24 +35,21 @@ namespace BiliStart
         {
             InitializeComponent();
             this.DataContext = Ioc.Default.GetService<HomeVM>();
-            Loaded += Home_Loaded;
-        }
-
-        private void Home_Loaded(object sender, RoutedEventArgs e)
-        {
-            (this.DataContext as HomeVM).ContentControl = this.MyContent;
         }
 
         private void NavigationItem_Click(object sender, RoutedEventArgs e)
         {
-            MyContent.Content = new HotPage();
+
         }
 
-        private void NavigationItem_Click_1(object sender, RoutedEventArgs e)
+        private void Recommend_Click(object sender, RoutedEventArgs e)
         {
-
-            MyContent.Content = new RecommendPage();
+            RootFrame.NavigationService.Navigate(new RecommendPage());
         }
 
+        private void Hot_Click(object sender, RoutedEventArgs e)
+        {
+            RootFrame.NavigationService.Navigate(new HotPage());
+        }
     }
 }

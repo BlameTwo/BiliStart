@@ -23,6 +23,8 @@ namespace BiliStart.ViewModel
         Logins Logins = new Logins();
 
         public AccountToken token = AccountSettings.Read();
+
+        Frame RootFrame { get; set; }
         public HomeVM()
         {
             IsActive = true;
@@ -30,6 +32,10 @@ namespace BiliStart.ViewModel
             {
                 this._NavigationView = arg;
                 loaded();
+            });
+            GetFrame = new RelayCommand<Frame>((frame) =>
+            {
+                this.RootFrame = frame;
             });
             LoginOrOpen = new RelayCommand(() =>
             {
@@ -71,7 +77,7 @@ namespace BiliStart.ViewModel
         public void Receive(FrameBaseNavigtion message)
         {
             _NavigationView!.PanelTitle = message.Page.Tag.ToString();
-            ContentControl.Content = message.Page;
+            RootFrame.NavigationService.Navigate(message.Page);
         }
 
         private AccountLoginResultData LoginResult;
@@ -84,6 +90,7 @@ namespace BiliStart.ViewModel
         }
 
         public RelayCommand<NavigationView> Loaded { get;private  set; }
+        public RelayCommand<Frame> GetFrame { get; private set; }
         public RelayCommand LoginOrOpen { get; private set; }
     }
 }

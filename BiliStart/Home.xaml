@@ -18,6 +18,7 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}" CommandParameter="{Binding ElementName=navigation}" />
+            <i:InvokeCommandAction Command="{Binding GetFrame}" CommandParameter="{Binding ElementName=RootFrame}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <des:MicaWindow.Foreground>
@@ -44,30 +45,27 @@
         </i:Interaction.Triggers>
         <des:NavigationView.Items>
             <des:NavigationItem
+                x:Name="Recommend"
                 Cache="Close"
-                Click="NavigationItem_Click_1"
+                Click="Recommend_Click"
                 Content="推荐"
                 Icon="&#xEA8A;"
-                NavigationPage="{x:Type pages:RecommendPage}"
                 Tag="推荐" />
             <des:NavigationItem
+                x:Name="Hot"
                 Cache="Close"
-                Click="NavigationItem_Click"
+                Click="Hot_Click"
                 Content="热门"
                 Icon="&#xE8F0;"
-                NavigationPage="{x:Type pages:HotPage}"
                 Tag="热门" />
             <des:NavigationItem
                 Cache="Close"
                 Content="测试"
                 Icon="&#xE8F0;"
-                NavigationPage="{x:Type pages:Test}"
                 Tag="测试" />
         </des:NavigationView.Items>
         <Grid>
-
-            <Frame x:Name="RootFrame" Visibility="Collapsed" />
-            <ContentControl x:Name="MyContent" />
+            <Frame x:Name="RootFrame" />
         </Grid>
     </des:NavigationView>
 </des:MicaWindow>
