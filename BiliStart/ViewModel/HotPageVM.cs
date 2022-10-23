@@ -38,8 +38,8 @@ namespace BiliStart.ViewModel
         private async void selected(HomeVideoVM? arg)
         {
             var value = await video.GetVideosContent(arg!._Item.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV);
-            PlayerPage page = new PlayerPage(value.Data!) { Tag = arg._Item.Title };
-            WeakReferenceMessenger.Default.Send(new FrameBaseNavigtion() { Event = NavigtionEvent.Navigation, Page = page });
+            PlayerPage page = new PlayerPage() { Tag = arg._Item.Title };
+            WeakReferenceMessenger.Default.Send(new FrameBaseNavigtion() { Event = NavigtionEvent.Navigation, Page = page,pararm = value.Data!});
         }
 
         private async void adddate()

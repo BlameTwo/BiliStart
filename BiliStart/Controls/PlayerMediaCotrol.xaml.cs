@@ -24,7 +24,7 @@ namespace BiliStart.Controls
     /// <summary>
     /// PlayerMediaCotrol.xaml 的交互逻辑
     /// </summary>
-    public partial class PlayerMediaControl : UserControl
+    public partial class PlayerMediaControl : UserControl,IDisposable
     {
         VideosContent VC { get; set; }
         VideoInfo VideoInfo { get; set; }
@@ -115,6 +115,7 @@ namespace BiliStart.Controls
         }
 
         private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+        private bool disposedValue;
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
@@ -208,6 +209,38 @@ namespace BiliStart.Controls
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    timer.Stop();
+                    Timer.Stop();
+                    timer.Tick -= Timer_Tick1;
+                    Timer.Tick -= Timer_Tick;
+                }
+
+                // TODO: 释放未托管的资源(未托管的对象)并重写终结器
+                // TODO: 将大型字段设置为 null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: 仅当“Dispose(bool disposing)”拥有用于释放未托管资源的代码时才替代终结器
+        // ~PlayerMediaControl()
+        // {
+        //     // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 

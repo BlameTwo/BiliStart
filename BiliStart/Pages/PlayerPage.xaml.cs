@@ -2,6 +2,7 @@
 using BiliBiliAPI.Models.HomeVideo;
 using BiliBiliAPI.Models.Videos;
 using BiliStart.Controls;
+using BiliStart.Interfaces;
 using BiliStart.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -32,17 +33,16 @@ namespace BiliStart.Pages
     /// <summary>
     /// Player.xaml 的交互逻辑
     /// </summary>
-    public partial class PlayerPage : Page
+    public partial class PlayerPage : Page,IPageBase
     {
         private VideosContent item;
         UserVideo userVideo = new UserVideo();
-        public PlayerPage(VideosContent Item)
+
+        public PlayerPage()
         {
             InitializeComponent();
             Loaded += PlayerPage_Loaded;
-            item = Item;
             SizeChanged += PlayerPage_SizeChanged;
-            islike.IsChecked = item.ReqUser.Like == "1" ? true : false;
         }
 
         private void PlayerPage_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -70,6 +70,13 @@ namespace BiliStart.Pages
             bool value = (bool)(sender as EmojiSwitchButton)!.IsChecked!;
             var result =  await userVideo.LikeVideo(value, item.Aid);
             MessageBox.Show("提示",result.Data.TipText);
+        }
+
+        public void SetExtraData(object ExtraData)
+        {
+            item = (VideosContent)ExtraData;
+
+            islike.IsChecked = item.ReqUser.Like == "1" ? true : false;
         }
     }
 }

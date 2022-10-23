@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BiliStart.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,16 @@ namespace BiliStart.Pages
     /// <summary>
     /// Test.xaml 的交互逻辑
     /// </summary>
-    public partial class Test : Page
+    public partial class Test : Page, IPageBase
     {
         public Test()
         {
             InitializeComponent();
+        }
+
+        public void SetExtraData(object ExtraData)
+        {
+
         }
     }
 }

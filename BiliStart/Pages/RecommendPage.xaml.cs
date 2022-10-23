@@ -1,5 +1,6 @@
 ﻿using BilibiliAPI.Video;
 using BiliStart.Event;
+using BiliStart.Interfaces;
 using BiliStart.ViewModel;
 using CommunityToolkit.Mvvm.Messaging;
 using System;
@@ -24,7 +25,7 @@ namespace BiliStart.Pages
     /// <summary>
     /// RecommendPage.xaml 的交互逻辑
     /// </summary>
-    public partial class RecommendPage : Page
+    public partial class RecommendPage : Page, IPageBase
     {
         public RecommendPage()
         {
@@ -42,6 +43,10 @@ namespace BiliStart.Pages
         {
             var value = this.ActualWidth;
         }
-        
+
+        public void SetExtraData(object ExtraData)
+        {
+
+        }
     }
 }

@@ -22,6 +22,7 @@ using System.IO;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using BiliStart.ViewModel;
 using BiliStart.Pages;
+using BiliStart.Interfaces;
 
 namespace BiliStart
 {
@@ -35,6 +36,13 @@ namespace BiliStart
         {
             InitializeComponent();
             this.DataContext = Ioc.Default.GetService<HomeVM>();
+            RootFrame.NavigationService.LoadCompleted += NavigationService_LoadCompleted;
+        }
+
+        private void NavigationService_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            var page = e.Content as IPageBase;
+            page!.SetExtraData(e.ExtraData);
         }
 
         private void NavigationItem_Click(object sender, RoutedEventArgs e)

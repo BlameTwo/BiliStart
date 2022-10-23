@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -30,6 +31,7 @@ namespace BiliStart
 
             //非UI线程未捕获异常处理事件(例如自己创建的一个子线程)
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
         }
 
         private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)

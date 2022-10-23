@@ -1,4 +1,5 @@
-﻿using BiliStart.ViewModel;
+﻿using BiliStart.Interfaces;
+using BiliStart.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,16 @@ namespace BiliStart.Pages
     /// <summary>
     /// HotPage.xaml 的交互逻辑
     /// </summary>
-    public partial class HotPage : Page
+    public partial class HotPage : Page, IPageBase
     {
         public HotPage()
         {
             InitializeComponent();
             this.DataContext = new HotPageVM();
+        }
+
+        public void SetExtraData(object ExtraData)
+        {
         }
     }
 }

@@ -76,8 +76,8 @@ namespace BiliStart.ViewModel
 
         public void Receive(FrameBaseNavigtion message)
         {
-            _NavigationView!.PanelTitle = message.Page.Tag.ToString();
-            RootFrame.NavigationService.Navigate(message.Page);
+            //_NavigationView!.PanelTitle = message.Page.Tag.ToString();
+            RootFrame.NavigationService.Navigate(message.Page,message.pararm);
         }
 
         private AccountLoginResultData LoginResult;
