@@ -1,6 +1,7 @@
 ﻿using BilibiliAPI.Video;
 using BiliStart.Event;
 using BiliStart.Pages;
+using BiliStart.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -38,8 +39,8 @@ namespace BiliStart.ViewModel
         private async void selected(HomeVideoVM? arg)
         {
             var value = await video.GetVideosContent(arg!._Item.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV);
-            PlayerPage page = new PlayerPage() { Tag = arg._Item.Title };
-            WeakReferenceMessenger.Default.Send(new FrameBaseNavigtion() { Event = NavigtionEvent.Navigation, Page = page,pararm = value.Data!});
+            PlayerWindows page = new PlayerWindows(item:value.Data) { Title = value.Data.Bvid };
+            page.Show();
         }
 
         private async void adddate()

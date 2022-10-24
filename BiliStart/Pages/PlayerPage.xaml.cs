@@ -33,16 +33,17 @@ namespace BiliStart.Pages
     /// <summary>
     /// Player.xaml 的交互逻辑
     /// </summary>
-    public partial class PlayerPage : Page,IPageBase
+    public partial class PlayerPage : AcrylicBlurWindow 
     {
-        private VideosContent item;
+        private VideosContent Item;
         UserVideo userVideo = new UserVideo();
 
-        public PlayerPage()
+        public PlayerPage(VideosContent item)
         {
             InitializeComponent();
             Loaded += PlayerPage_Loaded;
             SizeChanged += PlayerPage_SizeChanged;
+            Item = item;
         }
 
         private void PlayerPage_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -62,21 +63,16 @@ namespace BiliStart.Pages
 
         private async void PlayerPage_Loaded(object sender, RoutedEventArgs e)
         {
-            player.VideoContent = item;
+            player.VideoContent = Item;
+            islike.IsChecked = Item.ReqUser.Like == "1" ? true : false;
         }
 
         private async void islike_Checked(object sender, RoutedEventArgs e)
         {
             bool value = (bool)(sender as EmojiSwitchButton)!.IsChecked!;
-            var result =  await userVideo.LikeVideo(value, item.Aid);
+            var result =  await userVideo.LikeVideo(value, Item.Aid);
             MessageBox.Show("提示",result.Data.TipText);
         }
 
-        public void SetExtraData(object ExtraData)
-        {
-            item = (VideosContent)ExtraData;
-
-            islike.IsChecked = item.ReqUser.Like == "1" ? true : false;
-        }
     }
 }

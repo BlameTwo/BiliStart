@@ -10,14 +10,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Linq;
+using Unosquare.FFME;
 using Unosquare.FFME.Common;
 using ZUDesignControl.Controls;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace BiliStart.Controls
 {
@@ -40,7 +46,7 @@ namespace BiliStart.Controls
             timer.Tick += Timer_Tick;
             media.MediaOpened += Media_MediaOpened;
             //Unloaded += PlayerMediaControl_Unloaded;
-            timer.Tick += Timer_Tick1;
+            Timer.Tick += Timer_Tick1;
             timer.Start();
         }
 
@@ -185,10 +191,10 @@ namespace BiliStart.Controls
 
         private async void support_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var value = e.AddedItems[0] as Support_Formats;
+            var value = (sender as SplitButton).SelectedItem as Support_Formats;
             TimeSpan videotime = media.Position.Ticks == 0 ? new TimeSpan() :media.Position;
-            await media.Pause();
-            await mediavideo.Pause();
+            media.Pause();
+            mediavideo.Pause();
             foreach (var item in VideoInfo.Dash.DashVideos)
             {
                 if(item.ID == value.Quality)
@@ -207,9 +213,12 @@ namespace BiliStart.Controls
             }
         }
 
+        
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
         }
+
 
         protected virtual void Dispose(bool disposing)
         {
