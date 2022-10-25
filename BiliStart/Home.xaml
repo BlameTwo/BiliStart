@@ -60,9 +60,11 @@
                 Tag="热门" />
             <des:NavigationItem
                 Cache="Close"
-                Content="测试"
-                Icon="&#xE8F0;"
-                Tag="测试" />
+                Click="NavigationItem_Click_1"
+                Content="排行榜"
+                Icon="&#xE753;"
+                Tag="排行榜" />
+
         </des:NavigationView.Items>
         <Grid>
             <Frame x:Name="RootFrame" />

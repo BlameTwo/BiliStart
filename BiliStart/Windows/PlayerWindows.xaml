@@ -9,6 +9,7 @@
     xmlns:local="clr-namespace:BiliStart.Windows"
     xmlns:local1="clr-namespace:BiliStart.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="mycontent"
     Title="PlayerWindows"
     Width="800"
     Height="450"
@@ -17,6 +18,10 @@
     Style="{DynamicResource AcrylicStyle}"
     mc:Ignorable="d">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
         <Grid x:Name="fathergrid" ClipToBounds="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -57,14 +62,30 @@
                     </Grid.RowDefinitions>
                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                         <des:Button
+                            x:Name="playbutton"
                             Grid.Column="0"
                             Click="Button_Click"
-                            FontSize="15"
-                            Foreground="{DynamicResource App_Foreground_Color}"
-                            Icon="&#xF5B0;" />
+                            Content="&#xE768;"
+                            FontFamily="{DynamicResource Microsoft_Icon}"
+                            FontSize="24"
+                            Foreground="{DynamicResource App_Foreground_Color}">
+                            <des:Button.Style>
+                                <Style BasedOn="{StaticResource DefaultDesButtonStyle}" TargetType="{x:Type des:Button}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType=local:PlayerWindows}, Path=Playing}" Value="true">
+                                            <Setter Property="Content" Value="&#xE769;" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType=local:PlayerWindows}, Path=Playing}" Value="false">
+                                            <Setter Property="Content" Value="&#xE768;" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </des:Button.Style>
+                        </des:Button>
                         <TextBlock
                             x:Name="durition"
                             Margin="10,0,0,0"
+                            VerticalAlignment="Center"
                             Text="0:0:0/0:0:0" />
                     </StackPanel>
                     <des:Slider
@@ -77,6 +98,7 @@
                         <des:SplitButton
                             x:Name="support"
                             ItemContainerStyle="{DynamicResource DefaultComboBoxItemStyle}"
+                            SelectedIndex="0"
                             SelectionChanged="support_SelectionChanged">
                             <des:SplitButton.ItemTemplate>
                                 <DataTemplate DataType="{x:Type date:Support_Formats}">
@@ -115,5 +137,30 @@
                 </Grid>
             </Border>
         </Grid>
+        <des:Pivot
+            x:Name="more"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Margin="15"
+            Padding="10"
+            FontSize="15">
+            <des:Pivot.Items>
+                <des:PivotItem
+                    Content="这是评论"
+                    FontSize="20"
+                    Header="评论"
+                    Tag="pl" />
+                <des:PivotItem
+                    Content="这是详情"
+                    FontSize="20"
+                    Header="详情"
+                    Tag="xq" />
+                <des:PivotItem
+                    Content="这是推荐"
+                    FontSize="20"
+                    Header="推荐"
+                    Tag="tj" />
+            </des:Pivot.Items>
+        </des:Pivot>
     </Grid>
 </des:AcrylicBlurWindow>

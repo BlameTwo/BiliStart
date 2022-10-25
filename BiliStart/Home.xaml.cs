@@ -59,5 +59,10 @@ namespace BiliStart
         {
             RootFrame.NavigationService.Navigate(new HotPage());
         }
+
+        private void NavigationItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            RootFrame.NavigationService.Navigate(new TopVideoPage());
+        }
     }
 }

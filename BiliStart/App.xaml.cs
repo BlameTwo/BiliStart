@@ -106,6 +106,7 @@ namespace BiliStart
             services.AddTransient<QRLoginVM>();
             services.AddTransient<HomeVM>();
             services.AddTransient<PasswordLoginVM>();
+            services.AddTransient<TopVideoVM>();
             var provider = services.BuildServiceProvider();
             Ioc.Default.ConfigureServices(provider);
         }

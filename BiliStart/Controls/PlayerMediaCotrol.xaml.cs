@@ -166,7 +166,6 @@ namespace BiliStart.Controls
             }
         }
 
-        
         public void Play()
         {
             media.Play();

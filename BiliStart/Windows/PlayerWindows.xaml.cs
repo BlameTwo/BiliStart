@@ -4,6 +4,7 @@ using BiliStart.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,9 +32,14 @@ namespace BiliStart.Windows
 
         VideoInfo VideoInfo { get; set; }
         bool IsPlay { get; set; }
-        DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(30) };
-        DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+        DispatcherTimer PostProcess = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(30) };
+        DispatcherTimer DanmakuPostProcess = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
         UserVideo userVideo = new UserVideo();
+
+        public bool Playing { get; set; }
+
+        public bool OkPlay { get; set; }
+    
         private double OldTick { get; set; } = 0;
 
         BilibiliAPI.Video.Video video = new BilibiliAPI.Video.Video();
@@ -44,12 +50,28 @@ namespace BiliStart.Windows
             media.MediaInitializing += Media_MediaInitializing;
             mediavideo.MediaInitializing += Media_MediaInitializing;
             Loaded += PlayerWindows_Loaded;
-            timer.Tick += Timer_Tick;
             media.MediaOpened += Media_MediaOpened;
-            //Unloaded += PlayerMediaControl_Unloaded;
-            Timer.Tick += Timer_Tick1;
-            timer.Start();
+            media.MediaOpened+=Media_MediaOpened;
+            PostProcess.Tick += PostProcess_Tick1;
+            DanmakuPostProcess.Tick += Danmaku_Tick;
             VC = item;
+            SizeChanged += PlayerWindows_SizeChanged;
+            Playing = false;
+        }
+
+
+        private void PlayerWindows_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (this.ActualWidth < 900)
+            {
+                more.Visibility = Visibility.Collapsed;
+                Grid.SetColumnSpan(fathergrid, 2);
+            }
+            else
+            {
+                more.Visibility = Visibility.Visible;
+                Grid.SetColumnSpan(fathergrid, 1);
+            }
         }
 
         private async void PlayerWindows_Loaded(object sender, RoutedEventArgs e)
@@ -62,7 +84,7 @@ namespace BiliStart.Windows
             support.SelectedIndex = 0;
         }
 
-        private void Timer_Tick1(object? sender, EventArgs e)
+        private void PostProcess_Tick1(object? sender, EventArgs e)
         {
             Dispatcher.Invoke(new Action(async () =>
             {
@@ -77,7 +99,7 @@ namespace BiliStart.Windows
             }));
         }
 
-        private void Timer_Tick(object? sender, EventArgs e)
+        private void Danmaku_Tick(object? sender, EventArgs e)
         {
             Dispatcher.Invoke(async () =>
             {
@@ -89,14 +111,22 @@ namespace BiliStart.Windows
             foreach (var item in danmakulist)
             {
                 SolidColorBrush color = new SolidColorBrush();
-                var text = "#" + System.Convert.ToString(System.Convert.ToInt32(item.Color.ToString()), 16);
+                var text = "";
+                try
+                {
+                    text = "#" + System.Convert.ToString(System.Convert.ToInt32(item.Color.ToString()), 16);
+                }
+                catch (Exception)
+                {
+                    text = "令牌无效";
+                }
                 var style = new DankumuTextStyle()
                 {
-                    Color = new SolidColorBrush((Color)ColorConverter.ConvertFromString(text)),
                     Size = item.FontSize,
                     FontWeight = FontWeights.Bold,
                     FontFamily = new FontFamily("微软雅黑")
                 };
+                style.Color = text != "令牌无效" ? new SolidColorBrush((Color)ColorConverter.ConvertFromString(text)) : new SolidColorBrush(Colors.White);
                 //增加弹幕
                 switch (item.DanmakuType)
                 {
@@ -121,22 +151,24 @@ namespace BiliStart.Windows
 
         private async void support_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var value = (sender as SplitButton).SelectedItem as Support_Formats;
+            var value = (sender as SplitButton)!.SelectedItem as Support_Formats;
             TimeSpan videotime = media.Position.Ticks == 0 ? new TimeSpan() : media.Position;
-            media.Pause();
-            mediavideo.Pause();
+            await media.Pause();
+            await mediavideo.Pause();
             foreach (var item in VideoInfo.Dash.DashVideos)
             {
-                if (item.ID == value.Quality)
+                if (item.ID == value!.Quality)
                 {
-                    media.Open(new Uri(item.Base_Url));
-                    mediavideo.Open(new Uri(VideoInfo.Dash.DashAudio[0].BaseUrl));
+                    var value2 =  await media.Open(new Uri(item.Base_Url));
+                    var value3 =  await mediavideo.Open(new Uri(VideoInfo.Dash.DashAudio[0].BaseUrl));
+                    if(value3 && value2)
+                    {
+                        Play();
+                    }
                     if (videotime.Ticks != 0)
                     {
-                        media.Seek(videotime);
-                        mediavideo.Seek(videotime);
-                        media.Play();
-                        mediavideo.Play();
+                        await media.Seek(videotime);
+                        await mediavideo.Seek(videotime);
                     }
                     break;
                 }
@@ -148,10 +180,24 @@ namespace BiliStart.Windows
         {
         }
 
+        /// <summary>
+        /// 此事件共挂载两个触发者
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Media_MediaOpened(object? sender, MediaOpenedEventArgs e)
         {
-            slider.Maximum = media.NaturalDuration!.Value.TotalSeconds;
-            timer.Start();
+            if (media.IsOpen == true && mediavideo.IsOpen == true)
+            {
+                playbutton.IsEnabled = true;
+                slider.Maximum = media.NaturalDuration!.Value.TotalSeconds;
+                DanmakuPostProcess.Start();
+                PostProcess.Start();
+            }
+            else
+            {
+                playbutton.IsEnabled = false;
+            }
         }
 
         private void Media_MediaInitializing(object? sender, MediaInitializingEventArgs e)
@@ -165,11 +211,27 @@ namespace BiliStart.Windows
             Play();
         }
 
-        public void Play()
+        public async void Play()
         {
-            media.Play();
-            mediavideo.Play();
-            timer.Start();
+            if(media.Source != null)
+                slider.Maximum = media.NaturalDuration!.Value.TotalSeconds;
+            Playing = !Playing;
+            if (Playing)
+            {
+                await media.Play();
+                await mediavideo.Play();
+                DanmakuPostProcess.Start();
+                playbutton.Content = "\uE769";
+                PostProcess.Start();
+            }
+            else
+            {
+                await media.Pause();
+                await mediavideo.Pause();
+                DanmakuPostProcess.Stop();
+                PostProcess.Stop();
+                playbutton.Content = "\uE768";
+            }
         }
     }
 }

@@ -14,6 +14,8 @@
                 <ResourceDictionary Source="pack://application:,,,/ZUDesignControl;component/Colors/Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/BiliStart;component/Animations.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+
             <Style x:Key="ItemsControlStyle" TargetType="ItemsControl">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -25,6 +27,18 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <ItemsPanelTemplate x:Key="DefaultVideoPanel">
+                <UniformGrid Columns="5" />
+            </ItemsPanelTemplate>
+
+            <ItemsPanelTemplate x:Key="DefaultVideoPanelPx1000">
+                <UniformGrid Columns="3" />
+            </ItemsPanelTemplate>
+
+            <ItemsPanelTemplate x:Key="DefaultVideoPanelPx700">
+                <UniformGrid Columns="1" />
+            </ItemsPanelTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
