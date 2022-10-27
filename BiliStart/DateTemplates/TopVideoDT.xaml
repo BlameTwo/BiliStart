@@ -8,7 +8,7 @@
     <convert:TimeConvert x:Key="RankConvert" />
     <convert:CountForNumber x:Key="CountForNumber" />
     <convert:TextLengthConvert x:Key="TextLengthConvert" />
-    <DataTemplate x:Key="DefaultTopVideo" DataType="{x:Type data:TopVideo}">
+    <DataTemplate x:Key="DefaultTopVideoPx700" DataType="{x:Type data:TopVideo}">
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -96,6 +96,53 @@
                     </Border>
                 </StackPanel>
             </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="DefaultTopVideo" DataType="{x:Type data:TopVideo}">
+        <Grid ClipToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <Border
+                Width="250"
+                Height="170"
+                Panel.ZIndex="-1"
+                extend:BorderImageSoureExtend.AnimationType="Opacity"
+                extend:BorderImageSoureExtend.Source="{Binding Cover}"
+                CornerRadius="5" />
+            <Border
+                Margin="5,5,0,0"
+                Padding="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="{DynamicResource App_CardOrPanel_Color}"
+                CornerRadius="5">
+                <TextBlock Text="{Binding Bvid}" />
+            </Border>
+            <TextBlock
+                Grid.Row="1"
+                Margin="0,5,0,0"
+                FontSize="15"
+                Text="{Binding Title, Converter={StaticResource TextLengthConvert}, ConverterParameter=15}"
+                TextWrapping="Wrap" />
+
+            <Border
+                Margin="5,0,0,5"
+                Padding="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Background="{DynamicResource App_CardOrPanel_Color}"
+                CornerRadius="5">
+                <TextBlock TextOptions.TextHintingMode="Fixed">
+                    <Run Text="{Binding Up.Name}" />
+                    <Run Text="~" />
+                    <Run Text="{Binding UserUpdata, Converter={StaticResource RankConvert}}" />
+                </TextBlock>
+            </Border>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
