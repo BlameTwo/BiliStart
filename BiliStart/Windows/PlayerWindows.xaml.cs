@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using Unosquare.FFME.Common;
 using ZUDesignControl.Controls;
+using MessageBox = System.Windows.MessageBox;
 
 namespace BiliStart.Windows
 {
@@ -76,12 +77,20 @@ namespace BiliStart.Windows
 
         private async void PlayerWindows_Loaded(object sender, RoutedEventArgs e)
         {
-            Danmaku danmaku = new Danmaku();
-            var danmakutext = await danmaku.GetDanmakuTest(VC.First_Cid);
-            formatDanmakuTextModels = await danmaku.GetFormatDanmakuText(danmakutext);
-            VideoInfo = (await video.GetVideo(VC, BiliBiliAPI.Models.VideoIDType.BV, 0)).Data;
-            support.ItemsSource = VideoInfo.Support_Formats;
-            support.SelectedIndex = 0;
+            try
+            {
+                Danmaku danmaku = new Danmaku();
+                var danmakutext = await danmaku.GetDanmakuTest(VC.First_Cid);
+                formatDanmakuTextModels = await danmaku.GetFormatDanmakuText(danmakutext);
+                VideoInfo = (await video.GetVideo(VC, BiliBiliAPI.Models.VideoIDType.BV, 0)).Data;
+                support.ItemsSource = VideoInfo.Support_Formats;
+                support.SelectedIndex = 0;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void PostProcess_Tick1(object? sender, EventArgs e)

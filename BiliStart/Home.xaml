@@ -64,7 +64,12 @@
                 Content="排行榜"
                 Icon="&#xE753;"
                 Tag="排行榜" />
-
+            <des:NavigationItem
+                Cache="Close"
+                Click="NavigationItem_Click_2"
+                Content="搜索"
+                Icon="&#xE721;"
+                Tag="搜索" />
         </des:NavigationView.Items>
         <Grid>
             <Frame x:Name="RootFrame" />

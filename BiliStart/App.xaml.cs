@@ -21,7 +21,6 @@ namespace BiliStart
         public App()
         {
             Unosquare.FFME.Library.FFmpegDirectory = "D:\\FFmpeg";
-            this.Startup += App_Startup;
 
             //Task线程内未捕获异常处理事件
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException; ;//Task异常 
@@ -94,21 +93,6 @@ namespace BiliStart
             }
         }
 
-        private void App_Startup(object sender, StartupEventArgs e)
-        {
-            InitialServices();
-        }
-
-        private static void InitialServices()
-        {
-            var services = new ServiceCollection();
-            services.AddTransient<LoginViewModel>();
-            services.AddTransient<QRLoginVM>();
-            services.AddTransient<HomeVM>();
-            services.AddTransient<PasswordLoginVM>();
-            services.AddTransient<TopVideoVM>();
-            var provider = services.BuildServiceProvider();
-            Ioc.Default.ConfigureServices(provider);
-        }
+        
     }
 }

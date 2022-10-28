@@ -1,8 +1,12 @@
-﻿using System;
+﻿using BiliStart.ViewModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BiliStart
 {
@@ -29,13 +33,31 @@ namespace BiliStart
             System.Windows.Application.LoadComponent(this, resourceLocater);
         }
 
+        private static void App_Startup(object sender, StartupEventArgs e)
+        {
+            InitialServices();
+        }
 
+        private static void InitialServices()
+        {
+            var services = new ServiceCollection();
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<QRLoginVM>();
+            services.AddTransient<HomeVM>();
+            services.AddTransient<PasswordLoginVM>();
+            services.AddTransient<TopVideoVM>();
+            services.AddTransient<SearchPageVM>();
+            var provider = services.BuildServiceProvider();
+            Ioc.Default.ConfigureServices(provider);
+        }
+
+        static BiliStart.App  app = new BiliStart.App();
 
         [STAThread]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public static void Main(string[] args)
         {
-            BiliStart.App app = new BiliStart.App();
+            app.Startup += App_Startup;
             app.InitializeComponent();
             app.Run();
         }
