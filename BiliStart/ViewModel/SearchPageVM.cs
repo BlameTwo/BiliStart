@@ -20,7 +20,6 @@ namespace BiliStart.ViewModel
 
         async void load()
         {
-            var value = await Search.SearchVideo("崩坏世界的歌姬", "5");
         }
 
         public RelayCommand Loaded { get; private set; }
