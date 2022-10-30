@@ -12,6 +12,8 @@
     Title="BliStart"
     d:DataContext="{d:DesignInstance Type=vm:HomeVM}"
     Background="Transparent"
+    Foreground="{DynamicResource App_Foreground_Color}"
+    SizeChanged="MicaWindow_SizeChanged"
     Style="{DynamicResource MicaStyle}"
     Topmost="False"
     mc:Ignorable="d">
@@ -21,9 +23,6 @@
             <i:InvokeCommandAction Command="{Binding GetFrame}" CommandParameter="{Binding ElementName=RootFrame}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <des:MicaWindow.Foreground>
-        <SolidColorBrush Color="{DynamicResource Control_Foreground_TextFill}" />
-    </des:MicaWindow.Foreground>
     <des:MicaWindow.HeaderContent>
         <des:PersonPictureButton
             Padding="5"
@@ -33,6 +32,32 @@
             CornerRadius="5"
             Pic_Uri="{Binding _LoginResult.Face_Image}" />
     </des:MicaWindow.HeaderContent>
+    <des:MicaWindow.TitbarControl>
+        <Grid x:Name="titbarcontrol">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <des:TextBox
+                Width="400"
+                Padding="5,0,5,0"
+                VerticalContentAlignment="Center"
+                CornerRadius="5"
+                Foreground="{DynamicResource App_Foreground_Color}"
+                Placeholder="搜索你的关键字"
+                Text="{Binding SearchKey}" />
+            <Button
+                Grid.Column="1"
+                Width="35"
+                Margin="5,0,0,0"
+                Command="{Binding SearchClick}"
+                Content="&#xE721;"
+                FontFamily="{DynamicResource Microsoft_Icon}"
+                FontSize="14"
+                Foreground="{DynamicResource App_Foreground_Color}"
+                Style="{DynamicResource IconButtonStyle}" />
+        </Grid>
+    </des:MicaWindow.TitbarControl>
     <des:NavigationView
         x:Name="navigation"
         Cache="Open"
@@ -64,12 +89,6 @@
                 Content="排行榜"
                 Icon="&#xE753;"
                 Tag="排行榜" />
-            <des:NavigationItem
-                Cache="Close"
-                Click="NavigationItem_Click_2"
-                Content="搜索"
-                Icon="&#xE721;"
-                Tag="搜索" />
         </des:NavigationView.Items>
         <Grid>
             <Frame x:Name="RootFrame" />

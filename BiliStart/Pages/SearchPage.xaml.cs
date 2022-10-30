@@ -26,12 +26,13 @@ namespace BiliStart.Pages
         public SearchPage()
         {
             InitializeComponent();
-            this.DataContext = Ioc.Default.GetService<SearchPageVM>();
+            
         }
 
         public void SetExtraData(object ExtraData)
         {
-
+            this.DataContext = new SearchPageVM() { _SearchKey = (string)ExtraData };
         }
+
     }
 }

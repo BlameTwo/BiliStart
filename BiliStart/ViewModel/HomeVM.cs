@@ -4,6 +4,7 @@ using BiliBiliAPI.Models.Account;
 using BiliBiliAPI.Models.Settings;
 using BiliStart.Dialog;
 using BiliStart.Event;
+using BiliStart.Pages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -50,6 +51,15 @@ namespace BiliStart.ViewModel
                 }
             });
 
+            SearchClick = new RelayCommand(() =>
+            {
+                if (!string.IsNullOrWhiteSpace(searchkey))
+                {
+                    RootFrame!.NavigationService.Navigate(new SearchPage(), SearchKey);
+                    SearchKey = "";
+                }
+            });
+
         }
         bool IsLogin { get; set; }
         async void loaded()
@@ -74,6 +84,7 @@ namespace BiliStart.ViewModel
 
         public ContentControl ContentControl { get; set; }
 
+
         public void Receive(FrameBaseNavigtion message)
         {
             //_NavigationView!.PanelTitle = message.Page.Tag.ToString();
@@ -89,8 +100,18 @@ namespace BiliStart.ViewModel
             set => SetProperty(ref LoginResult, value);
         }
 
+        private string searchkey;
+
+        public string SearchKey
+        {
+            get { return searchkey; }
+            set=>SetProperty(ref searchkey, value);
+        }
+
+
         public RelayCommand<NavigationView> Loaded { get;private  set; }
         public RelayCommand<Frame> GetFrame { get; private set; }
         public RelayCommand LoginOrOpen { get; private set; }
+        public RelayCommand SearchClick { get; private set; }
     }
 }

@@ -36,6 +36,9 @@
     <Compile Update="Pages\TopVideoPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\SearchPivotItems\SearchVideo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\PlayerWindows.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,6 +84,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\TopVideoPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SearchPivotItems\SearchVideo.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\PlayerWindows.xaml">

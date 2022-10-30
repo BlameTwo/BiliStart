@@ -71,7 +71,14 @@ namespace BiliStart.Controls
 
         public static int GetRandomInt(int min, int max)
         {
-            return ra.Next(min, max);
+            try
+            {
+                return ra.Next(min, max);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         public void LockSlot(int _row)

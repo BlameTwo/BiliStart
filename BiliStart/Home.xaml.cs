@@ -65,9 +65,16 @@ namespace BiliStart
             RootFrame.NavigationService.Navigate(new TopVideoPage());
         }
 
-        private void NavigationItem_Click_2(object sender, RoutedEventArgs e)
+        private void MicaWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            RootFrame.NavigationService.Navigate(new SearchPage());
+            if (this.ActualWidth < 750)
+            {
+                titbarcontrol.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                titbarcontrol.Visibility = Visibility.Visible;
+            }
         }
     }
 }
