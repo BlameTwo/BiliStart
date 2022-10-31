@@ -56,6 +56,9 @@
     <Page Update="DateTemplates\HomeVideoDT.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="DateTemplates\SearchVideoDT.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="DateTemplates\TopVideoDT.xaml">
       <SubType>Designer</SubType>
     </Page>
