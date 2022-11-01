@@ -88,9 +88,12 @@
     </DataTemplate>
 
     <DataTemplate x:Key="HomeVideo700" DataType="{x:Type vm:HomeVideoVM}">
-        <Grid Margin="10" ClipToBounds="True">
+        <Grid
+            Width="700"
+            Margin="10"
+            ClipToBounds="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border

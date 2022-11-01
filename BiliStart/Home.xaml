@@ -63,8 +63,9 @@
         Cache="Open"
         FrameBase="{Binding ElementName=RootFrame}"
         MenuHeader="BStart"
-        MenuOpenLength="160"
-        PanelTitle="欢迎使用哔哩Start">
+        MenuOpenLength="200"
+        PanelTitle="欢迎使用哔哩Start"
+        TreeView.SelectedItemChanged="navigation_SelectedItemChanged">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded" />
         </i:Interaction.Triggers>
@@ -72,21 +73,21 @@
             <des:NavigationItem
                 x:Name="Recommend"
                 Cache="Close"
-                Click="Recommend_Click"
-                Content="推荐"
+                FontSize="15"
+                Header="推荐"
                 Icon="&#xEA8A;"
                 Tag="推荐" />
             <des:NavigationItem
                 x:Name="Hot"
                 Cache="Close"
-                Click="Hot_Click"
-                Content="热门"
+                FontSize="15"
+                Header="热门"
                 Icon="&#xE8F0;"
                 Tag="热门" />
             <des:NavigationItem
                 Cache="Close"
-                Click="NavigationItem_Click_1"
-                Content="排行榜"
+                FontSize="15"
+                Header="排行榜"
                 Icon="&#xE753;"
                 Tag="排行榜" />
         </des:NavigationView.Items>

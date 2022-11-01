@@ -119,23 +119,24 @@ namespace BiliStart.Windows
             var danmakulist = formatDanmakuTextModels.Where(p => p.Time > nowpositon && p.Time - nowpositon < 1).ToList();
             foreach (var item in danmakulist)
             {
-                SolidColorBrush color = new SolidColorBrush();
-                var text = "";
-                try
-                {
-                    text = "#" + System.Convert.ToString(System.Convert.ToInt32(item.Color.ToString()), 16);
-                }
-                catch (Exception)
-                {
-                    text = "令牌无效";
-                }
+
                 var style = new DankumuTextStyle()
                 {
                     Size = item.FontSize,
                     FontWeight = FontWeights.Bold,
                     FontFamily = new FontFamily("微软雅黑")
                 };
-                style.Color = text != "令牌无效" ? new SolidColorBrush((Color)ColorConverter.ConvertFromString(text)) : new SolidColorBrush(Colors.White);
+                SolidColorBrush color = new SolidColorBrush();
+                var text = "";
+                try
+                {
+                    text = "#" + System.Convert.ToString(System.Convert.ToInt32(item.Color.ToString()), 16);
+                    style.Color = text != "令牌无效" ? new SolidColorBrush((Color)ColorConverter.ConvertFromString(text)) : new SolidColorBrush(Colors.White);
+                }
+                catch (Exception)
+                {
+                    text = "令牌无效";
+                }
                 //增加弹幕
                 switch (item.DanmakuType)
                 {

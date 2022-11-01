@@ -9,9 +9,12 @@
     <convert:CountForNumber x:Key="CountForNumber" />
     <convert:TextLengthConvert x:Key="TextLengthConvert" />
     <DataTemplate x:Key="DefaultTopVideoPx700" DataType="{x:Type data:TopVideo}">
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid
+            Width="700"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Border

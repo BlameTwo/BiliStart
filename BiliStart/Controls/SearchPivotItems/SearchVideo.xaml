@@ -26,8 +26,14 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
         <des:ListView
             x:Name="list"
+            Grid.Row="1"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
             Background="Transparent"
@@ -39,6 +45,11 @@
             VirtualizingPanel.IsContainerVirtualizable="True"
             VirtualizingPanel.IsVirtualizing="True"
             VirtualizingPanel.VirtualizationMode="Recycling">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Selected}" CommandParameter="{Binding ElementName=list, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <des:ListView.Style>
                 <Style BasedOn="{StaticResource ItemsControlStyle}" TargetType="{x:Type ItemsControl}">
                     <Setter Property="ItemTemplate" Value="{DynamicResource DefaultSearchVideo}" />
@@ -47,12 +58,30 @@
                         <DataTrigger Binding="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={x:Static convert:IsLessThanConverter.Instance}, ConverterParameter=1000}" Value="True">
                             <Setter Property="ItemsPanel" Value="{DynamicResource DefaultVideoPanelPx1000}" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={x:Static convert:IsLessThanConverter.Instance}, ConverterParameter=700}" Value="True">
+                        <DataTrigger Binding="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={x:Static convert:IsLessThanConverter.Instance}, ConverterParameter=600}" Value="True">
                             <Setter Property="ItemsPanel" Value="{DynamicResource DefaultVideoPanelPx700}" />
+                            <Setter Property="ItemTemplate" Value="{DynamicResource DefaultSearchVideoPx700}" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </des:ListView.Style>
         </des:ListView>
+        <StackPanel Grid.Row="2">
+            <des:Button
+                Grid.Row="1"
+                Margin="0,5"
+                Padding="5"
+                Command="{Binding AddData}"
+                Content="加载更多"
+                CornerRadius="5"
+                IconMargin="0">
+                <des:Button.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource App_BorderBrush_Color}" />
+                </des:Button.BorderBrush>
+                <des:Button.Background>
+                    <SolidColorBrush Opacity="{DynamicResource Control_Click_Opacity}" Color="{DynamicResource Control_Click_Click}" />
+                </des:Button.Background>
+            </des:Button>
+        </StackPanel>
     </Grid>
 </UserControl>

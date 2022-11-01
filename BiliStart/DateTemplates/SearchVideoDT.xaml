@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:convert="clr-namespace:BiliStart.Converter"
     xmlns:data="clr-namespace:BiliBiliAPI.Models.Search;assembly=BiliBiliAPI.Models"
+    xmlns:des="clr-namespace:ZUDesignControl.Controls;assembly=ZUDesignControl"
     xmlns:extend="clr-namespace:ZUDesignControl.Extend;assembly=ZUDesignControl">
     <convert:TextLengthConvert x:Key="TextLength" />
     <convert:TickConvert x:Key="TickConvert" />
@@ -29,7 +30,7 @@
                 VerticalAlignment="Top"
                 FontSize="15"
                 FontWeight="Bold"
-                Text="{Binding Title}"
+                Text="{Binding Title, Converter={StaticResource TextLength}, ConverterParameter=20}"
                 TextWrapping="Wrap" />
             <Border
                 Margin="5,5,0,0"
@@ -95,6 +96,93 @@
                     <TextBlock Text="{Binding CreateTime, Converter={StaticResource TimeConvert}}" />
                 </StackPanel>
             </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DefaultSearchVideoPx700" DataType="{x:Type data:Item}">
+        <Grid
+            Width="700"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border
+                Width="150"
+                Height="100"
+                extend:BorderImageSoureExtend.AnimationType="Opacity"
+                extend:BorderImageSoureExtend.Source="{Binding Cover}"
+                ClipToBounds="True"
+                CornerRadius="10" />
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <TextBlock
+                    FontSize="15"
+                    Text="{Binding Title, Converter={StaticResource TextLength}, ConverterParameter=25}"
+                    TextWrapping="Wrap" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,20,0,20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <des:Button>
+                        <StackPanel Orientation="Horizontal">
+                            <Border
+                                Width="25"
+                                Height="25"
+                                HorizontalAlignment="Left"
+                                extend:BorderImageSoureExtend.AnimationType="Opacity"
+                                extend:BorderImageSoureExtend.Source="{Binding UpCover}"
+                                CornerRadius="25" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Text="{Binding UpName}" />
+                        </StackPanel>
+                    </des:Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Border
+                        Padding="5"
+                        Background="{DynamicResource App_CardOrPanel_Color}"
+                        CornerRadius="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Margin="0,2,0,0"
+                                FontFamily="{DynamicResource Microsoft_Icon}"
+                                Text="&#xE7B3;" />
+                            <TextBlock Margin="5,0,0,0" Text="{Binding PlayCount, Converter={StaticResource CountForNumberConvert}}" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Margin="5,0,0,0"
+                        Padding="5"
+                        Background="{DynamicResource App_CardOrPanel_Color}"
+                        CornerRadius="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Margin="0,2,0,0"
+                                FontFamily="{DynamicResource Microsoft_Icon}"
+                                Text="&#xE7BC;" />
+                            <TextBlock Margin="5,0,0,0" Text="{Binding DanmakuCount, Converter={StaticResource CountForNumberConvert}}" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Margin="5,0,0,0"
+                        Padding="5"
+                        Background="{DynamicResource App_CardOrPanel_Color}"
+                        CornerRadius="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Margin="0,2,5,0"
+                                FontFamily="{DynamicResource Microsoft_Icon}"
+                                Text="&#xEC92;" />
+                            <TextBlock Text="{Binding CreateTime, Converter={StaticResource TimeConvert}}" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

@@ -45,25 +45,6 @@ namespace BiliStart
             page!.SetExtraData(e.ExtraData);
         }
 
-        private void NavigationItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Recommend_Click(object sender, RoutedEventArgs e)
-        {
-            RootFrame.NavigationService.Navigate(new RecommendPage());
-        }
-
-        private void Hot_Click(object sender, RoutedEventArgs e)
-        {
-            RootFrame.NavigationService.Navigate(new HotPage());
-        }
-
-        private void NavigationItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            RootFrame.NavigationService.Navigate(new TopVideoPage());
-        }
 
         private void MicaWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -74,6 +55,25 @@ namespace BiliStart
             else
             {
                 titbarcontrol.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void navigation_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if(e.NewValue is NavigationItem item)
+            {
+                switch (item.Tag)
+                {
+                    case "推荐":
+                        RootFrame.NavigationService.Navigate(new RecommendPage());
+                        break;
+                    case "热门":
+                        RootFrame.NavigationService.Navigate(new HotPage());
+                        break;
+                    case "排行榜":
+                        RootFrame.NavigationService.Navigate(new TopVideoPage());
+                        break;
+                }
             }
         }
     }
