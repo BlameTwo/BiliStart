@@ -51,11 +51,11 @@ namespace BiliStart.ViewModel
                 }
             });
 
-            SearchClick = new RelayCommand(() =>
+            SearchClick = new RelayCommand<string>((str) =>
             {
-                if (!string.IsNullOrWhiteSpace(searchkey))
+                if (!string.IsNullOrWhiteSpace(str))
                 {
-                    RootFrame!.NavigationService.Navigate(new SearchPage(), SearchKey);
+                    RootFrame!.NavigationService.Navigate(new SearchPage(), str);
                     SearchKey = "";
                 }
             });
@@ -105,13 +105,13 @@ namespace BiliStart.ViewModel
         public string SearchKey
         {
             get { return searchkey; }
-            set=>SetProperty(ref searchkey, value);
+            set { searchkey = value;OnPropertyChanged(); }
         }
 
 
         public RelayCommand<NavigationView> Loaded { get;private  set; }
         public RelayCommand<Frame> GetFrame { get; private set; }
         public RelayCommand LoginOrOpen { get; private set; }
-        public RelayCommand SearchClick { get; private set; }
+        public RelayCommand<string> SearchClick { get; private set; }
     }
 }

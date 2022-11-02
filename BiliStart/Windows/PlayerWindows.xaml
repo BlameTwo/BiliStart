@@ -28,18 +28,21 @@
                 <RowDefinition />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
+
             <ffme:MediaElement
                 x:Name="media"
                 Grid.RowSpan="3"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Background="Black"
+                ScrubbingEnabled="True"
                 Stretch="Uniform" />
             <ffme:MediaElement
                 x:Name="mediavideo"
                 Grid.RowSpan="3"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
+                ScrubbingEnabled="True"
                 Stretch="Uniform" />
             <local1:Dankumu x:Name="dankumu" Grid.RowSpan="2" />
             <Border
@@ -113,17 +116,24 @@
                             Foreground="{DynamicResource App_Foreground_Color}"
                             Icon="&#xE740;" />
                     </StackPanel>
-                    <Grid Grid.Row="1" Margin="0,5,0,0">
-                        <des:SwitchToggleButton HorizontalAlignment="Left" Content="弹幕" />
-                    </Grid>
-                    <des:TextBox
+                    <DockPanel
                         Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="0,5,0,0"
-                        Padding="2"
-                        VerticalContentAlignment="Center"
-                        CornerRadius="5"
-                        Placeholder="发个弹幕吧！" />
+                        Grid.ColumnSpan="2"
+                        Margin="0,5,0,0">
+                        <des:SwitchToggleButton
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="弹幕" />
+                        <des:TextBox
+                            Grid.Row="1"
+                            Margin="10,5,0,0"
+                            Padding="2"
+                            VerticalContentAlignment="Center"
+                            CornerRadius="5"
+                            Placeholder="发个弹幕吧！" />
+                    </DockPanel>
+
                     <des:Button
                         Grid.Row="1"
                         Grid.Column="2"

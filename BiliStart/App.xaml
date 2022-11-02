@@ -47,6 +47,7 @@
                 <UniformGrid Columns="5" />
             </ItemsPanelTemplate>
 
+
             <ItemsPanelTemplate x:Key="DefaultVideoPanelPx1000">
                 <UniformGrid Columns="3" />
             </ItemsPanelTemplate>

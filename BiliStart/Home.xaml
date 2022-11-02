@@ -17,6 +17,12 @@
     Style="{DynamicResource MicaStyle}"
     Topmost="False"
     mc:Ignorable="d">
+    <des:MicaWindow.InputBindings>
+        <KeyBinding
+            Key="Enter"
+            Command="{Binding SearchClick}"
+            CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}" />
+    </des:MicaWindow.InputBindings>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}" CommandParameter="{Binding ElementName=navigation}" />
@@ -39,18 +45,20 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <des:TextBox
+                x:Name="SearchTextBox"
                 Width="400"
                 Padding="5,0,5,0"
                 VerticalContentAlignment="Center"
                 CornerRadius="5"
                 Foreground="{DynamicResource App_Foreground_Color}"
                 Placeholder="搜索你的关键字"
-                Text="{Binding SearchKey}" />
+                Text="{Binding SearchKey, Mode=TwoWay}" />
             <Button
                 Grid.Column="1"
                 Width="35"
                 Margin="5,0,0,0"
                 Command="{Binding SearchClick}"
+                CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}"
                 Content="&#xE721;"
                 FontFamily="{DynamicResource Microsoft_Icon}"
                 FontSize="14"
@@ -76,6 +84,7 @@
                 FontSize="15"
                 Header="推荐"
                 Icon="&#xEA8A;"
+                IsSelected="True"
                 Tag="推荐" />
             <des:NavigationItem
                 x:Name="Hot"

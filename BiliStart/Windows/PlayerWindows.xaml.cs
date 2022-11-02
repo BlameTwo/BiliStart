@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Unosquare.FFME;
 using Unosquare.FFME.Common;
 using ZUDesignControl.Controls;
 using MessageBox = System.Windows.MessageBox;
@@ -58,6 +59,13 @@ namespace BiliStart.Windows
             VC = item;
             SizeChanged += PlayerWindows_SizeChanged;
             Playing = false;
+
+
+            media.SubtitleDecoded += (s, e) =>
+            {
+            };
+
+
         }
 
 
@@ -99,6 +107,7 @@ namespace BiliStart.Windows
             {
 
                 var value = media.Position.Ticks;
+
                 if (value > 0 && OldTick != value)
                 {
                     OldTick = value;
@@ -114,11 +123,14 @@ namespace BiliStart.Windows
             {
                 durition.Text = media.Position.ToString(@"hh\:mm\:ss") + "\\" + media.NaturalDuration!.Value.ToString(@"hh\:mm\:ss");
                 slider.Value = media.Position.TotalSeconds;
+               
+                this.Title = media.DownloadProgress.ToString();
             });
             var nowpositon = media.Position.TotalSeconds;
             var danmakulist = formatDanmakuTextModels.Where(p => p.Time > nowpositon && p.Time - nowpositon < 1).ToList();
             foreach (var item in danmakulist)
             {
+                
 
                 var style = new DankumuTextStyle()
                 {

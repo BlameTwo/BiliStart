@@ -27,9 +27,11 @@
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            BorderBrush="{DynamicResource App_Background_Color}"
+            BorderThickness="1"
             CornerRadius="5">
             <Border.Background>
-                <SolidColorBrush Color="{DynamicResource App_BorderBrush_Color}" />
+                <SolidColorBrush Color="{DynamicResource App_CardOrPanel_Color_Two}" />
             </Border.Background>
             <Grid Margin="10">
                 <Grid.RowDefinitions>

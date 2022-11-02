@@ -11,13 +11,21 @@ namespace BiliStart
     {
         public static ObservableCollection<T> ToObservableCollection<T>(this List<T> values)
         {
-            ObservableCollection<T> values1 = new ObservableCollection<T>();
-            foreach (var item in values)
+            try
             {
-                values1.Add(item);
-            }
 
-            return values1;
+                ObservableCollection<T> values1 = new ObservableCollection<T>();
+                foreach (var item in values)
+                {
+                    values1.Add(item);
+                }
+
+                return values1;
+            }
+            catch (Exception)
+            {
+                return new ObservableCollection<T>();
+            }
         }
     }
 }
