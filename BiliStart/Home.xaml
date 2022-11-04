@@ -1,4 +1,4 @@
-﻿<des:MicaWindow
+﻿<des:TabbleWindow
     x:Class="BiliStart.Home"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,22 +14,22 @@
     Background="Transparent"
     Foreground="{DynamicResource App_Foreground_Color}"
     SizeChanged="MicaWindow_SizeChanged"
-    Style="{DynamicResource MicaStyle}"
+    Style="{DynamicResource TabbleStyle}"
     Topmost="False"
     mc:Ignorable="d">
-    <des:MicaWindow.InputBindings>
+    <des:TabbleWindow.InputBindings>
         <KeyBinding
             Key="Enter"
             Command="{Binding SearchClick}"
             CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}" />
-    </des:MicaWindow.InputBindings>
+    </des:TabbleWindow.InputBindings>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}" CommandParameter="{Binding ElementName=navigation}" />
             <i:InvokeCommandAction Command="{Binding GetFrame}" CommandParameter="{Binding ElementName=RootFrame}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <des:MicaWindow.HeaderContent>
+    <des:TabbleWindow.HeaderContent>
         <des:PersonPictureButton
             Padding="5"
             Background="{DynamicResource App_Account_Color}"
@@ -37,8 +37,8 @@
             Content="登录"
             CornerRadius="5"
             Pic_Uri="{Binding _LoginResult.Face_Image}" />
-    </des:MicaWindow.HeaderContent>
-    <des:MicaWindow.TitbarControl>
+    </des:TabbleWindow.HeaderContent>
+    <des:TabbleWindow.TitbarControl>
         <Grid x:Name="titbarcontrol">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -65,7 +65,7 @@
                 Foreground="{DynamicResource App_Foreground_Color}"
                 Style="{DynamicResource IconButtonStyle}" />
         </Grid>
-    </des:MicaWindow.TitbarControl>
+    </des:TabbleWindow.TitbarControl>
     <des:NavigationView
         x:Name="navigation"
         Cache="Open"
@@ -80,6 +80,7 @@
         <des:NavigationView.Items>
             <des:NavigationItem
                 x:Name="Recommend"
+                Margin="0,3"
                 Cache="Close"
                 FontSize="15"
                 Header="推荐"
@@ -88,12 +89,15 @@
                 Tag="推荐" />
             <des:NavigationItem
                 x:Name="Hot"
+                Margin="0,3"
                 Cache="Close"
                 FontSize="15"
                 Header="热门"
                 Icon="&#xE8F0;"
                 Tag="热门" />
             <des:NavigationItem
+                x:Name="Top"
+                Margin="0,3"
                 Cache="Close"
                 FontSize="15"
                 Header="排行榜"
@@ -104,4 +108,4 @@
             <Frame x:Name="RootFrame" />
         </Grid>
     </des:NavigationView>
-</des:MicaWindow>
+</des:TabbleWindow>

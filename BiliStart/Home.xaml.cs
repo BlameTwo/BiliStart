@@ -29,7 +29,7 @@ namespace BiliStart
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Home :MicaWindow
+    public partial class Home :TabbleWindow
     {
 
         public Home()
@@ -37,10 +37,35 @@ namespace BiliStart
             InitializeComponent();
             this.DataContext = Ioc.Default.GetService<HomeVM>();
             RootFrame.NavigationService.LoadCompleted += NavigationService_LoadCompleted;
+            RootFrame.NavigationService.Navigated += NavigationService_Navigated;
+        }
+
+        private void NavigationService_Navigated(object sender, NavigationEventArgs e)
+        {
+            //导航后触发的列表选项变化
+            Type type = e.Content.GetType();
+            if(type == typeof(RecommendPage))
+            {
+                Recommend.IsSelected = true;
+            }
+            else if(type == typeof(HotPage))
+            {
+                Hot.IsSelected = true;
+            }else if(type == typeof(TopVideoPage))
+            {
+                Top.IsSelected = true;
+            }
+            else
+            {
+                Recommend.IsSelected = false;
+                Hot.IsSelected = false;
+                Top.IsSelected = false;
+            }
         }
 
         private void NavigationService_LoadCompleted(object sender, NavigationEventArgs e)
         {
+            //使用接口进行传递参数
             var page = e.Content as IPageBase;
             page!.SetExtraData(e.ExtraData);
         }
@@ -48,6 +73,7 @@ namespace BiliStart
 
         private void MicaWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            //搜索栏的显示控制
             if (this.ActualWidth < 750)
             {
                 titbarcontrol.Visibility = Visibility.Collapsed;

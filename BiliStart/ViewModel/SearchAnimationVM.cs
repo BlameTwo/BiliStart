@@ -1,5 +1,6 @@
 ﻿using BilibiliAPI.Search;
 using BiliBiliAPI.Models.Search;
+using BiliStart.ViewModel.ItemViewModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -19,23 +20,28 @@ namespace BiliStart.ViewModel
             IsActive = true;
             Loaded = new RelayCommand(() => load());
             this.SearchKey = SearchKey;
+            Items = new ObservableCollection<SearchAnimationItemVM>();
         }
 
         async void load()
         {
-            _Item = (await Search.SearchAnimation(SearchKey,Index)).Data.Items.ToObservableCollection();
+            var value = (await Search.SearchAnimation(SearchKey,Index)).Data.Items.ToObservableCollection();
+            foreach (var item in value)
+            {
+                Items.Add(new SearchAnimationItemVM() { _Item = item });
+            }
         }
         int Index = 1;
         public RelayCommand Loaded { get; private set; }
         public string SearchKey { get; }
 
 
-        private ObservableCollection<AniationItem> Item;
+        private ObservableCollection<SearchAnimationItemVM> items;
 
-        public ObservableCollection<AniationItem> _Item
+        public ObservableCollection<SearchAnimationItemVM> Items
         {
-            get { return Item; }
-            set => SetProperty(ref Item, value);
+            get { return items; }
+            set => SetProperty(ref items, value);
         }
 
 
