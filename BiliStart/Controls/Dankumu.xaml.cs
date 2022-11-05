@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -152,6 +153,8 @@ namespace BiliStart.Controls
         {
             DankumuText text1 = new DankumuText() { Text = text, Foreground = style.Color,FontSize = style.Size
             ,FontFamily = style.FontFamily,FontWeight = style.FontWeight};
+            DropShadowEffect effect = new DropShadowEffect() {Color = Colors.Black,Opacity = 0.7,BlurRadius = 5,ShadowDepth=0};
+            text1.Effect = effect;
             return text1;
         }
     }
