@@ -21,12 +21,12 @@ namespace BiliStart.ViewModel.ItemViewModel
 
         private void selection(Episodes? arg)
         {
-            MessageBox.Show($"选择了第{arg.Index}集，cid为{arg.Uri}");
+            MessageBox.Show($"选择了第{arg.Index}集，epid为{arg.Uriparam}");
         }
 
-        private AniationItem Item;
+        private Aniation_Movie_Item Item;
 
-        public AniationItem _Item
+        public Aniation_Movie_Item _Item
         {
             get { return Item; }
             set=>SetProperty(ref Item, value);

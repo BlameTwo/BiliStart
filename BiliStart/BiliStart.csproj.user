@@ -15,6 +15,9 @@
     <Compile Update="Controls\SearchPivotItems\SearchAnimation.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\SearchPivotItems\SearchMovie.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Dialog\LoginDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -57,6 +60,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\SearchPivotItems\SearchAnimation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SearchPivotItems\SearchMovie.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="DateTemplates\HomeVideoDT.xaml">

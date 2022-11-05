@@ -29,7 +29,7 @@ namespace BiliStart
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Home :TabbleWindow
+    public partial class Home :WindowBase
     {
 
         public Home()

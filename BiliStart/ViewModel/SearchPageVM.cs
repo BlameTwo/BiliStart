@@ -36,6 +36,7 @@ namespace BiliStart.ViewModel
                     Content.Content = new BiliStart.Controls.SearchPivotItems.SearchAnimation() { SearchKey = _SearchKey};  
                     break;
                 case "电影":
+                    Content.Content = new BiliStart.Controls.SearchPivotItems.SearchMovie() { SearchKey = _SearchKey };
                     break;
                 case "专栏":
                     break;

@@ -1,4 +1,4 @@
-﻿<des:TabbleWindow
+﻿<des:WindowBase
     x:Class="BiliStart.Home"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,25 +11,26 @@
     xmlns:vm="clr-namespace:BiliStart.ViewModel"
     Title="BliStart"
     d:DataContext="{d:DesignInstance Type=vm:HomeVM}"
+    BackType="Tabbed"
     Background="Transparent"
     Foreground="{DynamicResource App_Foreground_Color}"
     SizeChanged="MicaWindow_SizeChanged"
-    Style="{DynamicResource TabbleStyle}"
+    Style="{DynamicResource BaseStyle}"
     Topmost="False"
     mc:Ignorable="d">
-    <des:TabbleWindow.InputBindings>
+    <des:WindowBase.InputBindings>
         <KeyBinding
             Key="Enter"
             Command="{Binding SearchClick}"
             CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}" />
-    </des:TabbleWindow.InputBindings>
+    </des:WindowBase.InputBindings>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}" CommandParameter="{Binding ElementName=navigation}" />
             <i:InvokeCommandAction Command="{Binding GetFrame}" CommandParameter="{Binding ElementName=RootFrame}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <des:TabbleWindow.HeaderContent>
+    <des:WindowBase.HeaderContent>
         <des:PersonPictureButton
             Padding="5"
             Background="{DynamicResource App_Account_Color}"
@@ -37,8 +38,8 @@
             Content="登录"
             CornerRadius="5"
             Pic_Uri="{Binding _LoginResult.Face_Image}" />
-    </des:TabbleWindow.HeaderContent>
-    <des:TabbleWindow.TitbarControl>
+    </des:WindowBase.HeaderContent>
+    <des:WindowBase.TitbarControl>
         <Grid x:Name="titbarcontrol">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -65,7 +66,7 @@
                 Foreground="{DynamicResource App_Foreground_Color}"
                 Style="{DynamicResource IconButtonStyle}" />
         </Grid>
-    </des:TabbleWindow.TitbarControl>
+    </des:WindowBase.TitbarControl>
     <des:NavigationView
         x:Name="navigation"
         Cache="Open"
@@ -108,4 +109,4 @@
             <Frame x:Name="RootFrame" />
         </Grid>
     </des:NavigationView>
-</des:TabbleWindow>
+</des:WindowBase>
