@@ -27,7 +27,7 @@ namespace BiliStart.ViewModel
 
             AddData = new RelayCommand(async() =>
             {
-                var list = (await Search.GetVideo(SearchKey, Index, OrderBy.Default, 1)).Data.Items.ToObservableCollection();
+                var list = (await Search.GetVideo(SearchKey, Index, OrderBy.Default, 0)).Data.Items.ToObservableCollection();
                 for (int i = 0; i < list.Count; i++)
                 {
                     MyList.Add(list[i]);
@@ -54,7 +54,7 @@ namespace BiliStart.ViewModel
 
         private async void loaded()
         {
-            MyList = (await Search.GetVideo(SearchKey, Index, OrderBy.Default, 1)).Data.Items.ToObservableCollection(); ;
+            MyList = (await Search.GetVideo(SearchKey, Index, OrderBy.Default, 0)).Data.Items.ToObservableCollection(); ;
         }
         int Index { get; set; } = 1;
         private ObservableCollection<BiliBiliAPI.Models.Search.Item> List;

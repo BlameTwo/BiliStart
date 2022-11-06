@@ -1,6 +1,7 @@
 ﻿using BilibiliAPI.Video;
 using BiliBiliAPI.Models.Videos;
 using BiliStart.Controls;
+using BiliStart.Controls.PlayerPivotItems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,13 +60,6 @@ namespace BiliStart.Windows
             VC = item;
             SizeChanged += PlayerWindows_SizeChanged;
             Playing = false;
-
-
-            media.SubtitleDecoded += (s, e) =>
-            {
-            };
-
-
         }
 
 
@@ -175,8 +169,8 @@ namespace BiliStart.Windows
         {
             var value = (sender as SplitButton)!.SelectedItem as Support_Formats;
             TimeSpan videotime = media.Position.Ticks == 0 ? new TimeSpan() : media.Position;
-            await media.Pause();
-            await mediavideo.Pause();
+            await media.Close();
+            await mediavideo.Close();
             foreach (var item in VideoInfo.Dash.DashVideos)
             {
                 if (item.ID == value!.Quality)
@@ -253,6 +247,21 @@ namespace BiliStart.Windows
                 DanmakuPostProcess.Stop();
                 PostProcess.Stop();
                 playbutton.Content = "\uE768";
+            }
+        }
+
+        private void more_SelectionChanged(object sender, SelectedArgs e)
+        {
+            if(e.arg.SelectItem == One)
+            {
+
+            }else if(e.arg.SelectItem == Two)
+            {
+                detail.VideoContent = this.VC;
+            }
+            else if(e.arg.SelectItem == There)
+            {
+
             }
         }
     }

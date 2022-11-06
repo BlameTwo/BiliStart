@@ -31,11 +31,14 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+
         <des:ListView
             x:Name="homevideos"
+            Grid.Row="1"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
             Background="Transparent"
@@ -69,7 +72,7 @@
             </des:ListView.Style>
         </des:ListView>
         <des:Button
-            Grid.Row="1"
+            Grid.Row="2"
             Margin="0,5"
             Padding="5"
             Command="{Binding AddData}"

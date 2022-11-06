@@ -17,8 +17,7 @@ namespace BiliStart.Converter
             long lTime = long.Parse(long.Parse(value.ToString()) + "0000000");
             TimeSpan toNow = new TimeSpan(lTime);
             DateTime targetDt = dtStart.Add(toNow);
-            return $"{targetDt.Month}-{targetDt.Day}";
-
+            return targetDt.ToString("G");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
