@@ -1,6 +1,6 @@
 # BiliStart
 
-WPF的Bilibili客户端
+WinUI3的Bilibili客户端
 
 采用自制UI和Win11  22H2新材质笔刷制作而成。
 
