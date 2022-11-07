@@ -51,15 +51,11 @@ namespace BiliStart
             else if(type == typeof(HotPage))
             {
                 Hot.IsSelected = true;
-            }else if(type == typeof(TopVideoPage))
-            {
-                Top.IsSelected = true;
             }
             else
             {
                 Recommend.IsSelected = false;
                 Hot.IsSelected = false;
-                Top.IsSelected = false;
             }
         }
 

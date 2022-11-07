@@ -35,7 +35,47 @@
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <des:Button
+                Margin="10"
+                Padding="15"
+                Background="{DynamicResource App_Account_Color}"
+                Command="{Binding GoTopList}"
+                Content="&#xE7AC;"
+                CornerRadius="10"
+                FontFamily="{DynamicResource Microsoft_Icon}"
+                FontSize="30">
+                <des:Button.ToolTip>
+                    <ToolTip Padding="5" Content="排行榜" />
+                </des:Button.ToolTip>
+            </des:Button>
+            <des:Button
+                Margin="10"
+                Padding="15"
+                Background="{DynamicResource App_Account_Color}"
+                Command="{Binding GoWeek}"
+                Content="&#xE8C0;"
+                CornerRadius="10"
+                FontFamily="{DynamicResource Microsoft_Icon}"
+                FontSize="30">
+                <des:Button.ToolTip>
+                    <ToolTip Padding="5" Content="每周必看" />
+                </des:Button.ToolTip>
+            </des:Button>
+            <des:Button
+                Margin="10"
+                Padding="15"
+                Background="{DynamicResource App_Account_Color}"
+                Content="&#xEC32;"
+                CornerRadius="10"
+                FontFamily="{DynamicResource Microsoft_Icon}"
+                FontSize="30">
+                <des:Button.ToolTip>
+                    <ToolTip Padding="5" Content="黑马榜单" />
+                </des:Button.ToolTip>
+            </des:Button>
 
+        </StackPanel>
         <des:ListView
             x:Name="homevideos"
             Grid.Row="1"

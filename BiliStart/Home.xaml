@@ -9,6 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:BiliStart.Pages"
     xmlns:vm="clr-namespace:BiliStart.ViewModel"
+    x:Name="home"
     Title="BliStart"
     d:DataContext="{d:DesignInstance Type=vm:HomeVM}"
     BackType="Tabbed"
@@ -96,14 +97,6 @@
                 Header="热门"
                 Icon="&#xE8F0;"
                 Tag="热门" />
-            <des:NavigationItem
-                x:Name="Top"
-                Margin="0,3"
-                Cache="Close"
-                FontSize="15"
-                Header="排行榜"
-                Icon="&#xE753;"
-                Tag="排行榜" />
         </des:NavigationView.Items>
         <Grid>
             <Frame x:Name="RootFrame" />

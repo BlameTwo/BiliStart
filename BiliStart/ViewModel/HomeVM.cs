@@ -89,6 +89,7 @@ namespace BiliStart.ViewModel
         {
             //_NavigationView!.PanelTitle = message.Page.Tag.ToString();
             RootFrame.NavigationService.Navigate(message.Page,message.pararm);
+            _NavigationView.PanelTitle = message.Tag;
         }
 
         private AccountLoginResultData LoginResult;

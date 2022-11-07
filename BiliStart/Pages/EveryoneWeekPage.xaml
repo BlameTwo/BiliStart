@@ -1,0 +1,80 @@
+﻿<Page
+    x:Class="BiliStart.Pages.EveryoneWeekPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:BiliStart.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="clr-namespace:BiliBiliAPI.Models.TopList;assembly=BiliBiliAPI.Models"
+    xmlns:des="clr-namespace:ZUDesignControl.Controls;assembly=ZUDesignControl"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:BiliStart.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:BiliStart.ViewModel"
+    Title="EveryoneWeekPage"
+    d:DataContext="{d:DesignInstance Type=vm:EveryoneWeekPageVM}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/BiliStart;component/DateTemplates/HotWeakDT.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <des:ComboBox
+            x:Name="headerlist"
+            Width="250"
+            Margin="0,10,0,0"
+            FontSize="15"
+            ItemContainerStyle="{DynamicResource DefaultComboBoxItemStyle}"
+            ItemsSource="{Binding _EVeryList}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding WeekSelectionChanged}" CommandParameter="{Binding ElementName=headerlist, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <des:ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type data:EveryoneWeekData}">
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </des:ComboBox.ItemTemplate>
+        </des:ComboBox>
+        <des:ListView
+            x:Name="videos"
+            Grid.Row="1"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            ItemContainerStyle="{DynamicResource GridListViewItem}"
+            ItemsSource="{Binding _Items}"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding PlayerSelectionChanged}" CommandParameter="{Binding ElementName=videos, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <des:ListView.Style>
+                <Style BasedOn="{StaticResource ItemsControlStyle}" TargetType="ItemsControl">
+                    <Setter Property="ItemTemplate" Value="{DynamicResource DefaultHotWeak}" />
+                    <Setter Property="ItemsPanel" Value="{DynamicResource DefaultVideoPanel}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Page}, Converter={x:Static convert:IsLessThanConverter.Instance}, ConverterParameter=700}" Value="True" />
+                    </Style.Triggers>
+                </Style>
+            </des:ListView.Style>
+        </des:ListView>
+    </Grid>
+</Page>

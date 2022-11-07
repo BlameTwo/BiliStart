@@ -19,7 +19,7 @@ namespace BiliStart.ViewModel
         public TopVideoVM()
         {
             IsActive = true;
-            Loaded = new RelayCommand(() => loaded());
+            Loaded = new AsyncRelayCommand(loaded);
             Selected = new RelayCommand<TopVideo>((arg) => selected(arg));
             Search = new RelayCommand<CidModel>((arg) => search(arg));
             _Cids = new ObservableCollection<CidModel>();
@@ -59,7 +59,7 @@ namespace BiliStart.ViewModel
         }
 
         BilibiliAPI.TopVideos.TopListVideo TopListVideo = new BilibiliAPI.TopVideos.TopListVideo(); 
-        private async void loaded()
+        private async Task loaded()
         {
             List = (await TopListVideo.GetTopVideo(BilibiliAPI.Cid.All,7)).Data.List.ToObservableCollection();
         }
@@ -82,7 +82,7 @@ namespace BiliStart.ViewModel
 
 
 
-        public RelayCommand Loaded { get; private set; }
+        public AsyncRelayCommand Loaded { get; private set; }
         public RelayCommand<TopVideo> Selected { get; set; }
         public RelayCommand<CidModel> Search { get; private set; }
     }

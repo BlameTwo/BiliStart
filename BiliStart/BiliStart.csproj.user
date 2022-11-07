@@ -30,6 +30,9 @@
     <Compile Update="Login\QRLogin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\EveryoneWeekPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\HotPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -74,6 +77,9 @@
     <Page Update="DateTemplates\HomeVideoDT.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="DateTemplates\HotWeakDT.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="DateTemplates\SearchAnimationDT.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -93,6 +99,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Home.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EveryoneWeekPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\HotPage.xaml">
