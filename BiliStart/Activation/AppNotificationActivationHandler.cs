@@ -43,7 +43,7 @@ public class AppNotificationActivationHandler : ActivationHandler<LaunchActivate
 
         App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
         {
-            App.MainWindow.ShowMessageDialogAsync("TODO: Handle notification activations.", "Notification Activation");
+            App.MainWindow.ShowMessageDialogAsync("TODO: Handle notification activations.", "系统通知被点击");
         });
 
         await Task.CompletedTask;

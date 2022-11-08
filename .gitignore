@@ -3,3 +3,9 @@ BiliStart/obj/
 BiliStart.Danmaku/bin
 BiliStart.Danmaku/obj
 vs
+/BiliStart.Core/obj/Debug/net6.0
+/BiliStart.Core/bin/Debug/net6.0
+/BiliStart/BiliStart.csproj.user
+/BiliStart.UI/bin/Debug/net6.0-windows10.0.19041.0
+/BiliStart.UI/obj
+/BiliStart.UI/BiliStart.UI.csproj.user

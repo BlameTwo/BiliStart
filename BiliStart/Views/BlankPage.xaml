@@ -2,11 +2,22 @@
     x:Class="BiliStart.Views.BlankPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="using:BiliStart.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <control:DanmakuControl x:Name="danmaku" />
+        <MediaPlayerElement/>
+        <Button
+            Grid.Row="1"
+            Click="Button_Click"
+            Content="增加滚动弹幕" />
     </Grid>
 </Page>

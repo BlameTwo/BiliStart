@@ -33,21 +33,21 @@ public class AppNotificationService : IAppNotificationService
     {
         // TODO: Handle notification invocations when your app is already running.
 
-        //// // Navigate to a specific page based on the notification arguments.
-        //// if (ParseArguments(args.Argument)["action"] == "Settings")
-        //// {
-        ////    App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-        ////    {
-        ////        _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
-        ////    });
-        //// }
-
-        App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+        // Navigate to a specific page based on the notification arguments.
+        if (ParseArguments(args.Argument)["action"] == "Settings")
         {
-            App.MainWindow.ShowMessageDialogAsync("TODO: Handle notification invocations when your app is already running.", "Notification Invoked");
+            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+            });
+        }
 
-            App.MainWindow.BringToFront();
-        });
+        //App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+        //{
+        //    App.MainWindow.ShowMessageDialogAsync("TODO: Handle notification invocations when your app is already running.", "Notification Invoked");
+
+        //    App.MainWindow.BringToFront();
+        //});
     }
 
     public bool Show(string payload)
