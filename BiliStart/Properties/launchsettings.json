@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "BiliStart (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "BiliStart (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}

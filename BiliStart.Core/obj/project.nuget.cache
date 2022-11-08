@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "hINRuUtW3X2isWGxgjJKbRoLh7u3I6S9DHl0OrywQHUTkQCBg6oyFM7J/W1Xvk+rBDirxPaDmIGf+/SjDn35cQ==",
+  "success": true,
+  "projectFilePath": "D:\\BiliStart\\BiliStart.Core\\BiliStart.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\30140\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

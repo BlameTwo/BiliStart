@@ -1,0 +1,12 @@
+D:\BiliStart\BiliStart.Core\bin\x86\Debug\net6.0\BiliStart.Core.deps.json
+D:\BiliStart\BiliStart.Core\bin\x86\Debug\net6.0\BiliStart.Core.dll
+D:\BiliStart\BiliStart.Core\bin\x86\Debug\net6.0\BiliStart.Core.pdb
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\BiliStart.Core.csproj.AssemblyReference.cache
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\BiliStart.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\BiliStart.Core.AssemblyInfoInputs.cache
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\BiliStart.Core.AssemblyInfo.cs
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\BiliStart.Core.csproj.CoreCompileInputs.cache
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\BiliStart.Core.dll
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\refint\BiliStart.Core.dll
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\BiliStart.Core.pdb
+D:\BiliStart\BiliStart.Core\obj\x86\Debug\net6.0\ref\BiliStart.Core.dll
