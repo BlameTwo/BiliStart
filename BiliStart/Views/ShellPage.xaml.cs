@@ -1,7 +1,8 @@
-﻿using BiliStart.Contracts.Services;
+﻿using BilibiliAPI.Account;
+using BiliStart.Contracts.Services;
 using BiliStart.Helpers;
 using BiliStart.ViewModels;
-
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -19,6 +20,7 @@ public sealed partial class ShellPage : Page
         get;
     }
 
+
     public ShellPage(ShellViewModel viewModel)
     {
         ViewModel = viewModel;
@@ -26,15 +28,12 @@ public sealed partial class ShellPage : Page
 
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
-
-        // TODO: Set the title bar icon by updating /Assets/WindowIcon.ico.
-        // A custom title bar is required for full window theme and Mica support.
-        // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
     }
+
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
@@ -75,6 +74,7 @@ public sealed partial class ShellPage : Page
 
         return keyboardAccelerator;
     }
+
 
     private static void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
