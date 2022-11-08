@@ -11,4 +11,9 @@ WinUI3的Bilibili客户端
 | **UI库**  | [ZUDesignControl](https://github.com/BlameTwo/ZUDesignControl.git) |
 | **API库** | [BiliBiliAccount](https://github.com/BlameTwo/BiliBiliAccount.git)  |
 
+
+
+
+**开始重写并使用WinUI3**
+
 🙌很大的BUG
