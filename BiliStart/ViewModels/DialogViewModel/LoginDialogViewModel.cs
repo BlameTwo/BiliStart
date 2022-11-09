@@ -64,9 +64,11 @@ public partial class LoginDialogViewModel : ObservableRecipient
         {
             case "扫码登录":
                 _PrimaryEnable = false;
+                timer.Start();
                 break;
             case "账号密码":
                 _PrimaryEnable = true;
+                timer.Stop();
                 break;
         }
     }

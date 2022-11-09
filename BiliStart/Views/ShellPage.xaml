@@ -17,8 +17,15 @@
                     Width="50"
                     Height="50"
                     ProfilePicture="{x:Bind ViewModel._LoginData.Face_Image, Mode=OneWay}" />
-                <TextBlock
+                <Path
+                    Height="13"
                     Margin="0,15,0,0"
+                    Data="{x:Bind ViewModel._LoginData.Exp.Level, Converter={StaticResource LevelConvert}, Mode=OneWay}"
+                    Fill="Red"
+                    Stretch="Uniform" />
+
+                <TextBlock
+                    Margin="0,5,0,0"
                     HorizontalAlignment="Center"
                     FontSize="17"
                     Style="{ThemeResource BaseTextBlockStyle}"
@@ -38,12 +45,7 @@
                     <Run Text="/" />
                     <Run Text="{x:Bind bar.Maximum, Mode=OneWay}" />
                 </TextBlock>
-                <Path
-                    Height="13"
-                    Margin="0,5,0,0"
-                    Data="{x:Bind ViewModel._LoginData.Exp.Level, Converter={StaticResource LevelConvert}, Mode=OneWay}"
-                    Fill="Red"
-                    Stretch="Uniform" />
+
 
                 <Border
                     Height="1"
@@ -79,8 +81,7 @@
                     Command="{x:Bind ViewModel.UnLogin}"
                     Content="退出登录"
                     FontSize="16"
-                    Foreground="Red"
-                    Style="{ThemeResource PivotTitleContentControlStyle}" />
+                    Style="{ThemeResource DefaultHyperlinkButtonStyle}" />
             </StackPanel>
         </Flyout>
     </Page.Resources>
@@ -124,17 +125,8 @@
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}">
             <NavigationView.MenuItems>
                 <NavigationViewItem
-                    x:Uid="Shell_Main"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.MainViewModel">
-                    <NavigationViewItem.Icon>
-                        <FontIcon
-                            FontFamily="{StaticResource SymbolThemeFontFamily}"
-                            Glyph="&#xe7c3;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem
-                    x:Uid="Shell_Blank"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.BlankViewModel">
+                    x:Uid="Shell_Home"
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HomeViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"

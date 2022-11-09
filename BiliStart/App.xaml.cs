@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
+using Windows.Globalization;
 
 namespace BiliStart;
 
@@ -79,10 +80,6 @@ public partial class App : Application
             // Views and ViewModels
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
-            services.AddTransient<BlankViewModel>();
-            services.AddTransient<BlankPage>();
-            services.AddTransient<MainViewModel>();
-            services.AddTransient<MainPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
@@ -90,11 +87,15 @@ public partial class App : Application
             services.AddTransient<LoginDialogViewModel>(); 
             services.AddTransient<LoginDialog>();
 
+            services.AddTransient<HomePage>();
+
+            services.AddTransient<HomeViewModel>();
+
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
         Build();
-
+        ApplicationLanguages.PrimaryLanguageOverride = "zh-CN";
         App.GetService<IAppNotificationService>().Initialize();
 
         UnhandledException += App_UnhandledException;
@@ -136,7 +137,7 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
+        //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
 
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
