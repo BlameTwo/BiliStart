@@ -2,15 +2,32 @@
     x:Class="BiliStart.Views.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:itemstyle="using:BiliStart.Styles.ItemsDataTemplate"
     xmlns:local="using:BiliStart.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI.Controls"
     Background="Transparent"
     mc:Ignorable="d">
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{x:Bind ViewModel.Loaded}" />
+        </core:EventTriggerBehavior>
 
+    </i:Interaction.Behaviors>
     <Grid>
-        <TextBlock
-            x:Uid="Shell_Home.Content"
-            Text="你好" />
+        <ui:AdaptiveGridView
+            DesiredWidth="280"
+            ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
+            ItemHeight="180"
+            ItemsSource="{x:Bind ViewModel._Data, Mode=TwoWay}">
+            <ui:AdaptiveGridView.ItemTemplate>
+                <DataTemplate>
+                    <itemstyle:HomeItemStyle Item="{Binding}" />
+                </DataTemplate>
+            </ui:AdaptiveGridView.ItemTemplate>
+        </ui:AdaptiveGridView>
     </Grid>
 </Page>
