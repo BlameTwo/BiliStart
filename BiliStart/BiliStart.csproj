@@ -25,6 +25,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Dialogs\LoginDialog.xaml" />
+    <None Remove="Styles\Converter.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +50,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\Converter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Dialogs\LoginDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

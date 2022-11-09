@@ -103,10 +103,7 @@ public partial class LoginDialogViewModel : ObservableRecipient
 
     public string _User
     {
-        get
-        {
-            return User;
-        }
+        get => User;
         set => SetProperty(ref User, value);
     }
 
@@ -132,8 +129,8 @@ public partial class LoginDialogViewModel : ObservableRecipient
                 AccountSettings.Write(BiliBiliArgs.TokenSESSDATA);
                 timer.Stop();
                 timer.Tick -= Timer_Tick;
-
                 App.IsLogin = true;
+                WeakReferenceMessenger.Default.Send<LoginEvent>(new LoginEvent() { Event = LoginEventEnum.Login, Message = "用户登录" });
                 Dialog.Hide();
                 break;
             case Checkenum.No:
@@ -162,15 +159,14 @@ public partial class LoginDialogViewModel : ObservableRecipient
         if (c.ContainsKey("access_key"))
         {
             AccountToken token = new AccountToken();
-            string mid = "";
-            string token2 = "";
+            var mid = "";
+            var token2 = "";
             c.TryGetValue("mid", out mid!);
             c.TryGetValue("access_key", out token2!);
             token.Mid = mid; token.SECCDATA = token2;
             BiliBiliArgs.TokenSESSDATA = token;
             AccountSettings.Write(BiliBiliArgs.TokenSESSDATA);
             WeakReferenceMessenger.Default.Send<LoginEvent>(new LoginEvent() { Event = LoginEventEnum.Login, Message = "用户登录"});
-
             App.IsLogin = true;
             Dialog.Hide();
 

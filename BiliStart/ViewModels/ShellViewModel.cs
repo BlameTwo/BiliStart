@@ -33,7 +33,7 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
     {
         get;
     }
-    public AsyncRelayCommand Loaded
+    public AsyncRelayCommand<Flyout> Loaded
     {
         get;private set;
     }
@@ -55,6 +55,7 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
 
     public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService)
     {
+        IsActive = true;
         if(App.Token != null)
         {
             BiliBiliArgs.TokenSESSDATA = App.Token;
@@ -66,34 +67,54 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
         NavigationService = navigationService;
         NavigationService.Navigated += OnNavigated;
         NavigationViewService = navigationViewService;
-        Loaded = new AsyncRelayCommand(async => load());
+        Loaded = new AsyncRelayCommand<Flyout>(async(arg)=> await load(arg!));
         UserClick = new AsyncRelayCommand(async () =>
         {
+            flyout!.Hide();
             if (!App.IsLogin)
             {
                 LoginDialog loginDialog = new LoginDialog();
                 loginDialog.XamlRoot = (App.MainWindow.Content as ShellPage)!.Content.XamlRoot;
                 await loginDialog.ShowAsync();
             }
-        }); 
+            else
+            {
+                _login();
+                flyout.ShowAt(FlyoutButton);
+            }
+        });
+        UnLogin = new RelayCommand(()=>unlogin());
     }
 
-    private async Task load()
+    private void unlogin()
     {
+        _LoginData = new AccountLoginResultData() { Name = "账号未登录", Face_Image = "https://i0.hdslb.com/bfs/face/member/noface.jpg@240w_240h_1c_1s.webp" };
+        App.IsLogin = false;
+        Login.Unlogin();
+        flyout.Hide();
+    }
+
+    public Button FlyoutButton;
+
+    Flyout flyout;
+
+    private async Task load(Flyout flyout)
+    {
+        this.flyout = flyout ?? null;
         var result = (await Login.Login(App.Token));
         if (result.Code == "-101")
         {
-            _LoginData = new AccountLoginResultData() { Name = "账号未登录", Face_Image= "https://i0.hdslb.com/bfs/face/member/noface.jpg@240w_240h_1c_1s.webp" };
+            _LoginData = new AccountLoginResultData() { Name = "账号未登录", Face_Image = "https://i0.hdslb.com/bfs/face/member/noface.jpg@240w_240h_1c_1s.webp", Exp = new Level_Exp() };
         }
-        else if(result.Data != null)
+        else if (result.Data != null)
         {
             _LoginData = result.Data;
+            App.IsLogin = true;
         }
     }
 
     async void _login()
     {
-
         var result = (await Login.Login(App.Token));
         _LoginData = result.Data;
     }
@@ -129,6 +150,11 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
         {
             Selected = selectedItem;
         }
+    }
+
+    public RelayCommand UnLogin
+    {
+        get;private set;
     }
 
     public void Receive(LoginEvent message)

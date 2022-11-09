@@ -3,12 +3,19 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:BiliStart.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     CloseButtonText="关闭"
     Closed="{x:Bind ViewModel.LoginClose}"
     CornerRadius="10"
     mc:Ignorable="d">
+    <i:Interaction.Behaviors>
+        <e:EventTriggerBehavior EventName="Loaded">
+            <e:InvokeCommandAction Command="{x:Bind ViewModel.RefQrCommand}" />
+        </e:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
 
     <Pivot Grid.Row="1">
         <PivotItem Header="扫码登陆">

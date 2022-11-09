@@ -1,0 +1,8 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="using:BiliStart.Behaviors.Converter"
+    xmlns:local="using:BiliStart.Styles">
+
+    <convert:LevelNumberToPathConvert x:Key="LevelConvert" />
+</ResourceDictionary>

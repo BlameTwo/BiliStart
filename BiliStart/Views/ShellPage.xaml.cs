@@ -1,5 +1,6 @@
 ﻿using BilibiliAPI.Account;
 using BiliStart.Contracts.Services;
+using BiliStart.Dialogs;
 using BiliStart.Helpers;
 using BiliStart.ViewModels;
 using CommunityToolkit.Mvvm.Input;
@@ -25,7 +26,6 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         InitializeComponent();
-
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
         App.MainWindow.ExtendsContentIntoTitleBar = true;
@@ -38,9 +38,9 @@ public sealed partial class ShellPage : Page
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
-
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
+        ViewModel.FlyoutButton = userbutton;
     }
 
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
