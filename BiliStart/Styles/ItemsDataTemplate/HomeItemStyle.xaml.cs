@@ -54,4 +54,5 @@ public sealed partial class HomeItemStyle : UserControl
             (s as HomeItemStyle)!.ViewModel = new HomeItemViewModel() { _Item = item };
         }
     }
+
 }

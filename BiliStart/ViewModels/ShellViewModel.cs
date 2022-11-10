@@ -5,6 +5,7 @@ using BiliBiliAPI.Models.Settings;
 using BiliStart.Contracts.Services;
 using BiliStart.Dialogs;
 using BiliStart.Event;
+using BiliStart.Services;
 using BiliStart.Views;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -92,6 +93,7 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
         App.IsLogin = false;
         Login.Unlogin();
         flyout.Hide();
+        TipShow.SendMessage("用户退出登录", "账户操作");
     }
 
     public Button FlyoutButton;
@@ -163,6 +165,8 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
         {
             case LoginEventEnum.Login:
                 _login();
+
+                TipShow.SendMessage("用户登录", "账户操作");
                 break;
             case LoginEventEnum.UnLogin:
                 break;

@@ -95,7 +95,6 @@ public partial class App : Application
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
         Build();
-        ApplicationLanguages.PrimaryLanguageOverride = "zh-CN";
         App.GetService<IAppNotificationService>().Initialize();
 
         UnhandledException += App_UnhandledException;

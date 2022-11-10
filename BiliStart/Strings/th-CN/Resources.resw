@@ -117,44 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>BiliStart</value>
-  </data>
   <data name="AppDescription" xml:space="preserve">
     <value>BiliStart</value>
   </data>
-  <data name="Shell_Main.Content" xml:space="preserve">
-    <value>Main</value>
-  </data>
-  <data name="Shell_Blank.Content" xml:space="preserve">
-    <value>Blank</value>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>主题设置</value>
-  </data>
-  <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>主题</value>
-  </data>
-  <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>明亮</value>
-  </data>
-  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>黑暗</value>
-  </data>
-  <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>跟随系统</value>
-  </data>
-  <data name="Settings_About.Text" xml:space="preserve">
-    <value>关于这个程序</value>
-  </data>
-  <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>此程序使用B站的一些数据，绝对安全</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>我的主页</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://github.com/BlameTwo/BiliStart</value>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>BiliStart</value>
   </data>
   <data name="AppNotificationSamplePayload" xml:space="preserve">
     <value>&lt;toast launch="action=ToastClick"&gt;
@@ -170,17 +137,41 @@
   &lt;/actions&gt;
 &lt;/toast&gt;</value>
   </data>
-  <data name="Shell_Home.Content" xml:space="preserve">
-    <value>首页</value>
+  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+    <value>我的主頁</value>
   </data>
-  <data name="Shell_Home_Refresh.Text" xml:space="preserve">
-    <value>刷新</value>
+  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/BlameTwo/BiliStart</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>關於這個程序</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>此程序使用BiliBili的一些數據，絕對安全</value>
+  </data>
+  <data name="Settings_Personalization.Text" xml:space="preserve">
+    <value>主題設置</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>主題</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>黑暗</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>跟隨系統</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>明亮</value>
+  </data>
+  <data name="Shell_Blank.Content" xml:space="preserve">
+    <value>個人中心</value>
   </data>
   <data name="Shell_Flyout_User_Center.Content" xml:space="preserve">
-    <value>个人中心</value>
+    <value>個人中心</value>
   </data>
   <data name="Shell_Flyout_User_LastLook.Content" xml:space="preserve">
-    <value>稍后再看</value>
+    <value>稍後再看</value>
   </data>
   <data name="Shell_Flyout_User_Message.Content" xml:space="preserve">
     <value>消息中心</value>
@@ -189,12 +180,21 @@
     <value>我的收藏</value>
   </data>
   <data name="Shell_Flyout_User_UnLogin.Content" xml:space="preserve">
-    <value>退出登录</value>
+    <value>退出登錄</value>
+  </data>
+  <data name="Shell_Home.Content" xml:space="preserve">
+    <value>首頁</value>
+  </data>
+  <data name="Shell_Home_Refresh.Text" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Shell_Main.Content" xml:space="preserve">
+    <value>Main</value>
   </data>
   <data name="Shell_Setting.Content" xml:space="preserve">
-    <value>设置</value>
+    <value>設置</value>
   </data>
   <data name="Shell_Setting_Language.Text" xml:space="preserve">
-    <value>语言</value>
+    <value>語言</value>
   </data>
 </root>
