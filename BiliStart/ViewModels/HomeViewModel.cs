@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using BiliBiliAPI.Models.HomeVideo;
+using BiliStart.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Windows.UI.WebUI;
@@ -23,20 +25,35 @@ public class HomeViewModel: ScrolViewModelBase
         _Data = new ObservableCollection<Item>();
         AddData = new AsyncRelayCommand(async() => await adddata());
         Loaded = new AsyncRelayCommand(async () => await load());
+        GoVideo = new AsyncRelayCommand<Item>(async (arg) => await govideo(arg!));
     }
-
-    async Task load()
+    async Task govideo(Item arg)
     {
-        _Data = (await Video.GetHomeVideo()).Data.Item.ToObservableCollection();
+        var result = await Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV);
+        // Queue navigation with low priority to allow the UI to initialize.
+        App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+        {
+            var navigationService = App.GetService<INavigationService>();
+            navigationService.NavigateTo(typeof(PlayerViewModel).FullName!,result);
+        });
     }
-
-    private async Task adddata()
+    async Task load()
     {
         var result = (await Video.GetHomeVideo()).Data.Item.ToObservableCollection();
         foreach (var item in result)
         {
             _Data.Add(item);
         }
+    }
+
+    private async Task adddata()
+    {
+        await load();
+    }
+
+    public AsyncRelayCommand<Item> GoVideo
+    {
+        get;private  set;    
     }
 
     private ObservableCollection<Item> Data;

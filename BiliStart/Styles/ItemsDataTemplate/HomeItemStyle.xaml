@@ -26,6 +26,7 @@
             </Grid.RowDefinitions>
             <Image
                 x:Name="image"
+                Opacity="1"
                 Source="{x:Bind Item.Cover, Mode=OneWay}"
                 Stretch="UniformToFill">
                 <!--<i:Interaction.Behaviors>
@@ -36,9 +37,8 @@
                                     <DoubleAnimation
                                         Storyboard.TargetName="image"
                                         Storyboard.TargetProperty="Opacity"
-                                        From="0"
                                         To="1"
-                                        Duration="0:0:0.2" />
+                                        Duration="0:0:1" />
                                 </Storyboard>
                             </media:ControlStoryboardAction.Storyboard>
                         </media:ControlStoryboardAction>
