@@ -16,4 +16,10 @@ WinUI3的Bilibili客户端
 
 **开始重写并使用WinUI3**
 
+感谢WinUIEx
+感谢WindowsAppSDK
+Template Studio for WinUI
+
+正在进行快速重写
+
 🙌很大的BUG
