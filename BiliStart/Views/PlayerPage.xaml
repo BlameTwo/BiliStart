@@ -22,7 +22,7 @@
             x:Uid="Player_GoHome"
             Grid.Row="1"
             Canvas.ZIndex="2"
-            Click="Button_Click_1"
+            Command="{x:Bind ViewModel.GoBackCommand}"
             Style="{ThemeResource AccentButtonStyle}" />
         <MediaPlayerElement
             x:Name="media"

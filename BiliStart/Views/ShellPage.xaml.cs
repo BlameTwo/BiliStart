@@ -9,7 +9,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-
 using Windows.System;
 
 namespace BiliStart.Views;
@@ -41,6 +40,7 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = App.GetService<ShellViewModel>();
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
         App.MainWindow.ExtendsContentIntoTitleBar = true;

@@ -4,6 +4,7 @@ using BiliStart.Views;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 
 namespace BiliStart.Services;
 
@@ -24,13 +25,15 @@ public class ActivationService : IActivationService
     public async Task ActivateAsync(object activationArgs)
     {
         // Execute tasks before activation.
-        await InitializeAsync();
+        //await InitializeAsync();
 
         // Set the MainWindow Content.
         if (App.MainWindow.Content == null)
         {
-            _shell = App.GetService<ShellPage>();
-            App.MainWindow.Content =_shell ??  new Frame();
+            //_shell = App.GetService<ShellPage>();
+            //App.MainWindow.Content =_shell ??  new Frame();
+            App.MainWindow.Content = new MainPage();
+            (App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(ShellPage));
         }
 
         // Handle activation via ActivationHandlers.

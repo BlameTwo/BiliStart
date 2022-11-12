@@ -30,6 +30,7 @@ using Windows.Media.Streaming.Adaptive;
 using Windows.UI.ViewManagement;
 using Microsoft.UI.Windowing;
 using Microsoft.UI;
+using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -47,7 +48,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     }
     public PlayerPage()
     {
-       ViewModel = App.GetService<PlayerViewModel>();
+        ViewModel = App.GetService<PlayerViewModel>();
         this.InitializeComponent();
         Loaded += PlayerPage_Loaded;
     }
@@ -158,8 +159,4 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
     }
 
-    private void Button_Click_1(object sender, RoutedEventArgs e)
-    {
-        (App.MainWindow.Content as Frame)!.GoBack();
-    }
 }

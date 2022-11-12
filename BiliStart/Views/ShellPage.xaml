@@ -215,9 +215,7 @@
                     </Frame.ContentTransitions>
 
                 </Frame>
-                <TeachingTip
-                    x:Name="ToggleThemeTeachingTip2"
-                    x:FieldModifier="public" />
+
             </Grid>
         </NavigationView>
     </Grid>

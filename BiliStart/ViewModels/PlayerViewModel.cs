@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using BiliBiliAPI.Models.Videos;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BiliStart.ViewModels;
-public class PlayerViewModel:ObservableRecipient
+public partial class PlayerViewModel:ObservableRecipient
 {
     public PlayerViewModel()
     {
@@ -23,4 +24,9 @@ public class PlayerViewModel:ObservableRecipient
         set=>SetProperty(ref Content, value);
     }
 
+    [RelayCommand]
+    public void GoBack()
+    {
+        (App.MainWindow.Content as MainPage)!.RootFrame.GoBack();
+    }
 }

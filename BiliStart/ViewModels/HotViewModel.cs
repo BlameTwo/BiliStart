@@ -36,7 +36,7 @@ namespace BiliStart.ViewModels
 
 
                 //根目录导航
-                (App.MainWindow.Content as Frame)!.Navigate(typeof(PlayerPage), result);
+                (App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(PlayerPage), result);
             });
         }
 
