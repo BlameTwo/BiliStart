@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:BiliStart.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winex="using:WinUIEx"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
@@ -16,10 +17,12 @@
             <RowDefinition Height="7*" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
-        <MediaPlayerElement x:Name="media" />
+        <MediaPlayerElement
+            x:Name="media"
+            Grid.RowSpan="2" />
         <Grid
             Grid.Row="1"
             HorizontalAlignment="Stretch"
-            Background="{ThemeResource ComboBoxPopupBackgroundThemeBrush}" />
+            Background="Transparent" />
     </Grid>
 </Page>

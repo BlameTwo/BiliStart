@@ -15,9 +15,9 @@ using Microsoft.UI.Xaml.Media;
 using Windows.UI.WebUI;
 
 namespace BiliStart.ViewModels;
-public class HomeViewModel: ScrolViewModelBase
+public partial class HomeViewModel: ScrolViewModelBase
 {
-    BilibiliAPI.Video.Video Video = new ();
+    BiliBiliAPI.Video.Video Video = new ();
 
     public HomeViewModel()
     {
@@ -39,16 +39,27 @@ public class HomeViewModel: ScrolViewModelBase
     }
     async Task load()
     {
-        var result = (await Video.GetHomeVideo()).Data.Item.ToObservableCollection();
-        foreach (var item in result)
+        for (int i = 0; i < 2; i++)
         {
-            _Data.Add(item);
+            var result = (await Video.GetHomeVideo()).Data.Item.ToObservableCollection();
+            foreach (var item in result)
+            {
+                _Data.Add(item);
+            }
         }
+    }
+
+    [RelayCommand]
+    public async Task Refresh()
+    {
+        _Data.Clear();
+        _Data = (await Video.GetHomeVideo()).Data.Item.ToObservableCollection();
     }
 
     private async Task adddata()
     {
         await load();
+
     }
 
     public AsyncRelayCommand<Item> GoVideo

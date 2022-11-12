@@ -197,4 +197,7 @@
   <data name="Shell_Setting_Language.Text" xml:space="preserve">
     <value>语言</value>
   </data>
+  <data name="Shell_Hot.Content" xml:space="preserve">
+    <value>热门</value>
+  </data>
 </root>

@@ -130,9 +130,16 @@
                     x:Uid="Shell_Home"
                     helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HomeViewModel">
                     <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Home" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    x:Uid="Shell_Hot"
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HotViewModel">
+                    <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
-                            Glyph="&#xe7c3;" />
+                            Glyph="&#xEC4A;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>

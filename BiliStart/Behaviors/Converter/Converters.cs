@@ -1,4 +1,4 @@
-﻿using BilibiliAPI;
+﻿using BiliBiliAPI;
 using Microsoft.UI.Xaml.Data;
 using System;
 using System.Collections.Generic;

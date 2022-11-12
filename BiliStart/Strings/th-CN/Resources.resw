@@ -188,6 +188,9 @@
   <data name="Shell_Home_Refresh.Text" xml:space="preserve">
     <value>刷新</value>
   </data>
+  <data name="Shell_Hot.Content" xml:space="preserve">
+    <value>熱門</value>
+  </data>
   <data name="Shell_Main.Content" xml:space="preserve">
     <value>Main</value>
   </data>

@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
-using BilibiliAPI.Video;
+using BiliBiliAPI.Video;
 using BiliBiliAPI.Models;
 using BiliBiliAPI.Models.Videos;
 using BiliStart.Contracts.Services;
@@ -51,7 +51,8 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 
     protected async override void OnNavigatedFrom(NavigationEventArgs e)
     {
-        
+        media.MediaPlayer.Pause();
+        media.MediaPlayer.Dispose();
     }
 
 

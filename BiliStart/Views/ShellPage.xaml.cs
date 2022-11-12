@@ -1,4 +1,4 @@
-﻿using BilibiliAPI.Account;
+﻿using BiliBiliAPI.Account;
 using BiliStart.Contracts.Services;
 using BiliStart.Dialogs;
 using BiliStart.Helpers;

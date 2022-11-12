@@ -29,6 +29,7 @@
                 Opacity="1"
                 Source="{x:Bind Item.Cover, Mode=OneWay}"
                 Stretch="UniformToFill">
+                <!--  Í¼Æ¬¼ÓÔØ¶¯»­  -->
                 <!--<i:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="ImageOpened">
                         <media:ControlStoryboardAction>
@@ -50,9 +51,7 @@
                 Padding="5"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Background="{ThemeResource AppBarBackgroundThemeBrush}"
-                BorderBrush="{ThemeResource AppBarBorderThemeBrush}"
-                BorderThickness="{ThemeResource VideoBorder}"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
                 CornerRadius="5">
                 <TextBlock
                     FontSize="12"
@@ -77,7 +76,7 @@
                 Padding="5"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
                 CornerRadius="5">
                 <TextBlock
                     FontSize="{ThemeResource VideoTitle}"
@@ -91,7 +90,7 @@
                 Padding="5"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
                 CornerRadius="5">
                 <TextBlock
                     Margin="5"

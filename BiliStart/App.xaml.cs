@@ -1,4 +1,4 @@
-﻿using BilibiliAPI;
+﻿using BiliBiliAPI;
 using BiliBiliAPI.Models.Account;
 using BiliBiliAPI.Models.Settings;
 using BiliStart.Activation;
@@ -93,6 +93,8 @@ public partial class App : Application
             services.AddTransient<PlayerPage>();
             services.AddTransient<PlayerViewModel>();
 
+            services.AddTransient<HotPage>();
+            services.AddTransient<HotViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
