@@ -200,4 +200,10 @@
   <data name="Shell_Hot.Content" xml:space="preserve">
     <value>热门</value>
   </data>
+  <data name="Player_FullScreen.Content" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="Player_GoHome.Content" xml:space="preserve">
+    <value>回首页</value>
+  </data>
 </root>

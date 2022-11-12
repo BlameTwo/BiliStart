@@ -137,6 +137,12 @@
   &lt;/actions&gt;
 &lt;/toast&gt;</value>
   </data>
+  <data name="Player_FullScreen.Content" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="Player_GoHome.Content" xml:space="preserve">
+    <value>回首頁</value>
+  </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
     <value>我的主頁</value>
   </data>

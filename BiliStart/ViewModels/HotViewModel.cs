@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using BiliBiliAPI.Models.HomeVideo;
 using BiliBiliAPI.Video;
 using BiliStart.Contracts.Services;
+using BiliStart.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml.Controls;
 
 namespace BiliStart.ViewModels
 {
@@ -29,8 +31,12 @@ namespace BiliStart.ViewModels
             // Queue navigation with low priority to allow the UI to initialize.
             App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
             {
-                var navigationService = App.GetService<INavigationService>();
-                navigationService.NavigateTo(typeof(PlayerViewModel).FullName!, result);
+                //var navigationService = App.GetService<INavigationService>();
+                //navigationService.NavigateTo(typeof(PlayerViewModel).FullName!, result);
+
+
+                //根目录导航
+                (App.MainWindow.Content as Frame)!.Navigate(typeof(PlayerPage), result);
             });
         }
 

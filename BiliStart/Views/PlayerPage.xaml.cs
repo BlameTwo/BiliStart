@@ -27,6 +27,9 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.Streaming.Adaptive;
+using Windows.UI.ViewManagement;
+using Microsoft.UI.Windowing;
+using Microsoft.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -143,5 +146,20 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     public static readonly DependencyProperty PlayArgsProperty =
         DependencyProperty.Register("PlayArgs", typeof(PlayerArgs), typeof(PlayerPage), new PropertyMetadata(default(PlayerArgs)));
 
+    public object OldContent
+    {
+        get;set;    
+    }
 
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+        var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(hwnd));
+        appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
+    }
+
+    private void Button_Click_1(object sender, RoutedEventArgs e)
+    {
+        (App.MainWindow.Content as Frame)!.GoBack();
+    }
 }

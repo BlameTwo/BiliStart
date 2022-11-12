@@ -6,6 +6,7 @@ using BiliStart.Contracts.Services;
 using BiliStart.Dialogs;
 using BiliStart.Event;
 using BiliStart.Services;
+using BiliStart.Styles;
 using BiliStart.Views;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -113,6 +114,7 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
             _LoginData = result.Data;
             App.IsLogin = true;
         }
+        
     }
 
     async void _login()

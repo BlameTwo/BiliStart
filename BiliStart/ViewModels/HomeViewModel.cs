@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using BiliBiliAPI.Models.HomeVideo;
 using BiliStart.Contracts.Services;
+using BiliStart.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Dispatching;
@@ -33,8 +34,13 @@ public partial class HomeViewModel: ScrolViewModelBase
         // Queue navigation with low priority to allow the UI to initialize.
         App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
         {
-            var navigationService = App.GetService<INavigationService>();
-            navigationService.NavigateTo(typeof(PlayerViewModel).FullName!,result);
+            //注入导航
+            //var navigationService = App.GetService<INavigationService>();
+            //navigationService.NavigateTo(typeof(PlayerViewModel).FullName!,result);
+
+
+            //根目录导航
+            (App.MainWindow.Content as Frame)!.Navigate(typeof(PlayerPage),result);
         });
     }
     async Task load()

@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Windows.Globalization;
 
 namespace BiliStart;
@@ -24,7 +25,7 @@ namespace BiliStart;
 // To learn more about WinUI 3, see https://docs.microsoft.com/windows/apps/winui/winui3/.
 public partial class App : Application
 {
-
+    private ShellPage _shell;
 
     public IHost Host
     {
@@ -143,6 +144,15 @@ public partial class App : Application
 
         App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
 
-        await App.GetService<IActivationService>().ActivateAsync(args);
+        //await App.GetService<IActivationService>().ActivateAsync(args);
+
+        if (App.MainWindow.Content == null)
+        {
+            _shell = App.GetService<ShellPage>();
+            App.MainWindow.Content = new Frame() { FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("微软雅黑")};
+            (App.MainWindow.Content as Frame)!.Navigate(typeof(ShellPage));
+            App.MainWindow.Show();
+            App.MainWindow.Activate();
+        }
     }
 }

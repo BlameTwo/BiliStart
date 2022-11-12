@@ -6,6 +6,7 @@ using BiliStart.ViewModels;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 
@@ -18,13 +19,27 @@ public sealed partial class ShellPage : Page
 {
     public ShellViewModel ViewModel
     {
-        get;
+        get;set;
     }
 
 
-    public ShellPage(ShellViewModel viewModel)
+    //public ShellPage(ShellViewModel viewModel)
+    //{
+        
+    //    ViewModel = viewModel;
+    //    InitializeComponent();
+    //    ViewModel.NavigationService.Frame = NavigationFrame;
+    //    ViewModel.NavigationViewService.Initialize(NavigationViewControl);
+    //    App.MainWindow.ExtendsContentIntoTitleBar = true;
+    //    App.MainWindow.SetTitleBar(AppTitleBar);
+    //    App.MainWindow.Activated += MainWindow_Activated;
+    //    AppTitleBarText.Text = "AppDisplayName".GetLocalized();
+
+    //}
+
+    public ShellPage()
     {
-        ViewModel = viewModel;
+        ViewModel = App.GetService<ShellViewModel>();
         InitializeComponent();
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
@@ -32,11 +47,11 @@ public sealed partial class ShellPage : Page
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
+
     }
-
-
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
+        this.DataContext = ViewModel;
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
@@ -84,4 +99,5 @@ public sealed partial class ShellPage : Page
 
         args.Handled = result;
     }
+
 }
