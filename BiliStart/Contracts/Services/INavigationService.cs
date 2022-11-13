@@ -17,7 +17,18 @@ public interface INavigationService
         get; set;
     }
 
+    Frame? RootFrame
+    {
+
+        get;set;    
+    }
+
     bool NavigateTo(string pageKey, object? parameter = null, bool clearNavigation = false);
 
     bool GoBack();
+
+    bool RootBack();
+
+
+    bool RootNavigationTo(string pageKey, object? parameter = null, bool clearNavigation = false);
 }

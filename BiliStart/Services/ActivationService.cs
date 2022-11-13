@@ -24,25 +24,20 @@ public class ActivationService : IActivationService
 
     public async Task ActivateAsync(object activationArgs)
     {
-        // Execute tasks before activation.
-        //await InitializeAsync();
+        await InitializeAsync();
 
-        // Set the MainWindow Content.
+        //var navigation = App.GetService<BiliStart.Services.NavigationService>();
+        //navigation.RootFrame = this.RootFrame;
         if (App.MainWindow.Content == null)
         {
-            //_shell = App.GetService<ShellPage>();
-            //App.MainWindow.Content =_shell ??  new Frame();
             App.MainWindow.Content = new MainPage();
             (App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(ShellPage));
         }
 
-        // Handle activation via ActivationHandlers.
         await HandleActivationAsync(activationArgs);
 
-        // Activate the MainWindow.
         App.MainWindow.Activate();
 
-        // Execute tasks after activation.
         await StartupAsync();
     }
 

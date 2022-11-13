@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using BiliBiliAPI.Models.HomeVideo;
 using BiliStart.Contracts.Services;
+using BiliStart.Services;
 using BiliStart.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -35,11 +36,11 @@ public partial class HomeViewModel: ScrolViewModelBase
         App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
         {
             //注入导航
-            //var navigationService = App.GetService<INavigationService>();
+            var navigationService = App.GetService<INavigationService>();
             //navigationService.NavigateTo(typeof(PlayerViewModel).FullName!,result);
-
-
-            (App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(PlayerPage), result);
+            navigationService.RootNavigationTo(typeof(PlayerViewModel).FullName!, result);
+;
+            //(App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(PlayerPage), result);
             //根目录导航
         });
     }

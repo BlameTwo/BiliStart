@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using BiliStart.Contracts.Services;
+using BiliStart.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -25,8 +27,16 @@ namespace BiliStart;
 /// </summary>
 public sealed partial class MainPage : Page
 {
+    public MainViewModel ViewModel
+    {
+        get;
+    }
+
     public MainPage()
     {
+        this.ViewModel = App.GetService<MainViewModel>();
         this.InitializeComponent();
+        ViewModel!.NavigationService.RootFrame = RootFrame;
     }
+
 }

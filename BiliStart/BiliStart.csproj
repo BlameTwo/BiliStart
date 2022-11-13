@@ -37,7 +37,6 @@
     <None Remove="Styles\VideoGridViewItem.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\HotPage.xaml" />
-    <None Remove="Views\MainPage.xaml" />
     <None Remove="Views\PlayerPage.xaml" />
   </ItemGroup>
 
@@ -65,9 +64,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Page Update="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Views\HotPage.xaml">

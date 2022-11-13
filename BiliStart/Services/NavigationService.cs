@@ -13,10 +13,11 @@ public class NavigationService : INavigationService
 {
     private readonly IPageService _pageService;
     private object? _lastParameterUsed;
+    private object? root_lastParameterUsed;
     private Frame? _frame;
-
+    private Frame? _rootframe;
     public event NavigatedEventHandler? Navigated;
-
+    public event NavigatedEventHandler? RootNavigated;
     public Frame? Frame
     {
         get
@@ -40,6 +41,68 @@ public class NavigationService : INavigationService
 
     [MemberNotNullWhen(true, nameof(Frame), nameof(_frame))]
     public bool CanGoBack => Frame != null && Frame.CanGoBack;
+
+
+    [MemberNotNullWhen(true, nameof(RootFrame), nameof(_rootframe))]
+    public bool RootCanGoBack => RootFrame != null && RootFrame.CanGoBack;
+
+
+    public Frame? RootFrame
+    {
+        get
+        {
+            if (_rootframe == null)
+            {
+                _rootframe = App.MainWindow.Content as Frame;
+                RootRegisterFrameEvents();
+            }
+
+            return _rootframe;
+        }
+
+        set
+        {
+            RootUnregisterFrameEvents();
+            _rootframe = value;
+            RootRegisterFrameEvents();
+        }
+    }
+
+    private void RootUnregisterFrameEvents()
+    {
+
+        if (_rootframe != null)
+        {
+            _rootframe.Navigated -= RootOnNavigated;
+        }
+    }
+
+    private void RootOnNavigated(object sender, NavigationEventArgs e)
+    {
+        if (sender is Frame frame)
+        {
+            var clearNavigation = false;
+            if (clearNavigation)
+            {
+                _rootframe.BackStack.Clear();
+            }
+
+            if (_rootframe.GetPageViewModel() is INavigationAware navigationAware)
+            {
+                navigationAware.OnNavigatedTo(e.Parameter);
+            }
+
+            Navigated?.Invoke(sender, e);
+        }
+    }
+
+    private void RootRegisterFrameEvents()
+    {
+        if (_rootframe != null)
+        {
+            _rootframe.Navigated += RootOnNavigated;
+        }
+    }
 
     public NavigationService(IPageService pageService)
     {
@@ -79,6 +142,7 @@ public class NavigationService : INavigationService
         return false;
     }
 
+
     public bool NavigateTo(string pageKey, object? parameter = null, bool clearNavigation = false)
     {
         var pageType = _pageService.GetPageType(pageKey);
@@ -91,6 +155,30 @@ public class NavigationService : INavigationService
             if (navigated)
             {
                 _lastParameterUsed = parameter;
+                if (vmBeforeNavigation is INavigationAware navigationAware)
+                {
+                    navigationAware.OnNavigatedFrom();
+                }
+            }
+
+            return navigated;
+        }
+
+        return false;
+    }
+
+    public bool RootNavigationTo(string pageKey, object? parameter = null, bool clearNavigation = false)
+    {
+        var pageType = _pageService.GetPageType(pageKey);
+
+        if (_rootframe != null && (_rootframe.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(root_lastParameterUsed))))
+        {
+            _rootframe.Tag = clearNavigation;
+            var vmBeforeNavigation = _rootframe.GetPageViewModel();
+            var navigated = _rootframe.Navigate(pageType, parameter);
+            if (navigated)
+            {
+                root_lastParameterUsed = parameter;
                 if (vmBeforeNavigation is INavigationAware navigationAware)
                 {
                     navigationAware.OnNavigatedFrom();
@@ -120,5 +208,20 @@ public class NavigationService : INavigationService
 
             Navigated?.Invoke(sender, e);
         }
+    }
+
+    public bool RootBack()
+    {
+        if (RootCanGoBack)
+        {
+            var vmBeforeNavigation = _rootframe.GetPageViewModel();
+            _frame.GoBack();
+            if (vmBeforeNavigation is INavigationAware navigationAware)
+            {
+                navigationAware.OnNavigatedFrom();
+            }
+            return true;
+        }
+        return false;
     }
 }

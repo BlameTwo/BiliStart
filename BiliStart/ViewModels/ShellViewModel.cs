@@ -76,7 +76,7 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
             if (!App.IsLogin)
             {
                 LoginDialog loginDialog = new LoginDialog();
-                loginDialog.XamlRoot = (App.MainWindow.Content as Frame)!.XamlRoot;
+                loginDialog.XamlRoot = (App.MainWindow.Content as MainPage)!.XamlRoot;
                 await loginDialog.ShowAsync();
             }
             else

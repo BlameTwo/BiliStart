@@ -18,6 +18,7 @@ public class PageService : IPageService
         Configure<HomeViewModel, HomePage>();
         Configure<PlayerViewModel, PlayerPage>();
         Configure<HotViewModel, HotPage>();
+        Configure<MainViewModel,MainPage>();
     }
 
     public Type GetPageType(string key)
