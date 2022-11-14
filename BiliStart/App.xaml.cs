@@ -166,11 +166,9 @@ public partial class App : Application
         base.OnLaunched(args);
 
         ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
-        ResourceMap resourceMap = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
-        // Here you load the resource you need
-        var resourceValue = resourceMap.GetValue("AppNotificationSamplePayload", resourceContext);
 
-        App.GetService<IAppNotificationService>().Show(string.Format(resourceValue.ValueAsString, AppContext.BaseDirectory));
+
+        App.GetService<IAppNotificationService>().CreateShow("ToGO!","前往首页","前往热门","欢迎使用Bili","你好！",AppContext.BaseDirectory+ "Assets/icon.ico");
 
         await App.GetService<IActivationService>().ActivateAsync(args);
 

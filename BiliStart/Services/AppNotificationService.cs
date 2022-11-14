@@ -1,10 +1,17 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Web;
 
 using BiliStart.Contracts.Services;
 using BiliStart.ViewModels;
-
+using CommunityToolkit.WinUI.Notifications;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.Windows.AppNotifications;
+using Windows.ApplicationModel.Activation;
+using Windows.System;
+using Windows.UI.Popups;
+using static QRCoder.PayloadGenerator;
 
 namespace BiliStart.Notifications;
 
@@ -17,6 +24,9 @@ public class AppNotificationService : IAppNotificationService
     {
         _navigationService = navigationService;
         _hotNavigationService = hotNavigationService;
+
+        ContentDialog contentDialog = new ContentDialog();
+            
     }
 
     ~AppNotificationService()
@@ -34,13 +44,26 @@ public class AppNotificationService : IAppNotificationService
 
     public void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
     {
-        //实验跳转
-        if (ParseArguments(args.Argument)["action"] == "Settings")
+        switch (ParseArguments(args.Argument)["action"])
         {
-            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-            {
-                _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
-            });
+            case "Settings":
+                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+                });
+                break;
+            case "primary":
+                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    _navigationService.NavigateTo(typeof(HomeViewModel).FullName!);
+                });
+                break;
+            case "secondary":
+                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    _navigationService.NavigateTo(typeof(HotViewModel).FullName!);
+                });
+                break;
         }
     }
 
@@ -61,5 +84,31 @@ public class AppNotificationService : IAppNotificationService
     public void Unregister()
     {
         AppNotificationManager.Default.Unregister();
+    }
+
+    public void CreateShow(string arguments,string PrimaryText, string SecondaryText, string Title, string SubTitle, string LeftImage = "")
+    {
+        if (LeftImage != null)
+        {
+            string xml = $"<toast lang=\"zh-CN\" launch=\"action=ToastClick\">" +
+                            "<visual>" +
+                                "<binding template=\"ToastGeneric\">" +
+                                   $"<image placement=\"appLogoOverride \" src=\"{LeftImage}\" hint-crop=\"circle\" />" +
+                                   $"<text>{Title}</text>" +
+                                   $"<text>{SubTitle}</text>" +
+                                "</binding>" +
+                            "</visual>" +
+                            "<actions>"+
+                                "<action"+
+                                $" content=\"{PrimaryText}\"" + $" arguments=\"action=primary\"" +" >"+
+                                "</action>"+
+                                 "<action" +
+                                $" content=\"{SecondaryText}\"" + $" arguments=\"action=secondary\"" + " >" +
+                                "</action>" +
+                            "</actions>" +
+                         "</toast>";
+            var appNotification = new AppNotification(xml);
+            AppNotificationManager.Default.Show(appNotification);
+        }
     }
 }

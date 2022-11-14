@@ -26,28 +26,30 @@ public class AppNotificationActivationHandler : ActivationHandler<LaunchActivate
 
     protected async override Task HandleInternalAsync(LaunchActivatedEventArgs args)
     {
-        // TODO: Handle notification activations.
-
-        //// // Access the AppNotificationActivatedEventArgs.
         var activatedEventArgs = (AppNotificationActivatedEventArgs)AppInstance.GetCurrent().GetActivatedEventArgs().Data;
 
-        // Navigate to a specific page based on the notification arguments.
-        if (_notificationService.ParseArguments(activatedEventArgs.Argument)["action"] == "Settings")
+       
+        switch (_notificationService.ParseArguments(activatedEventArgs.Argument)["action"])
         {
-            // Queue navigation with low priority to allow the UI to initialize.
-            App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
-            {
-                _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
-            });
+            case "Settings":
+                App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+                {
+                    _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+                });
+                break;
+            case "primary":
+                App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+                {
+                    _navigationService.NavigateTo(typeof(HomeViewModel).FullName!);
+                });
+                break;
+            case "secondary":
+                App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+                {
+                    _navigationService.NavigateTo(typeof(HotViewModel).FullName!);
+                });
+                break;
         }
-
-
-
-        App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
-        {
-            App.MainWindow.ShowMessageDialogAsync("TODO: Handle notification activations.", "系统通知被点击");
-        });
-
         await Task.CompletedTask;
     }
 }

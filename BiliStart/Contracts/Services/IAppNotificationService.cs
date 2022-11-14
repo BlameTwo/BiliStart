@@ -11,4 +11,6 @@ public interface IAppNotificationService
     NameValueCollection ParseArguments(string arguments);
 
     void Unregister();
+
+    void CreateShow(string arguments,string PrimaryText,string SecondaryText, string Title, string SubTitle,string LeftImage = "");
 }
