@@ -206,4 +206,13 @@
   <data name="Player_GoHome.Content" xml:space="preserve">
     <value>回首页</value>
   </data>
+  <data name="Shell_Top.Content" xml:space="preserve">
+    <value>排行榜</value>
+  </data>
+  <data name="TopMore_LookWeak.Text" xml:space="preserve">
+    <value>每周必看</value>
+  </data>
+  <data name="TopMore_TopList.Text" xml:space="preserve">
+    <value>排行榜</value>
+  </data>
 </root>

@@ -21,6 +21,7 @@
         <DataTemplate x:Key="DefaultVideo">
             <itemstyle:HomeItemStyle Item="{Binding}" />
         </DataTemplate>
+
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>

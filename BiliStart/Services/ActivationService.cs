@@ -25,9 +25,6 @@ public class ActivationService : IActivationService
     public async Task ActivateAsync(object activationArgs)
     {
         await InitializeAsync();
-
-        //var navigation = App.GetService<BiliStart.Services.NavigationService>();
-        //navigation.RootFrame = this.RootFrame;
         if (App.MainWindow.Content == null)
         {
             App.MainWindow.Content = new MainPage();

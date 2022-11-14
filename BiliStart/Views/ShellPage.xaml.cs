@@ -20,22 +20,6 @@ public sealed partial class ShellPage : Page
     {
         get;set;
     }
-
-
-    //public ShellPage(ShellViewModel viewModel)
-    //{
-        
-    //    ViewModel = viewModel;
-    //    InitializeComponent();
-    //    ViewModel.NavigationService.Frame = NavigationFrame;
-    //    ViewModel.NavigationViewService.Initialize(NavigationViewControl);
-    //    App.MainWindow.ExtendsContentIntoTitleBar = true;
-    //    App.MainWindow.SetTitleBar(AppTitleBar);
-    //    App.MainWindow.Activated += MainWindow_Activated;
-    //    AppTitleBarText.Text = "AppDisplayName".GetLocalized();
-
-    //}
-
     public ShellPage()
     {
         ViewModel = App.GetService<ShellViewModel>();
@@ -53,7 +37,6 @@ public sealed partial class ShellPage : Page
     }
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        this.DataContext = ViewModel;
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));

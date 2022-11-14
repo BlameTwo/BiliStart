@@ -9,9 +9,11 @@ using BiliStart.Dialogs;
 using BiliStart.Helpers;
 using BiliStart.Models;
 using BiliStart.Notifications;
+using BiliStart.Pages;
 using BiliStart.Services;
 using BiliStart.ViewModels;
 using BiliStart.ViewModels.DialogViewModel;
+using BiliStart.ViewModels.PageViewModels;
 using BiliStart.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -69,16 +71,25 @@ public partial class App : Application
             services.AddSingleton<IAppNotificationService, AppNotificationService>();
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
-            services.AddTransient<INavigationViewService, NavigationViewService>();
 
-            services.AddSingleton<IActivationService, ActivationService>();
-            services.AddSingleton<IPageService, PageService>();
+
+            services.AddTransient<INavigationViewService, NavigationViewService>();
             services.AddSingleton<INavigationService, NavigationService>();
 
-            // Core Services
+
+            services.AddTransient<IHotNavigationViewService, HotNavigationViewService>();
+            services.AddSingleton<IHotNavigationService, HotNavigationService>();
+
+            services.AddSingleton<IActivationService, ActivationService>();
+
+
+            // 页面文件服务
+            services.AddSingleton<IPageService, PageService>();
+
+            // 文件操作
             services.AddSingleton<IFileService, FileService>();
 
-            // Views and ViewModels
+            // 视图和视图模型
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
             services.AddTransient<ShellPage>();
@@ -99,6 +110,12 @@ public partial class App : Application
 
             services.AddTransient<MainPage>();
             services.AddTransient<MainViewModel>();
+
+            services.AddTransient<TopMorePage>();
+            services.AddTransient<TopMoreViewModel>();
+
+            services.AddTransient<RankPage>();
+            services.AddTransient<RankViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
@@ -145,15 +162,9 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
+        
 
         await App.GetService<IActivationService>().ActivateAsync(args);
 
-        //if (App.MainWindow.Content == null)
-        //{
-        //    (App.MainWindow.Content as Frame)!.Navigate(typeof(ShellPage));
-        //    App.MainWindow.Show();
-        //    App.MainWindow.Activate();
-        //}
     }
 }

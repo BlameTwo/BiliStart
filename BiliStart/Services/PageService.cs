@@ -1,5 +1,8 @@
-﻿using BiliStart.Contracts.Services;
+﻿using BiliBiliAPI.Models.HomeVideo;
+using BiliStart.Contracts.Services;
+using BiliStart.Pages;
 using BiliStart.ViewModels;
+using BiliStart.ViewModels.PageViewModels;
 using BiliStart.Views;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -19,6 +22,10 @@ public class PageService : IPageService
         Configure<PlayerViewModel, PlayerPage>();
         Configure<HotViewModel, HotPage>();
         Configure<MainViewModel,MainPage>();
+        Configure<TopMoreViewModel, TopMorePage>();
+
+        Configure<RankViewModel, RankPage>();
+
     }
 
     public Type GetPageType(string key)
@@ -35,7 +42,7 @@ public class PageService : IPageService
         return pageType;
     }
 
-    private void Configure<VM, V>()
+    public void Configure<VM, V>()
         where VM : ObservableObject
         where V : Page
     {

@@ -20,3 +20,7 @@ public interface INavigationViewService
 
     NavigationViewItem? GetSelectedItem(Type pageType);
 }
+
+public interface IHotNavigationViewService : INavigationViewService
+{
+}

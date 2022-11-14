@@ -17,7 +17,7 @@ public interface INavigationService
         get; set;
     }
 
-    Frame? RootFrame
+   Frame? RootFrame
     {
 
         get;set;    
@@ -31,4 +31,10 @@ public interface INavigationService
 
 
     bool RootNavigationTo(string pageKey, object? parameter = null, bool clearNavigation = false);
+}
+
+
+public interface IHotNavigationService:INavigationService
+{
+
 }

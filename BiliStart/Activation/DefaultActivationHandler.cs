@@ -8,10 +8,12 @@ namespace BiliStart.Activation;
 public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
 {
     private readonly INavigationService _navigationService;
+    private readonly IHotNavigationService hotNavigationService;
 
-    public DefaultActivationHandler(INavigationService navigationService)
+    public DefaultActivationHandler(INavigationService navigationService,IHotNavigationService hotNavigationService)
     {
         _navigationService = navigationService;
+        this.hotNavigationService = hotNavigationService;
     }
 
     protected override bool CanHandleInternal(LaunchActivatedEventArgs args)

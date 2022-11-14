@@ -11,10 +11,12 @@ namespace BiliStart.Notifications;
 public class AppNotificationService : IAppNotificationService
 {
     private readonly INavigationService _navigationService;
+    private readonly IHotNavigationService _hotNavigationService;
 
-    public AppNotificationService(INavigationService navigationService)
+    public AppNotificationService(INavigationService navigationService,IHotNavigationService hotNavigationService)
     {
         _navigationService = navigationService;
+        _hotNavigationService = hotNavigationService;
     }
 
     ~AppNotificationService()

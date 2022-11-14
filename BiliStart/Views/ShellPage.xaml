@@ -147,6 +147,15 @@
                             Glyph="&#xEC4A;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem
+                    x:Uid="Shell_Top"
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.TopMoreViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xE753;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.HeaderTemplate>
                 <DataTemplate>

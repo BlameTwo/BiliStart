@@ -32,12 +32,14 @@
   <ItemGroup>
     <None Remove="Dialogs\LoginDialog.xaml" />
     <None Remove="MainPage.xaml" />
+    <None Remove="Pages\RankPage.xaml" />
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\VideoGridViewItem.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\HotPage.xaml" />
     <None Remove="Views\PlayerPage.xaml" />
+    <None Remove="Views\TopMorePage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +65,12 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Pages\RankPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\TopMorePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,7 +114,7 @@
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   

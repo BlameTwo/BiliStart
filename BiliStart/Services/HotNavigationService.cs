@@ -1,15 +1,17 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using BiliStart.Contracts.Services;
 using BiliStart.Contracts.ViewModels;
 using BiliStart.Helpers;
-
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace BiliStart.Services;
-
-public class NavigationService : INavigationService
+internal class HotNavigationService : IHotNavigationService
 {
     private readonly IPageService _pageService;
     private object? _lastParameterUsed;
@@ -24,7 +26,6 @@ public class NavigationService : INavigationService
         {
             if (_frame == null)
             {
-                _frame = App.MainWindow.Content as Frame;
                 RegisterFrameEvents();
             }
 
@@ -48,11 +49,63 @@ public class NavigationService : INavigationService
 
 
     public Frame? RootFrame
-    {get;set;   
+    {
+        get
+        {
+            if (_rootframe == null)
+            {
+                _rootframe = App.MainWindow.Content as Frame;
+                RootRegisterFrameEvents();
+            }
+
+            return _rootframe;
+        }
+
+        set
+        {
+            RootUnregisterFrameEvents();
+            _rootframe = value;
+            RootRegisterFrameEvents();
+        }
     }
 
-    
-    public NavigationService(IPageService pageService)
+    private void RootUnregisterFrameEvents()
+    {
+
+        if (_rootframe != null)
+        {
+            _rootframe.Navigated -= RootOnNavigated;
+        }
+    }
+
+    private void RootOnNavigated(object sender, NavigationEventArgs e)
+    {
+        if (sender is Frame frame)
+        {
+            var clearNavigation = false;
+            if (clearNavigation)
+            {
+                _rootframe.BackStack.Clear();
+            }
+
+            if (_rootframe.GetPageViewModel() is INavigationAware navigationAware)
+            {
+                navigationAware.OnNavigatedTo(e.Parameter);
+            }
+
+            Navigated?.Invoke(sender, e);
+        }
+    }
+
+    private void RootRegisterFrameEvents()
+    {
+        if (_rootframe != null)
+        {
+            _rootframe.Navigated += RootOnNavigated;
+        }
+    }
+
+    public HotNavigationService(IPageService pageService)
     {
         _pageService = pageService;
     }
