@@ -33,8 +33,10 @@
     <None Remove="Dialogs\LoginDialog.xaml" />
     <None Remove="MainPage.xaml" />
     <None Remove="Pages\RankPage.xaml" />
+    <None Remove="Pages\WeekPage.xaml" />
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
+    <None Remove="Styles\ItemsDataTemplate\RankItemStyle.xaml" />
     <None Remove="Styles\VideoGridViewItem.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\HotPage.xaml" />
@@ -65,6 +67,12 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\ItemsDataTemplate\RankItemStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Pages\WeekPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Pages\RankPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

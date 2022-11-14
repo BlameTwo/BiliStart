@@ -78,7 +78,6 @@
                 Style="{ThemeResource SubtitleTextBlockStyle}" />
             <ComboBox x:Name="language">
                 <ComboBoxItem Content="简体" />
-                <ComboBoxItem Content="繁體" />
                 <i:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="SelectionChanged">
                         <core:InvokeCommandAction

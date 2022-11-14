@@ -173,9 +173,6 @@
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>首页</value>
   </data>
-  <data name="Shell_Home_Refresh.Text" xml:space="preserve">
-    <value>刷新</value>
-  </data>
   <data name="Shell_Flyout_User_Center.Content" xml:space="preserve">
     <value>个人中心</value>
   </data>
@@ -213,6 +210,21 @@
     <value>每周必看</value>
   </data>
   <data name="TopMore_TopList.Text" xml:space="preserve">
+    <value>排行榜</value>
+  </data>
+  <data name="Refresh.Text" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="RefreshIcon.Text" xml:space="preserve">
+    <value>&amp;#xE72C;</value>
+  </data>
+  <data name="Shell_Home_TextBlock.Text" xml:space="preserve">
+    <value>首页</value>
+  </data>
+  <data name="Shell_Hot_TextBlock.Text" xml:space="preserve">
+    <value>热门</value>
+  </data>
+  <data name="Shell_Top_TextBlock.Text" xml:space="preserve">
     <value>排行榜</value>
   </data>
 </root>

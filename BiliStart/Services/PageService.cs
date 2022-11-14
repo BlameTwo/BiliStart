@@ -24,7 +24,9 @@ public class PageService : IPageService
         Configure<MainViewModel,MainPage>();
         Configure<TopMoreViewModel, TopMorePage>();
 
+        //排行榜导航页面
         Configure<RankViewModel, RankPage>();
+        Configure<WeekViewModel, WeekPage>();
 
     }
 

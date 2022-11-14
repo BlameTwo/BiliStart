@@ -37,9 +37,10 @@ public class SettingsViewModel : ObservableRecipient
         get;
     }
 
-    public SettingsViewModel(IThemeSelectorService themeSelectorService)
+    public SettingsViewModel(IThemeSelectorService themeSelectorService,ITipShow tipShow)
     {
         _themeSelectorService = themeSelectorService;
+        TipShow = tipShow;
         _elementTheme = _themeSelectorService.Theme;
         _versionDescription = GetVersionDescription();
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
@@ -58,10 +59,6 @@ public class SettingsViewModel : ObservableRecipient
                 case 0:
                     ApplicationLanguages.PrimaryLanguageOverride = "zh-CN";
                     break;
-                case 1:
-
-                    ApplicationLanguages.PrimaryLanguageOverride = "th-CN";
-                    break;
             }
             TipShow.SendMessage("静态资源已经改变，请重启应用", "设置操作");
         });
@@ -70,6 +67,10 @@ public class SettingsViewModel : ObservableRecipient
     public RelayCommand<ComboBox> ChangedLanguage
     {
         get;set;
+    }
+    public ITipShow TipShow
+    {
+        get;
     }
 
     private static string GetVersionDescription()

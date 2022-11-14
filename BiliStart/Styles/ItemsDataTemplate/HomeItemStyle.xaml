@@ -28,24 +28,7 @@
                 x:Name="image"
                 Opacity="1"
                 Source="{x:Bind Item.Cover, Mode=OneWay}"
-                Stretch="UniformToFill">
-                <!--  Í¼Æ¬¼ÓÔØ¶¯»­  -->
-                <!--<i:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="ImageOpened">
-                        <media:ControlStoryboardAction>
-                            <media:ControlStoryboardAction.Storyboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="image"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="1"
-                                        Duration="0:0:1" />
-                                </Storyboard>
-                            </media:ControlStoryboardAction.Storyboard>
-                        </media:ControlStoryboardAction>
-                    </core:EventTriggerBehavior>
-                </i:Interaction.Behaviors>-->
-            </Image>
+                Stretch="UniformToFill" />
             <Border
                 Margin="3,0,0,3"
                 Padding="5"

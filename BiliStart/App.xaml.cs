@@ -86,6 +86,9 @@ public partial class App : Application
             // 页面文件服务
             services.AddSingleton<IPageService, PageService>();
 
+            //弹窗服务
+            services.AddSingleton<ITipShow,TipShow>();
+
             // 文件操作
             services.AddSingleton<IFileService, FileService>();
 
@@ -116,6 +119,9 @@ public partial class App : Application
 
             services.AddTransient<RankPage>();
             services.AddTransient<RankViewModel>();
+
+            services.AddTransient<WeekPage>();
+            services.AddTransient<WeekViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

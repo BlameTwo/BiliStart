@@ -28,7 +28,10 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-
+        <TextBlock
+            x:Uid="Shell_Hot_TextBlock"
+            HorizontalAlignment="Left"
+            Style="{ThemeResource PageTitleStyle}" />
         <Button HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal">
                 <TextBlock
@@ -36,7 +39,7 @@
                     FontFamily="Segoe MDL2 Assets"
                     Text="&#xE72C;" />
                 <TextBlock
-                    x:Uid="Shell_Home_Refresh"
+                    x:Uid="Refresh"
                     Margin="5,0,0,0" />
             </StackPanel>
         </Button>

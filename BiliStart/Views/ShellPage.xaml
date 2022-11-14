@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:acrylic="using:ABI.Microsoft.UI.Xaml.Media"
     xmlns:animatedvisuals="using:ABI.Microsoft.UI.Xaml.Controls.AnimatedVisuals"
-    xmlns:behaviors="using:BiliStart.Behaviors"
     xmlns:convert="using:BiliStart.Behaviors.Converter"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -94,7 +93,6 @@
                 Command="{x:Bind ViewModel.Loaded}"
                 CommandParameter="{x:Bind flyout}" />
         </core:EventTriggerBehavior>
-
     </i:Interaction.Behaviors>
     <Grid>
         <Grid
@@ -120,14 +118,14 @@
         <NavigationView
             x:Name="NavigationViewControl"
             x:FieldModifier="public"
+            AlwaysShowHeader="False"
             Background="Transparent"
             Canvas.ZIndex="0"
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             ExpandedModeThresholdWidth="1280"
-            Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}"
             IsBackButtonVisible="Visible"
             IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
-            IsSettingsVisible="False"
+            IsSettingsVisible="True"
             PaneDisplayMode="Auto"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}">
             <NavigationView.MenuItems>
@@ -157,21 +155,6 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
-            <NavigationView.HeaderTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock
-                            Style="{ThemeResource TitleTextBlockStyle}"
-                            Text="{Binding}" />
-                    </Grid>
-                </DataTemplate>
-            </NavigationView.HeaderTemplate>
-            <NavigationView.FooterMenuItems>
-                <NavigationViewItem
-                    x:Uid="Shell_Setting"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.SettingsViewModel"
-                    Icon="Setting" />
-            </NavigationView.FooterMenuItems>
             <NavigationView.PaneFooter>
                 <Button
                     x:Name="userbutton"
@@ -200,19 +183,7 @@
                     </Grid>
                 </Button>
             </NavigationView.PaneFooter>
-            <i:Interaction.Behaviors>
-                <behaviors:NavigationViewHeaderBehavior DefaultHeader="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
-                    <behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <TextBlock
-                                    Style="{ThemeResource TitleTextBlockStyle}"
-                                    Text="{Binding}" />
-                            </Grid>
-                        </DataTemplate>
-                    </behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
-                </behaviors:NavigationViewHeaderBehavior>
-            </i:Interaction.Behaviors>
+
             <Grid Margin="{StaticResource NavigationViewPageContentMargin}">
                 <Frame x:Name="NavigationFrame">
                     <Frame.ContentTransitions>

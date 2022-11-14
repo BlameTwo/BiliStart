@@ -35,6 +35,10 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
     {
         get;
     }
+    public ITipShow TipShow
+    {
+        get;
+    }
     public AsyncRelayCommand<Flyout> Loaded
     {
         get;private set;
@@ -55,7 +59,7 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
 
 
 
-    public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService)
+    public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService,ITipShow tipShow )
     {
         IsActive = true;
         if(App.Token != null)
@@ -69,6 +73,7 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
         NavigationService = navigationService;
         NavigationService.Navigated += OnNavigated;
         NavigationViewService = navigationViewService;
+        TipShow = tipShow;
         Loaded = new AsyncRelayCommand<Flyout>(async(arg)=> await load(arg!));
         UserClick = new AsyncRelayCommand(async () =>
         {

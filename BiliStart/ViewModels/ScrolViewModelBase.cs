@@ -10,7 +10,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 
 namespace BiliStart.ViewModels;
-public class ScrolViewModelBase:ObservableRecipient
+public  class ScrolViewModelBase:ObservableRecipient
 {
     public ScrolViewModelBase()
     {
@@ -19,9 +19,11 @@ public class ScrolViewModelBase:ObservableRecipient
 
     private void Scroolload(AdaptiveGridView? arg)
     {
+        if (arg == null)
+            return;
         var listview = (VisualTreeHelper.GetChild(arg, 0) as Border)!.Child as ScrollViewer;
         SV = listview;
-        SV.ViewChanged += SV_ViewChanged;
+        SV!.ViewChanged += SV_ViewChanged;
     }
 
     private async void SV_ViewChanged(object? sender, ScrollViewerViewChangedEventArgs e)

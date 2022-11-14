@@ -5,48 +5,52 @@
     x:Class="BiliStart.Views.TopMorePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="using:BiliStart.Helpers"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:BiliStart.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <Grid>
-        <NavigationView
-            x:Name="NavigationControl"
-            Background="Transparent"
-            IsBackButtonVisible="Collapsed"
-            IsSettingsVisible="False"
-            PaneDisplayMode="Top">
-            <NavigationView.MenuItems>
-                <NavigationViewItem
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.RankViewModel"
-                    Tag="TopList">
-                    <NavigationViewItem.Icon>
-                        <FontIcon
-                            FontFamily="{StaticResource SymbolThemeFontFamily}"
-                            Glyph="&#xE753;" />
-                    </NavigationViewItem.Icon>
-                    <NavigationViewItem.Content>
-                        <TextBlock
-                            x:Uid="TopMore_TopList"
-                            Margin="5,0,0,0" />
-                    </NavigationViewItem.Content>
-                </NavigationViewItem>
-                <NavigationViewItem Tag="TopList">
-                    <NavigationViewItem.Icon>
-                        <SymbolIcon Symbol="Calendar" />
-                    </NavigationViewItem.Icon>
-                    <NavigationViewItem.Content>
-                        <TextBlock
-                            x:Uid="TopMore_LookWeak"
-                            Margin="5,0,0,0" />
-                    </NavigationViewItem.Content>
-                </NavigationViewItem>
-            </NavigationView.MenuItems>
-            <NavigationView.Content>
-                <Frame x:Name="FrameControl" />
-            </NavigationView.Content>
-        </NavigationView>
-    </Grid>
+    <NavigationView
+        x:Name="NavigationControl"
+        Grid.Row="0"
+        Background="Transparent"
+        IsBackButtonVisible="Collapsed"
+        IsSettingsVisible="False"
+        PaneDisplayMode="Top">
+        <NavigationView.MenuItems>
+            <NavigationViewItem
+                helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.RankViewModel"
+                Tag="TopList">
+                <NavigationViewItem.Icon>
+                    <FontIcon
+                        FontFamily="{StaticResource SymbolThemeFontFamily}"
+                        Glyph="&#xE753;" />
+                </NavigationViewItem.Icon>
+                <NavigationViewItem.Content>
+                    <TextBlock
+                        x:Uid="TopMore_TopList"
+                        Margin="5,0,0,0" />
+                </NavigationViewItem.Content>
+            </NavigationViewItem>
+            <NavigationViewItem
+                helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.WeekViewModel"
+                Tag="TopList">
+                <NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="Calendar" />
+                </NavigationViewItem.Icon>
+                <NavigationViewItem.Content>
+                    <TextBlock
+                        x:Uid="TopMore_LookWeak"
+                        Margin="5,0,0,0" />
+                </NavigationViewItem.Content>
+            </NavigationViewItem>
+        </NavigationView.MenuItems>
+        <NavigationView.Content>
+            <Frame x:Name="FrameControl" />
+        </NavigationView.Content>
+    </NavigationView>
 </Page>
