@@ -99,26 +99,26 @@ public partial class App : Application
             services.AddTransient<LoginDialogViewModel>(); 
             services.AddTransient<LoginDialog>();
 
-            services.AddSingleton<HomePage>();
-            services.AddSingleton<HomeViewModel>();
+            services.AddTransient<HomePage>();
+            services.AddTransient<HomeViewModel>();
 
-            services.AddSingleton<PlayerPage>();
-            services.AddSingleton<PlayerViewModel>();
+            services.AddTransient<PlayerPage>();
+            services.AddTransient<PlayerViewModel>();
 
-            services.AddSingleton<HotPage>();
-            services.AddSingleton<HotViewModel>();
+            services.AddTransient<HotPage>();
+            services.AddTransient<HotViewModel>();
 
-            services.AddSingleton<MainPage>();
-            services.AddSingleton<MainViewModel>();
+            services.AddTransient<MainPage>();
+            services.AddTransient<MainViewModel>();
 
-            services.AddSingleton<TopMorePage>();
-            services.AddSingleton<TopMoreViewModel>();
+            services.AddTransient<TopMorePage>();
+            services.AddTransient<TopMoreViewModel>();
 
-            services.AddSingleton<RankPage>();
-            services.AddSingleton<RankViewModel>();
+            services.AddTransient<RankPage>();
+            services.AddTransient<RankViewModel>();
 
-            services.AddSingleton<WeekPage>();
-            services.AddSingleton<WeekViewModel>();
+            services.AddTransient<WeekPage>();
+            services.AddTransient<WeekViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

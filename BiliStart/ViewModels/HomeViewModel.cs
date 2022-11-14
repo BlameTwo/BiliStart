@@ -37,11 +37,7 @@ public partial class HomeViewModel: ScrolViewModelBase
         {
             //注入导航
             var navigationService = App.GetService<INavigationService>();
-            //navigationService.NavigateTo(typeof(PlayerViewModel).FullName!,result);
             navigationService.RootNavigationTo(typeof(PlayerViewModel).FullName!, result);
-;
-            //(App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(PlayerPage), result);
-            //根目录导航
         });
     }
     async Task load()

@@ -24,7 +24,7 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = App.GetService<ShellViewModel>();
         InitializeComponent();
-        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
 

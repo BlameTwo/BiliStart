@@ -31,6 +31,7 @@ using Windows.UI.ViewManagement;
 using Microsoft.UI.Windowing;
 using Microsoft.UI;
 using WinRT;
+using Windows.Media.Playback;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -53,20 +54,34 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         Loaded += PlayerPage_Loaded;
     }
 
-    protected async override void OnNavigatedFrom(NavigationEventArgs e)
+    protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
     {
+        Loaded -= PlayerPage_Loaded;
+        media.MediaPlayer.MediaOpened -= MediaPlayer_MediaOpened;
         media.MediaPlayer.Pause();
         media.MediaPlayer.Dispose();
+        MediaPlayer.Dispose();
+        GC.Collect();
+        GC.WaitForPendingFinalizers(); base.OnNavigatingFrom(e);
+        Source = null;
+        media.Source = null;
     }
 
-
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+        base.OnNavigatedFrom(e);
+        System.GC.Collect();
+    }
+    MediaSource ?Source;
+    MediaPlayer ?MediaPlayer;
     protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
         VideoInfo info = (await Video.GetVideo((e.Parameter as ResultCode<VideosContent>)!.Data, BiliBiliAPI.Models.VideoIDType.AV)).Data;
 
-        media.Source =(Windows.Media.Playback.IMediaPlaybackSource) await CreateMediaSourceAsync(info.Dash.DashVideos[0], info.Dash.DashAudio[0]);
-
-
+        this.Source = await CreateMediaSourceAsync(info.Dash.DashVideos[0], info.Dash.DashAudio[0]);
+        MediaPlayer = new MediaPlayer();
+        MediaPlayer.SetMediaSource(Source.AdaptiveMediaSource);
+        media.SetMediaPlayer(MediaPlayer);
         media.MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
     }
 

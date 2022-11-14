@@ -20,11 +20,16 @@ public class AppNotificationService : IAppNotificationService
     private readonly INavigationService _navigationService;
     private readonly IHotNavigationService _hotNavigationService;
 
-    public AppNotificationService(INavigationService navigationService,IHotNavigationService hotNavigationService)
+    public ITipShow TipShow
+    {
+        get;
+    }
+
+    public AppNotificationService(INavigationService navigationService,IHotNavigationService hotNavigationService,ITipShow tipShow)
     {
         _navigationService = navigationService;
         _hotNavigationService = hotNavigationService;
-
+        TipShow = tipShow;
         ContentDialog contentDialog = new ContentDialog();
             
     }
@@ -88,8 +93,11 @@ public class AppNotificationService : IAppNotificationService
 
     public void CreateShow(string arguments,string PrimaryText, string SecondaryText, string Title, string SubTitle, string LeftImage = "")
     {
+        if (!AppNotificationManager.IsSupported())
+            TipShow.SendMessage(null,"您的计算机不支持当前通知");
         if (LeftImage != null)
         {
+
             string xml = $"<toast lang=\"zh-CN\" launch=\"action=ToastClick\">" +
                             "<visual>" +
                                 "<binding template=\"ToastGeneric\">" +

@@ -48,10 +48,41 @@ public class NavigationService : INavigationService
 
 
     public Frame? RootFrame
-    {get;set;   
+    {
+        get
+        {
+            if (_rootframe == null)
+            {
+                UnRootRegisterFrameEvents();
+            }
+
+            return _rootframe;
+        }
+
+        set
+        {
+            UnRootRegisterFrameEvents();
+            _rootframe = value;
+            RootRegisterFrameEvents();
+        }
     }
 
-    
+    private void RootRegisterFrameEvents()
+    {
+        if (_rootframe != null)
+        {
+            _rootframe.Navigated += RootNavigated;
+        }
+    }
+
+    private void UnRootRegisterFrameEvents()
+    {
+        if(_rootframe != null)
+        {
+            _rootframe.Navigated -= RootNavigated;
+        }
+    }
+
     public NavigationService(IPageService pageService)
     {
         _pageService = pageService;

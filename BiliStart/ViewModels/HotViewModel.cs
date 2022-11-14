@@ -31,12 +31,9 @@ namespace BiliStart.ViewModels
             // Queue navigation with low priority to allow the UI to initialize.
             App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
             {
-                //var navigationService = App.GetService<INavigationService>();
-                //navigationService.NavigateTo(typeof(PlayerViewModel).FullName!, result);
+                var navigationService = App.GetService<INavigationService>();
+                navigationService.RootNavigationTo(typeof(PlayerViewModel).FullName!, result);
 
-
-                //根目录导航
-                (App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(PlayerPage), result);
             });
         }
 

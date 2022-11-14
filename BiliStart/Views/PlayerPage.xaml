@@ -9,7 +9,6 @@
     xmlns:local="using:BiliStart.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winex="using:WinUIEx"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
     <Grid x:Name="grid">
