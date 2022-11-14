@@ -106,7 +106,7 @@
                 Width="16"
                 Height="16"
                 HorizontalAlignment="Left"
-                Source="/Assets/WindowIcon.ico" />
+                Source="/Assets/icon.ico" />
             <TextBlock
                 x:Name="AppTitleBarText"
                 Margin="28,0,0,0"
@@ -128,7 +128,18 @@
             IsSettingsVisible="True"
             PaneDisplayMode="Auto"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}">
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox
+                    x:Uid="Shell_SearchBox"
+                    AutomationProperties.Name="Search"
+                    QueryIcon="Find" />
+            </NavigationView.AutoSuggestBox>
             <NavigationView.MenuItems>
+
+
+                <NavigationViewItemHeader
+                    x:Uid="Shell_ItemHeader_Frist"
+                    FontSize="25" />
                 <NavigationViewItem
                     x:Uid="Shell_Home"
                     helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HomeViewModel">
@@ -154,6 +165,7 @@
                             Glyph="&#xE753;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+
             </NavigationView.MenuItems>
             <NavigationView.PaneFooter>
                 <Button

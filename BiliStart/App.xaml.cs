@@ -1,12 +1,10 @@
-﻿using BiliBiliAPI;
-using BiliBiliAPI.Models.Account;
+﻿using BiliBiliAPI.Models.Account;
 using BiliBiliAPI.Models.Settings;
 using BiliStart.Activation;
 using BiliStart.Contracts.Services;
 using BiliStart.Core.Contracts.Services;
 using BiliStart.Core.Services;
 using BiliStart.Dialogs;
-using BiliStart.Helpers;
 using BiliStart.Models;
 using BiliStart.Notifications;
 using BiliStart.Pages;
@@ -15,12 +13,11 @@ using BiliStart.ViewModels;
 using BiliStart.ViewModels.DialogViewModel;
 using BiliStart.ViewModels.PageViewModels;
 using BiliStart.Views;
+using CommunityToolkit.Common;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Windows.Globalization;
+using Windows.ApplicationModel.Resources.Core;
 
 namespace BiliStart;
 
@@ -93,35 +90,35 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // 视图和视图模型
-            services.AddTransient<SettingsViewModel>();
-            services.AddTransient<SettingsPage>();
-            services.AddTransient<ShellPage>();
-            services.AddTransient<ShellViewModel>();
+            services.AddSingleton<SettingsViewModel>();
+            services.AddSingleton<SettingsPage>();
+            services.AddSingleton<ShellPage>();
+            services.AddSingleton<ShellViewModel>();
 
 
             services.AddTransient<LoginDialogViewModel>(); 
             services.AddTransient<LoginDialog>();
 
-            services.AddTransient<HomePage>();
-            services.AddTransient<HomeViewModel>();
+            services.AddSingleton<HomePage>();
+            services.AddSingleton<HomeViewModel>();
 
-            services.AddTransient<PlayerPage>();
-            services.AddTransient<PlayerViewModel>();
+            services.AddSingleton<PlayerPage>();
+            services.AddSingleton<PlayerViewModel>();
 
-            services.AddTransient<HotPage>();
-            services.AddTransient<HotViewModel>();
+            services.AddSingleton<HotPage>();
+            services.AddSingleton<HotViewModel>();
 
-            services.AddTransient<MainPage>();
-            services.AddTransient<MainViewModel>();
+            services.AddSingleton<MainPage>();
+            services.AddSingleton<MainViewModel>();
 
-            services.AddTransient<TopMorePage>();
-            services.AddTransient<TopMoreViewModel>();
+            services.AddSingleton<TopMorePage>();
+            services.AddSingleton<TopMoreViewModel>();
 
-            services.AddTransient<RankPage>();
-            services.AddTransient<RankViewModel>();
+            services.AddSingleton<RankPage>();
+            services.AddSingleton<RankViewModel>();
 
-            services.AddTransient<WeekPage>();
-            services.AddTransient<WeekViewModel>();
+            services.AddSingleton<WeekPage>();
+            services.AddSingleton<WeekViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
@@ -168,7 +165,12 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        
+        ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
+        ResourceMap resourceMap = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+        // Here you load the resource you need
+        var resourceValue = resourceMap.GetValue("AppNotificationSamplePayload", resourceContext);
+
+        App.GetService<IAppNotificationService>().Show(string.Format(resourceValue.ValueAsString, AppContext.BaseDirectory));
 
         await App.GetService<IActivationService>().ActivateAsync(args);
 

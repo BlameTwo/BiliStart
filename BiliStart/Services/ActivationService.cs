@@ -24,7 +24,9 @@ public class ActivationService : IActivationService
 
     public async Task ActivateAsync(object activationArgs)
     {
+        //等待注入
         await InitializeAsync();
+        //初始化页面
         if (App.MainWindow.Content == null)
         {
             App.MainWindow.Content = new MainPage();
@@ -33,8 +35,10 @@ public class ActivationService : IActivationService
 
         await HandleActivationAsync(activationArgs);
 
+        //注入完毕后，启动页面
         App.MainWindow.Activate();
 
+        //正式启动
         await StartupAsync();
     }
 

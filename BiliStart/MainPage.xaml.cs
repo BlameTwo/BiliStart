@@ -32,10 +32,14 @@ public sealed partial class MainPage : Page
         get;
     }
 
+
+
     public MainPage()
     {
         this.ViewModel = App.GetService<MainViewModel>();
         this.InitializeComponent();
+
+        //¸³Öµ¸ùFrame
         ViewModel!.NavigationService.RootFrame = RootFrame;
     }
 

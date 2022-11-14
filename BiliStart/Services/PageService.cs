@@ -17,6 +17,7 @@ public class PageService : IPageService
 
     public PageService()
     {
+        //注册全局页面信息
         Configure<SettingsViewModel, SettingsPage>();
         Configure<HomeViewModel, HomePage>();
         Configure<PlayerViewModel, PlayerPage>();

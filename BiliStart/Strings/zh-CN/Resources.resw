@@ -162,7 +162,7 @@
     &lt;binding template="ToastGeneric"&gt;
       &lt;text&gt;App Notification&lt;/text&gt;
       &lt;text&gt;&lt;/text&gt;
-      &lt;image placement="appLogoOverride" hint-crop="circle" src="{0}Assets/WindowIcon.ico"/&gt;
+      &lt;image placement="appLogoOverride" hint-crop="circle" src="{0}Assets/icon.ico"/&gt;
     &lt;/binding&gt;
   &lt;/visual&gt;
   &lt;actions&gt;
@@ -226,5 +226,11 @@
   </data>
   <data name="Shell_Top_TextBlock.Text" xml:space="preserve">
     <value>排行榜</value>
+  </data>
+  <data name="Shell_ItemHeader_Frist.Content" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="Shell_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>搜索</value>
   </data>
 </root>

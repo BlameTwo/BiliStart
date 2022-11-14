@@ -21,6 +21,7 @@ public class AppNotificationService : IAppNotificationService
 
     ~AppNotificationService()
     {
+        //关闭服务
         Unregister();
     }
 
@@ -33,9 +34,7 @@ public class AppNotificationService : IAppNotificationService
 
     public void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
     {
-        // TODO: Handle notification invocations when your app is already running.
-
-        // Navigate to a specific page based on the notification arguments.
+        //实验跳转
         if (ParseArguments(args.Argument)["action"] == "Settings")
         {
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
@@ -43,13 +42,6 @@ public class AppNotificationService : IAppNotificationService
                 _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
             });
         }
-
-        //App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-        //{
-        //    App.MainWindow.ShowMessageDialogAsync("TODO: Handle notification invocations when your app is already running.", "Notification Invoked");
-
-        //    App.MainWindow.BringToFront();
-        //});
     }
 
     public bool Show(string payload)

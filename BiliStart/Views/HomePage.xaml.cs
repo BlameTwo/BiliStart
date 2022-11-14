@@ -14,8 +14,6 @@ using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace BiliStart.Views;
 /// <summary>
@@ -30,6 +28,7 @@ public sealed partial class HomePage : Page
     }
     public HomePage()
     {
+        //在页面初始化完成前获得VM
         ViewModel = App.GetService<HomeViewModel>();
         this.InitializeComponent();
     }

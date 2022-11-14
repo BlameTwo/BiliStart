@@ -11,6 +11,10 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace BiliStart.Services;
+
+/// <summary>
+/// TODO 等待修补
+/// </summary>
 internal class HotNavigationService : IHotNavigationService
 {
     private readonly IPageService _pageService;
