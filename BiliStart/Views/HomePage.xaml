@@ -2,6 +2,7 @@
     x:Class="BiliStart.Views.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:CommunityToolkit.WinUI.UI.Animations"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:data="using:BiliBiliAPI.Models.HomeVideo"
@@ -11,6 +12,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI.UI.Controls"
     Background="Transparent"
+    NavigationCacheMode="Disabled"
     mc:Ignorable="d">
     <i:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
@@ -50,11 +52,15 @@
             x:Name="adaptive"
             Grid.Row="1"
             Margin="0,5,0,0"
+            animations:ItemsReorderAnimation.Duration="0:0:0.2"
             DesiredWidth="250"
+            IsMultiSelectCheckBoxEnabled="False"
             ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
             ItemHeight="180"
             ItemTemplate="{ThemeResource DefaultVideo}"
-            ItemsSource="{x:Bind ViewModel._Data, Mode=TwoWay}">
+            ItemsSource="{x:Bind ViewModel._Data, Mode=TwoWay}"
+            SelectionMode="Extended"
+            StretchContentForSingleRow="True">
             <i:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Loaded">
                     <core:InvokeCommandAction
@@ -70,6 +76,7 @@
             <ui:AdaptiveGridView.ItemContainerTransitions>
                 <TransitionCollection>
                     <AddDeleteThemeTransition />
+                    <ContentThemeTransition />
                 </TransitionCollection>
             </ui:AdaptiveGridView.ItemContainerTransitions>
         </ui:AdaptiveGridView>

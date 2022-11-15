@@ -11,7 +11,8 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:ABI.Microsoft.UI.Xaml.Media"
-    Loaded="OnLoaded">
+    Loaded="OnLoaded"
+    NavigationCacheMode="Required">
     <Page.Resources>
         <Flyout
             x:Name="flyout"
@@ -196,7 +197,7 @@
                 </Button>
             </NavigationView.PaneFooter>
 
-            <Grid Margin="{StaticResource NavigationViewPageContentMargin}">
+            <Grid x:Name="grid">
                 <Frame x:Name="NavigationFrame">
                     <Frame.ContentTransitions>
                         <TransitionCollection>

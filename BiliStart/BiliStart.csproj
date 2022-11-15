@@ -22,6 +22,9 @@
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
+	  <!--<WindowsPackageType>None</WindowsPackageType>
+	  <PublishTrimmed>true</PublishTrimmed>-->
+	  
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="Assets\SplashScreen.scale-100.png" />
@@ -35,6 +38,7 @@
     <None Remove="MainPage.xaml" />
     <None Remove="Pages\RankPage.xaml" />
     <None Remove="Pages\WeekPage.xaml" />
+    <None Remove="Styles\Animations.xaml" />
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\RankItemStyle.xaml" />
@@ -52,12 +56,15 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="CommunityToolkit.WinUI.Notifications" Version="7.1.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Animations" Version="7.1.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Behaviors" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.220930.4-preview2" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
     <PackageReference Include="QRCoder" Version="1.4.3" />
     <PackageReference Include="WinUIEx" Version="1.8.0" />
   </ItemGroup>
@@ -71,6 +78,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\Animations.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\ItemsDataTemplate\RankItemStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

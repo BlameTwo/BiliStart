@@ -52,7 +52,6 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        this.UnhandledException += App_UnhandledException1;
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).
@@ -128,10 +127,6 @@ public partial class App : Application
         UnhandledException += App_UnhandledException;
     }
 
-    private void App_UnhandledException1(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
-    {
-        
-    }
 
     public static AccountToken Token
     {
@@ -167,8 +162,7 @@ public partial class App : Application
 
         ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
 
-
-        App.GetService<IAppNotificationService>().CreateShow("ToGO!","前往首页","前往热门","欢迎使用Bili","你好！",AppContext.BaseDirectory+ "Assets/icon.ico");
+        //App.GetService<IAppNotificationService>().CreateShow("ToGO!","前往首页","前往热门","欢迎使用Bili","你好！",AppContext.BaseDirectory+ "Assets/icon.ico");
 
         await App.GetService<IActivationService>().ActivateAsync(args);
 
