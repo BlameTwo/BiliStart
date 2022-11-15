@@ -22,8 +22,10 @@
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
-	  <!--<WindowsPackageType>None</WindowsPackageType>
-	  <PublishTrimmed>true</PublishTrimmed>-->
+	<WindowsPackageType>None</WindowsPackageType>
+	<WindowsPackageType>None</WindowsPackageType>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<PublishTrimmed>true</PublishTrimmed>
 	  
   </PropertyGroup>
   <ItemGroup>

@@ -47,7 +47,7 @@ public partial class App : Application
         get; set;
     } = false;
 
-    public static WindowEx MainWindow { get; } = new MainWindow();
+    public static Window MainWindow { get; } = new MainWindow();
 
     public App()
     {

@@ -38,8 +38,7 @@ public sealed partial class MainPage : Page
     {
         this.ViewModel = App.GetService<MainViewModel>();
         this.InitializeComponent();
-
-        //¸³Öµ¸ùFrame
+        ViewModel!.TipShow.TipControl = this.ToggleThemeTeachingTip2;
         ViewModel!.NavigationService.RootFrame = RootFrame;
     }
 

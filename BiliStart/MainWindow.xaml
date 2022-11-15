@@ -1,4 +1,9 @@
-﻿<windowex:WindowEx
+﻿<!--
+    MinWidth="500"
+    MinHeight="500"
+    PersistenceId="MainWindow"
+-->
+<Window
     x:Class="BiliStart.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,7 +11,4 @@
     xmlns:local="using:BiliStart"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:windowex="using:WinUIEx"
-    MinWidth="500"
-    MinHeight="500"
-    PersistenceId="MainWindow"
     mc:Ignorable="d" />
