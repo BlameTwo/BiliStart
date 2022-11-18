@@ -22,10 +22,9 @@
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
-	<WindowsPackageType>None</WindowsPackageType>
-	<WindowsPackageType>None</WindowsPackageType>
+	<!--<WindowsPackageType>None</WindowsPackageType>-->
+	
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	<PublishTrimmed>true</PublishTrimmed>
 	  
   </PropertyGroup>
   <ItemGroup>
@@ -44,6 +43,7 @@
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\RankItemStyle.xaml" />
+    <None Remove="Styles\ItemsDataTemplate\WeekItemStyle.xaml" />
     <None Remove="Styles\VideoGridViewItem.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\HotPage.xaml" />
@@ -80,6 +80,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\ItemsDataTemplate\WeekItemStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\Animations.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

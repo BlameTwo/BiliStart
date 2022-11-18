@@ -28,7 +28,6 @@ namespace BiliStart.ViewModels
         async Task govideo(Item arg)
         {
             var result = await _Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV);
-            // Queue navigation with low priority to allow the UI to initialize.
             App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
             {
                 var navigationService = App.GetService<INavigationService>();

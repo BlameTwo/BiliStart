@@ -44,10 +44,13 @@ public partial class HomeViewModel: ScrolViewModelBase
     {
         for (int i = 0; i < 2; i++)
         {
-            var result = (await Video.GetHomeVideo()).Data.Item.ToObservableCollection();
-            foreach (var item in result)
+            var result = (await Video.GetHomeVideo());
+            if (result != null)
             {
-                _Data.Add(item);
+                foreach (var item in result.Data.Item)
+                {
+                    _Data.Add(item);
+                }
             }
         }
     }

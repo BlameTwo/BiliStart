@@ -6,5 +6,5 @@
 
     <x:Double x:Key="MediumFontSize">16</x:Double>
 
-    <x:Double x:Key="VideoTitle">13</x:Double>
+    <x:Double x:Key="VideoTitle">15</x:Double>
 </ResourceDictionary>

@@ -206,7 +206,7 @@
   <data name="Shell_Top.Content" xml:space="preserve">
     <value>排行榜</value>
   </data>
-  <data name="TopMore_LookWeak.Text" xml:space="preserve">
+  <data name="TopMore_LookWeek.Text" xml:space="preserve">
     <value>每周必看</value>
   </data>
   <data name="TopMore_TopList.Text" xml:space="preserve">

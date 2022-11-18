@@ -44,13 +44,15 @@
                 </NavigationViewItem.Icon>
                 <NavigationViewItem.Content>
                     <TextBlock
-                        x:Uid="TopMore_LookWeak"
+                        x:Uid="TopMore_LookWeek"
                         Margin="5,0,0,0" />
                 </NavigationViewItem.Content>
             </NavigationViewItem>
         </NavigationView.MenuItems>
         <NavigationView.Content>
-            <Frame x:Name="FrameControl" />
+            <Frame
+                x:Name="FrameControl"
+                Margin="15" />
         </NavigationView.Content>
     </NavigationView>
 </Page>
