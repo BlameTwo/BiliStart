@@ -59,6 +59,5 @@ public sealed partial class HomeItemStyle : UserControl
 
     private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
-        image.Opacity = 1;
     }
 }

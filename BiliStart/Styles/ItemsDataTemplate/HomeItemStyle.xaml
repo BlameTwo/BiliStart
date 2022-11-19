@@ -15,24 +15,27 @@
     xmlns:local="using:BiliStart.Styles.ItemsDataTemplate"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:styleui="using:BiliStart.UI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI.UI"
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
     <UserControl.Resources>
         <convert:CountForNumber x:Key="LookCount" />
-
     </UserControl.Resources>
     <Border
         Margin="5"
+        BorderBrush="{ThemeResource AppBarBorderThemeBrush}"
+        BorderThickness="1"
         CornerRadius="5">
         <Grid ui:UIElementExtensions.ClipToBounds="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="7*" />
                 <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
-            <Image
+            <styleui:ImageLoad
                 x:Name="image"
                 ui:VisualExtensions.NormalizedCenterPoint="0.5"
+                DisplayType="Rect"
                 Source="{x:Bind Item.Cover, Mode=OneWay}"
                 Stretch="UniformToFill">
                 <i:Interaction.Behaviors>
@@ -43,7 +46,7 @@
                         <behaviors:StartAnimationAction Animation="{ThemeResource GridVideoExit}" />
                     </core:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
-            </Image>
+            </styleui:ImageLoad>
             <Border
                 Margin="3,0,0,3"
                 Padding="5"

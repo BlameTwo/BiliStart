@@ -12,12 +12,15 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:BiliStart.Styles.ItemsDataTemplate"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:styleui="using:BiliStart.UI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d">
     <UserControl.Resources>
         <convert:CountForNumber x:Name="ForNumberConvert" />
         <convert:TimeConvert x:Name="TimeConvert" />
+
     </UserControl.Resources>
+
     <Border
         Margin="5"
         ui:UIElementExtensions.ClipToBounds="True"
@@ -28,7 +31,18 @@
                 <RowDefinition Height="7*" />
                 <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
-            <Image
+
+            <Border
+                x:Name="border"
+                Grid.RowSpan="1"
+                Background="Black"
+                CornerRadius="5"
+                Opacity="1">
+                <Border.OpacityTransition>
+                    <ScalarTransition />
+                </Border.OpacityTransition>
+            </Border>
+            <styleui:ImageLoad
                 x:Name="image"
                 Grid.RowSpan="1"
                 ui:VisualExtensions.NormalizedCenterPoint="0.5"
@@ -43,7 +57,7 @@
                         <behaviors:StartAnimationAction Animation="{ThemeResource GridVideoExit}" />
                     </core:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
-            </Image>
+            </styleui:ImageLoad>
             <Border
                 Grid.Row="1"
                 Background="{ThemeResource CardBackgroundFillColorDefault}">
@@ -79,11 +93,33 @@
                 Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
                 CornerRadius="5">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{x:Bind Data.Stat.Views, Mode=OneWay, Converter={StaticResource ForNumberConvert}}" />
+                    <FontIcon
+                        Margin="0,1,0,0"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="14"
+                        Glyph="&#xE7B3;" />
                     <TextBlock
-                        VerticalAlignment="Bottom"
-                        FontSize="10"
-                        Text="  ²¥·Å" />
+                        Margin="3,0,0,0"
+                        Text="{x:Bind Data.Stat.Views, Mode=OneWay, Converter={StaticResource ForNumberConvert}}" />
+                </StackPanel>
+            </Border>
+            <Border
+                Grid.Row="0"
+                Margin="3,0,0,3"
+                Padding="5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                CornerRadius="5">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon
+                        Margin="0,1,0,0"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="14"
+                        Glyph="&#xE7BC;" />
+                    <TextBlock
+                        Margin="3,0,0,0"
+                        Text="{x:Bind Data.Stat.DanMaku, Mode=OneWay, Converter={StaticResource ForNumberConvert}}" />
                 </StackPanel>
             </Border>
         </Grid>

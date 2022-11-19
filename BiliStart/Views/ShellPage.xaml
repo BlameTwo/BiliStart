@@ -136,8 +136,6 @@
                     QueryIcon="Find" />
             </NavigationView.AutoSuggestBox>
             <NavigationView.MenuItems>
-
-
                 <NavigationViewItemHeader
                     x:Uid="Shell_ItemHeader_Frist"
                     FontSize="25" />
@@ -166,7 +164,7 @@
                             Glyph="&#xE753;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-
+                <NavigationViewItemHeader x:Uid="Shell_ItemHeader_Second" />
             </NavigationView.MenuItems>
             <NavigationView.PaneFooter>
                 <Button

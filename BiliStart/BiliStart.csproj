@@ -22,12 +22,14 @@
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
-	<!--<WindowsPackageType>None</WindowsPackageType>-->
+	  <!--
+	<WindowsPackageType>None</WindowsPackageType>-->
 	
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	  
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\img_holder.png" />
     <Content Remove="Assets\SplashScreen.scale-100.png" />
     <Content Remove="Assets\SplashScreen.scale-125.png" />
     <Content Remove="Assets\SplashScreen.scale-150.png" />

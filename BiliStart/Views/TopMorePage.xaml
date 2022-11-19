@@ -13,14 +13,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
-
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
     <NavigationView
         x:Name="NavigationControl"
         Grid.Row="0"
         Background="Transparent"
         IsBackButtonVisible="Collapsed"
         IsSettingsVisible="False"
-        PaneDisplayMode="Top">
+        PaneDisplayMode="Top"
+        SelectionChanged="{x:Bind ViewModel.NavigationControl_SelectionChanged}">
+
         <NavigationView.MenuItems>
             <NavigationViewItem
                 helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.RankViewModel"
@@ -48,6 +54,9 @@
                         Margin="5,0,0,0" />
                 </NavigationViewItem.Content>
             </NavigationViewItem>
+            <NavigationViewItem
+                x:Uid="TopMore_TidRank"
+                MenuItemsSource="{x:Bind ViewModel.TidData, Mode=OneWay}" />
         </NavigationView.MenuItems>
         <NavigationView.Content>
             <Frame

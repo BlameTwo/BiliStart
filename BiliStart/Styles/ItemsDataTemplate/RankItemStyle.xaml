@@ -15,6 +15,7 @@
     xmlns:local="using:BiliStart.Styles.ItemsDataTemplate"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:styleui="using:BiliStart.UI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -30,12 +31,10 @@
                 <RowDefinition Height="7*" />
                 <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
-
-            <Image
+            <styleui:ImageLoad
                 x:Name="image"
-                Grid.RowSpan="1"
                 ui:VisualExtensions.NormalizedCenterPoint="0.5"
-                Opacity="1"
+                DisplayType="Rect"
                 Source="{x:Bind Data.Cover, Mode=OneWay}"
                 Stretch="UniformToFill">
                 <i:Interaction.Behaviors>
@@ -46,7 +45,7 @@
                         <behaviors:StartAnimationAction Animation="{ThemeResource GridVideoExit}" />
                     </core:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
-            </Image>
+            </styleui:ImageLoad>
             <Border
                 Grid.Row="1"
                 Background="{ThemeResource CardBackgroundFillColorDefault}">

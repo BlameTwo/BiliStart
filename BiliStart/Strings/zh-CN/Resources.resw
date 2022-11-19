@@ -231,6 +231,12 @@
     <value>主页</value>
   </data>
   <data name="Shell_SearchBox.PlaceholderText" xml:space="preserve">
-    <value>搜索</value>
+    <value>搜索你的关键字</value>
+  </data>
+  <data name="Shell_ItemHeader_Second.Content" xml:space="preserve">
+    <value>频道</value>
+  </data>
+  <data name="TopMore_TidRank.Content" xml:space="preserve">
+    <value>分区排行</value>
   </data>
 </root>

@@ -38,5 +38,4 @@ public sealed partial class TopMorePage : Page
         ViewModel.navigationService.Frame = FrameControl;
         ViewModel.navigationViewService.Initialize(NavigationControl);
     }
-
 }

@@ -34,7 +34,12 @@ public partial class WeekViewModel:ObservableRecipient
         get;set;    
     }
 
-
+    private string title;
+    public string Title
+    {
+        get => title;
+        set=>SetProperty(ref title, value);
+    }
 
     private ObservableCollection<EveryoneWeekData> WeekHeaderItem;
 
@@ -52,6 +57,7 @@ public partial class WeekViewModel:ObservableRecipient
         var list = await Week.GetWeekTopList(data.Number);
         NowSelection = list.Data;
         _Items = list.Data.Items.ToObservableCollection();
+        Title = $"“{list.Data.Config.SubJect}";
     }
 
     private ObservableCollection<WeekItemData> Items;

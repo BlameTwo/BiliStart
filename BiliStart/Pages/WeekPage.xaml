@@ -31,15 +31,17 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBlock
-            x:Uid="TopMore_LookWeek"
             Margin="10"
             HorizontalAlignment="Left"
-            FontSize="{ThemeResource LargeFontSize}" />
+            FontSize="25"
+            FontWeight="Bold"
+            Text="{x:Bind ViewModel.Title, Mode=OneWay}" />
         <ComboBox
             x:Name="combobox"
             Margin="0,15,0,0"
             HorizontalAlignment="Right"
-            ItemsSource="{x:Bind ViewModel._WeekHeaderItem, Mode=OneWay}">
+            ItemsSource="{x:Bind ViewModel._WeekHeaderItem, Mode=OneWay}"
+            SelectedIndex="0">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="data:EveryoneWeekData">
                     <TextBlock Text="{x:Bind Name, Mode=OneWay}" />

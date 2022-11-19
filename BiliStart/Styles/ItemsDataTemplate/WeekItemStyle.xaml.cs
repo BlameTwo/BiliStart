@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -28,7 +29,7 @@ public sealed partial class WeekItemStyle : UserControl
     {
         this.InitializeComponent();
     }
-    
+
     public WeekItemViewModel ViewModel
     {
         get;set;
@@ -50,4 +51,5 @@ public sealed partial class WeekItemStyle : UserControl
     {
         (s as WeekItemStyle)!.ViewModel = new WeekItemViewModel() { _Data = (WeekItemData)e.NewValue };
     }
+
 }

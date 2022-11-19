@@ -36,4 +36,22 @@ public sealed partial class RankPage : Page
         ViewModel = App.GetService<RankViewModel>();
         this.InitializeComponent();
     }
+
+    protected async override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        try
+        {
+            //·ÖÇøµ¼º½
+            int value = int.Parse(e.Parameter.ToString()!);
+            if(value != null)
+            {
+                await ViewModel!.refersh(value.ToString()!);
+            }
+        }
+        catch (Exception)
+        {
+            await ViewModel.Loaded();
+        }
+    }
+   
 }

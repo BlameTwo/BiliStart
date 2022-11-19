@@ -13,20 +13,24 @@
 
     <Grid x:Name="grid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.7*" />
             <RowDefinition Height="4.5*" />
             <RowDefinition Height="4.5*" />
         </Grid.RowDefinitions>
         <Button
             x:Uid="Player_GoHome"
             Grid.Row="1"
+            Margin="5,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
             Canvas.ZIndex="2"
             Command="{x:Bind ViewModel.GoBackCommand}"
             Style="{ThemeResource AccentButtonStyle}" />
         <MediaPlayerElement
             x:Name="media"
-            Grid.Row="0"
-            Grid.RowSpan="3" />
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Background="Transparent" />
         <Grid
             Grid.Row="1"
             HorizontalAlignment="Stretch"

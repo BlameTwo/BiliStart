@@ -16,21 +16,17 @@
             <itemtemplate:RankItemStyle Data="{Binding}" />
         </DataTemplate>
     </Page.Resources>
-    <i:Interaction.Behaviors>
-        <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadedCommand}" />
-        </core:EventTriggerBehavior>
-    </i:Interaction.Behaviors>
+
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBlock
-            x:Uid="TopMore_TopList"
             Margin="10"
             HorizontalAlignment="Left"
-            FontSize="{ThemeResource LargeFontSize}" />
+            FontSize="{ThemeResource LargeFontSize}"
+            Text="{x:Bind ViewModel.Title, Mode=OneWay}" />
         <Button
             Grid.Row="0"
             Margin="0,0,10,0"
