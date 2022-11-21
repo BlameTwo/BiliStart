@@ -16,7 +16,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBlock Style="{ThemeResource PageTitleStyle}">
-            <Run x:Uid="Search_Title" />
+            <Run
+                x:Uid="Search_Title"
+                FontWeight="Bold" />
             <Run Text="{x:Bind ViewModel._SearchKey, Mode=OneWay}" />
         </TextBlock>
         <Pivot Grid.Row="1">

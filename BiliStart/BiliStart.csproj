@@ -46,6 +46,7 @@
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\RankItemStyle.xaml" />
+    <None Remove="Styles\ItemsDataTemplate\SearchVideoItem.xaml" />
     <None Remove="Styles\ItemsDataTemplate\WeekItemStyle.xaml" />
     <None Remove="Styles\Search\SearchAnimation.xaml" />
     <None Remove="Styles\Search\SearchMovie.xaml" />
@@ -87,6 +88,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\ItemsDataTemplate\SearchVideoItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\Search\SearchMovie.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

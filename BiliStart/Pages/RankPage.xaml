@@ -10,6 +10,7 @@
     xmlns:local="using:BiliStart.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:uicontrol="using:BiliStart.UI"
     mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="DefaultVideo">
@@ -41,26 +42,10 @@
                     Margin="5,0,0,0" />
             </StackPanel>
         </Button>
-        <Border
+        <uicontrol:NullContent
             Grid.Row="1"
-            Padding="25"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Background="{ThemeResource LayerOnAccentAcrylicFillColorDefaultBrush}"
-            CornerRadius="10"
-            Visibility="{x:Bind ViewModel._NullPopup, Mode=OneWay}">
-            <StackPanel>
-                <Image
-                    Width="100"
-                    Source="ms-appx:///Assets/not.png"
-                    Stretch="UniformToFill" />
-                <TextBlock
-                    Margin="0,10"
-                    HorizontalAlignment="Center"
-                    FontSize="{ThemeResource LargeFontSize}"
-                    Text="{x:Bind ViewModel._TipMessage, Mode=OneWay}" />
-            </StackPanel>
-        </Border>
+            _NummPopup="{x:Bind ViewModel._NullPopup, Mode=OneWay}"
+            _TipMessage="{x:Bind ViewModel._TipMessage, Mode=OneWay}" />
         <ui:AdaptiveGridView
             Grid.Row="1"
             Margin="0,5,0,0"

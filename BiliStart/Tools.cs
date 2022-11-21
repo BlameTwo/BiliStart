@@ -10,7 +10,8 @@ public static class Tools
 {
     public static ObservableCollection<T> ToObservableCollection<T>(this List<T> list)
     {
-        ObservableCollection<T> collection = new ObservableCollection<T>(); 
+        if (list == null) return null;
+        ObservableCollection<T> collection = new ObservableCollection<T>();
         foreach (var item in list)
         {
             collection.Add(item);
