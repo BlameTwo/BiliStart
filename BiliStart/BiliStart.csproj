@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
     <RootNamespace>BiliStart</RootNamespace>
     <ApplicationIcon>Assets/icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -46,6 +45,7 @@
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\RankItemStyle.xaml" />
+    <None Remove="Styles\ItemsDataTemplate\SearchMovieItem.xaml" />
     <None Remove="Styles\ItemsDataTemplate\SearchVideoItem.xaml" />
     <None Remove="Styles\ItemsDataTemplate\WeekItemStyle.xaml" />
     <None Remove="Styles\Search\SearchAnimation.xaml" />
@@ -88,6 +88,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\ItemsDataTemplate\SearchMovieItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\ItemsDataTemplate\SearchVideoItem.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

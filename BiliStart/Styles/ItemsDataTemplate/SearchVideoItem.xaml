@@ -65,6 +65,57 @@
                 </StackPanel>
             </Border>
             <Border
+                Grid.Row="0"
+                Margin="3,3,0,0"
+                Padding="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                CornerRadius="5">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="15"
+                        Glyph="&#xE768;" />
+                    <TextBlock
+                        Margin="3,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="Wrap">
+                        <Run Text="{x:Bind Data.UpName, Mode=OneWay}" />
+                        <Run Text="{x:Bind Data.ShowTime, Mode=OneWay}" />
+
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+
+            <Border
+                Grid.Row="0"
+                Margin="0,0,3,3"
+                Padding="5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                CornerRadius="5">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="15"
+                        Glyph="&#xE768;" />
+                    <TextBlock
+                        Margin="3,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Text="{x:Bind Data.DurationText, Mode=OneWay}"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <Border
                 Grid.Row="1"
                 Background="{ThemeResource CardBackgroundFillColorDefault}">
                 <TextBlock
@@ -76,6 +127,7 @@
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="Wrap" />
             </Border>
+
         </Grid>
     </Border>
 </UserControl>

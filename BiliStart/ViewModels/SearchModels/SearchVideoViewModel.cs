@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using BiliBiliAPI.Models.HomeVideo;
 using BiliBiliAPI.Models.Search;
 using BiliBiliAPI.Search;
 using BiliStart.Contracts.Services;
@@ -40,10 +41,18 @@ public partial class SearchVideoViewModel:SearchViewModelBase
 
     private async void OnSearchChanged(string value)
     {
+        if (ItemData == null) ItemData =new();
         var result = await Search.GetVideo(value, 1, BiliBiliAPI.Models.Search.OrderBy.Default,0);
         if(result.Data != null)
         {
-            ItemData = result.Data.Items.ToObservableCollection();
+            foreach (var item in result.Data.Items.ToObservableCollection())
+            {
+                //过滤掉电影和番剧
+                if (item.Goto == "av")
+                {
+                    ItemData.Add(item);
+                }
+            }
         }
     }
 
