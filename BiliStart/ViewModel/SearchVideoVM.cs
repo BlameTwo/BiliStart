@@ -1,5 +1,5 @@
-﻿using BilibiliAPI.Search;
-using BilibiliAPI.Video;
+﻿using BiliBiliAPI.Search;
+using BiliBiliAPI.Video;
 using BiliBiliAPI.Models.Search;
 using BiliStart.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;

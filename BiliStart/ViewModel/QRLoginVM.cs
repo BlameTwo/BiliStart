@@ -1,4 +1,4 @@
-﻿using BilibiliAPI.Account;
+﻿using BiliBiliAPI.Account;
 using BiliBiliAPI.Models.Account;
 using BiliBiliAPI.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Threading;
 using BiliBiliAPI.Models.Settings;
-using BilibiliAPI;
+using BiliBiliAPI;
 using System.Diagnostics;
 using ZUDesignControl.Controls;
 using CommunityToolkit.Mvvm.Messaging;

@@ -1,4 +1,4 @@
-﻿using BilibiliAPI.Video;
+﻿using BiliBiliAPI.Video;
 using BiliStart.Event;
 using BiliStart.Interfaces;
 using BiliStart.ViewModel;

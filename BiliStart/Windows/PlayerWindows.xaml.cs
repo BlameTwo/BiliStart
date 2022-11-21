@@ -1,4 +1,4 @@
-﻿using BilibiliAPI.Video;
+﻿using BiliBiliAPI.Video;
 using BiliBiliAPI.Models.Videos;
 using BiliStart.Controls;
 using BiliStart.Controls.PlayerPivotItems;
@@ -45,7 +45,7 @@ namespace BiliStart.Windows
     
         private double OldTick { get; set; } = 0;
 
-        BilibiliAPI.Video.Video video = new BilibiliAPI.Video.Video();
+        BiliBiliAPI.Video.Video video = new BiliBiliAPI.Video.Video();
 
         public PlayerWindows(VideosContent item)
         {

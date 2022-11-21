@@ -1,4 +1,4 @@
-﻿using BilibiliAPI.Search;
+﻿using BiliBiliAPI.Search;
 using BiliBiliAPI.Models.Search;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;

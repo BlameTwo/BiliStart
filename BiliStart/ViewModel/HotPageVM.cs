@@ -1,4 +1,4 @@
-﻿using BilibiliAPI.Video;
+﻿using BiliBiliAPI.Video;
 using BiliStart.Event;
 using BiliStart.Pages;
 using BiliStart.Windows;
@@ -50,7 +50,7 @@ namespace BiliStart.ViewModel
         //推荐页和热门页都为一个VM
         private async void load()
         {
-            var items = (await video.GetHotVideo());
+            var items = (await video.GetHotVideo(null,0));
             foreach (var item in items.Item.ToObservableCollection())
             {
                 _Item.Add(new HomeVideoVM() { _Item = item });
@@ -66,7 +66,7 @@ namespace BiliStart.ViewModel
 
         private async void adddate()
         {
-            var items = (await video.GetHomeVideo()).Data.Item.ToObservableCollection();
+            var items = (await video.GetHotVideo(_Item.Last()._Item, _Item.Count)).Item.ToObservableCollection();
             foreach (var item in items)
             {
                 _Item.Add(new HomeVideoVM() { _Item = item });

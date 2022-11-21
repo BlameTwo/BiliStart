@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BiliBiliAccount\src\BiliBiliAccount\BilibiliAPI.csproj" />
     <ProjectReference Include="C:\Users\30140\Desktop\ZUDesignControl\ZUDesignControl\ZUDesignControl.csproj" />
+    <ProjectReference Include="D:\BiliBiliAccount\src\BiliBiliAccount\BiliBiliAPI.csproj" />
   </ItemGroup>
 
 </Project>

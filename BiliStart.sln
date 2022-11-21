@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiliStart", "BiliStart\Bili
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZUDesignControl", "C:\Users\30140\Desktop\ZUDesignControl\ZUDesignControl\ZUDesignControl.csproj", "{587D2DC2-132E-4E11-9FAB-6DA7FC383391}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilibiliAPI", "..\BiliBiliAccount\src\BiliBiliAccount\BilibiliAPI.csproj", "{C9400280-E9F1-4593-9611-D40E20D26A22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiliBiliAPI", "D:\BiliBiliAccount\src\BiliBiliAccount\BiliBiliAPI.csproj", "{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,22 +53,22 @@ Global
 		{587D2DC2-132E-4E11-9FAB-6DA7FC383391}.Release|x64.Build.0 = Release|x64
 		{587D2DC2-132E-4E11-9FAB-6DA7FC383391}.Release|x86.ActiveCfg = Release|Any CPU
 		{587D2DC2-132E-4E11-9FAB-6DA7FC383391}.Release|x86.Build.0 = Release|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Debug|arm64.Build.0 = Debug|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Debug|x64.Build.0 = Debug|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Debug|x86.Build.0 = Debug|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Release|arm64.ActiveCfg = Release|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Release|arm64.Build.0 = Release|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Release|x64.ActiveCfg = Release|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Release|x64.Build.0 = Release|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Release|x86.ActiveCfg = Release|Any CPU
-		{C9400280-E9F1-4593-9611-D40E20D26A22}.Release|x86.Build.0 = Release|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Debug|arm64.Build.0 = Debug|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Debug|x64.Build.0 = Debug|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Debug|x86.Build.0 = Debug|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Release|arm64.ActiveCfg = Release|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Release|arm64.Build.0 = Release|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Release|x64.ActiveCfg = Release|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Release|x64.Build.0 = Release|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Release|x86.ActiveCfg = Release|Any CPU
+		{407A5FD4-4DE6-4E78-BA01-3B9BCC190749}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

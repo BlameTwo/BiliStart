@@ -5,16 +5,18 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using BilibiliAPI.Video;
-using BiliBiliAPI.Models.TopList;
 using BiliStart.ViewModel.HotViewModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using BiliBiliAPI;
+using BiliBiliAPI.TopLists;
+using BiliBiliAPI.Video;
+using BiliBiliAPI.Models.TopList;
 
 namespace BiliStart.ViewModel;
 public class EveryoneWeekPageVM:ObservableRecipient
 {
-    BilibiliAPI.TopLists.EveryoneWeak EveryWeek = new BilibiliAPI.TopLists.EveryoneWeak();
+    EveryoneWeek EveryWeek = new EveryoneWeek();
     public EveryoneWeekPageVM()
     {
         _Items = new ObservableCollection<HotWeakDTVM>();

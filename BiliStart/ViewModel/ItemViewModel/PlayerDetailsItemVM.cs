@@ -1,4 +1,4 @@
-﻿using BilibiliAPI.Video;
+﻿using BiliBiliAPI.Video;
 using BiliBiliAPI.Models.Videos;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;

@@ -1,6 +1,6 @@
-﻿using BilibiliAPI;
-using BilibiliAPI.Account;
-using BilibiliAPI.User;
+﻿using BiliBiliAPI;
+using BiliBiliAPI.Account;
+using BiliBiliAPI.User;
 using BiliBiliAPI.Models.Account;
 using BiliBiliAPI.Models.Settings;
 using BiliStart.Event;
@@ -49,7 +49,7 @@ namespace BiliStart.ViewModel
 
         private void WebView2_NavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)
         {
-            var c = BilibiliAPI.ApiTools.Tools.GetFormData(e.Uri);
+            var c = BiliBiliAPI.ApiTools.Tools.GetFormData(e.Uri);
             if (c == null) return;
             if (c.ContainsKey("access_key"))
             {

@@ -1,4 +1,4 @@
-﻿using BilibiliAPI.Video;
+﻿using BiliBiliAPI.Video;
 using BiliBiliAPI.Models.HomeVideo;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
@@ -22,7 +22,7 @@ namespace BiliStart.ViewModel
 {
     public class RecommendVM :ObservableRecipient
     {
-        BilibiliAPI.Video.Video video = new BilibiliAPI.Video.Video();
+        BiliBiliAPI.Video.Video video = new BiliBiliAPI.Video.Video();
         public RecommendVM()
         {
             IsActive = true;

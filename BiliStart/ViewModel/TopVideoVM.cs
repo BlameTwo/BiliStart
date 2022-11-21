@@ -1,4 +1,4 @@
-﻿using BilibiliAPI;
+﻿using BiliBiliAPI;
 using BiliBiliAPI.Models.TopList;
 using BiliBiliAPI.Models.Videos;
 using BiliStart.Converter;
@@ -58,10 +58,10 @@ namespace BiliStart.ViewModel
             playerWindows.Show();
         }
 
-        BilibiliAPI.TopVideos.TopListVideo TopListVideo = new BilibiliAPI.TopVideos.TopListVideo(); 
+        BiliBiliAPI.TopVideos.TopListVideo TopListVideo = new BiliBiliAPI.TopVideos.TopListVideo(); 
         private async Task loaded()
         {
-            List = (await TopListVideo.GetTopVideo(BilibiliAPI.Cid.All,7)).Data.List.ToObservableCollection();
+            List = (await TopListVideo.GetTopVideo(BiliBiliAPI.Cid.All,7)).Data.List.ToObservableCollection();
         }
 
         private ObservableCollection<TopVideo> _List;
