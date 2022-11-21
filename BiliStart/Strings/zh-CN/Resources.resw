@@ -239,4 +239,16 @@
   <data name="TopMore_TidRank.Content" xml:space="preserve">
     <value>分区排行</value>
   </data>
+  <data name="Search_Animation.Header" xml:space="preserve">
+    <value>番剧</value>
+  </data>
+  <data name="Search_Movie.Header" xml:space="preserve">
+    <value>电影</value>
+  </data>
+  <data name="Search_Video.Header" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="Search_Title.Text" xml:space="preserve">
+    <value>搜索</value>
+  </data>
 </root>

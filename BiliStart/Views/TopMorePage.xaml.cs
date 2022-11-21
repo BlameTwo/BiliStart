@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using BiliStart.Contracts.Services;
 using BiliStart.ViewModels;
+using BiliStart.ViewModels.PageViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -37,5 +38,6 @@ public sealed partial class TopMorePage : Page
         this.InitializeComponent();
         ViewModel.navigationService.Frame = FrameControl;
         ViewModel.navigationViewService.Initialize(NavigationControl);
+        ViewModel.navigationService.NavigateTo(typeof(RankViewModel).FullName!);
     }
 }

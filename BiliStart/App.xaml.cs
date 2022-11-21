@@ -1,4 +1,5 @@
 ﻿using BiliBiliAPI.Models.Account;
+using BiliBiliAPI.Models.Search;
 using BiliBiliAPI.Models.Settings;
 using BiliStart.Activation;
 using BiliStart.Contracts.Services;
@@ -9,9 +10,11 @@ using BiliStart.Models;
 using BiliStart.Notifications;
 using BiliStart.Pages;
 using BiliStart.Services;
+using BiliStart.Styles.Search;
 using BiliStart.ViewModels;
 using BiliStart.ViewModels.DialogViewModel;
 using BiliStart.ViewModels.PageViewModels;
+using BiliStart.ViewModels.SearchModels;
 using BiliStart.Views;
 using CommunityToolkit.Common;
 using Microsoft.Extensions.DependencyInjection;
@@ -118,6 +121,18 @@ public partial class App : Application
 
             services.AddTransient<WeekPage>();
             services.AddTransient<WeekViewModel>();
+
+            services.AddTransient<SearchPage>();
+            services.AddTransient<SearchViewModel>();
+
+            services.AddTransient<Styles.Search.SearchVideo>();
+            services.AddTransient<SearchVideoViewModel>();
+
+            services.AddTransient<SearchAnimation>();
+            services.AddTransient<SearchAnimationViewModel>();
+
+            services.AddTransient<SearchMovie>();
+            services.AddTransient<SearchMovieViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

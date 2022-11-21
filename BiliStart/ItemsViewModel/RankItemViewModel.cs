@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BiliStart.ItemsViewModel;
-public class RankItemViewModel:ObservableObject
+
+
+[INotifyPropertyChanged]
+public partial class RankItemViewModel
 {
     public RankItemViewModel()
     {

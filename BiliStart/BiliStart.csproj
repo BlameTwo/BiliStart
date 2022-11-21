@@ -18,12 +18,12 @@
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <PackageCertificateThumbprint>7EDB48A23BF3C468AFC5314C72316D7D68301721</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
-	  <!--
-	<WindowsPackageType>None</WindowsPackageType>-->
+	
+	<!--<WindowsPackageType>None</WindowsPackageType>-->
 	
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	  
@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\icon.ico" />
+    <None Remove="Assets\not.png" />
     <None Remove="Dialogs\LoginDialog.xaml" />
     <None Remove="MainPage.xaml" />
     <None Remove="Pages\RankPage.xaml" />
@@ -46,10 +47,14 @@
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\RankItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\WeekItemStyle.xaml" />
+    <None Remove="Styles\Search\SearchAnimation.xaml" />
+    <None Remove="Styles\Search\SearchMovie.xaml" />
+    <None Remove="Styles\Search\SearchVideo.xaml" />
     <None Remove="Styles\VideoGridViewItem.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\HotPage.xaml" />
     <None Remove="Views\PlayerPage.xaml" />
+    <None Remove="Views\SearchPage.xaml" />
     <None Remove="Views\TopMorePage.xaml" />
   </ItemGroup>
 
@@ -67,7 +72,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.220930.4-preview2" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221116.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
     <PackageReference Include="QRCoder" Version="1.4.3" />
     <PackageReference Include="WinUIEx" Version="1.8.0" />
@@ -82,6 +87,18 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\Search\SearchMovie.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Styles\Search\SearchAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Styles\Search\SearchVideo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\SearchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\ItemsDataTemplate\WeekItemStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -131,9 +131,18 @@
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}">
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox
+                    x:Name="searchbox"
                     x:Uid="Shell_SearchBox"
                     AutomationProperties.Name="Search"
-                    QueryIcon="Find" />
+                    QueryIcon="Find">
+                    <i:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="QuerySubmitted">
+                            <core:InvokeCommandAction
+                                Command="{x:Bind ViewModel.SearchCommand}"
+                                CommandParameter="{x:Bind searchbox.Text, Mode=TwoWay}" />
+                        </core:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                </AutoSuggestBox>
             </NavigationView.AutoSuggestBox>
             <NavigationView.MenuItems>
                 <NavigationViewItemHeader

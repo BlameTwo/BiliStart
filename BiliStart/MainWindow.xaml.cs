@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml;
 using System.Runtime.InteropServices; // For DllImport
 using WinRT; // required to support Window.As<ICompositionSupportsSystemBackdrop>()
 using WinUIEx;
-
 namespace BiliStart;
 
 
@@ -70,10 +69,26 @@ public sealed partial class MainWindow : Window
         WindowManager manager = WindowManager.Get(this);
         m_wsdqHelper = new WindowsSystemDispatcherQueueHelper();
         m_wsdqHelper.EnsureWindowsSystemDispatcherQueueController();
-        SetBackdrop(BackdropType.MicaAlt);
+        SetBackdrop(BackdropType.DesktopAcrylic);
         Title = "AppDisplayName".GetLocalized();
         manager.MinWidth = 400;
         manager.MinHeight = 400;
+        int build = Environment.OSVersion.Version.Build;
+        if (build >= 22000 && build < 22621)
+        {
+            SetBackdrop(BackdropType.Mica);
+        }
+        else if(build == 22621)
+        {
+            SetBackdrop(BackdropType.MicaAlt);
+        }
+        else if(build < 22000){
+            SetBackdrop(BackdropType.DesktopAcrylic);
+        }
+        else
+        {
+            SetBackdrop(BackdropType.DefaultColor);
+        }
     }
 
 
@@ -92,7 +107,7 @@ public sealed partial class MainWindow : Window
         }
         this.Activated -= Window_Activated;
         this.Closed -= Window_Closed;
-        //((FrameworkElement)this.Content).ActualThemeChanged -= Window_ThemeChanged;
+        
         m_configurationSource = null;
 
         if (type == BackdropType.Mica)
@@ -139,7 +154,6 @@ public sealed partial class MainWindow : Window
             m_configurationSource = new Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration();
             this.Activated += Window_Activated;
             this.Closed += Window_Closed;
-            //((FrameworkElement)this.Content).ActualThemeChanged += Window_ThemeChanged;
 
             // Initial configuration state.
             m_configurationSource.IsInputActive = true;
@@ -171,7 +185,6 @@ public sealed partial class MainWindow : Window
             m_configurationSource = new Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration();
             this.Activated += Window_Activated;
             this.Closed += Window_Closed;
-            ((FrameworkElement)this.Content).ActualThemeChanged += Window_ThemeChanged;
 
             // Initial configuration state.
             m_configurationSource.IsInputActive = true;
@@ -211,12 +224,6 @@ public sealed partial class MainWindow : Window
         m_configurationSource = null;
     }
 
-    private void Window_ThemeChanged(FrameworkElement sender, object args)
-    {
-        if (m_configurationSource != null)
-        {
-        }
-    }
 
 
 }

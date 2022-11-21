@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using BiliStart.ViewModels.PageViewModels;
+using BiliStart.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -20,39 +20,29 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace BiliStart.Pages;
+namespace BiliStart.Views;
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class RankPage : Page
+public sealed partial class SearchPage : Page
 {
-    public RankViewModel ViewModel
+    public SearchViewModel ViewModel
     {
         get;
     }
-
-    public RankPage()
+    public SearchPage()
     {
-        ViewModel = App.GetService<RankViewModel>();
+        this.ViewModel = App.GetService<SearchViewModel>();
         this.InitializeComponent();
     }
 
-    protected async override void OnNavigatedTo(NavigationEventArgs e)
+    protected override void OnNavigatedTo(NavigationEventArgs e)
     {
-        try
+        //获得传参
+        if(e.Parameter != null && e.Parameter is string value)
         {
-            //分区导航
-            // Tip:如果你第一次运行排行榜页面到了这里就报错，这里是没有错误的哦，靠Tag携带的Tid参数来区别分区还是全区，继续F5下去吧
-            int value = int.Parse(e.Parameter.ToString()!);
-            if(value != null)
-            {
-                await ViewModel!.refersh(value.ToString()!);
-            }
+            ViewModel._SearchKey = value;
         }
-        catch (Exception)
-        {
-            await ViewModel.Loaded();
-        }
+        base.OnNavigatedTo(e);
     }
-   
 }

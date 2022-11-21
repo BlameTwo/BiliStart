@@ -17,6 +17,7 @@ using Microsoft.UI.Xaml.Media;
 using Windows.UI.WebUI;
 
 namespace BiliStart.ViewModels;
+
 public partial class HomeViewModel: ScrolViewModelBase
 {
     BiliBiliAPI.Video.Video Video = new ();
@@ -72,6 +73,7 @@ public partial class HomeViewModel: ScrolViewModelBase
     {
         get;private  set;    
     }
+
 
     private ObservableCollection<Item> Data;
 

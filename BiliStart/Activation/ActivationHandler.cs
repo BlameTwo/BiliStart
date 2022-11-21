@@ -10,6 +10,7 @@ public abstract class ActivationHandler<T> : IActivationHandler
 
     // Override this method to add the logic for your activation handler.
     protected abstract Task HandleInternalAsync(T args);
+    
 
     public bool CanHandle(object args) => args is T && CanHandleInternal((args as T)!);
 

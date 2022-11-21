@@ -1,9 +1,4 @@
-﻿<!--
-    MinWidth="500"
-    MinHeight="500"
-    PersistenceId="MainWindow"
--->
-<Window
+﻿<Window
     x:Class="BiliStart.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

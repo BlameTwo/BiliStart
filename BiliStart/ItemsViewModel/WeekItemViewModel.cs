@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BiliBiliAPI.Models.TopList;
 using CommunityToolkit.Mvvm.ComponentModel;
-
 namespace BiliStart.ItemsViewModel;
-public class WeekItemViewModel : ObservableObject
+
+
+[INotifyPropertyChanged]
+public partial class WeekItemViewModel
 {
     public WeekItemViewModel()
     {

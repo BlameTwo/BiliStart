@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BiliStart.ItemsViewModel;
-public class HomeItemViewModel:ObservableObject
+
+[INotifyPropertyChanged]
+public partial class HomeItemViewModel
 {
     private BiliBiliAPI.Models.HomeVideo.Item Item;
 

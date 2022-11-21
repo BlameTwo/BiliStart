@@ -30,6 +30,7 @@
         <NavigationView.MenuItems>
             <NavigationViewItem
                 helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.RankViewModel"
+                IsSelected="True"
                 Tag="TopList">
                 <NavigationViewItem.Icon>
                     <FontIcon

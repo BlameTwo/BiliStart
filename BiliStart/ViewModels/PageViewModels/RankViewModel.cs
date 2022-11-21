@@ -9,6 +9,9 @@ using BiliBiliAPI.Video;
 using BiliStart.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using PInvoke;
 
 namespace BiliStart.ViewModels.PageViewModels;
@@ -17,6 +20,7 @@ public partial class RankViewModel : ObservableRecipient
     TopListVideo Video = new TopListVideo();
     public RankViewModel(ITipShow tipshow)
     {
+        _NullPopup =  Visibility.Collapsed;
         Tipshow = tipshow;
     }
 
@@ -26,10 +30,9 @@ public partial class RankViewModel : ObservableRecipient
         _Items = result.Data.List.ToObservableCollection();
         Tipshow.SendMessage(null, result.Data.Note);
         Title = "排行榜";
+        _NullPopup = Visibility.Collapsed;
     }
 
-    [ObservableProperty]
-    private string? note;
 
     private ObservableCollection<BiliBiliAPI.Models.TopList.TopVideo> Items;
 
@@ -51,6 +54,22 @@ public partial class RankViewModel : ObservableRecipient
         set=>SetProperty(ref title,value);
     }
 
+    private Visibility NullPopup;
+
+    public Visibility _NullPopup
+    {
+        get => NullPopup;
+        set => SetProperty(ref NullPopup, value);
+    }
+
+    private string TipMessage;
+
+    public string _TipMessage
+    {
+        get => TipMessage;
+        set => SetProperty(ref TipMessage, value);
+    }
+
 
     public async Task refersh(string value)
     {
@@ -61,11 +80,14 @@ public partial class RankViewModel : ObservableRecipient
             _Items = result.Data.List.ToObservableCollection();
             Tipshow.SendMessage(null, result.Data.Note);
             Title = "分区排行";
+            _NullPopup = Visibility.Collapsed;
         }
         catch (Exception)
         {
             Title = "分区错误";
-            Tipshow.SendMessage(null,"当前分区无视频排行，请切换其他分区");
+            Tipshow.SendMessage(null, "当前分区无视频排行，请切换其他分区");
+            _NullPopup = Visibility.Visible;
+            _TipMessage = "所选分区无内容";
         }
         
     }

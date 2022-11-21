@@ -19,7 +19,7 @@ using Microsoft.UI.Xaml.Navigation;
 
 namespace BiliStart.ViewModels;
 
-public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
+public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
 {
     private bool _isBackEnabled;
     private object? _selected;
@@ -128,6 +128,12 @@ public class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent>
         _LoginData = result.Data;
     }
 
+    [RelayCommand]
+    public void Search(string key)
+    {
+        if(!string.IsNullOrWhiteSpace(key))
+            NavigationService.NavigateTo(typeof(SearchViewModel).FullName!,key);
+    }
 
     public AsyncRelayCommand UserClick
     {
