@@ -75,7 +75,6 @@
                     Text="{x:Bind Data.Rating, Mode=OneWay}"
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="Wrap" />
-
                 <Border
                     Margin="5,5,0,0"
                     Padding="5"

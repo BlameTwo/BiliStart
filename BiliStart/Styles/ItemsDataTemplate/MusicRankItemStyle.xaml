@@ -1,15 +1,83 @@
-
-
 <UserControl
     x:Class="BiliStart.Styles.ItemsDataTemplate.MusicRankItemStyle"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animation="using:CommunityToolkit.WinUI.UI.Animations"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.UI.Behaviors"
+    xmlns:biliimage="using:BiliStart.UI.Controls"
+    xmlns:controls1="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:BiliStart.Styles.ItemsDataTemplate"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI"
+    Height="200"
     mc:Ignorable="d">
+    <UserControl.Resources />
+    <Grid
+        Margin="5"
+        Padding="10"
+        Background="{ThemeResource CardBackgroundFillColorDefault}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <biliimage:ImageLoad
+                HorizontalAlignment="Left"
+                Source="{x:Bind Data.CreateCover, Mode=OneWay}"
+                Stretch="UniformToFill" />
+            <controls1:DropShadowPanel
+                x:Name="dropshadow"
+                HorizontalAlignment="Left"
+                BlurRadius="12"
+                ShadowOpacity="0.7">
+                <biliimage:ImageLoad
+                    x:Name="mvimage"
+                    Width="160"
+                    Source="{x:Bind Data.MVCover, Mode=OneWay}"
+                    Stretch="UniformToFill" />
+            </controls1:DropShadowPanel>
 
-    <Grid Margin="15">
-        <TextBlock Text="{x:Bind ViewModel._Data.Title, Mode=OneWay}" />
+        </Grid>
+
+        <StackPanel
+            Grid.Column="1"
+            Margin="10,0,0,0">
+            <TextBlock
+                FontSize="28"
+                Text="{x:Bind Data.Title, Mode=OneWay}"
+                TextTrimming="CharacterEllipsis" />
+            <TextBlock
+                Margin="0,5,0,0"
+                FontSize="13"
+                Foreground="{ThemeResource SystemChromeGrayColor}"
+                Text="{x:Bind Data.CreateTitle, Mode=OneWay}"
+                TextTrimming="CharacterEllipsis"
+                TextWrapping="Wrap" />
+
+            <TextBlock
+                Margin="0,15,0,0"
+                Foreground="{ThemeResource SystemChromeGrayColor}"
+                Text="{x:Bind Data.Singer, Mode=OneWay}" />
+
+        </StackPanel>
+        <StackPanel
+            Grid.Column="1"
+            Margin="10,0,0,0"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <Border
+                Padding="5"
+                Background="{ThemeResource CardBackgroundFillColorDefault}"
+                CornerRadius="5">
+                <TextBlock Text="{x:Bind Data.CreateReason, Mode=OneWay}" />
+            </Border>
+            <TextBlock
+                Margin="15,0,0,0"
+                VerticalAlignment="Center"
+                Text="{x:Bind Data.CreateNickName, Mode=OneWay}" />
+        </StackPanel>
     </Grid>
 </UserControl>

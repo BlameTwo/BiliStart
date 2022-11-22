@@ -57,4 +57,5 @@ public sealed partial class MusicRankItemStyle : UserControl
     {
         (s as MusicRankItemStyle)!.ViewModel = new() { _Data = (MusicRankData)e.NewValue };
     }
+
 }
