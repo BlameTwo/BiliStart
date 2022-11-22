@@ -44,6 +44,13 @@
                 </NavigationViewItem.Content>
             </NavigationViewItem>
             <NavigationViewItem
+                x:Uid="AllMusic"
+                helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.MusicAllViewModel">
+                <NavigationViewItem.Icon>
+                    <ImageIcon Source="ms-appx:///Assets/music.png" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem
                 helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.WeekViewModel"
                 Tag="TopList">
                 <NavigationViewItem.Icon>
@@ -58,6 +65,7 @@
             <NavigationViewItem
                 x:Uid="TopMore_TidRank"
                 MenuItemsSource="{x:Bind ViewModel.TidData, Mode=OneWay}" />
+
         </NavigationView.MenuItems>
         <NavigationView.Content>
             <Frame

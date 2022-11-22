@@ -22,7 +22,7 @@
             ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}">
             <ui:AdaptiveGridView.ItemTemplate>
                 <DataTemplate>
-                    <dt:SearchMovieItem Data="{Binding}" />
+                    <dt:SearchMovie_AnimationItem Data="{Binding}" />
                 </DataTemplate>
             </ui:AdaptiveGridView.ItemTemplate>
         </ui:AdaptiveGridView>

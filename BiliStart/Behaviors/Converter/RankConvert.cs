@@ -18,7 +18,7 @@ namespace BiliStart.Behaviors.Converter
             long lTime = long.Parse(long.Parse(value.ToString()) + "0000000");
             TimeSpan toNow = new TimeSpan(lTime);
             DateTime targetDt = dtStart.Add(toNow);
-            return targetDt.ToString("G");
+            return targetDt.ToString(parameter.ToString());
         }
 
 

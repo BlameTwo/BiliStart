@@ -12,7 +12,17 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <Page Update="Styles\ItemsDataTemplate\SearchMovieItem.xaml">
+    <Page Update="Styles\ItemsDataTemplate\MusicRankItemStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\MusicAllPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Styles\ItemsDataTemplate\SearchMovie_AnimationItem.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

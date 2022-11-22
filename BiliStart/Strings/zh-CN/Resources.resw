@@ -251,4 +251,10 @@
   <data name="Search_Title.Text" xml:space="preserve">
     <value>搜索</value>
   </data>
+  <data name="AllMusic.Content" xml:space="preserve">
+    <value>全区音乐榜单</value>
+  </data>
+  <data name="MusicAll_Year.Text" xml:space="preserve">
+    <value>年份</value>
+  </data>
 </root>

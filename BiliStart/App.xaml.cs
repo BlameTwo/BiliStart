@@ -133,6 +133,9 @@ public partial class App : Application
 
             services.AddTransient<SearchMovie>();
             services.AddTransient<SearchMovieViewModel>();
+
+            services.AddTransient<MusicAllPage>();
+            services.AddTransient<MusicAllViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
