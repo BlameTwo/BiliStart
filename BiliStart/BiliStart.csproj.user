@@ -12,6 +12,16 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <Page Update="Styles\ShellNavigationViewItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\MustWatchPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Styles\ItemsDataTemplate\MusicRankItemStyle.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -116,6 +116,9 @@
                 TextWrapping="NoWrap" />
 
         </Grid>
+
+
+
         <NavigationView
             x:Name="NavigationViewControl"
             x:FieldModifier="public"
@@ -126,38 +129,27 @@
             ExpandedModeThresholdWidth="1280"
             IsBackButtonVisible="Visible"
             IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
-            IsSettingsVisible="True"
-            PaneDisplayMode="Auto"
-            SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}">
-            <NavigationView.AutoSuggestBox>
-                <AutoSuggestBox
-                    x:Name="searchbox"
-                    x:Uid="Shell_SearchBox"
-                    AutomationProperties.Name="Search"
-                    QueryIcon="Find">
-                    <i:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="QuerySubmitted">
-                            <core:InvokeCommandAction
-                                Command="{x:Bind ViewModel.SearchCommand}"
-                                CommandParameter="{x:Bind searchbox.Text, Mode=TwoWay}" />
-                        </core:EventTriggerBehavior>
-                    </i:Interaction.Behaviors>
-                </AutoSuggestBox>
-            </NavigationView.AutoSuggestBox>
+            IsSettingsVisible="False"
+            MenuItemContainerStyle="{ThemeResource MyNaviagtionViewItem}"
+            OpenPaneLength="90"
+            PaneDisplayMode="Left"
+            SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
+            SizeChanged="NavigationViewControl_SizeChanged">
             <NavigationView.MenuItems>
-                <NavigationViewItemHeader
-                    x:Uid="Shell_ItemHeader_Frist"
-                    FontSize="25" />
                 <NavigationViewItem
                     x:Uid="Shell_Home"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HomeViewModel">
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HomeViewModel"
+                    Style="{ThemeResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
-                        <SymbolIcon Symbol="Home" />
+                        <FontIcon
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xE80F;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem
                     x:Uid="Shell_Hot"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HotViewModel">
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HotViewModel"
+                    Style="{ThemeResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
@@ -175,10 +167,21 @@
                 </NavigationViewItem>
                 <NavigationViewItemHeader x:Uid="Shell_ItemHeader_Second" />
             </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem
+                    x:Uid="Shell_Setting"
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.SettingsViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xE713;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.FooterMenuItems>
             <NavigationView.PaneFooter>
                 <Button
                     x:Name="userbutton"
-                    HorizontalAlignment="Stretch"
+                    HorizontalAlignment="Center"
                     Command="{x:Bind ViewModel.UserClick}"
                     CommandParameter="{x:Bind Name}">
 
@@ -192,20 +195,46 @@
                             Width="25"
                             Height="25"
                             ProfilePicture="{x:Bind ViewModel._LoginData.Face_Image, Mode=OneWay}" />
-                        <StackPanel
-                            Grid.Column="1"
-                            Margin="10,0,0,0"
-                            VerticalAlignment="Center">
-                            <TextBlock
-                                VerticalAlignment="Center"
-                                Text="{x:Bind ViewModel._LoginData.Name, Mode=OneWay}" />
-                        </StackPanel>
+
                     </Grid>
                 </Button>
             </NavigationView.PaneFooter>
-
             <Grid x:Name="grid">
-                <Frame x:Name="NavigationFrame">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <AutoSuggestBox
+                        x:Name="searchbox"
+                        x:Uid="Shell_SearchBox"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Search"
+                        Canvas.ZIndex="5"
+                        QueryIcon="Find">
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="QuerySubmitted">
+                                <core:InvokeCommandAction
+                                    Command="{x:Bind ViewModel.SearchCommand}"
+                                    CommandParameter="{x:Bind searchbox.Text, Mode=TwoWay}" />
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </AutoSuggestBox>
+                    <Button
+                        Grid.Column="1"
+                        Margin="5,0,0,0">
+                        <SymbolIcon Symbol="Download" />
+                    </Button>
+                </Grid>
+                <Frame
+                    x:Name="NavigationFrame"
+                    Grid.Row="1"
+                    Margin="0,10,0,0">
                     <Frame.ContentTransitions>
                         <TransitionCollection>
                             <NavigationThemeTransition>

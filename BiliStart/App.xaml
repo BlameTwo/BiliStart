@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="/Styles/TextBlock.xaml" />
                 <ResourceDictionary Source="/Styles/Converter.xaml" />
                 <ResourceDictionary Source="/Styles/VideoGridViewItem.xaml" />
+                <ResourceDictionary Source="/Styles/ShellNavigationViewItem.xaml" />
                 <ResourceDictionary Source="/Styles/Animations.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

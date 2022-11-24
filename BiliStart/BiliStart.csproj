@@ -39,6 +39,7 @@
     <None Remove="Dialogs\LoginDialog.xaml" />
     <None Remove="MainPage.xaml" />
     <None Remove="Pages\MusicAllPage.xaml" />
+    <None Remove="Pages\MustWatchPage.xaml" />
     <None Remove="Pages\RankPage.xaml" />
     <None Remove="Pages\WeekPage.xaml" />
     <None Remove="Styles\Animations.xaml" />
@@ -52,6 +53,7 @@
     <None Remove="Styles\Search\SearchAnimation.xaml" />
     <None Remove="Styles\Search\SearchMovie.xaml" />
     <None Remove="Styles\Search\SearchVideo.xaml" />
+    <None Remove="Styles\ShellNavigationViewItem.xaml" />
     <None Remove="Styles\VideoGridViewItem.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\HotPage.xaml" />
@@ -89,6 +91,12 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\ShellNavigationViewItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Pages\MustWatchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\ItemsDataTemplate\MusicRankItemStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

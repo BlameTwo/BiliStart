@@ -31,7 +31,7 @@ public class PageService : IPageService
         Configure<RankViewModel, RankPage>();
         Configure<WeekViewModel, WeekPage>();
         Configure<MusicAllViewModel, MusicAllPage>();
-
+        Configure<MustWatchViewModel, MustWatchPage>();  
 
     }
 

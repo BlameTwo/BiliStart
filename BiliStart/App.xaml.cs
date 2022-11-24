@@ -136,6 +136,9 @@ public partial class App : Application
 
             services.AddTransient<MusicAllPage>();
             services.AddTransient<MusicAllViewModel>();
+
+            services.AddTransient<MustWatchPage>();
+            services.AddTransient<MustWatchViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
