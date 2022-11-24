@@ -33,9 +33,7 @@
                 IsSelected="True"
                 Tag="TopList">
                 <NavigationViewItem.Icon>
-                    <FontIcon
-                        FontFamily="{StaticResource SymbolThemeFontFamily}"
-                        Glyph="&#xE753;" />
+                    <ImageIcon Source="ms-appx:///Assets/icon_rank.png" />
                 </NavigationViewItem.Icon>
                 <NavigationViewItem.Content>
                     <TextBlock
@@ -54,7 +52,7 @@
                 helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.WeekViewModel"
                 Tag="TopList">
                 <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="Calendar" />
+                    <ImageIcon Source="ms-appx:///Assets/icon_everyweek.png" />
                 </NavigationViewItem.Icon>
                 <NavigationViewItem.Content>
                     <TextBlock
@@ -64,8 +62,11 @@
             </NavigationViewItem>
             <NavigationViewItem
                 x:Uid="TopMore_TidRank"
-                MenuItemsSource="{x:Bind ViewModel.TidData, Mode=OneWay}" />
-
+                MenuItemsSource="{x:Bind ViewModel.TidData, Mode=OneWay}">
+                <NavigationViewItem.Icon>
+                    <ImageIcon Source="ms-appx:///Assets/icon_rank.png" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
         </NavigationView.MenuItems>
         <NavigationView.Content>
             <Frame

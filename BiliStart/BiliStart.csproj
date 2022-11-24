@@ -29,6 +29,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\icon.ico" />
+    <None Remove="Assets\icon_everyweek.png" />
+    <None Remove="Assets\icon_hot.png" />
+    <None Remove="Assets\icon_rank.png" />
     <None Remove="Assets\img_holder.png" />
     <None Remove="Assets\music.png" />
     <None Remove="Assets\not.png" />
@@ -91,6 +94,15 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Update="Assets\icon_everyweek.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\icon_hot.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\icon_rank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Page Update="Styles\ShellNavigationViewItem.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

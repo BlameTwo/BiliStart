@@ -130,7 +130,6 @@
             IsBackButtonVisible="Visible"
             IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
             IsSettingsVisible="False"
-            MenuItemContainerStyle="{ThemeResource MyNaviagtionViewItem}"
             OpenPaneLength="90"
             PaneDisplayMode="Left"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
@@ -139,7 +138,7 @@
                 <NavigationViewItem
                     x:Uid="Shell_Home"
                     helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HomeViewModel"
-                    Style="{ThemeResource MyNaviagtionViewItem}">
+                    Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
@@ -149,7 +148,7 @@
                 <NavigationViewItem
                     x:Uid="Shell_Hot"
                     helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HotViewModel"
-                    Style="{ThemeResource MyNaviagtionViewItem}">
+                    Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
@@ -158,7 +157,8 @@
                 </NavigationViewItem>
                 <NavigationViewItem
                     x:Uid="Shell_Top"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.TopMoreViewModel">
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.TopMoreViewModel"
+                    Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
@@ -170,7 +170,8 @@
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem
                     x:Uid="Shell_Setting"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.SettingsViewModel">
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.SettingsViewModel"
+                    Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
