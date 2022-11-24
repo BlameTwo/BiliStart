@@ -2,6 +2,7 @@
 using BiliBiliAPI.Account;
 using BiliBiliAPI.Models.Account;
 using BiliBiliAPI.Models.Settings;
+using BiliBiliAPI.Search;
 using BiliStart.Contracts.Services;
 using BiliStart.Dialogs;
 using BiliStart.Event;
@@ -23,7 +24,7 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
 {
     private bool _isBackEnabled;
     private object? _selected;
-
+    private DefaultSearch DefaultSearch = new DefaultSearch();
     public INavigationService NavigationService
     {
         get;
@@ -93,6 +94,15 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
         UnLogin = new RelayCommand(()=>unlogin());
     }
 
+    private string PlaceholderTextSearch;
+
+    public string _PlaceholderTextSearch
+    {
+        get => PlaceholderTextSearch;
+        set => SetProperty(ref PlaceholderTextSearch, value);
+    }
+
+
     private void unlogin()
     {
         _LoginData = new AccountLoginResultData() { Name = "账号未登录", Face_Image = "https://i0.hdslb.com/bfs/face/member/noface.jpg@240w_240h_1c_1s.webp" };
@@ -119,7 +129,7 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
             _LoginData = result.Data;
             App.IsLogin = true;
         }
-        
+        await InitSearch();
     }
 
     async void _login()
@@ -131,8 +141,20 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
     [RelayCommand]
     public void Search(string key)
     {
-        if(!string.IsNullOrWhiteSpace(key))
-            NavigationService.NavigateTo(typeof(SearchViewModel).FullName!,key);
+        if (!string.IsNullOrWhiteSpace(key))
+            NavigationService.NavigateTo(typeof(SearchViewModel).FullName!, key);
+        else
+        {
+            if (!string.IsNullOrWhiteSpace(_PlaceholderTextSearch))
+            {
+                NavigationService.NavigateTo(typeof(SearchViewModel).FullName!, _PlaceholderTextSearch);
+            }
+        }
+    }
+
+    public async Task InitSearch()
+    {
+        _PlaceholderTextSearch = (await DefaultSearch.GetDefault()).Data.Title;
     }
 
     public AsyncRelayCommand UserClick

@@ -116,4 +116,9 @@ public sealed partial class ShellPage : Page
             NavigationViewControl.IsPaneToggleButtonVisible = false;
         }
     }
+
+    private async void NavigationFrame_Navigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
+    {
+        await ViewModel.InitSearch();
+    }
 }

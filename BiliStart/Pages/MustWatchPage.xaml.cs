@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using BiliStart.ViewModels.PageViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -25,8 +26,14 @@ namespace BiliStart.Pages;
 /// </summary>
 public sealed partial class MustWatchPage : Page
 {
+    public MustWatchViewModel ViewModel
+    {
+        get;
+    }
+
     public MustWatchPage()
     {
+        ViewModel = App.GetService<MustWatchViewModel>();   
         this.InitializeComponent();
     }
 }

@@ -71,7 +71,7 @@ public sealed partial class MainWindow : Window
         m_wsdqHelper.EnsureWindowsSystemDispatcherQueueController();
         SetBackdrop(BackdropType.DesktopAcrylic);
         Title = "AppDisplayName".GetLocalized();
-        manager.MinWidth = 650;
+        manager.MinWidth = 400;
         manager.MinHeight = 500;
         int build = Environment.OSVersion.Version.Build;
         if (build >= 22000 && build < 22621)

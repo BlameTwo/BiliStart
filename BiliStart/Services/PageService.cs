@@ -30,7 +30,9 @@ public class PageService : IPageService
         //排行榜导航页面
         Configure<RankViewModel, RankPage>();
         Configure<WeekViewModel, WeekPage>();
+
         Configure<MusicAllViewModel, MusicAllPage>();
+
         Configure<MustWatchViewModel, MustWatchPage>();  
 
     }

@@ -257,4 +257,10 @@
   <data name="MusicAll_Year.Text" xml:space="preserve">
     <value>年份</value>
   </data>
+  <data name="TopMore_MustWatch.Content" xml:space="preserve">
+    <value>入站必刷</value>
+  </data>
+  <data name="TopMore_MustWatch_TextBlock.Text" xml:space="preserve">
+    <value>入站必刷</value>
+  </data>
 </root>

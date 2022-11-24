@@ -1,17 +1,43 @@
-<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
-<!-- Licensed under the MIT License. See LICENSE in the project root for license information. -->
-
 <Page
     x:Class="BiliStart.Pages.MustWatchPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BiliStart.Pages"
+    xmlns:animations="using:CommunityToolkit.WinUI.UI.Animations"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dt="using:BiliStart.Styles.ItemsDataTemplate"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:local="using:BiliStart.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    mc:Ignorable="d">
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock
+            HorizontalAlignment="Left"
+            Style="{ThemeResource PageTitleStyle}"
+            Text="{x:Bind ViewModel.SubTitle, Mode=OneWay}" />
+        <controls:AdaptiveGridView
+            Grid.Row="1"
+            Margin="0,5,0,0"
+            animations:ItemsReorderAnimation.Duration="0:0:0.2"
+            DesiredWidth="250"
+            ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
+            ItemHeight="180"
+            ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}">
+            <controls:AdaptiveGridView.ItemTemplate>
+                <DataTemplate>
+                    <dt:MustWatchItemStyle Item="{Binding}" />
+                </DataTemplate>
+            </controls:AdaptiveGridView.ItemTemplate>
+        </controls:AdaptiveGridView>
     </Grid>
 </Page>

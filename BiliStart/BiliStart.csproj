@@ -30,6 +30,7 @@
   <ItemGroup>
     <None Remove="Assets\icon.ico" />
     <None Remove="Assets\icon_everyweek.png" />
+    <None Remove="Assets\icon_history.png" />
     <None Remove="Assets\icon_hot.png" />
     <None Remove="Assets\icon_rank.png" />
     <None Remove="Assets\img_holder.png" />
@@ -49,6 +50,7 @@
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\MusicRankItemStyle.xaml" />
+    <None Remove="Styles\ItemsDataTemplate\MustWatchItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\RankItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\SearchMovie_AnimationItem.xaml" />
     <None Remove="Styles\ItemsDataTemplate\SearchVideoItem.xaml" />
@@ -94,7 +96,13 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\ItemsDataTemplate\MustWatchItemStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Content Update="Assets\icon_everyweek.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\icon_history.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Assets\icon_hot.png">

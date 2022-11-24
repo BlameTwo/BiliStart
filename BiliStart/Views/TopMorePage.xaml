@@ -67,6 +67,14 @@
                     <ImageIcon Source="ms-appx:///Assets/icon_rank.png" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
+
+            <NavigationViewItem
+                x:Uid="TopMore_MustWatch"
+                helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.MustWatchViewModel">
+                <NavigationViewItem.Icon>
+                    <ImageIcon Source="ms-appx:///Assets/icon_history.png" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
         </NavigationView.MenuItems>
         <NavigationView.Content>
             <Frame
