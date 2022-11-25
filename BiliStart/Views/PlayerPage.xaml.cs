@@ -32,6 +32,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI;
 using WinRT;
 using Windows.Media.Playback;
+using System.Runtime.InteropServices;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -52,6 +53,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         ViewModel = App.GetService<PlayerViewModel>();
         this.InitializeComponent();
         Loaded += PlayerPage_Loaded;
+        IsFull = false;
     }
 
     protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -166,12 +168,50 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     {
         get;set;    
     }
-
+    bool IsFull;
+    object oldtitbar;
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
-        var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(hwnd));
-        appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
+        if (IsFull)
+        {
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+            var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(hwnd));
+            appWindow.SetPresenter(AppWindowPresenterKind.Default);
+            App.MainWindow.SetIsMaximizable(false);
+            App.MainWindow.ExtendsContentIntoTitleBar = true;
+            App.MainWindow.SetTitleBar(null);
+            Grid.SetRowSpan(media,1);
+            Grid.SetRow(media, 1);
+            IsFull = false;
+
+            App.MainWindow.SetTitleBar(TitleBar);
+        }
+        else
+        {
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+            var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(hwnd));
+            App.MainWindow.SetIsMaximizable(true);
+            appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
+            App.MainWindow.ExtendsContentIntoTitleBar = false;
+            App.MainWindow.SetTitleBar(null);
+            Grid.SetRowSpan(media, 3);
+            Grid.SetRow(media, 0);
+            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~SW_MINIMIZE);
+            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~SW_MAXIMIZE);
+            IsFull = true;
+        }
+        
     }
+
+    private const int GWL_STYLE = -16;
+    private const int WS_SYSMENU = 0x80000;
+    public const int SW_MINIMIZE = 0x00020000;
+    public const int SW_MAXIMIZE = 0x00010000;
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32", EntryPoint = "SetWindowLong")]
+    private static extern uint SetWindowLong(IntPtr hwnd, int nIndex, int NewLong);
 
 }

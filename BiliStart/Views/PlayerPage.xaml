@@ -15,8 +15,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*" />
             <RowDefinition Height="4.5*" />
-            <RowDefinition Height="4.5*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        <Grid x:Name="TitleBar">
+
+            <TextBlock Text="TitleBar" />
+        </Grid>
         <Button
             x:Uid="Player_GoHome"
             Grid.Row="1"
@@ -33,9 +37,10 @@
             Background="Transparent" />
         <Grid
             Grid.Row="1"
+            Margin="5"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Bottom"
-            Background="Transparent"
+            Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
             Canvas.ZIndex="2">
             <Button
                 x:Uid="Player_FullScreen"

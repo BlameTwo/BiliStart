@@ -10,6 +10,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:BiliStart.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d">
     <i:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
@@ -27,8 +28,10 @@
             Text="{x:Bind ViewModel.SubTitle, Mode=OneWay}" />
         <controls:AdaptiveGridView
             Grid.Row="1"
-            Margin="0,5,0,0"
+            Margin="0,10,0,0"
             animations:ItemsReorderAnimation.Duration="0:0:0.2"
+            ui:ScrollViewerExtensions.HorizontalScrollBarMargin="10 0 0 0"
+            ui:ScrollViewerExtensions.VerticalScrollBarMargin="10 0 0 0"
             DesiredWidth="250"
             ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
             ItemHeight="180"
