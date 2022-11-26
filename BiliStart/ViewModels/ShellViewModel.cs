@@ -1,6 +1,8 @@
-﻿using BiliBiliAPI;
+﻿using System.Collections.ObjectModel;
+using BiliBiliAPI;
 using BiliBiliAPI.Account;
 using BiliBiliAPI.Models.Account;
+using BiliBiliAPI.Models.Search;
 using BiliBiliAPI.Models.Settings;
 using BiliBiliAPI.Search;
 using BiliStart.Contracts.Services;
@@ -29,6 +31,9 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
     {
         get;
     }
+
+    SearchSquare SearchSquare = new();
+
 
 
 
@@ -92,7 +97,19 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
             }
         });
         UnLogin = new RelayCommand(()=>unlogin());
+
     }
+
+
+
+    private ObservableCollection<string> SearchItems;
+
+    public ObservableCollection<string> _SearchItems
+    {
+        get => SearchItems;
+        set => SetProperty(ref SearchItems, value);
+    }
+
 
     private string PlaceholderTextSearch;
 
@@ -130,6 +147,7 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
             App.IsLogin = true;
         }
         await InitSearch();
+
     }
 
     async void _login()
@@ -138,7 +156,26 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
         _LoginData = result.Data;
     }
 
-    [RelayCommand]
+
+
+    public async void UpDataList(string text)
+    {
+        var result = await SearchSquare.GetSearchSuggest(text);
+        _SearchItems.Clear();
+        if(result.Result != null &&  result.Result.Values != null)
+        {
+            foreach (var item in result.Result.Values)
+            {
+                _SearchItems.Add(item.Value.ToString());
+            }
+        }
+        else
+        {
+            await RefershSearchHotRank();
+        }
+    }
+
+
     public void Search(string key)
     {
         if (!string.IsNullOrWhiteSpace(key))
@@ -155,6 +192,18 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
     public async Task InitSearch()
     {
         _PlaceholderTextSearch = (await DefaultSearch.GetDefault()).Data.Title;
+        await RefershSearchHotRank();
+    }
+
+
+    public async Task RefershSearchHotRank()
+    {
+        var result = (await SearchSquare.GetSearchHotRank(10));
+        _SearchItems = new();
+        foreach (var item in result.Data.Trending.List)
+        {
+            _SearchItems.Add(item.ShowName);
+        }
     }
 
     public AsyncRelayCommand UserClick

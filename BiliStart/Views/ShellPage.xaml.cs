@@ -76,7 +76,7 @@ public sealed partial class ShellPage : Page
         }
     }
 
-   
+
 
     private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)
     {
@@ -120,5 +120,15 @@ public sealed partial class ShellPage : Page
     private async void NavigationFrame_Navigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
     {
         await ViewModel.InitSearch();
+    }
+
+    private void searchbox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        ViewModel.Search(args.QueryText);
+    }
+
+    private void searchbox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        ViewModel.UpDataList(sender.Text);
     }
 }

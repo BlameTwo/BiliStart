@@ -213,16 +213,11 @@
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Search"
                         Canvas.ZIndex="5"
+                        ItemsSource="{x:Bind ViewModel._SearchItems, Mode=OneWay}"
                         PlaceholderText="{x:Bind ViewModel._PlaceholderTextSearch, Mode=OneWay}"
-                        QueryIcon="Find">
-                        <i:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="QuerySubmitted">
-                                <core:InvokeCommandAction
-                                    Command="{x:Bind ViewModel.SearchCommand}"
-                                    CommandParameter="{x:Bind searchbox.Text, Mode=TwoWay}" />
-                            </core:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </AutoSuggestBox>
+                        QueryIcon="Find"
+                        QuerySubmitted="searchbox_QuerySubmitted"
+                        TextChanged="searchbox_TextChanged" />
                     <Button
                         Grid.Column="1"
                         Margin="5,0,0,0">
