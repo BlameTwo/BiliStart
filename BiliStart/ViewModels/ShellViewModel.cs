@@ -161,6 +161,7 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
     public async void UpDataList(string text)
     {
         var result = await SearchSquare.GetSearchSuggest(text);
+        if (result == null) return;
         _SearchItems.Clear();
         if(result.Result != null &&  result.Result.Values != null)
         {

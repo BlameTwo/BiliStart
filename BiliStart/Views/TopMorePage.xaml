@@ -26,11 +26,17 @@
         IsSettingsVisible="False"
         PaneDisplayMode="Top"
         SelectionChanged="{x:Bind ViewModel.NavigationControl_SelectionChanged}">
-
         <NavigationView.MenuItems>
             <NavigationViewItem
+                x:Uid="TopMore_Hot"
+                helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HotViewModel"
+                IsSelected="True">
+                <NavigationViewItem.Icon>
+                    <ImageIcon Source="ms-appx:///Assets/icon_hot.png" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem
                 helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.RankViewModel"
-                IsSelected="True"
                 Tag="TopList">
                 <NavigationViewItem.Icon>
                     <ImageIcon Source="ms-appx:///Assets/icon_rank.png" />
@@ -40,6 +46,14 @@
                         x:Uid="TopMore_TopList"
                         Margin="5,0,0,0" />
                 </NavigationViewItem.Content>
+
+            </NavigationViewItem>
+            <NavigationViewItem
+                x:Uid="TopMore_TidRank"
+                MenuItemsSource="{x:Bind ViewModel.TidData, Mode=OneWay}">
+                <NavigationViewItem.Icon>
+                    <ImageIcon Source="ms-appx:///Assets/icon_rank.png" />
+                </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem
                 x:Uid="AllMusic"
@@ -60,13 +74,7 @@
                         Margin="5,0,0,0" />
                 </NavigationViewItem.Content>
             </NavigationViewItem>
-            <NavigationViewItem
-                x:Uid="TopMore_TidRank"
-                MenuItemsSource="{x:Bind ViewModel.TidData, Mode=OneWay}">
-                <NavigationViewItem.Icon>
-                    <ImageIcon Source="ms-appx:///Assets/icon_rank.png" />
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
+
 
             <NavigationViewItem
                 x:Uid="TopMore_MustWatch"

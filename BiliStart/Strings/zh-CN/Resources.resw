@@ -194,7 +194,7 @@
   <data name="Shell_Setting_Language.Text" xml:space="preserve">
     <value>语言</value>
   </data>
-  <data name="Shell_Hot.Content" xml:space="preserve">
+  <data name="TopMore_Hot.Content" xml:space="preserve">
     <value>热门</value>
   </data>
   <data name="Player_FullScreen.Content" xml:space="preserve">
@@ -221,7 +221,7 @@
   <data name="Shell_Home_TextBlock.Text" xml:space="preserve">
     <value>首页</value>
   </data>
-  <data name="Shell_Hot_TextBlock.Text" xml:space="preserve">
+  <data name="TopMore_Hot_TextBlock.Text" xml:space="preserve">
     <value>热门</value>
   </data>
   <data name="Shell_Top_TextBlock.Text" xml:space="preserve">

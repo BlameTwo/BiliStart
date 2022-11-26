@@ -127,7 +127,7 @@ public sealed partial class ShellPage : Page
         ViewModel.Search(args.QueryText);
     }
 
-    private void searchbox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    private async  void searchbox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
         ViewModel.UpDataList(sender.Text);
     }

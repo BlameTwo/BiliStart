@@ -146,23 +146,13 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem
-                    x:Uid="Shell_Hot"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HotViewModel"
-                    Style="{StaticResource MyNaviagtionViewItem}">
-                    <NavigationViewItem.Icon>
-                        <FontIcon
-                            FontFamily="{StaticResource SymbolThemeFontFamily}"
-                            Glyph="&#xEC4A;" />
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem
-                    x:Uid="Shell_Top"
+                    x:Uid="TopMore_Hot"
                     helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.TopMoreViewModel"
                     Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
-                            Glyph="&#xE753;" />
+                            Glyph="&#xEC4A;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItemHeader x:Uid="Shell_ItemHeader_Second" />
