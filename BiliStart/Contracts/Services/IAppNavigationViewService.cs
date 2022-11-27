@@ -12,7 +12,7 @@ public interface IAppNavigationViewService
     void Initialize(NavigationView navigationView, AppNavigationViewsEnum ob);
 
 
-    void UnregisterEvents();
+    void UnregisterEvents(AppNavigationViewsEnum appNavigationViewsEnum);
 
     NavigationViewItem? GetSelectedItem(Type pageType);
 
