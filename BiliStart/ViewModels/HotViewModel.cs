@@ -30,9 +30,8 @@ namespace BiliStart.ViewModels
             var result = await _Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV);
             App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
             {
-                var navigationService = App.GetService<INavigationService>();
-                navigationService.RootNavigationTo(typeof(PlayerViewModel).FullName!, result);
-
+                var navigationService = App.GetService<IAppNavigationService>();
+                navigationService.NavigationTo(AppNavigationViewsEnum.RootFrame, typeof(PlayerViewModel).FullName!, result);
             });
         }
 

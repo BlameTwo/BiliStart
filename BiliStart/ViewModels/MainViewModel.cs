@@ -11,24 +11,18 @@ using Microsoft.UI.Xaml.Navigation;
 namespace BiliStart.ViewModels;
 public partial class MainViewModel : ObservableRecipient
 {
-    public MainViewModel(INavigationService navigationService, IHotNavigationService hotNavigationService,ITipShow tipShow)
+    public MainViewModel(IAppNavigationService appNavigationService,ITipShow tipShow)
     {
-        NavigationService = navigationService;
-        HotNavigationService = hotNavigationService;
+        AppNavigationService = appNavigationService;
         TipShow = tipShow;
-        NavigationService.Navigated += OnNavigated;
+
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e)
     {
     
     }
-    public INavigationService NavigationService
-    {
-        get;
-    }
-
-    public IHotNavigationService HotNavigationService
+    public IAppNavigationService AppNavigationService
     {
         get;
     }

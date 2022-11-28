@@ -37,8 +37,8 @@ public partial class HomeViewModel: ScrolViewModelBase
         App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
         {
             //注入导航
-            var navigationService = App.GetService<INavigationService>();
-            navigationService.RootNavigationTo(typeof(PlayerViewModel).FullName!, result);
+            var navigationService = App.GetService<IAppNavigationService>();
+            navigationService.NavigationTo( AppNavigationViewsEnum.RootFrame,typeof(PlayerViewModel).FullName!, result);
         });
     }
     async Task load()

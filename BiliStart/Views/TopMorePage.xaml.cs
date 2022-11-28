@@ -36,8 +36,8 @@ public sealed partial class TopMorePage : Page
     {
         ViewModel = App.GetService<TopMoreViewModel>();
         this.InitializeComponent();
-        ViewModel.navigationService.Frame = FrameControl;
-        ViewModel.navigationViewService.Initialize(NavigationControl);
-        ViewModel.navigationService.NavigateTo(typeof(HotViewModel).FullName!);
+        ViewModel.NavigationService.HotListFrame = FrameControl;
+        ViewModel.NavigationViewService.Initialize(NavigationControl, AppNavigationViewsEnum.HotListFrame);
+        ViewModel.NavigationService.NavigationTo(AppNavigationViewsEnum.HotListFrame,typeof(HotViewModel).FullName!);
     }
 }

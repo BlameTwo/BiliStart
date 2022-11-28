@@ -8,6 +8,7 @@ using BiliBiliAPI.Search;
 using BiliStart.Contracts.Services;
 using BiliStart.Dialogs;
 using BiliStart.Event;
+using BiliStart.Helpers;
 using BiliStart.Services;
 using BiliStart.Styles;
 using BiliStart.Views;
@@ -27,20 +28,24 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
     private bool _isBackEnabled;
     private object? _selected;
     private DefaultSearch DefaultSearch = new DefaultSearch();
-    public INavigationService NavigationService
-    {
-        get;
-    }
 
     SearchSquare SearchSquare = new();
 
-
-
-
-    public INavigationViewService NavigationViewService
+    public IAppNavigationService NavigationService
     {
         get;
     }
+    public IPageService PageService
+    {
+        get;
+    }
+    public IAppNavigationViewService NavigationViewService
+    {
+        get;
+    }
+
+
+
     public ITipShow TipShow
     {
         get;
@@ -65,7 +70,7 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
 
 
 
-    public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService,ITipShow tipShow )
+    public ShellViewModel(IAppNavigationService navigationService, IPageService pageService, IAppNavigationViewService navigationViewService,ITipShow tipShow )
     {
         IsActive = true;
         if(App.Token != null)
@@ -77,8 +82,11 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
             BiliBiliArgs.TokenSESSDATA = new AccountToken();
         }
         NavigationService = navigationService;
-        NavigationService.Navigated += OnNavigated;
+        PageService = pageService;
         NavigationViewService = navigationViewService;
+        NavigationService.ShellNavigated += OnNavigated;
+        NavigationViewService = navigationViewService;
+        NavigationService = navigationService;
         TipShow = tipShow;
         Loaded = new AsyncRelayCommand<Flyout>(async(arg)=> await load(arg!));
         UserClick = new AsyncRelayCommand(async () =>
@@ -180,12 +188,12 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
     public void Search(string key)
     {
         if (!string.IsNullOrWhiteSpace(key))
-            NavigationService.NavigateTo(typeof(SearchViewModel).FullName!, key);
+            NavigationService.NavigationTo( AppNavigationViewsEnum.ShellFrame,typeof(SearchViewModel).FullName!, key);
         else
         {
             if (!string.IsNullOrWhiteSpace(_PlaceholderTextSearch))
             {
-                NavigationService.NavigateTo(typeof(SearchViewModel).FullName!, _PlaceholderTextSearch);
+                NavigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(SearchViewModel).FullName!, _PlaceholderTextSearch);
             }
         }
     }
@@ -224,7 +232,7 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
 
     private void OnNavigated(object sender, NavigationEventArgs e)
     {
-        IsBackEnabled = NavigationService.CanGoBack;
+        IsBackEnabled = (bool)NavigationService.CanShellFrameBack;
 
         if (e.SourcePageType == typeof(SettingsPage))
         {
@@ -232,12 +240,14 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
             return;
         }
 
-        var selectedItem = NavigationViewService.GetSelectedItem(e.SourcePageType);
+        var selectedItem = NavigationViewService.GetSelectedItem( AppNavigationViewsEnum.ShellFrame,e.SourcePageType);
         if (selectedItem != null)
         {
             Selected = selectedItem;
         }
     }
+
+    
 
     public RelayCommand UnLogin
     {

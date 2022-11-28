@@ -39,7 +39,7 @@ public sealed partial class MainPage : Page
         this.ViewModel = App.GetService<MainViewModel>();
         this.InitializeComponent();
         ViewModel!.TipShow.TipControl = this.ToggleThemeTeachingTip2;
-        ViewModel!.NavigationService.RootFrame = RootFrame;
+        ViewModel!.AppNavigationService.RootFrame = RootFrame;
     }
 
 }

@@ -17,27 +17,12 @@ namespace BiliStart.Services
         private object? shellobj;
         private object? hotlistobj;
         private object? rootobj;
+
         public event NavigatedEventHandler? ShellNavigated;
         public event NavigatedEventHandler? HotListNavigated;
         public event NavigatedEventHandler? RootNavigated;
 
-        public Frame? ShellFrame
-        {
-            get
-            {
-                if(shellframe == null)
-                {
-                    RegisterFrameEvents(shellframe, AppNavigationViewsEnum.ShellFrame);
-                }
-                return shellframe;
-            }
-            set
-            {
-                UnRegisterFrameEvents(shellframe, AppNavigationViewsEnum.ShellFrame);
-                shellframe = value;
-                RegisterFrameEvents(shellframe, AppNavigationViewsEnum.ShellFrame);
-            }
-        }
+       
 
         public AppNavigationService(IPageService pageService)
         {
@@ -49,13 +34,13 @@ namespace BiliStart.Services
             switch (ob)
             {
                 case AppNavigationViewsEnum.HotListFrame:
-                    obj.Navigated -= HotListNavigated;
+                    obj.Navigated += HotListNavigated;
                     break;
                 case AppNavigationViewsEnum.RootFrame:
-                    obj.Navigated -= RootNavigated;
+                    obj.Navigated += RootNavigated;
                     break;
                 case AppNavigationViewsEnum.ShellFrame:
-                    obj.Navigated -= ShellNavigated;
+                    obj.Navigated += ShellNavigated;
                     break;
             }
         }
@@ -65,13 +50,13 @@ namespace BiliStart.Services
             switch (ob)
             {
                 case AppNavigationViewsEnum.HotListFrame:
-                    obj.Navigated += HotListNavigated;
+                    obj.Navigated -= HotListNavigated;
                     break;
                 case AppNavigationViewsEnum.RootFrame:
-                    obj.Navigated += RootNavigated;
+                    obj.Navigated -= RootNavigated;
                     break;
                 case AppNavigationViewsEnum.ShellFrame:
-                    obj.Navigated += ShellNavigated;
+                    obj.Navigated -= ShellNavigated;
                     break;
             }
         }
@@ -88,7 +73,7 @@ namespace BiliStart.Services
             }
             set
             {
-                UnRegisterFrameEvents(hotlistframe, AppNavigationViewsEnum.HotListFrame);
+                UnRegisterFrameEvents(value, AppNavigationViewsEnum.HotListFrame);
                 hotlistframe = value;
                 RegisterFrameEvents(hotlistframe, AppNavigationViewsEnum.HotListFrame);
             }
@@ -105,12 +90,28 @@ namespace BiliStart.Services
             }
             set
             {
-                UnRegisterFrameEvents(rootframe, AppNavigationViewsEnum.RootFrame);
+                UnRegisterFrameEvents(value, AppNavigationViewsEnum.RootFrame);
                 rootframe = value;
                 RegisterFrameEvents(rootframe, AppNavigationViewsEnum.RootFrame);
             }
         }
-
+        public Frame? ShellFrame
+        {
+            get
+            {
+                if (shellframe == null)
+                {
+                    RegisterFrameEvents(shellframe, AppNavigationViewsEnum.ShellFrame);
+                }
+                return shellframe;
+            }
+            set
+            {
+                UnRegisterFrameEvents(value, AppNavigationViewsEnum.ShellFrame);
+                shellframe = value;
+                RegisterFrameEvents(shellframe, AppNavigationViewsEnum.ShellFrame);
+            }
+        }
 
         public bool? CanShellFrameBack
         {
@@ -186,19 +187,20 @@ namespace BiliStart.Services
             return false;
         }
 
-        public void GoBack(AppNavigationViewsEnum ob)
+        public bool GoBack(AppNavigationViewsEnum ob)
         {
             switch (ob)
             {
                 case AppNavigationViewsEnum.HotListFrame:
                     CanBack(HotListFrame);
-                    break;
+                    return true;
                 case AppNavigationViewsEnum.RootFrame:
                     CanBack(RootFrame);
-                    break;
+                    return true;
                 case AppNavigationViewsEnum.ShellFrame:
                     CanBack(ShellFrame);
-                    break;
+                    return true;
+                    default: return false;
             }
         }
 

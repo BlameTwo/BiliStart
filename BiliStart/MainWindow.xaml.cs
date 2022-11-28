@@ -80,7 +80,7 @@ public sealed partial class MainWindow : Window
         }
         else if(build == 22621)
         {
-            SetBackdrop(BackdropType.MicaAlt);
+            SetBackdrop(BackdropType.Mica);
         }
         else if(build < 22000){
             SetBackdrop(BackdropType.DesktopAcrylic);

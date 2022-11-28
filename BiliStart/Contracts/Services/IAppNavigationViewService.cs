@@ -14,7 +14,7 @@ public interface IAppNavigationViewService
 
     void UnregisterEvents(AppNavigationViewsEnum appNavigationViewsEnum);
 
-    NavigationViewItem? GetSelectedItem(Type pageType);
+    NavigationViewItem? GetSelectedItem(AppNavigationViewsEnum appNavigationViewsEnum, Type pageType);
 
     object? SettingsItem
     {

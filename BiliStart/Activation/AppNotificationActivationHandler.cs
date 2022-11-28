@@ -10,10 +10,10 @@ namespace BiliStart.Activation;
 
 public class AppNotificationActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
 {
-    private readonly INavigationService _navigationService;
+    private readonly IAppNavigationService _navigationService;
     private readonly IAppNotificationService _notificationService;
 
-    public AppNotificationActivationHandler(INavigationService navigationService, IAppNotificationService notificationService)
+    public AppNotificationActivationHandler(IAppNavigationService navigationService, IAppNotificationService notificationService)
     {
         _navigationService = navigationService;
         _notificationService = notificationService;
@@ -34,19 +34,19 @@ public class AppNotificationActivationHandler : ActivationHandler<LaunchActivate
             case "Settings":
                 App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
                 {
-                    _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame,typeof(SettingsViewModel).FullName!);
                 });
                 break;
             case "primary":
                 App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
                 {
-                    _navigationService.NavigateTo(typeof(HomeViewModel).FullName!);
+                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(HomeViewModel).FullName!);
                 });
                 break;
             case "secondary":
                 App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
                 {
-                    _navigationService.NavigateTo(typeof(HotViewModel).FullName!);
+                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(HotViewModel).FullName!);
                 });
                 break;
         }

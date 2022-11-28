@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace BiliStart.Contracts.Services
 {
@@ -39,9 +40,16 @@ namespace BiliStart.Contracts.Services
             get;
         }
 
-        void GoBack(AppNavigationViewsEnum ob);
+
+        event NavigatedEventHandler ShellNavigated;
+        event NavigatedEventHandler RootNavigated;
+        event NavigatedEventHandler HotListNavigated;
+
+        bool GoBack(AppNavigationViewsEnum ob);
 
         bool NavigationTo(AppNavigationViewsEnum ob, string pageKey, object? parameter = null, bool clearNavigation = false);
+
+
     }
 
     public enum AppNavigationViewsEnum

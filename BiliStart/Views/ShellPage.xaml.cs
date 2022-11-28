@@ -29,9 +29,9 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = App.GetService<ShellViewModel>();
         InitializeComponent();
-        ViewModel.NavigationService.Frame = NavigationFrame;
+        ViewModel.NavigationService.ShellFrame = NavigationFrame;
         
-        ViewModel.NavigationViewService.Initialize(NavigationViewControl);
+        ViewModel.NavigationViewService.Initialize(NavigationViewControl, AppNavigationViewsEnum.ShellFrame);
         App.MainWindow.Activated += MainWindow_Activated;
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
@@ -95,9 +95,9 @@ public sealed partial class ShellPage : Page
 
     private static void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
-        var navigationService = App.GetService<INavigationService>();
+        var navigationService = App.GetService<IAppNavigationService>();
 
-        var result = navigationService.GoBack();
+        var result = navigationService.GoBack(AppNavigationViewsEnum.ShellFrame);
 
         args.Handled = result;
     }

@@ -21,11 +21,6 @@ public partial class TopMoreViewModel:ObservableRecipient
 {
     BiliBiliAPI.Region.TidRegion TidRegion = new();
 
-    public IHotNavigationService navigationService { get; }
-    public IHotNavigationViewService navigationViewService
-    {
-        get;
-    }
 
 
 
@@ -36,7 +31,7 @@ public partial class TopMoreViewModel:ObservableRecipient
             try
             {
                 int value = int.Parse(item.Tag.ToString()!);
-                navigationService.NavigateTo(typeof(RankViewModel).FullName!,value);
+               NavigationService.NavigationTo( AppNavigationViewsEnum.HotListFrame,typeof(RankViewModel).FullName!,value);
                 //分区导航
             }
             catch (Exception)
@@ -46,12 +41,12 @@ public partial class TopMoreViewModel:ObservableRecipient
         }
     }
 
-    public TopMoreViewModel(IHotNavigationService navigationService, IHotNavigationViewService navigationViewService)
+    public TopMoreViewModel(IAppNavigationService navigationService, IAppNavigationViewService navigationViewService)
     {
         IsActive = true;
-        this.navigationService = navigationService;
-        this.navigationViewService = navigationViewService;
         TidData = new ObservableCollection<NavigationViewItem>();
+        NavigationService = navigationService;
+        NavigationViewService = navigationViewService;
     }
 
     [RelayCommand]
@@ -78,5 +73,13 @@ public partial class TopMoreViewModel:ObservableRecipient
     {
         get => tiddata;
         set=>SetProperty(ref tiddata, value);   
+    }
+    public IAppNavigationService NavigationService
+    {
+        get;
+    }
+    public IAppNavigationViewService NavigationViewService
+    {
+        get;
     }
 }

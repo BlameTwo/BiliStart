@@ -23,8 +23,6 @@ using Microsoft.UI.Xaml;
 using Windows.ApplicationModel.Resources.Core;
 
 namespace BiliStart;
-
-// To learn more about WinUI 3, see https://docs.microsoft.com/windows/apps/winui/winui3/.
 public partial class App : Application
 {
     private ShellPage _shell;
@@ -60,24 +58,20 @@ public partial class App : Application
         UseContentRoot(AppContext.BaseDirectory).
         ConfigureServices((context, services) =>
         {
-            // Default Activation Handler
             services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
-            // Other Activation Handlers
             services.AddTransient<IActivationHandler, AppNotificationActivationHandler>();
 
-            // Services
             services.AddSingleton<IAppNotificationService, AppNotificationService>();
+
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
 
 
-            services.AddTransient<INavigationViewService, NavigationViewService>();
-            services.AddSingleton<INavigationService, NavigationService>();
+            //应用导航
+            services.AddSingleton<IAppNavigationService, AppNavigationService>();
+            services.AddTransient<IAppNavigationViewService, AppNavigationViewService>();
 
-
-            services.AddTransient<IHotNavigationViewService, HotNavigationViewService>();
-            services.AddSingleton<IHotNavigationService, HotNavigationService>();
 
             services.AddSingleton<IActivationService, ActivationService>();
 

@@ -39,7 +39,20 @@ namespace BiliStart.Services
             get;
         }
 
-        public NavigationViewItem? GetSelectedItem(Type pageType) => throw new NotImplementedException();
+        public NavigationViewItem? GetSelectedItem(AppNavigationViewsEnum appNavigationViewsEnum, Type pageType)
+        {
+            switch (appNavigationViewsEnum)
+            {
+                case AppNavigationViewsEnum.HotListFrame:
+                    return GetSelectedItem(hotview.MenuItems, pageType) ?? GetSelectedItem(hotview.MenuItems, pageType);
+                case AppNavigationViewsEnum.RootFrame:
+                    return GetSelectedItem(rootview.MenuItems, pageType) ?? GetSelectedItem(rootview.FooterMenuItems, pageType);
+                case AppNavigationViewsEnum.ShellFrame:
+                    return GetSelectedItem(shellview.MenuItems, pageType) ?? GetSelectedItem(shellview.FooterMenuItems, pageType);
+                default:
+                    return null;
+            }
+        }
 
         public void Initialize(NavigationView navigationView, AppNavigationViewsEnum ob)
         {
@@ -64,15 +77,40 @@ namespace BiliStart.Services
             
         }
 
+
+        private NavigationViewItem? GetSelectedItem(IEnumerable<object> menuItems, Type pageType)
+        {
+            foreach (var item in menuItems.OfType<NavigationViewItem>())
+            {
+                if (IsMenuItemForPageType(item, pageType))
+                {
+                    return item;
+                }
+
+                var selectedChild = GetSelectedItem(item.MenuItems, pageType);
+                if (selectedChild != null)
+                {
+                    return selectedChild;
+                }
+            }
+
+            return null;
+        }
+
+        private bool IsMenuItemForPageType(NavigationViewItem menuItem, Type sourcePageType)
+        {
+            if (menuItem.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
+            {
+                return PageService.GetPageType(pageKey) == sourcePageType;
+            }
+
+            return false;
+        }
+
         private void Hotview_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             AppNavigationService.GoBack(AppNavigationViewsEnum.HotListFrame);
         }
-        private void Hotview_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-        {
-            ItemInvoked(AppNavigationViewsEnum.HotListFrame,args);
-        }
-
         private void Hotview_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             ItemInvoked(AppNavigationViewsEnum.HotListFrame,args);
@@ -111,7 +149,7 @@ namespace BiliStart.Services
 
                 if (selectedItem?.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
                 {
-                    AppNavigationService.NavigationTo(viewenum, typeof(SettingsViewModel).FullName!);
+                    AppNavigationService.NavigationTo(viewenum, pageKey);
                 }
             }
         }

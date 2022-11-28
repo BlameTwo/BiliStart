@@ -17,18 +17,16 @@ namespace BiliStart.Notifications;
 
 public class AppNotificationService : IAppNotificationService
 {
-    private readonly INavigationService _navigationService;
-    private readonly IHotNavigationService _hotNavigationService;
+    private readonly IAppNavigationService _navigationService;
 
     public ITipShow TipShow
     {
         get;
     }
 
-    public AppNotificationService(INavigationService navigationService,IHotNavigationService hotNavigationService,ITipShow tipShow)
+    public AppNotificationService(IAppNavigationService navigationService,ITipShow tipShow)
     {
         _navigationService = navigationService;
-        _hotNavigationService = hotNavigationService;
         TipShow = tipShow;
         ContentDialog contentDialog = new ContentDialog();
             
@@ -54,19 +52,19 @@ public class AppNotificationService : IAppNotificationService
             case "Settings":
                 App.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+                    _navigationService.NavigationTo( AppNavigationViewsEnum.ShellFrame,typeof(SettingsViewModel).FullName!);
                 });
                 break;
             case "primary":
                 App.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    _navigationService.NavigateTo(typeof(HomeViewModel).FullName!);
+                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(HomeViewModel).FullName!);
                 });
                 break;
             case "secondary":
                 App.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    _navigationService.NavigateTo(typeof(HotViewModel).FullName!);
+                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(HotViewModel).FullName!);
                 });
                 break;
         }
