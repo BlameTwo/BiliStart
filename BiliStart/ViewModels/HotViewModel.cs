@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using BiliBiliAPI.Models.HomeVideo;
 using BiliStart.Contracts.Services;
+using BiliStart.Services;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Dispatching;
 
@@ -9,11 +10,12 @@ namespace BiliStart.ViewModels
     public partial class HotViewModel:ScrolViewModelBase
     {
         private BiliBiliAPI.Video.Video _Video = new();
-        public HotViewModel()
+        public HotViewModel(IGoVideo goVideo)
         {
             _Item = new ObservableCollection<BiliBiliAPI.Models.HomeVideo.Item>();
             AddData = new AsyncRelayCommand(async () => await addata());
             GoVideo = new AsyncRelayCommand<BiliBiliAPI.Models.HomeVideo.Item>(async (arg) => await govideo(arg!));
+            GoVideo1 = goVideo;
         }
 
         async Task govideo(Item arg)
@@ -25,12 +27,8 @@ namespace BiliStart.ViewModels
             };
             var result = (await _Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV)).Data;
             arg2.Content = result;
-            App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
-            {
-                var navigationService = App.GetService<IAppNavigationService>();
-
-                navigationService.NavigationTo(AppNavigationViewsEnum.RootFrame, typeof(PlayerViewModel).FullName!, arg2);
-            });
+            GoVideo1.PlayerArgs = arg2;
+            GoVideo1.Go();
         }
 
         private async Task addata()
@@ -64,7 +62,9 @@ namespace BiliStart.ViewModels
             get => Item;
             set => SetProperty(ref Item, value);
         }
-
-
+        public IGoVideo GoVideo1
+        {
+            get;
+        }
     }
 }

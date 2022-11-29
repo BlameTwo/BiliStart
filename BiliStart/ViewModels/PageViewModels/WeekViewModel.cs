@@ -1,18 +1,23 @@
 ﻿using System.Collections.ObjectModel;
 using BiliBiliAPI.Models;
 using BiliBiliAPI.Models.TopList;
+using BiliStart.Contracts.Services;
+using BiliStart.Services;
+using BiliStart.ViewModels.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Xaml.Controls;
 
 namespace BiliStart.ViewModels.PageViewModels;
 public partial class WeekViewModel:ObservableRecipient
 {
     BiliBiliAPI.TopLists.EveryoneWeek Week = new();
 
-    public WeekViewModel()
+    public WeekViewModel(IGoVideo goVideo)
     {
         IsActive= true;
         Loaded = new RelayCommand(loaded);
+        GoVideo = goVideo;
     }
 
     private async void loaded()
@@ -29,12 +34,33 @@ public partial class WeekViewModel:ObservableRecipient
         get;set;    
     }
 
+    
+
     private string title;
     public string Title
     {
         get => title;
         set=>SetProperty(ref title, value);
     }
+
+    BiliBiliAPI.Video.Video Video = new();
+
+    public async void AdaptiveGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.AddedItems.Count>0)
+        {
+            var value = e.AddedItems[0] as BiliBiliAPI.Models.TopList.WeekItemData;
+            var arg = new PlayerArgs()
+            {
+                Aid = long.Parse(value.Aid),
+                Bvid = value.Bvid,
+                Content = ((await Video.GetVideosContent(value.Aid, BiliBiliAPI.Models.VideoIDType.AV)).Data)
+            };
+            GoVideo.PlayerArgs = arg;
+            GoVideo.Go();
+        }
+    }
+
 
     private ObservableCollection<EveryoneWeekData> WeekHeaderItem;
 
@@ -67,5 +93,9 @@ public partial class WeekViewModel:ObservableRecipient
     public RelayCommand Loaded
     {
         get;private set;
+    }
+    public IGoVideo GoVideo
+    {
+        get;
     }
 }

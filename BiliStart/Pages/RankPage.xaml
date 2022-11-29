@@ -54,6 +54,7 @@
             ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
             ItemHeight="180"
             ItemTemplate="{ThemeResource DefaultVideo}"
-            ItemsSource="{x:Bind ViewModel._Items, Mode=OneWay}" />
+            ItemsSource="{x:Bind ViewModel._Items, Mode=OneWay}"
+            SelectionChanged="{x:Bind ViewModel.AdaptiveGridView_SelectionChanged}" />
     </Grid>
 </Page>

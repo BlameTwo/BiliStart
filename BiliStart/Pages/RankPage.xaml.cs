@@ -54,5 +54,5 @@ public sealed partial class RankPage : Page
             await ViewModel.Loaded();
         }
     }
-   
+
 }

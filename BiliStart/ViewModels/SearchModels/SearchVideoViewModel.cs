@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using BiliStart.Contracts.Services;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Dispatching;
 
 namespace BiliStart.ViewModels.SearchModels;
 
@@ -52,6 +54,28 @@ public partial class SearchVideoViewModel:SearchViewModelBase
     {
         get => Items;
         set => SetProperty(ref Items,value);
+    }
+
+
+    BiliBiliAPI.Video.Video Video = new();
+
+
+    [RelayCommand]
+    public async Task GoVideo(BiliBiliAPI.Models.Search.Item item)
+    {
+        BiliStart.ViewModels.Models.PlayerArgs arg2 = new BiliStart.ViewModels.Models.PlayerArgs()
+        {
+            Aid = long.Parse(item.LinkParam),
+            Type = Models.GoToType.Video
+        };
+        var result = (await Video.GetVideosContent(item.LinkParam, BiliBiliAPI.Models.VideoIDType.AV)).Data;
+        arg2.Content = result;
+        App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+        {
+            //注入导航
+            var navigationService = App.GetService<IAppNavigationService>();
+            navigationService.NavigationTo(AppNavigationViewsEnum.RootFrame, typeof(PlayerViewModel).FullName!, arg2);
+        });
     }
 
 }

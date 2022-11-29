@@ -10,13 +10,14 @@ public partial class HomeViewModel: ScrolViewModelBase
 {
     BiliBiliAPI.Video.Video Video = new ();
 
-    public HomeViewModel()
+    public HomeViewModel(IGoVideo goVideo)
     {
         IsActive = true;
         _Data = new ObservableCollection<Item>();
         AddData = new AsyncRelayCommand(async() => await adddata());
         Loaded = new AsyncRelayCommand(async () => await load());
         GoVideo = new AsyncRelayCommand<Item>(async (arg) => await govideo(arg!));
+        GoVideo1 = goVideo;
     }
     async Task govideo(Item arg)
     {
@@ -27,12 +28,8 @@ public partial class HomeViewModel: ScrolViewModelBase
         };
         var result = (await Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV)).Data;
         arg2.Content = result;
-        App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
-        {
-            //注入导航
-            var navigationService = App.GetService<IAppNavigationService>();
-            navigationService.NavigationTo( AppNavigationViewsEnum.RootFrame,typeof(PlayerViewModel).FullName!,arg2);
-        });
+        GoVideo1.PlayerArgs = arg2;
+        GoVideo1.Go();
     }
     async Task load()
     {
@@ -80,5 +77,8 @@ public partial class HomeViewModel: ScrolViewModelBase
     {
         get;private set;
     }
-
+    public IGoVideo GoVideo1
+    {
+        get;
+    }
 }

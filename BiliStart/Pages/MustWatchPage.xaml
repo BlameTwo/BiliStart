@@ -35,7 +35,8 @@
             DesiredWidth="250"
             ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
             ItemHeight="180"
-            ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}">
+            ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
+            SelectionChanged="{x:Bind ViewModel.SelectionChanged}">
             <controls:AdaptiveGridView.ItemTemplate>
                 <DataTemplate>
                     <dt:MustWatchItemStyle Item="{Binding}" />

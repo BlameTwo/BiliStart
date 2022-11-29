@@ -18,6 +18,7 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 using BiliBiliAPI.Models.HomeVideo;
 using System.Collections.ObjectModel;
 using Windows.Media.Core;
+using FFmpegInteropX;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -109,10 +110,13 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 
 
 
+
     public async void Support_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         // https://www.microsoft.com/en-us/p/hevc-video-extensions-from-device-manufacturer/9n4wgh0z6vhq
-        // HEVC插件位置
+        // HEVC解码器位置
+        //https://apps.microsoft.com/store/detail/av1-video-extension/9MVZQVXJBQ9V?hl=zh-cn&gl=cn
+        //AV1解码器位置
         if (e.AddedItems[0] != null)
         {
             Support_Formats value = e.AddedItems[0] as Support_Formats;
@@ -120,11 +124,20 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             {
                 if (item.ID == value!.Quality)
                 {
-                    if (item.Codecs.StartsWith("h"))
+                    // hev 和 avc
+                    if (item.Codecs.StartsWith("hev"))
                     {
                         Source = await PlayerHelper.CreateMediaSourceAsync(item, ViewModel.VI.Dash.DashAudio[0]);
                         NowMediaPlayer.SetMediaSource(Source.AdaptiveMediaSource);
                         break;
+
+                        //ToDo:等待官方回复关于MediaSourceConfig的初始化错误
+                        //MediaSourceConfig Config = new MediaSourceConfig();
+                        //Config.FFmpegOptions.Add("referer", "https://www.bilibili.com");
+                        //Config.FFmpegOptions.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36");
+                        //var value2 = await FFmpegInteropX.FFmpegMediaSource.CreateFromUriAsync(item.BaseUrl, Config) ;
+                        //var mediaSource = value2.CreateMediaPlaybackItem();
+                        //NowMediaPlayer.Source = mediaSource;
                     }
                 }
             }

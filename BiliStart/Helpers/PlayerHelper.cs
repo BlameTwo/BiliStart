@@ -1,6 +1,9 @@
 ﻿using System.Text;
+using FFmpegInteropX;
+using Windows.Media;
 using Windows.Media.Core;
 using Windows.Media.Streaming.Adaptive;
+using Windows.Storage.Streams;
 
 namespace BiliStart.Helpers;
 public static class PlayerHelper
@@ -58,10 +61,5 @@ public static class PlayerHelper
 
     }
 
-
-    public static async Task<MediaSource> CreateFFmpegMediaSourceAsync(BiliBiliAPI.Models.Videos.DashVideo Video, BiliBiliAPI.Models.Videos.DashVideo Audio)
-    {
-        return null;
-    }
 
 }

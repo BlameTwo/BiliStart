@@ -1,18 +1,24 @@
 ﻿using System.Collections.ObjectModel;
+using BiliBiliAPI.Models.TopList;
 using BiliBiliAPI.TopVideos;
 using BiliStart.Contracts.Services;
+using BiliStart.ViewModels.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
 namespace BiliStart.ViewModels.PageViewModels;
 public partial class RankViewModel : ObservableRecipient
 {
     TopListVideo Video = new TopListVideo();
-    public RankViewModel(ITipShow tipshow)
+    public RankViewModel(ITipShow tipshow,IGoVideo goVideo)
     {
         _NullPopup =  Visibility.Collapsed;
         Tipshow = tipshow;
+        GoVideo = goVideo;
     }
+
+    BiliBiliAPI.Video.Video VContent = new();
 
     public async Task Loaded()
     {
@@ -21,8 +27,23 @@ public partial class RankViewModel : ObservableRecipient
         Tipshow.SendMessage(null, result.Data.Note);
         Title = "排行榜";
         _NullPopup = Visibility.Collapsed;
+        
     }
 
+
+
+    public async void AdaptiveGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var value = e.AddedItems[0] as BiliBiliAPI.Models.TopList.TopVideo;
+        var arg = new PlayerArgs()
+        {
+            Aid = long.Parse(value.Aid),
+            Bvid = value.Bvid
+            , Content = ((await VContent.GetVideosContent(value.Aid, BiliBiliAPI.Models.VideoIDType.AV)).Data)
+        };
+        GoVideo.PlayerArgs = arg;
+        GoVideo.Go();
+    }
 
     private ObservableCollection<BiliBiliAPI.Models.TopList.TopVideo> Items;
 
@@ -32,6 +53,10 @@ public partial class RankViewModel : ObservableRecipient
         set => SetProperty(ref Items, value);
     }
     public ITipShow Tipshow
+    {
+        get;
+    }
+    public IGoVideo GoVideo
     {
         get;
     }
@@ -81,4 +106,6 @@ public partial class RankViewModel : ObservableRecipient
         }
         
     }
+
+
 }

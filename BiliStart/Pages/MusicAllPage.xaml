@@ -60,7 +60,8 @@
             animations:ItemsReorderAnimation.Duration="0:0:0.2"
             DesiredWidth="500"
             ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
-            ItemsSource="{x:Bind ViewModel._Musics, Mode=OneWay}">
+            ItemsSource="{x:Bind ViewModel._Musics, Mode=OneWay}"
+            SelectionChanged="{x:Bind ViewModel.SelectionChanged}">
             <control:AdaptiveGridView.ItemTemplate>
                 <DataTemplate>
                     <dt:MusicRankItemStyle Data="{Binding}" />

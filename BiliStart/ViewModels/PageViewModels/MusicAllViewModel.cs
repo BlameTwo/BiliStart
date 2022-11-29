@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using BiliBiliAPI.Models.HomeVideo;
 using BiliBiliAPI.Models.TopList;
+using BiliStart.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
@@ -8,14 +10,17 @@ namespace BiliStart.ViewModels.PageViewModels;
 public partial class MusicAllViewModel:ObservableRecipient
 {
     BiliBiliAPI.TopLists.MusicRank Rank = new();
-    
-    public MusicAllViewModel()
+    BiliBiliAPI.Video.Video Video = new();
+    public MusicAllViewModel(IGoVideo goVideo)
     {
         Year = new();
         _Musics = new();
+        GoVideo = goVideo;
     }
 
     MusicRankList Source = new();
+
+
 
     [RelayCommand]
     public async void Loaded()
@@ -27,6 +32,23 @@ public partial class MusicAllViewModel:ObservableRecipient
             Year.Add(int.Parse(item.Year));
         }
     }
+
+    public async void SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.AddedItems.Count > 0)
+        {
+            var data = (MusicRankData)e.AddedItems[0];
+            BiliStart.ViewModels.Models.PlayerArgs arg = new()
+            {
+                Aid = long.Parse(data.CreateAid ?? data.MVBvid),
+                Bvid = data.CreateBvid??data.MVBvid,
+                Content = (await Video.GetVideosContent(data.CreateAid??data.MVAid, BiliBiliAPI.Models.VideoIDType.AV)).Data
+            };
+            GoVideo.PlayerArgs = arg;
+            GoVideo.Go();
+        }
+    }
+
     private ObservableCollection<MusicRankListItem> musicRank;
     public ObservableCollection<MusicRankListItem> MusicRank
     {
@@ -76,7 +98,8 @@ public partial class MusicAllViewModel:ObservableRecipient
         get => year;
         set=>SetProperty(ref year, value);
     }
-
-
-
+    public IGoVideo GoVideo
+    {
+        get;
+    }
 }
