@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BiliStart.Contracts.Services;
+﻿using BiliStart.Contracts.Services;
 using BiliStart.Contracts.ViewModels;
 using BiliStart.Helpers;
 using Microsoft.UI.Xaml.Controls;

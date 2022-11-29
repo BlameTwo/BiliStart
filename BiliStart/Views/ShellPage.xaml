@@ -114,7 +114,6 @@
                 VerticalAlignment="Center"
                 Style="{StaticResource CaptionTextBlockStyle}"
                 TextWrapping="NoWrap" />
-
         </Grid>
 
 

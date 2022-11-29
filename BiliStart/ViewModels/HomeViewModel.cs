@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Collections.ObjectModel;
 using BiliBiliAPI.Models.HomeVideo;
 using BiliStart.Contracts.Services;
-using BiliStart.Services;
-using BiliStart.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Windows.UI.WebUI;
 
 namespace BiliStart.ViewModels;
 
@@ -32,13 +20,18 @@ public partial class HomeViewModel: ScrolViewModelBase
     }
     async Task govideo(Item arg)
     {
-        var result = await Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV);
-        // Queue navigation with low priority to allow the UI to initialize.
+        BiliStart.ViewModels.Models.PlayerArgs arg2 = new BiliStart.ViewModels.Models.PlayerArgs()
+        {
+            Aid = long.Parse(arg.PlayArg.Aid),
+            Type = Models.GoToType.Video
+        };
+        var result = (await Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV)).Data;
+        arg2.Content = result;
         App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
         {
             //注入导航
             var navigationService = App.GetService<IAppNavigationService>();
-            navigationService.NavigationTo( AppNavigationViewsEnum.RootFrame,typeof(PlayerViewModel).FullName!, result);
+            navigationService.NavigationTo( AppNavigationViewsEnum.RootFrame,typeof(PlayerViewModel).FullName!,arg2);
         });
     }
     async Task load()

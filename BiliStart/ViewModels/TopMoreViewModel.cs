@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BiliBiliAPI.Models.Region;
+﻿using System.Collections.ObjectModel;
 using BiliStart.Contracts.Services;
-using BiliStart.Services;
 using BiliStart.ViewModels.PageViewModels;
-using BiliStart.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Microsoft.UI.Xaml.Navigation;
 
 namespace BiliStart.ViewModels;
 public partial class TopMoreViewModel:ObservableRecipient

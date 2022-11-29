@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-using BiliBiliAPI.Models.HomeVideo;
-using BiliBiliAPI.Models.Search;
-using BiliBiliAPI.Search;
+﻿using System.Collections.ObjectModel;
 using BiliStart.Contracts.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BiliStart.ViewModels.SearchModels;
 

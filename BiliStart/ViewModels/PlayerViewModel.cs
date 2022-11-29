@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BiliBiliAPI.Models.Videos;
+﻿using BiliBiliAPI.Models.Videos;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 
@@ -15,7 +12,61 @@ public partial class PlayerViewModel:ObservableRecipient
     public PlayerViewModel()
     {
         _FullButtonText = "\uE740";
+
+        Timer.Tick += Timer_Tick;
+        Timer.Start();
     }
+
+    private void Timer_Tick(object? sender, object e)
+    {
+        App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+        {
+            SliderValue = NowMediaPlayer.PlaybackSession.Position.TotalMilliseconds;
+        });
+
+    }
+
+
+    private VideoInfo VideoInfo;
+
+    public VideoInfo _VIdeoInfo
+    {
+        get => VideoInfo;
+        set => SetProperty(ref VideoInfo, value);
+    }
+
+
+
+
+    private double _MaxValue;
+
+    public double MaxValue
+    {
+        get => _MaxValue;
+        set=>SetProperty(ref _MaxValue, value);
+    }
+
+    public void MediaClear()
+    {
+        NowMediaPlayer.Pause();
+        Timer.Stop();
+        Timer.Tick-= Timer_Tick;
+        Source = null;
+        NowMediaPlayer.Dispose();
+        NowMediaPlayer = null;
+        
+    }
+
+    private double _SliderValue;
+
+    public double SliderValue
+    {
+        get => _SliderValue;
+        set => SetProperty(ref _SliderValue, value);
+    }
+
+
+    DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
 
     public MediaPlayer NowMediaPlayer;
 

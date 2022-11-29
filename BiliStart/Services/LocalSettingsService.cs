@@ -5,8 +5,6 @@ using BiliStart.Helpers;
 using BiliStart.Models;
 
 using Microsoft.Extensions.Options;
-
-using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace BiliStart.Services;

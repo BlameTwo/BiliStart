@@ -263,4 +263,13 @@
   <data name="TopMore_MustWatch_TextBlock.Text" xml:space="preserve">
     <value>入站必刷</value>
   </data>
+  <data name="AppName.Text" xml:space="preserve">
+    <value>BiliStart</value>
+  </data>
+  <data name="Player_Quality.Text" xml:space="preserve">
+    <value>清晰度</value>
+  </data>
+  <data name="Player_Speed.Text" xml:space="preserve">
+    <value>播放速度</value>
+  </data>
 </root>

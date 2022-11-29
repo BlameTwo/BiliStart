@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BiliBiliAPI.Models.Videos;
+﻿using BiliBiliAPI.Models.Videos;
 
 namespace BiliStart.ViewModels.Models;
-public struct PlayerArgs
+public class PlayerArgs
 {
     public VideosContent Content
     {
@@ -32,5 +27,5 @@ public struct PlayerArgs
 
 public enum GoToType
 {
-    Home,User
+    Video,Animation,Movie,
 }

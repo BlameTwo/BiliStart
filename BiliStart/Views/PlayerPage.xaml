@@ -5,12 +5,8 @@
     x:Class="BiliStart.Views.PlayerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:brushes="using:CommunityToolkit.WinUI.UI.Media"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:BiliStart.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:media="using:CommunityToolkit.WinUI.UI.Controls"
-    xmlns:winex="using:WinUIEx"
     mc:Ignorable="d">
 
     <Grid x:Name="grid">
@@ -19,8 +15,13 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+
         <Grid x:Name="TitleBar">
-            <TextBlock Text="TitleBar" />
+            <TextBlock
+                x:Name="TitleBarText"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}" />
         </Grid>
         <Button
             x:Uid="Player_GoHome"
@@ -52,16 +53,68 @@
                 HorizontalAlignment="Stretch"
                 Canvas.ZIndex="2">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="2">
+                <Grid Grid.Column="0">
                     <Button
-                        HorizontalAlignment="Right"
-                        Click="Button_Click"
-                        Content="{x:Bind ViewModel._FullButtonText, Mode=OneWay}"
-                        FontFamily="Segoe MDL2 Assets" />
+                        Click="Button_Click_1"
+                        Content="Start/Pause" />
+                </Grid>
+                <Slider
+                    x:Name="process"
+                    Grid.Column="1"
+                    Margin="10,0"
+                    Maximum="{x:Bind ViewModel.MaxValue, Mode=TwoWay}"
+                    Value="{x:Bind ViewModel.SliderValue, Mode=TwoWay}" />
+                <Grid Grid.Column="2">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="¸ü¶àÉèÖÃ">
+                            <Button.Flyout>
+                                <Flyout>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="7*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            x:Uid="Player_Quality"
+                                            VerticalAlignment="Center" />
+                                        <ComboBox
+                                            Grid.Column="1"
+                                            Width="100"
+                                            Margin="5,0,0,0" />
+                                        <TextBlock
+                                            x:Uid="Player_Speed"
+                                            Grid.Row="1"
+                                            VerticalAlignment="Center" />
+                                        <ComboBox
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Width="100"
+                                            Margin="5,0,0,0">
+                                            <ComboBoxItem Content="0.5" />
+                                            <ComboBoxItem Content="1" />
+                                            <ComboBoxItem Content="1.5" />
+                                            <ComboBoxItem Content="2" />
+                                        </ComboBox>
+                                    </Grid>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                        <Button
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Right"
+                            Click="Button_Click"
+                            Content="{x:Bind ViewModel._FullButtonText, Mode=OneWay}"
+                            FontFamily="Segoe MDL2 Assets" />
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Border>

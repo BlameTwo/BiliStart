@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using BiliBiliAPI.Models.HomeVideo;
-using BiliBiliAPI.Video;
 using BiliStart.Contracts.Services;
-using BiliStart.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml.Controls;
 
 namespace BiliStart.ViewModels
 {
@@ -27,11 +18,18 @@ namespace BiliStart.ViewModels
 
         async Task govideo(Item arg)
         {
-            var result = await _Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV);
+            BiliStart.ViewModels.Models.PlayerArgs arg2 = new BiliStart.ViewModels.Models.PlayerArgs()
+            {
+                Aid = long.Parse(arg.PlayArg.Aid),
+                Type = Models.GoToType.Video
+            };
+            var result = (await _Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV)).Data;
+            arg2.Content = result;
             App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
             {
                 var navigationService = App.GetService<IAppNavigationService>();
-                navigationService.NavigationTo(AppNavigationViewsEnum.RootFrame, typeof(PlayerViewModel).FullName!, result);
+
+                navigationService.NavigationTo(AppNavigationViewsEnum.RootFrame, typeof(PlayerViewModel).FullName!, arg2);
             });
         }
 
