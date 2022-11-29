@@ -1,8 +1,13 @@
-﻿using BiliBiliAPI.Models.Videos;
+﻿using System.Collections.ObjectModel;
+using BiliBiliAPI.Models;
+using BiliBiliAPI.Models.Videos;
+using BiliStart.Helpers;
+using BiliStart.ViewModels.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 
@@ -13,18 +18,14 @@ public partial class PlayerViewModel:ObservableRecipient
     {
         _FullButtonText = "\uE740";
 
-        Timer.Tick += Timer_Tick;
-        Timer.Start();
     }
 
-    private void Timer_Tick(object? sender, object e)
+    public PlayerArgs Args
     {
-        App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
-        {
-            SliderValue = NowMediaPlayer.PlaybackSession.Position.TotalMilliseconds;
-        });
-
+        get;set;    
     }
+
+    
 
 
     private VideoInfo VideoInfo;
@@ -46,16 +47,7 @@ public partial class PlayerViewModel:ObservableRecipient
         set=>SetProperty(ref _MaxValue, value);
     }
 
-    public void MediaClear()
-    {
-        NowMediaPlayer.Pause();
-        Timer.Stop();
-        Timer.Tick-= Timer_Tick;
-        Source = null;
-        NowMediaPlayer.Dispose();
-        NowMediaPlayer = null;
-        
-    }
+    
 
     private double _SliderValue;
 
@@ -66,11 +58,7 @@ public partial class PlayerViewModel:ObservableRecipient
     }
 
 
-    DispatcherTimer Timer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
 
-    public MediaPlayer NowMediaPlayer;
-
-    public MediaSource? Source;
 
     private string FullButtonText;
 
@@ -91,6 +79,24 @@ public partial class PlayerViewModel:ObservableRecipient
                 _FullButtonText = "\uE740";
                 break;
         }
+    }
+
+    private ObservableCollection<Support_Formats> Supports;
+
+    public ObservableCollection<Support_Formats> _Supports
+    {
+        get => Supports;
+        set => SetProperty(ref Supports, value);
+    }
+
+    readonly BiliBiliAPI.Video.Video Video = new();
+
+    public VideoInfo VI = null;
+
+    public async void InitVideo(ViewModels.Models.PlayerArgs playerArgs)
+    {
+        VI = (await Video.GetVideo(playerArgs.Content, VideoIDType.AV)).Data;
+        _Supports = VI.Support_Formats.ToObservableCollection();
     }
 
     private VideosContent Content;

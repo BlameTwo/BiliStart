@@ -29,3 +29,4 @@ public enum GoToType
 {
     Video,Animation,Movie,
 }
+

@@ -15,6 +15,9 @@ using Microsoft.UI;
 using Windows.Media.Playback;
 using BiliStart.Helpers;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using BiliBiliAPI.Models.HomeVideo;
+using System.Collections.ObjectModel;
+using Windows.Media.Core;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -39,16 +42,44 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         Loaded += PlayerPage_Loaded;
         TitleBarText.Text = "AppDisplayName".GetLocalized();
         IsFull = false;
+
+        Timer.Tick += Timer_Tick;
+        Timer.Start();
+    }
+
+    private void Timer_Tick(object? sender, object e)
+    {
+        App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+        {
+
+        });
+
     }
 
 
+    DispatcherTimer Timer = new() { Interval = TimeSpan.FromSeconds(1) };
+
     protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
     {
-        ViewModel.MediaClear();
+        MediaClear();
         Loaded -= PlayerPage_Loaded;
         media.MediaPlayer.MediaOpened -= MediaPlayer_MediaOpened;
         GC.Collect();
         GC.WaitForPendingFinalizers(); base.OnNavigatingFrom(e);
+    }
+
+    public void MediaClear()
+    {
+        Timer.Stop();
+        if (NowMediaPlayer != null)
+        {
+            NowMediaPlayer.Pause();
+            NowMediaPlayer.Dispose();
+        }
+        Timer.Tick -= Timer_Tick;
+        Source = null;
+        NowMediaPlayer = null;
+
     }
 
     protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -60,12 +91,13 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 
     protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
-        var value =  (e.Parameter as PlayerArgs);
-        if(e.Parameter is PlayerArgs playerArgs) 
+        if(e.Parameter is ViewModels.Models.PlayerArgs playerArgs) 
         {
+            ViewModel.Args = playerArgs;
             switch (playerArgs.Type)
             {
                 case GoToType.Video:
+                    ViewModel.InitVideo(playerArgs);
                     break;
                 case GoToType.Animation:
                     break;
@@ -73,28 +105,49 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
                     break;
             }
         }
-
-        //ResultCode<VideosContent> value = e.Parameter as ResultCode<VideosContent>;
-        //var info = (await Video.GetVideo((e.Parameter as ResultCode<VideosContent>)!.Data, BiliBiliAPI.Models.VideoIDType.AV));
-        //if(info.Data != null)
-        //{
-        //    ViewModel._VIdeoInfo= info.Data;
-        //    ViewModel._VIdeoInfo = ViewModel.Source = await PlayerHelper.CreateMediaSourceAsync(info.Dash.DashVideos[0], info.Dash.DashAudio[0]);
-        //    ViewModel.NowMediaPlayer = new MediaPlayer();
-        //    ViewModel.NowMediaPlayer.SetMediaSource(ViewModel.Source.AdaptiveMediaSource);
-        //    media.SetMediaPlayer(ViewModel.NowMediaPlayer);
-        //    media.MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
-        //}
     }
 
 
 
-    Video Video = new Video();
+    public async void Support_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // https://www.microsoft.com/en-us/p/hevc-video-extensions-from-device-manufacturer/9n4wgh0z6vhq
+        // HEVC²å¼þÎ»ÖÃ
+        if (e.AddedItems[0] != null)
+        {
+            Support_Formats value = e.AddedItems[0] as Support_Formats;
+            foreach (var item in ViewModel.VI.Dash.DashVideos)
+            {
+                if (item.ID == value!.Quality)
+                {
+                    if (item.Codecs.StartsWith("h"))
+                    {
+                        Source = await PlayerHelper.CreateMediaSourceAsync(item, ViewModel.VI.Dash.DashAudio[0]);
+                        NowMediaPlayer.SetMediaSource(Source.AdaptiveMediaSource);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+
+    public MediaPlayer NowMediaPlayer = new();
+
+    public MediaSource? Source;
+
     bool IsPlay = false;
 
     private async void PlayerPage_Loaded(object sender, RoutedEventArgs e)
     {
+        this.media.SetMediaPlayer(NowMediaPlayer);
+        NowMediaPlayer.MediaOpened += NowMediaPlayer_MediaOpened;
+        
+    }
 
+    private void NowMediaPlayer_MediaOpened(MediaPlayer sender, object args)
+    {
+        sender.Play();
     }
 
     private void MediaPlayer_MediaOpened(Windows.Media.Playback.MediaPlayer sender, object args)
@@ -106,17 +159,6 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             IsPlay = true;
         });
     }
-
-
-    public PlayerArgs PlayArgs
-    {
-        get=> (PlayerArgs)GetValue(PlayArgsProperty);
-        set => SetValue(PlayArgsProperty, value);
-    }
-
-    // Using a DependencyProperty as the backing store for PlayArgs.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty PlayArgsProperty =
-        DependencyProperty.Register("PlayArgs", typeof(PlayerArgs), typeof(PlayerPage), new PropertyMetadata(default(PlayerArgs)));
 
     public object OldContent
     {
@@ -169,4 +211,5 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             IsPlay = true;
         }
     }
+
 }

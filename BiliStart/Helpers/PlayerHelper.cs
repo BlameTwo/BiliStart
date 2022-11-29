@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Windows.Media.Core;
 using Windows.Media.Streaming.Adaptive;
 
@@ -61,4 +57,11 @@ public static class PlayerHelper
         }
 
     }
+
+
+    public static async Task<MediaSource> CreateFFmpegMediaSourceAsync(BiliBiliAPI.Models.Videos.DashVideo Video, BiliBiliAPI.Models.Videos.DashVideo Audio)
+    {
+        return null;
+    }
+
 }
