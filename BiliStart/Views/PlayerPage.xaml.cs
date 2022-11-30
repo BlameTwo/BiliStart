@@ -18,7 +18,6 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 using BiliBiliAPI.Models.HomeVideo;
 using System.Collections.ObjectModel;
 using Windows.Media.Core;
-using FFmpegInteropX;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -43,7 +42,6 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         Loaded += PlayerPage_Loaded;
         TitleBarText.Text = "AppDisplayName".GetLocalized();
         IsFull = false;
-
         Timer.Tick += Timer_Tick;
         Timer.Start();
     }
@@ -52,7 +50,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     {
         App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
         {
-
+            ViewModel.SliderValue = media.MediaPlayer.PlaybackSession.Position.TotalMilliseconds;
         });
 
     }
@@ -62,9 +60,8 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 
     protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
     {
-        MediaClear();
         Loaded -= PlayerPage_Loaded;
-        media.MediaPlayer.MediaOpened -= MediaPlayer_MediaOpened;
+        MediaClear();
         GC.Collect();
         GC.WaitForPendingFinalizers(); base.OnNavigatingFrom(e);
     }
@@ -74,6 +71,8 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         Timer.Stop();
         if (NowMediaPlayer != null)
         {
+            NowMediaPlayer.MediaOpened -= MediaPlayer_MediaOpened;
+
             NowMediaPlayer.Pause();
             NowMediaPlayer.Dispose();
         }
@@ -131,11 +130,11 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
                         NowMediaPlayer.SetMediaSource(Source.AdaptiveMediaSource);
                         break;
 
-                        //ToDo:等待官方回复关于MediaSourceConfig的初始化错误
+                        //ToDo: 等待官方回复关于MediaSourceConfig的初始化错误
                         //MediaSourceConfig Config = new MediaSourceConfig();
                         //Config.FFmpegOptions.Add("referer", "https://www.bilibili.com");
                         //Config.FFmpegOptions.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36");
-                        //var value2 = await FFmpegInteropX.FFmpegMediaSource.CreateFromUriAsync(item.BaseUrl, Config) ;
+                        //var value2 = await FFmpegInteropX.FFmpegMediaSource.CreateFromUriAsync(item.BaseUrl, Config);
                         //var mediaSource = value2.CreateMediaPlaybackItem();
                         //NowMediaPlayer.Source = mediaSource;
                     }
@@ -154,14 +153,9 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     private async void PlayerPage_Loaded(object sender, RoutedEventArgs e)
     {
         this.media.SetMediaPlayer(NowMediaPlayer);
-        NowMediaPlayer.MediaOpened += NowMediaPlayer_MediaOpened;
-        
+        NowMediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
     }
 
-    private void NowMediaPlayer_MediaOpened(MediaPlayer sender, object args)
-    {
-        sender.Play();
-    }
 
     private void MediaPlayer_MediaOpened(Windows.Media.Playback.MediaPlayer sender, object args)
     {
@@ -170,6 +164,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             media.MediaPlayer.Play();
             ViewModel.MaxValue = media.MediaPlayer.PlaybackSession.NaturalDuration.TotalMilliseconds;
             IsPlay = true;
+            
         });
     }
 
@@ -225,4 +220,10 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         }
     }
 
+
+
+    private void process_ManipulationCompleted(object sender, Microsoft.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
+    {
+        media.MediaPlayer.PlaybackSession.Position = TimeSpan.FromMilliseconds((sender as Slider)!.Value);
+    }
 }

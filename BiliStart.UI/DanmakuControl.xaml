@@ -8,7 +8,9 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Canvas x:Name="scroll" Grid.RowSpan="2" />
+        <Canvas
+            x:Name="scroll"
+            Grid.RowSpan="2" />
         <Grid
             x:Name="top"
             Grid.Row="0"

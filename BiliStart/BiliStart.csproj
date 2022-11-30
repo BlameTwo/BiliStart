@@ -5,7 +5,6 @@
 	  <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <RootNamespace>BiliStart</RootNamespace>
     <ApplicationIcon>Assets/icon.ico</ApplicationIcon>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x86;x64;arm64</Platforms>
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
     <PublishProfile>Properties\PublishProfiles\win10-$(Platform).pubxml</PublishProfile>
@@ -28,6 +27,16 @@
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	
 	<UserSecretsId>3bee64af-6db6-4011-afe9-0d174acac722</UserSecretsId>
+	
+	<StartupObject></StartupObject>
+	
+	<DefaultLanguage>zh-cn</DefaultLanguage>
+	
+	<PlatformTarget>x86</PlatformTarget>
+	
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+	
+	<IsPublishable>False</IsPublishable>
 	  
   </PropertyGroup>
   <ItemGroup>
@@ -83,7 +92,6 @@
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Media" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Media" Version="7.1.2" />
-    <PackageReference Include="FFmpegInteropX" Version="1.1.0-pre38" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
