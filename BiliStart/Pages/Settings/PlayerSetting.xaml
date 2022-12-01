@@ -1,0 +1,27 @@
+<UserControl
+    x:Class="BiliStart.Pages.Settings.PlayerSetting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BiliStart.Pages.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:biliconsole="using:BiliStart.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" >
+    <biliconsole:BorderExpander x:Uid="Setting_PlayerSupport">
+        <biliconsole:BorderExpander.Icon>
+            <SymbolIcon Symbol="Play"/>
+        </biliconsole:BorderExpander.Icon>
+        <biliconsole:BorderExpander.SubTitle>
+            <TextBlock x:Uid="Setting_PlayerSupportSubTitle" FontSize="10"/>
+        </biliconsole:BorderExpander.SubTitle>
+        <biliconsole:BorderExpander.Description>
+            <ComboBox 
+                x:Name="select"
+                SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="4K"/>
+                <ComboBoxItem Content="1080P"/>
+                <ComboBoxItem Content="720P"/>
+            </ComboBox>
+        </biliconsole:BorderExpander.Description>
+    </biliconsole:BorderExpander>
+</UserControl>

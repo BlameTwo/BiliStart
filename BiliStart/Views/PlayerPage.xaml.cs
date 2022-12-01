@@ -18,6 +18,9 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 using BiliBiliAPI.Models.HomeVideo;
 using System.Collections.ObjectModel;
 using Windows.Media.Core;
+using FFmpegInteropX;
+using BiliStart.Contracts.Services;
+using BiliStart.Services;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -35,15 +38,25 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         get;
     }
 
+
+
     public PlayerPage()
     {
         ViewModel = App.GetService<PlayerViewModel>();
+        LocalSettingsService = App.GetService<ILocalSettingsService>(); 
         this.InitializeComponent();
         Loaded += PlayerPage_Loaded;
         TitleBarText.Text = "AppDisplayName".GetLocalized();
         IsFull = false;
         Timer.Tick += Timer_Tick;
         Timer.Start();
+        
+    }
+
+
+    public ILocalSettingsService LocalSettingsService
+    {
+        get;
     }
 
     private void Timer_Tick(object? sender, object e)
@@ -116,27 +129,30 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         // HEVC解码器位置
         //https://apps.microsoft.com/store/detail/av1-video-extension/9MVZQVXJBQ9V?hl=zh-cn&gl=cn
         //AV1解码器位置
-        if (e.AddedItems[0] != null)
+        if(e.AddedItems.Count > 0)
         {
-            Support_Formats value = e.AddedItems[0] as Support_Formats;
-            foreach (var item in ViewModel.VI.Dash.DashVideos)
+            if (e.AddedItems[0] != null)
             {
-                if (item.ID == value!.Quality)
+                Support_Formats value = e.AddedItems[0] as Support_Formats;
+                foreach (var item in ViewModel.VI.Dash.DashVideos)
                 {
-                    // hev 和 avc
-                    if (item.Codecs.StartsWith("hev"))
+                    if (item.ID == value!.Quality)
                     {
-                        Source = await PlayerHelper.CreateMediaSourceAsync(item, ViewModel.VI.Dash.DashAudio[0]);
-                        NowMediaPlayer.SetMediaSource(Source.AdaptiveMediaSource);
-                        break;
+                        // hev 和 avc
+                        if (item.Codecs.StartsWith("hev"))
+                        {
+                            Source = await PlayerHelper.CreateMediaSourceAsync(item, ViewModel.VI.Dash.DashAudio[0]);
+                            NowMediaPlayer.SetMediaSource(Source.AdaptiveMediaSource);
+                            break;
 
-                        //ToDo: 等待官方回复关于MediaSourceConfig的初始化错误
-                        //MediaSourceConfig Config = new MediaSourceConfig();
-                        //Config.FFmpegOptions.Add("referer", "https://www.bilibili.com");
-                        //Config.FFmpegOptions.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36");
-                        //var value2 = await FFmpegInteropX.FFmpegMediaSource.CreateFromUriAsync(item.BaseUrl, Config);
-                        //var mediaSource = value2.CreateMediaPlaybackItem();
-                        //NowMediaPlayer.Source = mediaSource;
+                            //ToDo: 等待官方回复关于MediaSourceConfig的初始化错误
+                            //MediaSourceConfig Config = new MediaSourceConfig();
+                            //Config.FFmpegOptions.Add("referer", "https://www.bilibili.com");
+                            //Config.FFmpegOptions.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36");
+                            //var value2 = await FFmpegInteropX.FFmpegMediaSource.CreateFromUriAsync(item.BaseUrl, Config);
+                            //var mediaSource = value2.CreateMediaPlaybackItem();
+                            //NowMediaPlayer.Source = mediaSource;
+                        }
                     }
                 }
             }
@@ -152,6 +168,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 
     private async void PlayerPage_Loaded(object sender, RoutedEventArgs e)
     {
+       
         this.media.SetMediaPlayer(NowMediaPlayer);
         NowMediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
     }
@@ -159,20 +176,28 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 
     private void MediaPlayer_MediaOpened(Windows.Media.Playback.MediaPlayer sender, object args)
     {
+        App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () => InitPlay());
+
         App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
         {
-            media.MediaPlayer.Play();
             ViewModel.MaxValue = media.MediaPlayer.PlaybackSession.NaturalDuration.TotalMilliseconds;
-            IsPlay = true;
             
         });
+    }
+
+    async void InitPlay()
+    {
+        if(await LocalSettingsService.ReadSettingAsync<int>("Player_AutoStart") == 0)
+        {
+            IsPlay = true;
+            media.MediaPlayer.Play();
+        }
     }
 
     public object OldContent
     {
         get;set;    
     }
-
 
     bool IsFull;
     object oldtitbar;

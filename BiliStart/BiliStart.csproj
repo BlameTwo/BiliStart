@@ -21,7 +21,8 @@
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
-	<!--
+	
+	  <!--
 	<WindowsPackageType>None</WindowsPackageType>-->
 	
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -57,6 +58,8 @@
     <None Remove="Pages\MusicAllPage.xaml" />
     <None Remove="Pages\MustWatchPage.xaml" />
     <None Remove="Pages\RankPage.xaml" />
+    <None Remove="Pages\Settings\PlayerAutoStart.xaml" />
+    <None Remove="Pages\Settings\PlayerSetting.xaml" />
     <None Remove="Pages\WeekPage.xaml" />
     <None Remove="Styles\Animations.xaml" />
     <None Remove="Styles\Converter.xaml" />
@@ -92,10 +95,13 @@
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Media" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Media" Version="7.1.2" />
+    <PackageReference Include="FFmpegInteropX" Version="1.1.0-pre38" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
     <PackageReference Include="Microsoft.TeamFoundationServer.ExtendedClient" Version="16.170.0" />
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.7" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.1" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221116.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
     <PackageReference Include="QRCoder" Version="1.4.3" />
@@ -111,6 +117,12 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Pages\Settings\PlayerAutoStart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Pages\Settings\PlayerSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\ItemsDataTemplate\MustWatchItemStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

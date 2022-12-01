@@ -54,7 +54,6 @@
                     Opacity="0.5"
                     Color="{ThemeResource SolidBackgroundFillColorBase}" />
             </Border.Background>
-
             <Grid
                 HorizontalAlignment="Stretch"
                 Canvas.ZIndex="2">
@@ -92,7 +91,8 @@
                             Grid.Column="1"
                             Margin="5,0,0,0"
                             ItemsSource="{x:Bind ViewModel._Supports, Mode=OneWay}"
-                            SelectedIndex="0"
+                            x:Name="Play_Suppout"
+                            SelectedIndex="{x:Bind ViewModel._SupportIndex,Mode=TwoWay}"
                             SelectionChanged="Support_SelectionChanged">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate x:DataType="data:Support_Formats">

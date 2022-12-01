@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using BiliBiliAPI.Models;
 using BiliBiliAPI.Models.Videos;
+using BiliStart.Contracts.Services;
 using BiliStart.Helpers;
+using BiliStart.Services;
 using BiliStart.ViewModels.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -14,10 +16,10 @@ using Windows.Media.Playback;
 namespace BiliStart.ViewModels;
 public partial class PlayerViewModel:ObservableRecipient
 {
-    public PlayerViewModel()
+    public PlayerViewModel(ILocalSettingsService localSettingsService)
     {
         _FullButtonText = "\uE740";
-
+        LocalSettingsService = localSettingsService;
     }
 
     public PlayerArgs Args
@@ -99,12 +101,39 @@ public partial class PlayerViewModel:ObservableRecipient
         _Supports = VI.Support_Formats.ToObservableCollection();
     }
 
+
+    int GetSupportIndex(string value)
+    {
+        for (int i = 0; i < _Supports.Count; i++)
+        {
+            //找到
+            if (_Supports[i].New_description.IndexOf(value) != -1)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int SupportIndex;
+
+    public int _SupportIndex
+    {
+        get =>SupportIndex;
+        set => SetProperty(ref SupportIndex, value);
+    }
+
+
     private VideosContent Content;
 
     public VideosContent _Content
     {
         get => Content;
         set=>SetProperty(ref Content, value);
+    }
+    public ILocalSettingsService LocalSettingsService
+    {
+        get;
     }
 
     [RelayCommand]

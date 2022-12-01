@@ -272,4 +272,25 @@
   <data name="Player_Speed.Text" xml:space="preserve">
     <value>播放速度</value>
   </data>
+  <data name="Setting_Player.Text" xml:space="preserve">
+    <value>播放设置</value>
+  </data>
+  <data name="Setting_PlayerSupport.Header" xml:space="preserve">
+    <value>播放优先清晰度</value>
+  </data>
+  <data name="Setting_PlayerSupportSubTitle.Text" xml:space="preserve">
+    <value>此项设置为定义初始化播放时自动设置的视频清晰度</value>
+  </data>
+  <data name="Setting_PlayerAutoStart.Header" xml:space="preserve">
+    <value>是否自动播放</value>
+  </data>
+  <data name="Setting_PlayerAutoStartFirst.Content" xml:space="preserve">
+    <value>自动播放</value>
+  </data>
+  <data name="Setting_PlayerAutoStartSecond.Content" xml:space="preserve">
+    <value>关闭自动播放</value>
+  </data>
+  <data name="Setting_PlayerAutoStartSubtitle.Text" xml:space="preserve">
+    <value>此项设置全部的播放页面是否在加载后直接播放</value>
+  </data>
 </root>

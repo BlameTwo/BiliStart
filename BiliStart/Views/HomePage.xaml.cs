@@ -11,6 +11,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.Windows.Widgets.Providers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -31,5 +32,6 @@ public sealed partial class HomePage : Page
         //在页面初始化完成前获得VM
         ViewModel = App.GetService<HomeViewModel>();
         this.InitializeComponent();
+
     }
 }

@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 using BiliStart.Contracts.Services;
 using BiliStart.Helpers;
+using BiliStart.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -13,7 +14,7 @@ using Windows.Globalization;
 
 namespace BiliStart.ViewModels;
 
-public class SettingsViewModel : ObservableRecipient
+public partial class SettingsViewModel : ObservableRecipient
 {
     private readonly IThemeSelectorService _themeSelectorService;
     private ElementTheme _elementTheme;
@@ -31,15 +32,17 @@ public class SettingsViewModel : ObservableRecipient
         set => SetProperty(ref _versionDescription, value);
     }
 
+
     public ICommand SwitchThemeCommand
     {
         get;
     }
 
-    public SettingsViewModel(IThemeSelectorService themeSelectorService,ITipShow tipShow)
+    public SettingsViewModel(IThemeSelectorService themeSelectorService,ITipShow tipShow,ILocalSettingsService localSettingsService)
     {
         _themeSelectorService = themeSelectorService;
         TipShow = tipShow;
+        LocalSettingsService = localSettingsService;
         _elementTheme = _themeSelectorService.Theme;
         _versionDescription = GetVersionDescription();
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
@@ -61,13 +64,26 @@ public class SettingsViewModel : ObservableRecipient
             }
             TipShow.SendMessage("静态资源已经改变，请重启应用", "设置操作");
         });
+
+       
     }
+
+    [RelayCommand]
+    public async Task OnLoaded()
+    {
+       
+    }
+
 
     public RelayCommand<ComboBox> ChangedLanguage
     {
         get;set;
     }
     public ITipShow TipShow
+    {
+        get;
+    }
+    public ILocalSettingsService LocalSettingsService
     {
         get;
     }
