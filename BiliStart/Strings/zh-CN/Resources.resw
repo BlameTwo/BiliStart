@@ -293,4 +293,7 @@
   <data name="Setting_PlayerAutoStartSubtitle.Text" xml:space="preserve">
     <value>此项设置全部的播放页面是否在加载后直接播放</value>
   </data>
+  <data name="Shell_Dynamic.Content" xml:space="preserve">
+    <value>动态</value>
+  </data>
 </root>

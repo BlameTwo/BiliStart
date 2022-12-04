@@ -46,7 +46,7 @@ public class AppNotificationActivationHandler : ActivationHandler<LaunchActivate
             case "secondary":
                 App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
                 {
-                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(HotViewModel).FullName!);
+                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(TopMoreViewModel).FullName!);
                 });
                 break;
         }

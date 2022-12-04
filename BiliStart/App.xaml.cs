@@ -93,7 +93,8 @@ public partial class App : Application
             services.AddSingleton<SettingsPage>();
             services.AddSingleton<ShellPage>();
             services.AddSingleton<ShellViewModel>();
-
+            services.AddSingleton<MainPage>();
+            services.AddSingleton<MainViewModel>();
 
             services.AddTransient<LoginDialogViewModel>(); 
             services.AddTransient<LoginDialog>();
@@ -107,8 +108,6 @@ public partial class App : Application
             services.AddTransient<HotPage>();
             services.AddTransient<HotViewModel>();
 
-            services.AddTransient<MainPage>();
-            services.AddTransient<MainViewModel>();
 
             services.AddTransient<TopMorePage>();
             services.AddTransient<TopMoreViewModel>();
@@ -136,6 +135,9 @@ public partial class App : Application
 
             services.AddTransient<MustWatchPage>();
             services.AddTransient<MustWatchViewModel>();
+
+            services.AddTransient <DynamicPage>();
+            services.AddTransient<DynamicViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
@@ -180,7 +182,7 @@ public partial class App : Application
 
         ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
 
-        //App.GetService<IAppNotificationService>().CreateShow("ToGO!","前往首页","前往热门","欢迎使用Bili","你好！",AppContext.BaseDirectory+ "Assets/icon.ico");
+        App.GetService<IAppNotificationService>().CreateShow("ToGO!","前往首页","前往热门","欢迎使用Bili","你好！",AppContext.BaseDirectory+ "Assets/icon.ico");
 
         await App.GetService<IActivationService>().ActivateAsync(args);
 

@@ -25,7 +25,7 @@ public class PageService : IPageService
         Configure<MainViewModel,MainPage>();
         Configure<TopMoreViewModel, TopMorePage>();
         Configure<SearchViewModel, SearchPage>();
-
+        Configure<DynamicViewModel,DynamicPage>();
 
         //排行榜导航页面
         Configure<RankViewModel, RankPage>();

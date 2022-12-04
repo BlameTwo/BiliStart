@@ -42,7 +42,7 @@ public class AppNotificationService : IAppNotificationService
     {
         AppNotificationManager.Default.NotificationInvoked += OnNotificationInvoked;
 
-        //AppNotificationManager.Default.Register();
+        AppNotificationManager.Default.Register();
     }
 
     public void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
@@ -64,7 +64,7 @@ public class AppNotificationService : IAppNotificationService
             case "secondary":
                 App.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(HotViewModel).FullName!);
+                    _navigationService.NavigationTo(AppNavigationViewsEnum.ShellFrame, typeof(TopMoreViewModel).FullName!);
                 });
                 break;
         }

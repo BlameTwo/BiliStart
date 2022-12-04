@@ -1,28 +1,34 @@
-<!-- Copyright (c) Microsoft Corporation and Contributors. -->
-<!-- Licensed under the MIT License. -->
+<!--  Copyright (c) Microsoft Corporation and Contributors.  -->
+<!--  Licensed under the MIT License.  -->
 
 <UserControl
     x:Class="BiliStart.Pages.Settings.PlayerAutoStart"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BiliStart.Pages.Settings"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:biliconsole="using:BiliStart.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BiliStart.Pages.Settings"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    HorizontalAlignment="Stretch">
+    HorizontalAlignment="Stretch"
+    mc:Ignorable="d">
 
     <biliconsole:BorderExpander x:Uid="Setting_PlayerAutoStart">
         <biliconsole:BorderExpander.Icon>
-            <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE955;" />
+            <FontIcon
+                FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                Glyph="&#xE955;" />
         </biliconsole:BorderExpander.Icon>
         <biliconsole:BorderExpander.SubTitle>
-            <TextBlock FontSize="10" x:Uid="Setting_PlayerAutoStartSubtitle"/>
+            <TextBlock
+                x:Uid="Setting_PlayerAutoStartSubtitle"
+                FontSize="10" />
         </biliconsole:BorderExpander.SubTitle>
         <biliconsole:BorderExpander.Description>
-            <ComboBox x:Name="selection" SelectionChanged="ComboBox_SelectionChanged">
-                <ComboBoxItem x:Uid="Setting_PlayerAutoStartFirst"/>
-                <ComboBoxItem x:Uid="Setting_PlayerAutoStartSecond"/>
+            <ComboBox
+                x:Name="selection"
+                SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem x:Uid="Setting_PlayerAutoStartFirst" />
+                <ComboBoxItem x:Uid="Setting_PlayerAutoStartSecond" />
             </ComboBox>
         </biliconsole:BorderExpander.Description>
     </biliconsole:BorderExpander>

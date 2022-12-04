@@ -96,16 +96,18 @@
         </core:EventTriggerBehavior>
     </i:Interaction.Behaviors>
     <Grid>
+
         <Grid
+            Canvas.ZIndex="1"
             x:Name="AppTitleBar"
             Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
             VerticalAlignment="Top"
             x:FieldModifier="public"
-            Canvas.ZIndex="0"
             IsHitTestVisible="True">
             <Image
                 Width="16"
                 Height="16"
+                
                 HorizontalAlignment="Left"
                 Source="/Assets/icon.ico" />
             <TextBlock
@@ -115,15 +117,11 @@
                 Style="{StaticResource CaptionTextBlockStyle}"
                 TextWrapping="NoWrap" />
         </Grid>
-
-
-
         <NavigationView
             x:Name="NavigationViewControl"
             x:FieldModifier="public"
             AlwaysShowHeader="False"
             Background="Transparent"
-            Canvas.ZIndex="0"
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             ExpandedModeThresholdWidth="1280"
             IsBackButtonVisible="Visible"
@@ -151,7 +149,14 @@
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
-                            Glyph="&#xEC4A;" />
+                            Glyph="&#xEC4A;"  />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.DynamicViewModel"
+                    x:Uid="Shell_Dynamic" Style="{StaticResource MyNaviagtionViewItem}">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xEC26;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItemHeader x:Uid="Shell_ItemHeader_Second" />

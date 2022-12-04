@@ -8,11 +8,10 @@
     mc:Ignorable="d">
 
     <Border CornerRadius="5"
-            BorderBrush="{ThemeResource AccentAAFillColorDisabled}"
             BorderThickness="1"
             Padding="15"
             Margin="0 5 0 0"
-            Background="{ThemeResource ButtonDisabledBackgroundThemeBrush}"
+            Background="{ThemeResource ControlFillColorDefault}"
             HorizontalAlignment="Stretch">
         <Grid >
             <Grid.ColumnDefinitions>

@@ -99,6 +99,19 @@ public partial class PlayerViewModel:ObservableRecipient
     {
         VI = (await Video.GetVideo(playerArgs.Content, VideoIDType.AV)).Data;
         _Supports = VI.Support_Formats.ToObservableCollection();
+        switch (await LocalSettingsService.ReadSettingAsync<int>(BiliStart.Models.Settings.Player_Supper_Supper))
+        {
+            default:
+            case 0:
+                _SupportIndex = GetSupportIndex("4K");
+                break;
+            case 1:
+                _SupportIndex = GetSupportIndex("1080");
+                break;
+            case 2:
+                _SupportIndex = GetSupportIndex("720");
+                break;
+        }
     }
 
 

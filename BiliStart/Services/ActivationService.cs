@@ -32,6 +32,10 @@ public class ActivationService : IActivationService
             App.MainWindow.Content = new MainPage();
             (App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(ShellPage));
         }
+        else if (App.MainWindow.Content != null)
+        {
+            (App.MainWindow.Content as MainPage)!.RootFrame.Navigate(typeof(ShellPage));
+        }
 
         await HandleActivationAsync(activationArgs);
 

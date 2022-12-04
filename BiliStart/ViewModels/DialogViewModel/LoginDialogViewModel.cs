@@ -149,8 +149,9 @@ public partial class LoginDialogViewModel : ObservableRecipient
             }
         }
     }
-    public void WebView2_NavigationStarting(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs args)
+    public async void WebView2_NavigationStarting(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs args)
     {
+        var str = await sender.CoreWebView2.CookieManager.GetCookiesAsync(null);
         var c = GetFormData(args.Uri);
         if (c == null) return;
         if (c.ContainsKey("access_key"))

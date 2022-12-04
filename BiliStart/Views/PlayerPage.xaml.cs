@@ -22,9 +22,6 @@ using FFmpegInteropX;
 using BiliStart.Contracts.Services;
 using BiliStart.Services;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace BiliStart.Views;
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
@@ -139,19 +136,11 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
                     if (item.ID == value!.Quality)
                     {
                         // hev 和 avc
-                        if (item.Codecs.StartsWith("hev"))
+                        if (item.Codecs.StartsWith("avc"))
                         {
                             Source = await PlayerHelper.CreateMediaSourceAsync(item, ViewModel.VI.Dash.DashAudio[0]);
                             NowMediaPlayer.SetMediaSource(Source.AdaptiveMediaSource);
                             break;
-
-                            //ToDo: 等待官方回复关于MediaSourceConfig的初始化错误
-                            //MediaSourceConfig Config = new MediaSourceConfig();
-                            //Config.FFmpegOptions.Add("referer", "https://www.bilibili.com");
-                            //Config.FFmpegOptions.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36");
-                            //var value2 = await FFmpegInteropX.FFmpegMediaSource.CreateFromUriAsync(item.BaseUrl, Config);
-                            //var mediaSource = value2.CreateMediaPlaybackItem();
-                            //NowMediaPlayer.Source = mediaSource;
                         }
                     }
                 }

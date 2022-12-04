@@ -6,4 +6,7 @@
     xmlns:local="using:BiliStart"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:windowex="using:WinUIEx"
-    mc:Ignorable="d" />
+    xmlns:main="using:BiliStart.Views"
+    mc:Ignorable="d">
+    <local:MainPage/>
+</Window>

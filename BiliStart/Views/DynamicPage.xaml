@@ -1,0 +1,86 @@
+<!--  Copyright (c) Microsoft Corporation and Contributors.  -->
+<!--  Licensed under the MIT License.  -->
+
+<Page
+    x:Class="BiliStart.Views.DynamicPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:biliui="using:BiliStart.UI.Controls"
+    xmlns:cui="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:BiliStart.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="150" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="3*"
+                MaxWidth="250" />
+            <ColumnDefinition
+                Width="3*"
+                MaxWidth="250" />
+            <ColumnDefinition Width="6*" />
+        </Grid.ColumnDefinitions>
+        <biliui:CardControl
+            Grid.Column="0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Header="Live"
+            Icon="Target"
+            IconForeground="Red">
+            <biliui:CardControl.Content>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="LiveList" />
+            </biliui:CardControl.Content>
+        </biliui:CardControl>
+        <biliui:CardControl
+            Grid.Column="1"
+            Margin="5,0,0,0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Header="Update"
+            Icon="Calendar"
+            IconForeground="Green">
+            <biliui:CardControl.Content>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Up_UpDateList" />
+            </biliui:CardControl.Content>
+        </biliui:CardControl>
+        <biliui:CardControl
+            Grid.Column="2"
+            Margin="5,0,0,0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Header="MyInfo"
+            Icon="OtherUser"
+            IconForeground="BlueViolet">
+            <biliui:CardControl.Content>
+                <PersonPicture
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" />
+            </biliui:CardControl.Content>
+        </biliui:CardControl>
+        <Pivot
+            Grid.Row="1"
+            Grid.ColumnSpan="3">
+            <PivotItem Header="Video">
+                <TextBlock Text="Video_Dynimac" />
+            </PivotItem>
+            <PivotItem Header="Animation">
+                <TextBlock Text="Animation_Dynimac" />
+            </PivotItem>
+            <PivotItem Header="Read">
+                <TextBlock Text="Read_Dynimac" />
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

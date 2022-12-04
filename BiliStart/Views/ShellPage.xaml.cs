@@ -1,4 +1,5 @@
-﻿using BiliBiliAPI.Account;
+﻿using System.Runtime.InteropServices;
+using BiliBiliAPI.Account;
 using BiliStart.Contracts.Services;
 using BiliStart.Dialogs;
 using BiliStart.Helpers;
@@ -13,6 +14,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Windows.Graphics;
 using Windows.System;
+using Windows.UI.WindowManagement;
 using WinRT.Interop;
 
 namespace BiliStart.Views;
@@ -30,14 +32,13 @@ public sealed partial class ShellPage : Page
         ViewModel = App.GetService<ShellViewModel>();
         InitializeComponent();
         ViewModel.NavigationService.ShellFrame = NavigationFrame;
-        
+        App.MainWindow.ExtendsContentIntoTitleBar = true;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl, AppNavigationViewsEnum.ShellFrame);
         App.MainWindow.Activated += MainWindow_Activated;
-        App.MainWindow.ExtendsContentIntoTitleBar = true;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
         ViewModel.FlyoutButton = userbutton;
+        
     }
-
 
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -46,9 +47,12 @@ public sealed partial class ShellPage : Page
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
         ViewModel.FlyoutButton = userbutton;
-
         App.MainWindow.SetTitleBar(AppTitleBar);
     }
+
+   
+
+    
 
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {

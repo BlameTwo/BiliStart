@@ -75,6 +75,7 @@
     <None Remove="Styles\Search\SearchVideo.xaml" />
     <None Remove="Styles\ShellNavigationViewItem.xaml" />
     <None Remove="Styles\VideoGridViewItem.xaml" />
+    <None Remove="Views\DynamicPage.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\HotPage.xaml" />
     <None Remove="Views\PlayerPage.xaml" />
@@ -117,6 +118,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\DynamicPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Pages\Settings\PlayerAutoStart.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

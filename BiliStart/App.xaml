@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="/Styles/VideoGridViewItem.xaml" />
                 <ResourceDictionary Source="/Styles/ShellNavigationViewItem.xaml" />
                 <ResourceDictionary Source="/Styles/Animations.xaml" />
+                <ResourceDictionary Source="ms-appx:///BiliStart.UI/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

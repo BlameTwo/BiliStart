@@ -10,11 +10,18 @@
     <None Remove="Controls\ImageLoad.xaml" />
     <None Remove="DanmakuControl.xaml" />
     <None Remove="NullContent.xaml" />
+    <None Remove="Styles.xaml" />
   </ItemGroup>
 
   <ItemGroup>
       <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221116.1" />
       <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
