@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BiliBiliAPI;
 using BiliBiliAPI.Models.Account.Dynamic;
+using BiliBiliAPI.Models.User;
 using BiliBiliAPI.User;
 using BiliStart.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -21,7 +23,6 @@ public partial class DynamicViewModel:ObservableRecipient
         IsActive = true;
     }
     BiliBiliAPI.Account.Dynamic.MyDynamic Dynamic = new();
-    //Todo :User类中的GetUser方法返回的类残缺，需要补充…………
     Users Users = new();
     [RelayCommand]
     public async Task Loaded()
@@ -30,6 +31,7 @@ public partial class DynamicViewModel:ObservableRecipient
         LiveItems.Clear();
         var livevalues = (await Dynamic.GetDynamicUp_UpDateList()).Data;
         MyInfoData = livevalues.MyInfo;
+        _MyData = (await Users.GetUser(BiliBiliArgs.TokenSESSDATA.Mid)).Data;
         if (livevalues.LiveInfo != null)
         {
             foreach (var item in livevalues.LiveInfo.Items.ToObservableCollection())
@@ -45,6 +47,15 @@ public partial class DynamicViewModel:ObservableRecipient
             }
         }
     }
+
+    private UpData MyData;
+
+    public UpData _MyData
+    {
+        get => MyData;
+        set => SetProperty(ref MyData, value);
+    }
+
 
     private Dynamic_MyInfo _MyInfoData;
 

@@ -151,12 +151,27 @@ public partial class LoginDialogViewModel : ObservableRecipient
     }
     public async void WebView2_NavigationStarting(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs args)
     {
-        var str = await sender.CoreWebView2.CookieManager.GetCookiesAsync(null);
+        
+
         var c = GetFormData(args.Uri);
         if (c == null) return;
         if (c.ContainsKey("access_key"))
         {
+            var str = await sender.CoreWebView2.CookieManager.GetCookiesAsync(null);
+            AccountTokenCookies cookie = new AccountTokenCookies();
+            cookie.Cookies = new List<Cookie>();
+            foreach (var item in str)
+            {
+                cookie.Cookies.Add(new Cookie()
+                {
+                    Expires = item.Expires.ToString(),
+                    Http_Only = item.IsHttpOnly.ToString()
+                    , Name = item.Name,
+                    Value = item.Value
+                });
+            }
             AccountToken token = new AccountToken();
+            token.cookies = cookie;
             var mid = "";
             var token2 = "";
             c.TryGetValue("mid", out mid!);

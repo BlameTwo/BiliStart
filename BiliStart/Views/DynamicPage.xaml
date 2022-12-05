@@ -78,16 +78,17 @@
     </i:Interaction.Behaviors>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="250" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="2.5*" />
+            <RowDefinition Height="2.5*" />
+            <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="6*" />
         </Grid.ColumnDefinitions>
         <biliui:CardControl
-            Grid.Column="0"
+            Grid.Row="0"
+            Margin="0,0,0,5"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             Header="Live"
@@ -97,18 +98,29 @@
                 <cui:AdaptiveGridView
                     x:Name="adaptive"
                     Grid.Row="1"
+                    Padding="10"
                     animations:ItemsReorderAnimation.Duration="0:0:0.2"
                     IsMultiSelectCheckBoxEnabled="False"
                     ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
                     ItemTemplate="{ThemeResource DefaultUpInfo}"
                     ItemsSource="{x:Bind ViewModel.LiveItems, Mode=OneWay}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                    ScrollViewer.HorizontalScrollMode="Enabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollMode="Disabled"
                     SelectionMode="Extended"
-                    StretchContentForSingleRow="True" />
+                    StretchContentForSingleRow="True">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </cui:AdaptiveGridView>
             </biliui:CardControl.Content>
         </biliui:CardControl>
         <biliui:CardControl
-            Grid.Column="1"
-            Margin="5,0,0,0"
+            Grid.Row="1"
+            Margin="0,0,0,0"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             Header="Update"
@@ -124,12 +136,23 @@
                     ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
                     ItemTemplate="{ThemeResource DefaultUpInfo}"
                     ItemsSource="{x:Bind ViewModel._UpdateItems, Mode=OneWay}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                    ScrollViewer.HorizontalScrollMode="Enabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollMode="Disabled"
                     SelectionMode="Extended"
-                    StretchContentForSingleRow="True" />
+                    StretchContentForSingleRow="True">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </cui:AdaptiveGridView>
             </biliui:CardControl.Content>
         </biliui:CardControl>
         <biliui:CardControl
-            Grid.Column="2"
+            Grid.RowSpan="2"
+            Grid.Column="3"
             Margin="5,0,0,0"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
@@ -138,7 +161,7 @@
             IconForeground="BlueViolet">
             <biliui:CardControl.Background>
                 <ImageBrush
-                    ImageSource="{x:Bind ViewModel.MyInfoData.Back_Image, Mode=OneWay}"
+                    ImageSource="{x:Bind ViewModel._MyData.Top_Photo, Mode=OneWay}"
                     Stretch="UniformToFill" />
             </biliui:CardControl.Background>
             <biliui:CardControl.Content>
@@ -171,7 +194,7 @@
             </biliui:CardControl.Content>
         </biliui:CardControl>
         <Pivot
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.ColumnSpan="3">
             <PivotItem Header="Video">
                 <TextBlock Text="Video_Dynimac" />
