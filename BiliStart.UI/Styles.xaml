@@ -7,8 +7,11 @@
     xmlns:local="using:BiliStart.UI.Controls">
     <Style TargetType="local:CardControl">
         <Setter Property="FontSize" Value="20" />
+        <Setter Property="BorderBrush" Value="{ThemeResource AppBarBorderThemeBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="IconForeground" Value="{StaticResource AccentAAFillColorDefaultBrush}" />
         <Setter Property="Template" Value="{ThemeResource DefaultCardControl}" />
+        <Setter Property="Background" Value="{ThemeResource ControlFillColorDefault}" />
     </Style>
     <ControlTemplate
         x:Key="DefaultCardControl"
@@ -17,7 +20,9 @@
             Padding="10"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="{ThemeResource ControlFillColorDefault}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
             CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>

@@ -86,7 +86,10 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             //跳转服务
-            services.AddTransient<IGoVideo,GoVideo>();
+            services.AddSingleton<IGoVideo,GoVideo>();
+
+            //window窗体管理服务
+            services.AddSingleton<IWindowManager, Services.WindowManager>();
 
             // 视图和视图模型
             services.AddSingleton<SettingsViewModel>();

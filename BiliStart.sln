@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilibiliAPI", "..\BiliBiliAccount\src\BiliBiliAccount\BilibiliAPI.csproj", "{C9400280-E9F1-4593-9611-D40E20D26A22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiliBiliAPI", "..\BiliBiliAccount\src\BiliBiliAccount\BiliBiliAPI.csproj", "{C9400280-E9F1-4593-9611-D40E20D26A22}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiliStart", "BiliStart\BiliStart.csproj", "{66D66DD1-C47C-432C-BAD7-EFBA6BD05211}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiliStart.Core", "BiliStart
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiliStart.UI", "BiliStart.UI\BiliStart.UI.csproj", "{295FF375-9623-44D6-B861-02B47611A64B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITest", "UITest\UITest.csproj", "{CE5DE86F-9DE4-40D1-BF7B-8A67075F0DBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UITest", "UITest\UITest.csproj", "{CE5DE86F-9DE4-40D1-BF7B-8A67075F0DBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

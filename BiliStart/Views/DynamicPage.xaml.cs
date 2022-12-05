@@ -32,6 +32,7 @@ public sealed partial class DynamicPage : Page
     }
     public DynamicPage()
     {
+        this.ViewModel = App.GetService<DynamicViewModel>();
         this.InitializeComponent();
     }
 }
