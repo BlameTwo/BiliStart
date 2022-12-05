@@ -98,16 +98,15 @@
     <Grid>
 
         <Grid
-            Canvas.ZIndex="1"
             x:Name="AppTitleBar"
             Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
             VerticalAlignment="Top"
             x:FieldModifier="public"
+            Canvas.ZIndex="1"
             IsHitTestVisible="True">
             <Image
                 Width="16"
                 Height="16"
-                
                 HorizontalAlignment="Left"
                 Source="/Assets/icon.ico" />
             <TextBlock
@@ -149,14 +148,17 @@
                     <NavigationViewItem.Icon>
                         <FontIcon
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
-                            Glyph="&#xEC4A;"  />
+                            Glyph="&#xEC4A;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem
+                    x:Uid="Shell_Dynamic"
                     helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.DynamicViewModel"
-                    x:Uid="Shell_Dynamic" Style="{StaticResource MyNaviagtionViewItem}">
+                    Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xEC26;" />
+                        <FontIcon
+                            FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                            Glyph="&#xEC26;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItemHeader x:Uid="Shell_ItemHeader_Second" />

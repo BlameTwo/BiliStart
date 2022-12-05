@@ -1,8 +1,10 @@
 ﻿using BiliBiliAPI.Models.HomeVideo;
 using BiliStart.Contracts.Services;
 using BiliStart.Pages;
+using BiliStart.Pages.Dynamics;
 using BiliStart.ViewModels;
 using BiliStart.ViewModels.PageViewModels;
+using BiliStart.ViewModels.PageViewModels.DynamicsViewModels;
 using BiliStart.Views;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -32,8 +34,10 @@ public class PageService : IPageService
         Configure<WeekViewModel, WeekPage>();
 
         Configure<MusicAllViewModel, MusicAllPage>();
-
-        Configure<MustWatchViewModel, MustWatchPage>();  
+        Configure<MustWatchViewModel, MustWatchPage>();
+        
+        //动态页面
+        Configure<MyInfoViewModel,MyInfoPage>();  
 
     }
 

@@ -16,7 +16,7 @@ namespace BiliStart.Services
 {
     public class AppNavigationViewService : IAppNavigationViewService
     {
-        NavigationView shellview, rootview, hotview;
+        NavigationView shellview, rootview, hotview,dynamicview;
 
         public AppNavigationViewService(IAppNavigationService appNavigationService,IPageService pageService)
         {
@@ -73,10 +73,16 @@ namespace BiliStart.Services
                     shellview.ItemInvoked += Shellview_ItemInvoked;
                     shellview.BackRequested += Shellview_BackRequested;
                     break;
+                case AppNavigationViewsEnum.DynamicFrame:
+                    dynamicview = navigationView;
+                    dynamicview.ItemInvoked += Dynamicview_ItemInvoked;
+                    dynamicview.BackRequested += Dynamicview_BackRequested;
+                    break;
             }
             
         }
 
+        
 
         private NavigationViewItem? GetSelectedItem(IEnumerable<object> menuItems, Type pageType)
         {
@@ -115,6 +121,17 @@ namespace BiliStart.Services
         {
             ItemInvoked(AppNavigationViewsEnum.HotListFrame,args);
         }
+
+
+        private void Dynamicview_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            AppNavigationService.GoBack(AppNavigationViewsEnum.DynamicFrame);
+        }
+        private void Dynamicview_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            ItemInvoked(AppNavigationViewsEnum.DynamicFrame, args);
+        }
+
 
         private void Shellview_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
@@ -169,6 +186,11 @@ namespace BiliStart.Services
                 case AppNavigationViewsEnum.ShellFrame:
                     shellview.ItemInvoked -= Shellview_ItemInvoked;
                     shellview.BackRequested -= Shellview_BackRequested;
+                    break;
+                case AppNavigationViewsEnum.DynamicFrame:
+
+                    dynamicview.ItemInvoked -= Dynamicview_ItemInvoked;
+                    dynamicview.BackRequested -= Dynamicview_BackRequested;
                     break;
             }
         }

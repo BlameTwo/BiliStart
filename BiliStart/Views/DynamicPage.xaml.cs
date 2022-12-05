@@ -35,6 +35,8 @@ public sealed partial class DynamicPage : Page
     {
         this.ViewModel = App.GetService<DynamicViewModel>();
         this.InitializeComponent();
+        this.ViewModel.NavigationService.DynamicFrame = FrameControl;
+        this.ViewModel.NavigationViewService.Initialize(navigation, Contracts.Services.AppNavigationViewsEnum.DynamicFrame);
     }
 
    

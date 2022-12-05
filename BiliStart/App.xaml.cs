@@ -9,11 +9,13 @@ using BiliStart.Dialogs;
 using BiliStart.Models;
 using BiliStart.Notifications;
 using BiliStart.Pages;
+using BiliStart.Pages.Dynamics;
 using BiliStart.Services;
 using BiliStart.Styles.Search;
 using BiliStart.ViewModels;
 using BiliStart.ViewModels.DialogViewModel;
 using BiliStart.ViewModels.PageViewModels;
+using BiliStart.ViewModels.PageViewModels.DynamicsViewModels;
 using BiliStart.ViewModels.SearchModels;
 using BiliStart.Views;
 using CommunityToolkit.Common;
@@ -141,6 +143,9 @@ public partial class App : Application
 
             services.AddTransient <DynamicPage>();
             services.AddTransient<DynamicViewModel>();
+
+            services.AddTransient<MyInfoPage>();
+            services.AddTransient<MyInfoViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

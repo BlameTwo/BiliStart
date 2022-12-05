@@ -8,23 +8,18 @@ using BiliBiliAPI;
 using BiliBiliAPI.Models.Account.Dynamic;
 using BiliBiliAPI.Models.User;
 using BiliBiliAPI.User;
-using BiliStart.Contracts.Services;
 using BiliStart.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.VisualStudio.Services.Profile;
 
-namespace BiliStart.ViewModels;
-public partial class DynamicViewModel:ObservableRecipient
+namespace BiliStart.ViewModels.PageViewModels.DynamicsViewModels;
+
+public partial class MyInfoViewModel:ObservableRecipient
 {
-    public DynamicViewModel(IAppNavigationService navigationService, IPageService pageService, IAppNavigationViewService navigationViewService)
+    public MyInfoViewModel()
     {
         _UpdateItems = new();
-        LiveItems= new();
-        IsActive = true;
-        NavigationService = navigationService;
-        PageService = pageService;
-        NavigationViewService = navigationViewService;
+        LiveItems = new();
     }
     BiliBiliAPI.Account.Dynamic.MyDynamic Dynamic = new();
     Users Users = new();
@@ -43,7 +38,7 @@ public partial class DynamicViewModel:ObservableRecipient
                 LiveItems.Add(ToDynamicLive_My_VM<Dynamic_Live_Items>(item));
             }
         }
-        if(livevalues.UpList != null)
+        if (livevalues.UpList != null)
         {
             foreach (var item in livevalues.UpList.ToObservableCollection())
             {
@@ -83,15 +78,15 @@ public partial class DynamicViewModel:ObservableRecipient
     {
         DynamicLive_My_VM dynamicLive_My_VM = new()
         {
-            IsUpDate=value.IsUpDate,
+            IsUpDate = value.IsUpDate,
             Cover = value.Cover,
-            IsReserve= value.IsReserve,
+            IsReserve = value.IsReserve,
             Mid = value.Mid,
-            Title= value.Title, 
-            UpName = value.UpName, 
-          
+            Title = value.Title,
+            UpName = value.UpName,
+
         };
-        if(value is Dynamic_Live_Items value2)
+        if (value is Dynamic_Live_Items value2)
         {
             dynamicLive_My_VM.Url = value2.Url;
         }
@@ -103,7 +98,7 @@ public partial class DynamicViewModel:ObservableRecipient
     public ObservableCollection<DynamicLive_My_VM> LiveItems
     {
         get => liveitems;
-        set=>SetProperty(ref liveitems, value); 
+        set => SetProperty(ref liveitems, value);
     }
 
 
@@ -113,17 +108,5 @@ public partial class DynamicViewModel:ObservableRecipient
     {
         get => updateitems;
         set => SetProperty(ref updateitems, value);
-    }
-    public IAppNavigationService NavigationService
-    {
-        get;
-    }
-    public IPageService PageService
-    {
-        get;
-    }
-    public IAppNavigationViewService NavigationViewService
-    {
-        get;
     }
 }

@@ -25,6 +25,11 @@ namespace BiliStart.Contracts.Services
             get;set;
         }
 
+        Frame? DynamicFrame
+        {
+            get;set;
+        }
+
         bool? CanShellFrameBack 
         {
             get;
@@ -40,10 +45,15 @@ namespace BiliStart.Contracts.Services
             get;
         }
 
+        bool? CanDynamicFrameBack
+        {
+            get;
+        }
 
         event NavigatedEventHandler ShellNavigated;
         event NavigatedEventHandler RootNavigated;
         event NavigatedEventHandler HotListNavigated;
+        event NavigatedEventHandler DynamicNavigated;
 
         bool GoBack(AppNavigationViewsEnum ob);
 
@@ -54,6 +64,6 @@ namespace BiliStart.Contracts.Services
 
     public enum AppNavigationViewsEnum
     {
-        HotListFrame, RootFrame,ShellFrame
+        HotListFrame, RootFrame,ShellFrame,DynamicFrame
     }
 }

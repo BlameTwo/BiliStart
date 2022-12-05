@@ -8,16 +8,16 @@ namespace BiliStart.Services
 {
     public class AppNavigationService : IAppNavigationService
     {
-        private Frame shellframe, hotlistframe, rootframe;
+        private Frame shellframe, hotlistframe, rootframe,dynamicframe;
         private object? shellobj;
         private object? hotlistobj;
         private object? rootobj;
+        private object? dynamicobj;
 
         public event NavigatedEventHandler? ShellNavigated;
         public event NavigatedEventHandler? HotListNavigated;
         public event NavigatedEventHandler? RootNavigated;
-
-       
+        public event NavigatedEventHandler DynamicNavigated;
 
         public AppNavigationService(IPageService pageService)
         {
@@ -37,6 +37,9 @@ namespace BiliStart.Services
                 case AppNavigationViewsEnum.ShellFrame:
                     obj.Navigated += ShellNavigated;
                     break;
+                case AppNavigationViewsEnum.DynamicFrame:
+                    obj.Navigated += DynamicNavigated;
+                    break;
             }
         }
 
@@ -52,6 +55,9 @@ namespace BiliStart.Services
                     break;
                 case AppNavigationViewsEnum.ShellFrame:
                     obj.Navigated -= ShellNavigated;
+                    break;
+                case AppNavigationViewsEnum.DynamicFrame:
+                    obj.Navigated -= DynamicNavigated;
                     break;
             }
         }
@@ -108,6 +114,25 @@ namespace BiliStart.Services
             }
         }
 
+
+        public Frame? DynamicFrame
+        {
+            get
+            {
+                if (dynamicframe == null)
+                {
+                    RegisterFrameEvents(dynamicframe, AppNavigationViewsEnum.DynamicFrame);
+                }
+                return shellframe;
+            }
+            set
+            {
+                UnRegisterFrameEvents(value, AppNavigationViewsEnum.DynamicFrame);
+                dynamicframe = value;
+
+            }
+        }
+
         public bool? CanShellFrameBack
         {
             get => shellframe.CanGoBack;
@@ -126,7 +151,11 @@ namespace BiliStart.Services
         {
             get;
         }
-        
+
+        public bool? CanDynamicFrameBack
+        {
+            get => dynamicframe.CanGoBack;
+        }
 
         public bool NavigationTo(AppNavigationViewsEnum ob, string pageKey, object? parameter = null, bool clearNavigation = false)
         {
@@ -145,6 +174,10 @@ namespace BiliStart.Services
                 case AppNavigationViewsEnum.ShellFrame:
                     nowframe = shellframe;
                     nowparameter = shellobj;
+                    break;
+                case AppNavigationViewsEnum.DynamicFrame:
+                    nowframe = dynamicframe;
+                    nowparameter = dynamicobj;
                     break;
                 default:
                     break;
@@ -169,6 +202,9 @@ namespace BiliStart.Services
                         case AppNavigationViewsEnum.ShellFrame:
                             hotlistobj = parameter;
                             break;
+                        case AppNavigationViewsEnum.DynamicFrame:
+                            dynamicobj = parameter;
+                            break;
                     }
                     if (vmBeforeNavigation is INavigationAware navigationAware)
                     {
@@ -187,16 +223,15 @@ namespace BiliStart.Services
             switch (ob)
             {
                 case AppNavigationViewsEnum.HotListFrame:
-                    CanBack(HotListFrame);
-                    return true;
+                    return CanBack(HotListFrame);
                 case AppNavigationViewsEnum.RootFrame:
-                    CanBack(RootFrame);
-                    return true;
+                    return CanBack(RootFrame);
                 case AppNavigationViewsEnum.ShellFrame:
-                    CanBack(ShellFrame);
-                    return true;
-                    default: return false;
+                    return CanBack(ShellFrame);
+                case AppNavigationViewsEnum.DynamicFrame:
+                    return CanBack(DynamicFrame);
             }
+            return false;
         }
 
         private bool CanBack(Frame? frame)

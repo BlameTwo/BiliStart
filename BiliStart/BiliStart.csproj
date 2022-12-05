@@ -55,6 +55,7 @@
     <None Remove="Assets\SplashScreen.scale-400.png" />
     <None Remove="Dialogs\LoginDialog.xaml" />
     <None Remove="MainPage.xaml" />
+    <None Remove="Pages\Dynamics\MyInfo.xaml" />
     <None Remove="Pages\MusicAllPage.xaml" />
     <None Remove="Pages\MustWatchPage.xaml" />
     <None Remove="Pages\RankPage.xaml" />
@@ -118,6 +119,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Pages\Dynamic\MyInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\DynamicPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
