@@ -2,6 +2,9 @@
 
 namespace BiliStart.Contracts.Services;
 
+/// <summary>
+/// 通知服务
+/// </summary>
 public interface IAppNotificationService
 {
     void Initialize();

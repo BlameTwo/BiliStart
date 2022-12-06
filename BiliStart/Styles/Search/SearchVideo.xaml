@@ -1,5 +1,5 @@
-<!--  Copyright (c) Microsoft Corporation. All rights reserved.  -->
-<!--  Licensed under the MIT License. See LICENSE in the project root for license information.  -->
+
+
 
 <UserControl
     x:Class="BiliStart.Styles.Search.SearchVideo"
@@ -10,7 +10,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dt="using:BiliStart.Styles.ItemsDataTemplate"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:local="using:BiliStart.Styles.Search"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">

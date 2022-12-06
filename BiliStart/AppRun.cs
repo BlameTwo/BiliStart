@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BiliStart;
+﻿namespace BiliStart;
 public static class AppRun
 {
     //[global::System.Runtime.InteropServices.DllImport("Microsoft.ui.xaml.dll")]

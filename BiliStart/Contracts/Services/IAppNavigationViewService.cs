@@ -7,6 +7,9 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace BiliStart.Contracts.Services;
 
+/// <summary>
+/// App导航绑定
+/// </summary>
 public interface IAppNavigationViewService
 {
     void Initialize(NavigationView navigationView, AppNavigationViewsEnum ob);

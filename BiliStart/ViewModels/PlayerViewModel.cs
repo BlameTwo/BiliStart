@@ -2,16 +2,9 @@
 using BiliBiliAPI.Models;
 using BiliBiliAPI.Models.Videos;
 using BiliStart.Contracts.Services;
-using BiliStart.Helpers;
-using BiliStart.Services;
 using BiliStart.ViewModels.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Windows.Media.Core;
-using Windows.Media.Playback;
 
 namespace BiliStart.ViewModels;
 public partial class PlayerViewModel:ObservableRecipient

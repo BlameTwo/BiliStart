@@ -1,15 +1,10 @@
-<!--  Copyright (c) Microsoft Corporation. All rights reserved.  -->
-<!--  Licensed under the MIT License. See LICENSE in the project root for license information.  -->
-
 <Page
     x:Class="BiliStart.Views.PlayerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:convert="using:BiliStart.Behaviors.Converter"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:data="using:BiliBiliAPI.Models.Videos"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
@@ -88,11 +83,11 @@
                             <ComboBoxItem Content="2" />
                         </ComboBox>
                         <ComboBox
+                            x:Name="Play_Suppout"
                             Grid.Column="1"
                             Margin="5,0,0,0"
                             ItemsSource="{x:Bind ViewModel._Supports, Mode=OneWay}"
-                            x:Name="Play_Suppout"
-                            SelectedIndex="{x:Bind ViewModel._SupportIndex,Mode=TwoWay}"
+                            SelectedIndex="{x:Bind ViewModel._SupportIndex, Mode=TwoWay}"
                             SelectionChanged="Support_SelectionChanged">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate x:DataType="data:Support_Formats">

@@ -2,6 +2,9 @@
 
 namespace BiliStart.Contracts.Services;
 
+/// <summary>
+/// 设置主题
+/// </summary>
 public interface IThemeSelectorService
 {
     ElementTheme Theme

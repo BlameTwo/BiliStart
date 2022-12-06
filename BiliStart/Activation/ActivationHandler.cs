@@ -5,10 +5,10 @@
 public abstract class ActivationHandler<T> : IActivationHandler
     where T : class
 {
-    // Override this method to add the logic for whether to handle the activation.
+    // 是否处理激活逻辑
     protected virtual bool CanHandleInternal(T args) => true;
-
-    // Override this method to add the logic for your activation handler.
+    
+    //重写激活逻辑
     protected abstract Task HandleInternalAsync(T args);
     
 

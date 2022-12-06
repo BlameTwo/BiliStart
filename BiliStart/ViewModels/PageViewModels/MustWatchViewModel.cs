@@ -2,7 +2,6 @@
 using BiliBiliAPI.Models.HomeVideo;
 using BiliBiliAPI.Models.TopList;
 using BiliStart.Contracts.Services;
-using BiliStart.ItemsViewModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;

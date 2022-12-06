@@ -2,23 +2,16 @@
 using BiliBiliAPI;
 using BiliBiliAPI.Account;
 using BiliBiliAPI.Models.Account;
-using BiliBiliAPI.Models.Search;
-using BiliBiliAPI.Models.Settings;
 using BiliBiliAPI.Search;
 using BiliStart.Contracts.Services;
 using BiliStart.Dialogs;
 using BiliStart.Event;
-using BiliStart.Helpers;
-using BiliStart.Services;
-using BiliStart.Styles;
 using BiliStart.Views;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace BiliStart.ViewModels;
@@ -200,7 +193,11 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
 
     public async Task InitSearch()
     {
-        _PlaceholderTextSearch = (await DefaultSearch.GetDefault()).Data.Title;
+        var value = (await DefaultSearch.GetDefault());
+        if(value.Data != null)
+        {
+            _PlaceholderTextSearch = value.Data.Title;
+        }
         await RefershSearchHotRank();
     }
 

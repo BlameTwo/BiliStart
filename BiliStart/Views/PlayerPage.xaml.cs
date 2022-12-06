@@ -1,8 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-
-using BiliBiliAPI.Video;
-using BiliBiliAPI.Models;
 using BiliBiliAPI.Models.Videos;
 using BiliStart.ViewModels;
 using BiliStart.ViewModels.Models;
@@ -14,13 +9,8 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI;
 using Windows.Media.Playback;
 using BiliStart.Helpers;
-using Microsoft.Graphics.Canvas.UI.Xaml;
-using BiliBiliAPI.Models.HomeVideo;
-using System.Collections.ObjectModel;
 using Windows.Media.Core;
-using FFmpegInteropX;
 using BiliStart.Contracts.Services;
-using BiliStart.Services;
 
 namespace BiliStart.Views;
 /// <summary>

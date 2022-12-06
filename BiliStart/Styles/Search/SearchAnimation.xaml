@@ -6,7 +6,6 @@
     xmlns:control="using:BiliStart.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dt="using:BiliStart.Styles.ItemsDataTemplate"
-    xmlns:local="using:BiliStart.Styles.Search"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">

@@ -1,12 +1,12 @@
-<!--  Copyright (c) Microsoft Corporation and Contributors.  -->
-<!--  Licensed under the MIT License.  -->
+
+
 
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BiliStart.UI.Controls">
     <Style TargetType="local:CardControl">
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="15" />
         <Setter Property="BorderBrush" Value="{ThemeResource AppBarBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="IconForeground" Value="{StaticResource AccentAAFillColorDefaultBrush}" />
@@ -29,7 +29,9 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel
+                    Orientation="Horizontal"
+                    Visibility="{TemplateBinding HeaderVisibility}">
                     <SymbolIcon
                         Foreground="{TemplateBinding IconForeground}"
                         Symbol="{TemplateBinding Icon}" />

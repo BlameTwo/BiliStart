@@ -28,7 +28,6 @@ public static class QRConvert
             await bitmapImage.SetSourceAsync(stream);
             return bitmapImage;
         }
-        return null;
     }
 
 

@@ -1,8 +1,8 @@
-﻿using BiliStart.Helpers;
+﻿using BiliStart.Contracts.Services;
+using BiliStart.Helpers;
 using Microsoft.UI.Xaml;
 using System.Runtime.InteropServices; // For DllImport
 using WinRT; // required to support Window.As<ICompositionSupportsSystemBackdrop>()
-using WinUIEx;
 namespace BiliStart;
 
 
@@ -53,6 +53,11 @@ public sealed partial class MainWindow : Window
     Microsoft.UI.Composition.SystemBackdrops.DesktopAcrylicController m_acrylicController;
     Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration m_configurationSource;
 
+    public IWindowManager WindowManager
+    {
+        get;
+    }
+
     public enum BackdropType
     {
         Mica,
@@ -63,16 +68,16 @@ public sealed partial class MainWindow : Window
 
     public MainWindow()
     {
+        WindowManager = App.GetService<IWindowManager>();
+        
         InitializeComponent();
-        this.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/icon.ico"));
-        //使用WindowManager进行窗口管理
-        WindowManager manager = WindowManager.Get(this);
+        WindowManager.Window = this;
         m_wsdqHelper = new WindowsSystemDispatcherQueueHelper();
         m_wsdqHelper.EnsureWindowsSystemDispatcherQueueController();
         SetBackdrop(BackdropType.DesktopAcrylic);
         Title = "AppDisplayName".GetLocalized();
-        manager.MinWidth = 400;
-        manager.MinHeight = 500;
+        WindowManager.SetMinHeightAndWidth(500, 400);
+        WindowManager.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/icon.ico"));
         int build = Environment.OSVersion.Version.Build;
         if (build >= 22000 && build < 22621)
         {

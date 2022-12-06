@@ -1,5 +1,4 @@
 ﻿using BiliBiliAPI.Models.Account;
-using BiliBiliAPI.Models.Search;
 using BiliBiliAPI.Models.Settings;
 using BiliStart.Activation;
 using BiliStart.Contracts.Services;
@@ -18,7 +17,6 @@ using BiliStart.ViewModels.PageViewModels;
 using BiliStart.ViewModels.PageViewModels.DynamicsViewModels;
 using BiliStart.ViewModels.SearchModels;
 using BiliStart.Views;
-using CommunityToolkit.Common;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -179,8 +177,6 @@ public partial class App : Application
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
     {
-        // TODO: Log and handle exceptions as appropriate.
-        // https://docs.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.application.unhandledexception.
         e.Handled= true;
     }
 
@@ -190,7 +186,7 @@ public partial class App : Application
 
         ResourceContext resourceContext = ResourceContext.GetForViewIndependentUse();
 
-        App.GetService<IAppNotificationService>().CreateShow("ToGO!","前往首页","前往热门","欢迎使用Bili","你好！",AppContext.BaseDirectory+ "Assets/icon.ico");
+        //App.GetService<IAppNotificationService>().CreateShow("ToGO!","前往首页","前往热门","欢迎使用Bili","你好！",AppContext.BaseDirectory+ "Assets/icon.ico");
 
         await App.GetService<IActivationService>().ActivateAsync(args);
 

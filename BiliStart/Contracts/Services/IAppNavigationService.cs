@@ -8,6 +8,9 @@ using Microsoft.UI.Xaml.Navigation;
 
 namespace BiliStart.Contracts.Services
 {
+    /// <summary>
+    /// APP导航
+    /// </summary>
     public interface IAppNavigationService
     {
         Frame? ShellFrame

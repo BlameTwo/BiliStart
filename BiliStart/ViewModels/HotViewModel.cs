@@ -1,9 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using BiliBiliAPI.Models.HomeVideo;
 using BiliStart.Contracts.Services;
-using BiliStart.Services;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Dispatching;
 
 namespace BiliStart.ViewModels
 {

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using BiliStart.ViewModels.Models;
 
 namespace BiliStart.Contracts.Services;
+
+/// <summary>
+/// 导航到视频播放
+/// </summary>
 public interface IGoVideo
 {
     PlayerArgs PlayerArgs

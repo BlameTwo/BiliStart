@@ -1,21 +1,11 @@
-﻿using System.Runtime.InteropServices;
-using BiliBiliAPI.Account;
-using BiliStart.Contracts.Services;
-using BiliStart.Dialogs;
+﻿using BiliStart.Contracts.Services;
 using BiliStart.Helpers;
 using BiliStart.ViewModels;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI;
-using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Windows.Graphics;
 using Windows.System;
-using Windows.UI.WindowManagement;
-using WinRT.Interop;
 
 namespace BiliStart.Views;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 
@@ -28,6 +23,24 @@ public class CardControl:Microsoft.UI.Xaml.Controls.ContentControl
     public static readonly DependencyProperty IconProperty =
         DependencyProperty.Register("Icon", typeof(Symbol), typeof(CardControl), new PropertyMetadata(null));
 
+
+
+
+    public Visibility  HeaderVisibility
+    {
+        get
+        {
+            return (Visibility )GetValue(HeaderVisibilityProperty);
+        }
+        set
+        {
+            SetValue(HeaderVisibilityProperty, value);
+        }
+    }
+
+    // Using a DependencyProperty as the backing store for HeaderVisibility.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty HeaderVisibilityProperty =
+        DependencyProperty.Register("HeaderVisibility", typeof(Visibility ), typeof(CardControl), new PropertyMetadata(Visibility.Visible));
 
 
 
