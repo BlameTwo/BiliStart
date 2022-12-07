@@ -64,6 +64,7 @@
     <None Remove="Pages\WeekPage.xaml" />
     <None Remove="Styles\Animations.xaml" />
     <None Remove="Styles\Converter.xaml" />
+    <None Remove="Styles\Dynamics\DefaultDynamicItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\MusicRankItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\MustWatchItemStyle.xaml" />
@@ -119,6 +120,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\Dynamics\DefaultDynamicItemStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Pages\Dynamic\MyInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

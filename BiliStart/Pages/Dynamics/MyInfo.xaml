@@ -1,20 +1,50 @@
-
-
-
 <Page
     x:Class="BiliStart.Pages.Dynamics.MyInfoPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animations="using:CommunityToolkit.WinUI.UI.Animations"
-    xmlns:behaviors="using:CommunityToolkit.WinUI.UI.Behaviors"
     xmlns:biliui="using:BiliStart.UI.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:cui="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:data="using:BiliStart.Models"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:local="using:BiliStart.Pages.Dynamics"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:selecter="using:BiliStart.Styles.Dynamics"
     mc:Ignorable="d">
-    <Grid />
+    <Page.Resources>
+        <selecter:DynamicSelecter
+            x:Key="DynamicSelecter"
+            DefaultAVTemplate="{StaticResource AVDynamicDT}"
+            DefaultArticleTemplate="{StaticResource ArticleDynamicDT}"
+            DefaultDataTemplate="{StaticResource DefaultDynamicDT}"
+            DefaultDrawTemplate="{StaticResource DrawDynamicDT}"
+            DefaultForwardTemplate="{StaticResource ForwardDynamicDT}"
+            DefaultWordTemplate="{StaticResource WordDynamicDT}" />
+    </Page.Resources>
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior>
+            <core:InvokeCommandAction Command="{x:Bind ViewModel.LoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+    <Grid Margin="10">
+        <cui:AdaptiveGridView
+            x:Name="adaptive"
+            animations:ItemsReorderAnimation.Duration="0:0:0.2"
+            ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
+            ItemTemplateSelector="{StaticResource DynamicSelecter}"
+            ItemsSource="{x:Bind ViewModel._Items, Mode=OneWay}">
+            <i:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Loaded">
+                    <core:InvokeCommandAction
+                        Command="{x:Bind ViewModel.ScrollLoad}"
+                        CommandParameter="{x:Bind adaptive, Mode=TwoWay}" />
+                </core:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <cui:StaggeredPanel DesiredColumnWidth="300" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </cui:AdaptiveGridView>
+    </Grid>
 </Page>

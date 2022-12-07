@@ -88,7 +88,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -171,21 +171,20 @@
                 </biliui:CardControl.Content>
             </biliui:CardControl>
         </Grid>
-        <ScrollViewer Grid.Row="1">
-            <NavigationView
-                x:Name="navigation"
-                IsBackButtonVisible="Collapsed"
-                IsSettingsVisible="False"
-                PaneDisplayMode="Top">
-                <NavigationView.MenuItems>
-                    <NavigationViewItem
-                        helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.DynamicsViewModels.MyInfoViewModel"
-                        Content="MyInfo"
-                        Icon="Account" />
-                </NavigationView.MenuItems>
-                <Frame x:Name="FrameControl" />
-            </NavigationView>
-        </ScrollViewer>
+        <NavigationView
+            x:Name="navigation"
+            Grid.Row="1"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            PaneDisplayMode="Top">
+            <NavigationView.MenuItems>
+                <NavigationViewItem
+                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.PageViewModels.DynamicsViewModels.MyInfoViewModel"
+                    Content="MyInfo"
+                    Icon="Account" />
+            </NavigationView.MenuItems>
+            <Frame x:Name="FrameControl" />
+        </NavigationView>
     </Grid>
 
 </Page>
