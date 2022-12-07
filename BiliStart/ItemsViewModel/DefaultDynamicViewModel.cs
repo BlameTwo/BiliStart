@@ -19,5 +19,5 @@ public partial class DefaultDynamicViewModel: DynamicDataList
     }
 
 
-    public RichTextBlock RichTextBlockparame => RichTextBlockHelper.DynamicTextParse(this.Modules.Module_More.Desc.Text_Nodes);
+    public RichTextBlock RichTextBlockparame => RichTextBlockHelper.DynamicTextParse(this.Modules.Module_More.Desc.Text_Nodes,this.ID);
 }
