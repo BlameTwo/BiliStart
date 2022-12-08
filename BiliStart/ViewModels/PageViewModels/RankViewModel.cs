@@ -38,10 +38,13 @@ public partial class RankViewModel : ObservableRecipient
         {
             Aid = long.Parse(value.Aid),
             Bvid = value.Bvid
-            , Content = ((await VContent.GetVideosContent(value.Aid, BiliBiliAPI.Models.VideoIDType.AV)).Data)
+            , Content = ((await VContent.GetVideosContent(value.Bvid, BiliBiliAPI.Models.VideoIDType.BV)).Data)
         };
-        GoVideo.PlayerArgs = arg;
-        GoVideo.Go();
+        if(arg.Content != null)
+        {
+            GoVideo.PlayerArgs = arg;
+            GoVideo.Go();
+        }
     }
 
     private ObservableCollection<BiliBiliAPI.Models.TopList.TopVideo> Items;

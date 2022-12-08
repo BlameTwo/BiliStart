@@ -29,7 +29,6 @@
     <Grid Margin="10">
         <cui:AdaptiveGridView
             x:Name="adaptive"
-            animations:ItemsReorderAnimation.Duration="0:0:0.2"
             ItemContainerStyle="{ThemeResource DefaultGridViewItem}"
             ItemTemplateSelector="{StaticResource DynamicSelecter}"
             ItemsSource="{x:Bind ViewModel._Items, Mode=OneWay}">

@@ -41,6 +41,10 @@ namespace BiliStart.Styles.Dynamics
             get;set;
         }
 
+        public DataTemplate DefaultPGCTemplate
+        {
+            get;set;
+        }
         //选择动态数据模板
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
