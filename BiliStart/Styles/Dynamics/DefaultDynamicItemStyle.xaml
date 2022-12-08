@@ -332,9 +332,10 @@
                     Grid.Row="0"
                     DataContext="{Binding}"
                     Template="{ThemeResource DefaultDynamicHeader}" />
-                <TextBlock
+                <ContentControl
                     Grid.Row="1"
-                    Text="This is a Word Template" />
+                    Margin="10"
+                    Content="{Binding RichTextBlockparame, Mode=OneWay}" />
                 <ContentControl
                     Grid.Row="2"
                     Template="{ThemeResource DefaultDynamicFooter}" />
