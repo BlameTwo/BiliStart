@@ -124,7 +124,17 @@
         </Border>
     </DataTemplate>
 
-    <ControlTemplate x:Key="DrawDynamicCT">
+    <ControlTemplate
+        x:Key="PGCDynamicCT"
+        TargetType="ContentControl">
+        <TextBlock
+            Grid.Row="1"
+            Text="This is a PGC Template" />
+    </ControlTemplate>
+
+    <ControlTemplate
+        x:Key="DrawDynamicCT"
+        TargetType="ContentControl">
         <Border
             Margin="5"
             Padding="5"
@@ -170,7 +180,17 @@
             </Grid>
         </Border>
     </ControlTemplate>
-    <ControlTemplate x:Key="AVDynamicCT">
+    <ControlTemplate
+        x:Key="WordDynamicCT"
+        TargetType="ContentControl">
+        <ContentControl
+            Grid.Row="1"
+            Margin="10"
+            Content="{Binding RichTextBlockparame, Mode=OneWay}" />
+    </ControlTemplate>
+    <ControlTemplate
+        x:Key="AVDynamicCT"
+        TargetType="ContentControl">
         <Grid
             Grid.Row="1"
             Margin="10">
@@ -241,6 +261,14 @@
             </Border>
         </Grid>
     </ControlTemplate>
+
+    <ControlTemplate
+        x:Key="ArticleDynamicCT"
+        TargetType="ContentControl">
+        <TextBlock
+            Grid.Row="1"
+            Text="This is a Article Template" />
+    </ControlTemplate>
     <DataTemplate x:Key="DrawDynamicDT">
         <Border
             Margin="5"
@@ -301,77 +329,12 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <ContentControl
+                    Grid.Row="0"
                     DataContext="{Binding}"
                     Template="{ThemeResource DefaultDynamicHeader}" />
-                <Grid
+                <ContentControl
                     Grid.Row="1"
-                    Margin="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <ContentControl Content="{Binding RichTextBlockparame, Mode=OneWay}" />
-                    <Border
-                        Grid.Row="1"
-                        Margin="0,5,0,0"
-                        Padding="10"
-                        Background="{ThemeResource ControlFillColorDefault}"
-                        CornerRadius="5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-                            <bili:ImageLoad
-                                Source="{Binding Modules.Module_More.Module_Major.Major_Acrchive.Cover, Mode=OneWay}"
-                                Stretch="Uniform" />
-                            <FontIcon
-                                Margin="0,0,15,15"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom"
-                                FontFamily="Segoe Fluent Icons"
-                                FontSize="40"
-                                Glyph="&#xF5B0;" />
-                            <Border
-                                Margin="5,5,0,0"
-                                Padding="8"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
-                                CornerRadius="5">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        FontFamily="Segoe Fluent Icons"
-                                        Glyph="&#xE768;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        Text="{Binding Modules.Module_More.Module_Major.Major_Acrchive.State.ViewCount, Mode=OneWay}" />
-                                </StackPanel>
-                            </Border>
-                            <Border
-                                Margin="5,5,0,0"
-                                Padding="8"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
-                                CornerRadius="5">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        FontFamily="Segoe Fluent Icons"
-                                        Glyph="&#xE7BC;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        Text="{Binding Modules.Module_More.Module_Major.Major_Acrchive.State.DanmakuCount, Mode=OneWay}" />
-                                </StackPanel>
-                            </Border>
-                            <TextBlock
-                                Grid.Row="1"
-                                Margin="5,5,0,0"
-                                Text="{Binding Modules.Module_More.Module_Major.Major_Acrchive.Title, Mode=OneWay}"
-                                TextTrimming="CharacterEllipsis" />
-                        </Grid>
-                    </Border>
-                </Grid>
+                    Template="{StaticResource AVDynamicCT}" />
                 <ContentControl
                     Grid.Row="2"
                     DataContext="{Binding}"
@@ -395,9 +358,9 @@
                 <ContentControl
                     DataContext="{Binding}"
                     Template="{ThemeResource DefaultDynamicHeader}" />
-                <TextBlock
+                <ContentControl
                     Grid.Row="1"
-                    Text="This is a Article Template" />
+                    Template="{StaticResource ArticleDynamicCT}" />
                 <ContentControl
                     Grid.Row="2"
                     DataContext="{Binding}"
@@ -437,6 +400,7 @@
         </Border>
     </DataTemplate>
 
+
     <DataTemplate x:Key="WordDynamicDT">
         <Border
             Margin="5"
@@ -455,8 +419,7 @@
                     Template="{ThemeResource DefaultDynamicHeader}" />
                 <ContentControl
                     Grid.Row="1"
-                    Margin="10"
-                    Content="{Binding RichTextBlockparame, Mode=OneWay}" />
+                    Template="{StaticResource WordDynamicCT}" />
                 <ContentControl
                     Grid.Row="2"
                     Template="{ThemeResource DefaultDynamicFooter}" />
@@ -479,9 +442,9 @@
                 <ContentControl
                     DataContext="{Binding}"
                     Template="{ThemeResource DefaultDynamicHeader}" />
-                <TextBlock
+                <ContentControl
                     Grid.Row="1"
-                    Text="This is a PGC Template" />
+                    Template="{ThemeResource PGCDynamicCT}" />
                 <ContentControl
                     Grid.Row="2"
                     DataContext="{Binding}"

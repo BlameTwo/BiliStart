@@ -107,12 +107,16 @@ namespace BiliStart.Styles.Dynamics
                     switch (model.Orig.DynamicType)
                     {
                         case "DYNAMIC_TYPE_DRAW":
+                            (s as OrigSelecterDT)!.DataContext = model.Orig;
                             (s as OrigSelecterDT)!.Template = (ControlTemplate)App.Current.Resources["DrawDynamicCT"];
-                            (s as OrigSelecterDT)!.DataContext = model;
                             break;
                         case "DYNAMIC_TYPE_AV":
                             (s as OrigSelecterDT)!.DataContext = model.Orig;
                             (s as OrigSelecterDT)!.Template = (ControlTemplate)App.Current.Resources["AVDynamicCT"];
+                            break;
+                        case "DYNAMIC_TYPE_WORD":
+                            (s as OrigSelecterDT)!.DataContext = model.Orig;
+                            (s as OrigSelecterDT)!.Template = (ControlTemplate)App.Current.Resources["WordDynamicCT"];
                             break;
                         default:
                             break;
