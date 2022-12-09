@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using BiliStart.ItemsViewModel;
@@ -17,6 +18,11 @@ namespace BiliStart.Styles.Dynamics
         }
 
         public DataTemplate DefaultDrawTemplate
+        {
+            get;set;
+        }
+
+        public DataTemplate DefaultSeasonTemplate
         {
             get;set;
         }
@@ -45,6 +51,11 @@ namespace BiliStart.Styles.Dynamics
         {
             get;set;
         }
+
+        public DataTemplate DefaultLiveTemplate
+        {
+            get;set;
+        }
         //选择动态数据模板
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
@@ -62,10 +73,52 @@ namespace BiliStart.Styles.Dynamics
                         return DefaultForwardTemplate;
                     case "DYNAMIC_TYPE_WORD":
                         return DefaultWordTemplate;
+                    case "DYNAMIC_TYPE_UGC_SEASON":
+                        return DefaultSeasonTemplate;
+                    case "DYNAMIC_TYPE_PGC":
+                        return DefaultPGCTemplate;
+                    case "DYNAMIC_TYPE_LIVE_RCMD":
+                        return DefaultLiveTemplate;
                     default:return DefaultDataTemplate;
                 }
             }
             return DefaultDataTemplate;
+        }
+    }
+
+    public class OrigSelecterDT:ContentControl
+    {
+        public DefaultDynamicViewModel Data
+        {
+            get=>(DefaultDynamicViewModel) GetValue(DataProperty);
+            set => SetValue(DataProperty, value);
+        }
+
+        public static readonly DependencyProperty DataProperty =
+            DependencyProperty.Register("Data", typeof(DefaultDynamicViewModel), typeof(OrigSelecterDT), new PropertyMetadata(null,(s,e)=>Changed(s,e)));
+
+        private static void Changed(DependencyObject s, DependencyPropertyChangedEventArgs e)
+        {
+            //套娃筛选
+            if(e.NewValue is DefaultDynamicViewModel model)
+            {
+                if(model.Orig != null)
+                {
+                    switch (model.Orig.DynamicType)
+                    {
+                        case "DYNAMIC_TYPE_DRAW":
+                            (s as OrigSelecterDT)!.Template = (ControlTemplate)App.Current.Resources["DrawDynamicCT"];
+                            (s as OrigSelecterDT)!.DataContext = model;
+                            break;
+                        case "DYNAMIC_TYPE_AV":
+                            (s as OrigSelecterDT)!.DataContext = model.Orig;
+                            (s as OrigSelecterDT)!.Template = (ControlTemplate)App.Current.Resources["AVDynamicCT"];
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
     }
 }

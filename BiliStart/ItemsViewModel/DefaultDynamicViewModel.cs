@@ -47,6 +47,8 @@ public partial class DefaultDynamicViewModel: DynamicDataList
                     }
                 case "DYNAMIC_TYPE_WORD":
                     return RichTextBlockHelper.DynamicTextParse(this.Modules.Module_More.Desc.Text_Nodes, this.ID);
+                case "DYNAMIC_TYPE_FORWARD":
+                    return RichTextBlockHelper.DynamicTextParse(this.Modules.Module_More.Desc.Text_Nodes, this.ID);
                 default:
                     return new RichTextBlock();
             }

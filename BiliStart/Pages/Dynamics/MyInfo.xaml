@@ -19,6 +19,8 @@
             DefaultDataTemplate="{StaticResource DefaultDynamicDT}"
             DefaultDrawTemplate="{StaticResource DrawDynamicDT}"
             DefaultForwardTemplate="{StaticResource ForwardDynamicDT}"
+            DefaultLiveTemplate="{StaticResource LiveDynamicDT}"
+            DefaultSeasonTemplate="{StaticResource SeasonDynamicDT}"
             DefaultWordTemplate="{StaticResource WordDynamicDT}" />
     </Page.Resources>
     <i:Interaction.Behaviors>

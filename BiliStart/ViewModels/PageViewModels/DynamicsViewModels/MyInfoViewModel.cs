@@ -30,7 +30,7 @@ public partial class MyInfoViewModel:ScrolViewModelBase
         foreach (var item in result.Data.DynamicList.ToObservableCollection())
         {
             Items.Add(new DefaultDynamicViewModel() { Basic = item.Basic,
-            ID = item.ID, DynamicType = item.DynamicType, IsVisible = item.IsVisible, Modules = item.Modules});
+            ID = item.ID, DynamicType = item.DynamicType, IsVisible = item.IsVisible, Modules = item.Modules,Orig = item.Orig});
         }
         index++;
     }

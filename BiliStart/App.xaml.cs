@@ -150,7 +150,7 @@ public partial class App : Application
         Build();
         App.GetService<IAppNotificationService>().Initialize();
 
-        UnhandledException += App_UnhandledException;
+        //UnhandledException += App_UnhandledException;
     }
 
 
