@@ -21,6 +21,9 @@ public partial class DefaultDynamicViewModel: DynamicDataList
     }
 
 
+    /// <summary>
+    /// 简介文字内容，只读字段
+    /// </summary>
     public RichTextBlock RichTextBlockparame
     {
         get

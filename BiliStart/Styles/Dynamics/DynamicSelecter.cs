@@ -56,6 +56,7 @@ namespace BiliStart.Styles.Dynamics
         {
             get;set;
         }
+
         //选择动态数据模板
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
@@ -97,6 +98,7 @@ namespace BiliStart.Styles.Dynamics
         public static readonly DependencyProperty DataProperty =
             DependencyProperty.Register("Data", typeof(DefaultDynamicViewModel), typeof(OrigSelecterDT), new PropertyMetadata(null,(s,e)=>Changed(s,e)));
 
+        //这里使用获得的数据进行筛选控件模板，应用，是直接获取后台资源。
         private static void Changed(DependencyObject s, DependencyPropertyChangedEventArgs e)
         {
             //套娃筛选
@@ -119,6 +121,7 @@ namespace BiliStart.Styles.Dynamics
                             (s as OrigSelecterDT)!.Template = (ControlTemplate)App.Current.Resources["WordDynamicCT"];
                             break;
                         default:
+                            (s as OrigSelecterDT)!.DataContext = "未实现的控件模板";
                             break;
                     }
                 }
