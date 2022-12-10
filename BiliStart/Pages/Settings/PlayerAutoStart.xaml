@@ -12,6 +12,7 @@
     HorizontalAlignment="Stretch"
     mc:Ignorable="d">
 
+    <!--<FontIcon FontFamily="Webdings" Glyph="&#xF0FC;" />-->
     <biliconsole:BorderExpander x:Uid="Setting_PlayerAutoStart">
         <biliconsole:BorderExpander.Icon>
             <FontIcon

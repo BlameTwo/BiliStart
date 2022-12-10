@@ -127,9 +127,59 @@
     <ControlTemplate
         x:Key="PGCDynamicCT"
         TargetType="ContentControl">
-        <TextBlock
-            Grid.Row="1"
-            Text="This is a PGC Template" />
+        <Grid Margin="0,10">
+            <bili:ImageLoad
+                Source="{Binding Modules.Module_More.Module_Major.PGC.Cover, Mode=OneWay}"
+                Stretch="UniformToFill" />
+            <FontIcon
+                Margin="0,0,5,5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                FontFamily="Segoe Fluent Icons"
+                FontSize="40"
+                Glyph="&#xF5B0;" />
+            <Border
+                Margin="3,3,0,0"
+                Padding="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                CornerRadius="5">
+                <TextBlock Text="{Binding Modules.Module_More.Module_Major.PGC.Pgc_Badge.text, Mode=OneWay}" />
+            </Border>
+            <Border
+                Margin="5,0,0,5"
+                Padding="8"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                CornerRadius="5">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon
+                        FontFamily="Segoe Fluent Icons"
+                        Glyph="&#xE768;" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        Text="{Binding Modules.Module_More.Module_Major.PGC.Stat.ViewCount, Mode=OneWay}" />
+                </StackPanel>
+            </Border>
+            <Border
+                Margin="0,5,5,0"
+                Padding="8"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                CornerRadius="5">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon
+                        FontFamily="Segoe Fluent Icons"
+                        Glyph="&#xE7BC;" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        Text="{Binding Modules.Module_More.Module_Major.PGC.Stat.DanmakuCount, Mode=OneWay}" />
+                </StackPanel>
+            </Border>
+        </Grid>
     </ControlTemplate>
     <ControlTemplate
         x:Key="LiveDynamicCT"
@@ -143,7 +193,9 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding Modules.Module_Author.Dynamic_Message, Mode=OneWay}" />
+                <TextBlock
+                    Foreground="{ThemeResource AccentAAFillColorSecondaryBrush}"
+                    Text="{Binding Modules.Module_Author.Dynamic_Message, Mode=OneWay}" />
                 <Grid
                     Grid.Row="1"
                     Margin="0,5,0,0">
@@ -192,7 +244,6 @@
         <Border
             Margin="5"
             Padding="5"
-            Background="{ThemeResource ControlFillColorDefault}"
             CornerRadius="5">
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -301,7 +352,56 @@
             </Border>
         </Grid>
     </ControlTemplate>
+    <ControlTemplate
+        x:Key="SeasonDynamicCT"
+        TargetType="ContentControl">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Foreground="{ThemeResource AccentAAFillColorSecondaryBrush}"
+                Text="{Binding Modules.Module_Author.Dynamic_Message, Mode=OneWay}" />
+            <bili:ImageLoad
+                Grid.Row="1"
+                Margin="0,5,0,0"
+                Source="{Binding Modules.Module_More.Module_Major.UGC_Season.Cover, Mode=OneWay}" />
+            <Border
+                Grid.Row="1"
+                Margin="5,10,0,0"
+                Padding="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                CornerRadius="5">
+                <TextBlock Text="{Binding Modules.Module_More.Module_Major.UGC_Season.UGC_Badge.text, Mode=OneWay}" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Margin="0,0,5,5"
+                Padding="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                CornerRadius="5">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon
+                        FontFamily="Segoe Fluent Icons"
+                        Glyph="&#xEC92;" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        Text="{Binding Modules.Module_More.Module_Major.UGC_Season.DurationText}" />
+                </StackPanel>
+            </Border>
+            <TextBlock
+                Grid.Row="2"
+                Margin="0,5,0,0"
+                Text="{Binding Modules.Module_More.Module_Major.UGC_Season.Title}" />
 
+        </Grid>
+    </ControlTemplate>
     <ControlTemplate
         x:Key="ArticleDynamicCT"
         TargetType="ContentControl">
@@ -464,6 +564,7 @@
                     Template="{ThemeResource DefaultDynamicHeader}" />
                 <ContentControl
                     Grid.Row="1"
+                    DataContext="{Binding}"
                     Template="{ThemeResource PGCDynamicCT}" />
                 <ContentControl
                     Grid.Row="2"
@@ -515,9 +616,10 @@
                 <ContentControl
                     DataContext="{Binding}"
                     Template="{ThemeResource DefaultDynamicHeader}" />
-                <TextBlock
+                <ContentControl
                     Grid.Row="1"
-                    Text="This is a Season Template" />
+                    DataContext="{Binding}"
+                    Template="{StaticResource SeasonDynamicCT}" />
                 <ContentControl
                     Grid.Row="2"
                     DataContext="{Binding}"
