@@ -131,7 +131,61 @@
             Grid.Row="1"
             Text="This is a PGC Template" />
     </ControlTemplate>
-
+    <ControlTemplate
+        x:Key="LiveDynamicCT"
+        TargetType="ContentControl">
+        <Border
+            Margin="5"
+            Padding="5"
+            CornerRadius="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Modules.Module_Author.Dynamic_Message, Mode=OneWay}" />
+                <Grid
+                    Grid.Row="1"
+                    Margin="0,5,0,0">
+                    <bili:ImageLoad
+                        Source="{Binding Modules.Module_More.Module_Major.Major_Live.LiveContent.LiveInfo.Cover, Mode=OneWay}"
+                        Stretch="UniformToFill" />
+                    <Border
+                        Margin="5,5,0,0"
+                        Padding="8"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                        CornerRadius="5">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon
+                                FontFamily="Segoe Fluent Icons"
+                                Glyph="&#xE71B;" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                Text="{Binding Modules.Module_More.Module_Major.Major_Live.LiveContent.LiveInfo.Room_id, Mode=OneWay}" />
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Margin="0,5,5,0"
+                        Padding="8"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                        CornerRadius="5">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon
+                                FontFamily="Segoe Fluent Icons"
+                                Glyph="&#xE716;" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                Text="{Binding Modules.Module_More.Module_Major.Major_Live.LiveContent.LiveInfo.Watch_Show.ViewCountTwo}" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+    </ControlTemplate>
     <ControlTemplate
         x:Key="DrawDynamicCT"
         TargetType="ContentControl">
@@ -140,43 +194,29 @@
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
             CornerRadius="5">
-            <Grid>
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <ContentControl
-                    DataContext="{Binding}"
-                    Template="{ThemeResource DefaultDynamicHeader}" />
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <ContentControl
-                        Margin="10"
-                        Content="{Binding RichTextBlockparame, Mode=OneWay}" />
-                    <StackPanel Grid.Row="1">
-                        <FlipView
-                            x:Name="Gallery"
-                            MaxHeight="300"
-                            Background="Transparent"
-                            ItemsSource="{Binding Modules.Module_More.Module_Major.Draw.DrawItems, Mode=OneWay}">
-                            <FlipView.ItemTemplate>
-                                <DataTemplate>
-                                    <Image
-                                        Source="{Binding Cover, Mode=OneWay}"
-                                        Stretch="UniformToFill" />
-                                </DataTemplate>
-                            </FlipView.ItemTemplate>
-                        </FlipView>
-                    </StackPanel>
-                </Grid>
-                <ContentControl
-                    Grid.Row="2"
-                    DataContext="{Binding}"
-                    Template="{ThemeResource DefaultDynamicFooter}" />
+                    Margin="10"
+                    Content="{Binding RichTextBlockparame, Mode=OneWay}" />
+                <StackPanel Grid.Row="1">
+                    <FlipView
+                        x:Name="Gallery"
+                        MaxHeight="300"
+                        Background="Transparent"
+                        ItemsSource="{Binding Modules.Module_More.Module_Major.Draw.DrawItems, Mode=OneWay}">
+                        <FlipView.ItemTemplate>
+                            <DataTemplate>
+                                <Image
+                                    Source="{Binding Cover, Mode=OneWay}"
+                                    Stretch="UniformToFill" />
+                            </DataTemplate>
+                        </FlipView.ItemTemplate>
+                    </FlipView>
+                </StackPanel>
             </Grid>
         </Border>
     </ControlTemplate>
@@ -284,30 +324,10 @@
                 <ContentControl
                     DataContext="{Binding}"
                     Template="{ThemeResource DefaultDynamicHeader}" />
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <ContentControl
-                        Margin="10"
-                        Content="{Binding RichTextBlockparame, Mode=OneWay}" />
-                    <StackPanel Grid.Row="1">
-                        <FlipView
-                            x:Name="Gallery"
-                            MaxHeight="300"
-                            Background="Transparent"
-                            ItemsSource="{Binding Modules.Module_More.Module_Major.Draw.DrawItems, Mode=OneWay}">
-                            <FlipView.ItemTemplate>
-                                <DataTemplate>
-                                    <Image
-                                        Source="{Binding Cover, Mode=OneWay}"
-                                        Stretch="UniformToFill" />
-                                </DataTemplate>
-                            </FlipView.ItemTemplate>
-                        </FlipView>
-                    </StackPanel>
-                </Grid>
+                <ContentControl
+                    Grid.Row="1"
+                    DataContext="{Binding}"
+                    Template="{ThemeResource DrawDynamicCT}" />
                 <ContentControl
                     Grid.Row="2"
                     DataContext="{Binding}"
@@ -468,9 +488,10 @@
                 <ContentControl
                     DataContext="{Binding}"
                     Template="{ThemeResource DefaultDynamicHeader}" />
-                <TextBlock
+                <ContentControl
                     Grid.Row="1"
-                    Text="This is a Live Template" />
+                    DataContext="{Binding}"
+                    Template="{StaticResource LiveDynamicCT}" />
                 <ContentControl
                     Grid.Row="2"
                     DataContext="{Binding}"

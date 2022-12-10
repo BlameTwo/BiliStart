@@ -87,6 +87,7 @@ namespace BiliStart.Styles.Dynamics
         }
     }
 
+
     public class OrigSelecterDT:ContentControl
     {
         public DefaultDynamicViewModel Data

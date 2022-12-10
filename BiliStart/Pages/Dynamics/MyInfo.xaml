@@ -20,6 +20,7 @@
             DefaultDrawTemplate="{StaticResource DrawDynamicDT}"
             DefaultForwardTemplate="{StaticResource ForwardDynamicDT}"
             DefaultLiveTemplate="{StaticResource LiveDynamicDT}"
+            DefaultPGCTemplate="{StaticResource PGCDynamicDT}"
             DefaultSeasonTemplate="{StaticResource SeasonDynamicDT}"
             DefaultWordTemplate="{StaticResource WordDynamicDT}" />
     </Page.Resources>
