@@ -172,8 +172,8 @@
                                 VerticalAlignment="Center">
                                 <Rectangle
                                     x:Name="SelectionIndicator"
-                                    Width="{ThemeResource NavigationViewSelectionIndicatorWidth}"
-                                    Height="{ThemeResource NavigationViewSelectionIndicatorHeight}"
+                                    Width="5"
+                                    Height="25"
                                     Fill="{ThemeResource NavigationViewSelectionIndicatorForeground}"
                                     Opacity="0.0"
                                     RadiusX="{ThemeResource NavigationViewSelectionIndicatorRadius}"

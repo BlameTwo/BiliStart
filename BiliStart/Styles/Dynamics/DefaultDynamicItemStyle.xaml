@@ -414,7 +414,10 @@
             Margin="5"
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
+            BorderBrush="{ThemeResource ComboBoxBorderThemeBrush}"
+            BorderThickness="0.3"
             CornerRadius="5">
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -441,6 +444,8 @@
             Margin="5"
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
+            BorderBrush="{ThemeResource ComboBoxBorderThemeBrush}"
+            BorderThickness="0.1"
             CornerRadius="5">
             <Grid>
                 <Grid.RowDefinitions>
@@ -468,6 +473,8 @@
             Margin="5"
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
+            BorderBrush="{ThemeResource ComboBoxBorderThemeBrush}"
+            BorderThickness="0.3"
             CornerRadius="5">
             <Grid>
                 <Grid.RowDefinitions>
@@ -494,7 +501,10 @@
             Margin="5"
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
+            BorderBrush="{ThemeResource ComboBoxBorderThemeBrush}"
+            BorderThickness="0.3"
             CornerRadius="5">
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -526,6 +536,8 @@
             Margin="5"
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
+            BorderBrush="{ThemeResource ComboBoxBorderThemeBrush}"
+            BorderThickness="0.3"
             CornerRadius="5">
             <Grid>
                 <Grid.RowDefinitions>
@@ -552,7 +564,10 @@
             Margin="5"
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
+            BorderBrush="{ThemeResource ComboBoxBorderThemeBrush}"
+            BorderThickness="0.3"
             CornerRadius="5">
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -579,6 +594,8 @@
             Margin="5"
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
+            BorderBrush="{ThemeResource ComboBoxBorderThemeBrush}"
+            BorderThickness="0.3"
             CornerRadius="5">
             <Grid>
                 <Grid.RowDefinitions>
@@ -606,6 +623,8 @@
             Margin="5"
             Padding="5"
             Background="{ThemeResource ControlFillColorDefault}"
+            BorderBrush="{ThemeResource ComboBoxBorderThemeBrush}"
+            BorderThickness="0.3"
             CornerRadius="5">
             <Grid>
                 <Grid.RowDefinitions>
