@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BiliStart.ViewModels;
-public class SearchViewModelBase:ObservableRecipient
+public class SearchViewModelBase:ScrolViewModelBase
     
 {
 
@@ -14,7 +14,7 @@ public class SearchViewModelBase:ObservableRecipient
     {
 
     }
-
+    
     private string SearchKey;
 
     public string _SearchKey

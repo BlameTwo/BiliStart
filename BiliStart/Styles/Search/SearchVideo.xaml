@@ -29,6 +29,11 @@
                         Command="{x:Bind ViewModel.GoVideoCommand}"
                         CommandParameter="{x:Bind gridview.SelectedItem, Mode=TwoWay}" />
                 </core:EventTriggerBehavior>
+                <core:EventTriggerBehavior EventName="Loaded">
+                    <core:InvokeCommandAction
+                        Command="{x:Bind ViewModel.ScrollLoad}"
+                        CommandParameter="{x:Bind gridview, Mode=TwoWay}" />
+                </core:EventTriggerBehavior>
             </i:Interaction.Behaviors>
             <ui:AdaptiveGridView.ItemTemplate>
                 <DataTemplate>

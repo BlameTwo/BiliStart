@@ -10,8 +10,20 @@ public class SearchMovieViewModel : SearchViewModelBase
         Changed = new Action<string>((str) => OnChanged(str));
         Changing = new Action<string>((str) => OnChanging(str));
         Popup_Visibility = Visibility.Collapsed;
+        AddData = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(async () => await adddata());
     }
-
+    int Index =1;
+    private async Task adddata()
+    {
+        var result = await Search.SearchMovie(this._SearchKey, Index); 
+        if (result.Data.Items == null) return;
+        foreach (var item in result.Data.Items)
+        {
+            Items.Add(item);
+        }
+        Index++;
+    }
+    string Key;
     private void OnChanging(string str)
     {
 
@@ -50,6 +62,7 @@ public class SearchMovieViewModel : SearchViewModelBase
         else
         {
             Items = result.Data.Items.ToObservableCollection();
+            Index++;
         }
     }
 }

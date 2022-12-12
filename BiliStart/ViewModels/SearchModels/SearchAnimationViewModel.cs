@@ -9,13 +9,26 @@ public class SearchAnimationViewModel : SearchViewModelBase
     {
         Changed = new Action<string>((str) => OnChanged(str));
         Changing = new Action<string>((str) => OnChanging(str));
-
+        AddData = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(async () => await adddata());
         Popup_Visibility = Visibility.Collapsed;
     }
-
+    string Key;
+    private async Task adddata()
+    {
+        var result = await Search.SearchAnimation(Key, Index);
+        if (result.Data.Items == null) return;
+        foreach (var item in result.Data.Items)
+        {
+            _Items.Add(item);
+        }
+        Index++;
+    }
+    int Index = 1;
     private async void OnChanged(string str)
     {
-        var result = await Search.SearchAnimation(str, 1);
+        this.Key = str;
+        var result = await Search.SearchAnimation(str, Index);
+        
         if (result.Data.Items == null || result.Data.Items.Count == 0)
         {
             Popup_Visibility = Visibility.Visible;
@@ -24,6 +37,7 @@ public class SearchAnimationViewModel : SearchViewModelBase
         else
         {
             _Items = result.Data.Items.ToObservableCollection();
+            Index++;
         }
     }
 

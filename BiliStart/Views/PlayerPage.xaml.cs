@@ -11,6 +11,8 @@ using Windows.Media.Playback;
 using BiliStart.Helpers;
 using Windows.Media.Core;
 using BiliStart.Contracts.Services;
+using BiliBiliAPI.Models.HomeVideo;
+using BiliBiliAPI.Models;
 
 namespace BiliStart.Views;
 /// <summary>
@@ -68,16 +70,16 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     public void MediaClear()
     {
         Timer.Stop();
-        if (NowMediaPlayer != null)
+        if (ViewModel.NowMediaPlayer != null)
         {
-            NowMediaPlayer.MediaOpened -= MediaPlayer_MediaOpened;
+            ViewModel.NowMediaPlayer.MediaOpened -= MediaPlayer_MediaOpened;
 
-            NowMediaPlayer.Pause();
-            NowMediaPlayer.Dispose();
+            ViewModel.NowMediaPlayer.Pause();
+            ViewModel.NowMediaPlayer.Dispose();
         }
         Timer.Tick -= Timer_Tick;
-        Source = null;
-        NowMediaPlayer = null;
+        ViewModel.Source = null;
+        ViewModel.NowMediaPlayer = null;
 
     }
 
@@ -93,53 +95,31 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         if(e.Parameter is ViewModels.Models.PlayerArgs playerArgs) 
         {
             ViewModel.Args = playerArgs;
+            if (playerArgs.Content.Pages.Count <= 1)
+            {
+                //PagePivotItem.Visibility = Visibility.Collapsed;
+                RightPivot.Items.Remove(PagePivotItem);
+            }
             ViewModel.InitVideo(playerArgs);
         }
+        
     }
 
 
 
 
-    public async void Support_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        // https://www.microsoft.com/en-us/p/hevc-video-extensions-from-device-manufacturer/9n4wgh0z6vhq
-        // HEVC解码器位置
-        //https://apps.microsoft.com/store/detail/av1-video-extension/9MVZQVXJBQ9V?hl=zh-cn&gl=cn
-        //AV1解码器位置
-        if(e.AddedItems.Count > 0)
-        {
-            if (e.AddedItems[0] != null)
-            {
-                Support_Formats value = e.AddedItems[0] as Support_Formats;
-                foreach (var item in ViewModel.VI.Dash.DashVideos)
-                {
-                    if (item.ID == value!.Quality)
-                    {
-                        // hev 和 avc
-                        if (item.Codecs.StartsWith("avc"))
-                        {
-                            Source = await PlayerHelper.CreateMediaSourceAsync(item, ViewModel.VI.Dash.DashAudio[0]);
-                            NowMediaPlayer.SetMediaSource(Source.AdaptiveMediaSource);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
 
 
-    public MediaPlayer NowMediaPlayer = new();
-
-    public MediaSource? Source;
 
     bool IsPlay = false;
 
     private async void PlayerPage_Loaded(object sender, RoutedEventArgs e)
     {
        
-        this.media.SetMediaPlayer(NowMediaPlayer);
-        NowMediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
+        this.media.SetMediaPlayer(ViewModel.NowMediaPlayer);
+        //在这里订阅一个媒体加载完毕事件
+        ViewModel.NowMediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
     }
 
 
@@ -179,13 +159,16 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
             var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(hwnd));
             appWindow.SetPresenter(AppWindowPresenterKind.Default);
-            Grid.SetRowSpan(media,1);
-            Grid.SetRow(media, 1);
-            media.Margin = new Thickness(10);
+            Grid.SetRowSpan(mediaborder, 1);
+            Grid.SetRow(mediaborder, 1);
+            Grid.SetRowSpan(mediaborder,2);
+            media.Margin = new Thickness(5);
+            mediaborder.Margin = new Thickness(10);
             IsFull = false;
             App.MainWindow.SetTitleBar(TitleBar);
-            MoreColumn.Width = new GridLength(300);
+            MoreColumn.Width = new GridLength(450, GridUnitType.Pixel);
             bottommenu.Visibility = Visibility.Visible;
+            mediaborder.CornerRadius = new CornerRadius(10);
             ViewModel.FullChanged(false);
             App.MainWindow.ExtendsContentIntoTitleBar = true;
         }
@@ -195,12 +178,15 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(hwnd));
             appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
             App.MainWindow.SetTitleBar(null);
-            Grid.SetRowSpan(media, 3);
-            Grid.SetRow(media, 0);
+            Grid.SetRowSpan(mediaborder, 1);
+            Grid.SetRow(mediaborder, 0);
+            Grid.SetRowSpan(mediaborder, 2);
+            mediaborder.Margin = new Thickness(0);
             media.Margin = new Thickness(0);
             MoreColumn.Width = new GridLength(0);
             bottommenu.Visibility = Visibility.Collapsed;
             IsFull = true;
+            mediaborder.CornerRadius = new CornerRadius(0);
             ViewModel.FullChanged(true);
             App.MainWindow.ExtendsContentIntoTitleBar = false;
         }
@@ -226,4 +212,6 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     {
         media.MediaPlayer.PlaybackSession.Position = TimeSpan.FromMilliseconds((sender as Slider)!.Value);
     }
+
+   
 }
