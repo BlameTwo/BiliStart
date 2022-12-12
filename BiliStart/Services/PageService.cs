@@ -36,9 +36,11 @@ public class PageService : IPageService
         Configure<MusicAllViewModel, MusicAllPage>();
         Configure<MustWatchViewModel, MustWatchPage>();
         
+
         //动态页面
         Configure<MyInfoViewModel,MyInfoPage>();  
 
+        Configure<PGCPlayerViewModel, PGCPlayerPage>();
     }
 
     public Type GetPageType(string key)

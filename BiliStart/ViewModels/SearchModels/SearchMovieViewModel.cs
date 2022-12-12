@@ -41,6 +41,7 @@ public class SearchMovieViewModel : SearchViewModelBase
     private async  void OnChanged(string str)
     {
         var result = await Search.SearchMovie(str, 1);
+        if (result.Data == null) return;
         if (result.Data.Items == null|| result.Data.Items.Count == 0)
         {
             Popup_Visibility = Visibility.Visible;

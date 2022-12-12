@@ -15,9 +15,18 @@
             <RowDefinition Height="35" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-
-        <Grid x:Name="TitleBar">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition
+                x:Name="MoreColumn"
+                Width="300" />
+        </Grid.ColumnDefinitions>
+        <Grid
+            x:Name="TitleBar"
+            Grid.ColumnSpan="2"
+            Margin="48,0,0,0">
             <TextBlock
                 x:Name="TitleBarText"
                 Margin="10,0,0,0"
@@ -25,19 +34,27 @@
                 Style="{StaticResource CaptionTextBlockStyle}" />
         </Grid>
         <Button
-            x:Uid="Player_GoHome"
-            Grid.Row="1"
-            Margin="5,5,0,0"
+            Grid.Row="0"
+            Margin="5,0,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
             Canvas.ZIndex="2"
             Command="{x:Bind ViewModel.GoBackCommand}"
-            Style="{ThemeResource AccentButtonStyle}" />
+            Style="{ThemeResource AccentButtonStyle}">
+            <FontIcon
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontFamily="Segoe Fluent Icons"
+                FontSize="10"
+                Glyph="&#xE112;" />
+        </Button>
         <MediaPlayerElement
             x:Name="media"
             Grid.Row="1"
             Grid.RowSpan="2"
-            Background="Transparent" />
+            Margin="10"
+            Background="Transparent"
+            CornerRadius="5" />
         <Border
             Grid.Row="1"
             Margin="5"
@@ -101,9 +118,105 @@
                             Click="Button_Click"
                             Content="{x:Bind ViewModel._FullButtonText, Mode=OneWay}"
                             FontFamily="Segoe MDL2 Assets" />
+
                     </StackPanel>
                 </Grid>
             </Grid>
         </Border>
+        <Pivot
+            x:Name="RightPivot"
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Grid.Column="1">
+            <PivotItem
+                Content="Data"
+                Header="Data" />
+            <PivotItem
+                Content="Comment"
+                Header="Comment" />
+            <PivotItem
+                Content="More"
+                Header="More" />
+        </Pivot>
+        <Border
+            x:Name="bottommenu"
+            Grid.Row="3"
+            Margin="10,10"
+            Padding="15"
+            Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+            CornerRadius="5">
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton Margin="0">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon
+                            FontFamily="Segoe Fluent Icons"
+                            FontSize="15"
+                            Glyph="&#xE19F;" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Text="Like" />
+                    </StackPanel>
+                </ToggleButton>
+                <ToggleButton Margin="5,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon
+                            FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                            FontSize="15"
+                            Glyph="&#xEDE3;" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Text="Coins" />
+                    </StackPanel>
+                </ToggleButton>
+                <Button Margin="5,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon
+                            FontFamily="Segoe Fluent Icons"
+                            FontSize="15"
+                            Glyph="&#xE1CE;" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Text="Favourite" />
+                    </StackPanel>
+                    <Button.Flyout>
+                        <Flyout>
+                            <TextBlock Text="this is a Favourite" />
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+                <ToggleButton Margin="5,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon
+                            FontFamily="Segoe Fluent Icons"
+                            Glyph="&#xEC92;" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Text="AddTimeLook" />
+                    </StackPanel>
+                </ToggleButton>
+            </StackPanel>
+
+        </Border>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="PlayState">
+                <VisualState x:Name="Width450">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MoreColumn.Width" Value="300" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Width460">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MoreColumn.Width" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

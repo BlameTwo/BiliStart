@@ -20,5 +20,7 @@ namespace BiliStart.Contracts.Services
         void SetIcon(string icon);
 
         void SetMinHeightAndWidth(int height,int width);
+
+        void SetTitle(string title);
     }
 }

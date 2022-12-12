@@ -78,6 +78,9 @@ public partial class PlayerViewModel:ObservableRecipient
 
     private ObservableCollection<Support_Formats> Supports;
 
+    /// <summary>
+    /// 分辨率列表
+    /// </summary>
     public ObservableCollection<Support_Formats> _Supports
     {
         get => Supports;

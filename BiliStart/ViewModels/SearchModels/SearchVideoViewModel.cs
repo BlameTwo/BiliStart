@@ -66,7 +66,6 @@ public partial class SearchVideoViewModel:SearchViewModelBase
         BiliStart.ViewModels.Models.PlayerArgs arg2 = new BiliStart.ViewModels.Models.PlayerArgs()
         {
             Aid = long.Parse(item.LinkParam),
-            Type = Models.GoToType.Video
         };
         var result = (await Video.GetVideosContent(item.LinkParam, BiliBiliAPI.Models.VideoIDType.AV)).Data;
         arg2.Content = result;

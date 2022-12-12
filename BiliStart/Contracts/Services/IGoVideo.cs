@@ -18,4 +18,6 @@ public interface IGoVideo
     }
 
     bool Go();
+
+    bool GoPGC();
 }

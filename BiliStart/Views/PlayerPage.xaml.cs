@@ -52,7 +52,6 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         {
             ViewModel.SliderValue = media.MediaPlayer.PlaybackSession.Position.TotalMilliseconds;
         });
-
     }
 
 
@@ -94,16 +93,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         if(e.Parameter is ViewModels.Models.PlayerArgs playerArgs) 
         {
             ViewModel.Args = playerArgs;
-            switch (playerArgs.Type)
-            {
-                case GoToType.Video:
-                    ViewModel.InitVideo(playerArgs);
-                    break;
-                case GoToType.Animation:
-                    break;
-                case GoToType.Movie:
-                    break;
-            }
+            ViewModel.InitVideo(playerArgs);
         }
     }
 
@@ -191,8 +181,11 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             appWindow.SetPresenter(AppWindowPresenterKind.Default);
             Grid.SetRowSpan(media,1);
             Grid.SetRow(media, 1);
+            media.Margin = new Thickness(10);
             IsFull = false;
             App.MainWindow.SetTitleBar(TitleBar);
+            MoreColumn.Width = new GridLength(300);
+            bottommenu.Visibility = Visibility.Visible;
             ViewModel.FullChanged(false);
             App.MainWindow.ExtendsContentIntoTitleBar = true;
         }
@@ -204,6 +197,9 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             App.MainWindow.SetTitleBar(null);
             Grid.SetRowSpan(media, 3);
             Grid.SetRow(media, 0);
+            media.Margin = new Thickness(0);
+            MoreColumn.Width = new GridLength(0);
+            bottommenu.Visibility = Visibility.Collapsed;
             IsFull = true;
             ViewModel.FullChanged(true);
             App.MainWindow.ExtendsContentIntoTitleBar = false;

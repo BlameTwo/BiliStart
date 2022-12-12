@@ -38,4 +38,10 @@ internal class GoVideo : IGoVideo
         }
         return false;
     }
+
+    public bool GoPGC()
+    {
+        //PGC跳转
+        return true;
+    }
 }

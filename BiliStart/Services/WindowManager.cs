@@ -48,5 +48,10 @@ namespace BiliStart.Services
             Manager.MinHeight= height;
             Manager.MinWidth= width;
         }
+
+        public void SetTitle(string title)
+        {
+            window.Title= title;
+        }
     }
 }

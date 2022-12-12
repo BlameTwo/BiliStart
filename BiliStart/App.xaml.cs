@@ -1,4 +1,5 @@
-﻿using BiliBiliAPI.Models.Account;
+﻿using BiliBiliAPI;
+using BiliBiliAPI.Models.Account;
 using BiliBiliAPI.Models.Settings;
 using BiliStart.Activation;
 using BiliStart.Contracts.Services;
@@ -144,6 +145,9 @@ public partial class App : Application
 
             services.AddTransient<MyInfoPage>();
             services.AddTransient<MyInfoViewModel>();
+
+            services.AddTransient<PGCPlayerPage>();
+            services.AddTransient<PGCPlayerViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

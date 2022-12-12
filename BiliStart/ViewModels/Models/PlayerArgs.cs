@@ -1,4 +1,5 @@
-﻿using BiliBiliAPI.Models.Videos;
+﻿using System.Collections.ObjectModel;
+using BiliBiliAPI.Models.Videos;
 
 namespace BiliStart.ViewModels.Models;
 public class PlayerArgs
@@ -7,12 +8,6 @@ public class PlayerArgs
     {
         get;set;    
     }
-
-    public GoToType Type
-    {
-        get;set;    
-    }
-
     public long Aid
     {
         get;set;    
@@ -25,8 +20,4 @@ public class PlayerArgs
     }
 }
 
-public enum GoToType
-{
-    Video,Animation,Movie,
-}
 

@@ -22,8 +22,7 @@ public partial class HomeViewModel: ScrolViewModelBase
     {
         BiliStart.ViewModels.Models.PlayerArgs arg2 = new BiliStart.ViewModels.Models.PlayerArgs()
         {
-            Aid = long.Parse(arg.PlayArg.Aid),
-            Type = Models.GoToType.Video
+            Aid = long.Parse(arg.PlayArg.Aid)
         };
         var result = (await Video.GetVideosContent(arg.PlayArg.Aid, BiliBiliAPI.Models.VideoIDType.AV)).Data;
         arg2.Content = result;
