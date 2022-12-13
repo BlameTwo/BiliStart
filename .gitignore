@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/UITest/obj/x86/Debug/net6.0-windows10.0.19041.0/win10-x86/UITest.assets.cache
+/UITest/obj/x86/Debug/net6.0-windows10.0.19041.0/win10-x86/MainWindow.g.cs
+/UITest/obj/x86/Debug/net6.0-windows10.0.19041.0/win10-x86/MainWindow.g.i.cs
+/UITest/obj/x86/Debug/net6.0-windows10.0.19041.0/win10-x86/XamlTypeInfo.g.cs
+/UITest/obj/UITest.csproj.nuget.dgspec.json
+/UITest/obj/project.nuget.cache
+/UITest/obj/project.assets.json
