@@ -178,7 +178,6 @@ public partial class PlayerViewModel:ObservableRecipient
     {
         switch (await LocalSettingsService.ReadSettingAsync<int>(BiliStart.Models.Settings.Player_Supper_Supper))
         {
-            default:
             case 0:
                 _SupportIndex = GetSupportIndex("4K");
                 break;
@@ -203,13 +202,26 @@ public partial class PlayerViewModel:ObservableRecipient
     {
         for (int i = 0; i < _Supports.Count; i++)
         {
-            //这里有BUG，不应该只筛选文字，不够严谨，应该筛选清晰度代码
-            if (_Supports[i].New_description.IndexOf(value) != -1)
+            switch (value)
             {
-                return i;
+                case "4K":
+                    if (_Supports[i].Quality == "120")
+                        return i;
+                    else
+                        continue;
+                case "1080":
+                    if (_Supports[i].Quality == "80")
+                        return i;
+                    else
+                        continue;
+                case "720":
+                    if (_Supports[i].Quality == "64")
+                        return i;
+                    else
+                        continue;
             }
         }
-        return -1;
+        return 1;
     }
 
     private int SupportIndex;

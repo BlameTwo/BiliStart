@@ -27,8 +27,7 @@
         </Grid.ColumnDefinitions>
         <Grid
             x:Name="TitleBar"
-            Grid.ColumnSpan="2"
-            Margin="50,0,0,0">
+            Grid.ColumnSpan="2">
             <TextBlock
                 x:Name="TitleBarText"
                 Margin="10,0,0,0"
@@ -36,6 +35,7 @@
                 Style="{StaticResource CaptionTextBlockStyle}" />
         </Grid>
         <Button
+            x:Name="BackButton"
             Grid.Row="0"
             Margin="5,0,0,0"
             HorizontalAlignment="Left"
@@ -91,8 +91,6 @@
                     x:Name="process"
                     Grid.Column="1"
                     Margin="10,0"
-                    ManipulationCompleted="process_ManipulationCompleted"
-                    ManipulationMode="All"
                     Maximum="{x:Bind ViewModel.MaxValue, Mode=OneWay}"
                     ThumbToolTipValueConverter="{ThemeResource SliderConvert}"
                     Value="{x:Bind ViewModel.SliderValue, Mode=OneWay}" />

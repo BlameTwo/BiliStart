@@ -27,7 +27,7 @@
                 x:Name="image"
                 ui:VisualExtensions.NormalizedCenterPoint="0.5"
                 DisplayType="Rect"
-                Source="{x:Bind Item.Cover, Mode=OneWay}"
+                Source="{Binding Cover, Mode=OneWay}"
                 Stretch="UniformToFill">
                 <i:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="PointerEntered">
@@ -56,7 +56,7 @@
                     <TextBlock
                         Margin="5,0,0,0"
                         FontSize="13"
-                        Text="{x:Bind Item.Stat.View, Mode=OneWay, Converter={StaticResource LookCount}}" />
+                        Text="{Binding Stat.View, Mode=OneWay, Converter={StaticResource LookCount}}" />
                 </StackPanel>
             </Border>
             <Border
@@ -87,7 +87,7 @@
                     <TextBlock
                         Margin="5,0,0,0"
                         FontSize="13"
-                        Text="{x:Bind Item.Stat.View, Mode=OneWay, Converter={StaticResource LookCount}}" />
+                        Text="{Binding Stat.View, Mode=OneWay, Converter={StaticResource LookCount}}" />
                 </StackPanel>
             </Border>
             <Border
@@ -101,7 +101,7 @@
                 <TextBlock
                     Margin="5"
                     FontSize="12"
-                    Text="{x:Bind Item.Owner.UpName, Mode=OneWay}"
+                    Text="{Binding Owner.UpName, Mode=OneWay}"
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="Wrap" />
             </Border>

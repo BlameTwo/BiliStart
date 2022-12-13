@@ -12,6 +12,8 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\demo_2.mp4" />
+    <None Remove="Assets\demo_2_danmaku.xml" />
     <None Remove="Assets\icon.ico" />
     <None Remove="Assets\icon_everyweek.png" />
     <None Remove="Assets\icon_history.png" />
@@ -68,6 +70,12 @@
     <ProjectReference Include="..\BiliStart.UI\BiliStart.UI.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update="Assets\demo_2.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\demo_2_danmaku.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Assets\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -13,6 +13,8 @@ using Windows.Media.Core;
 using BiliStart.Contracts.Services;
 using BiliBiliAPI.Models.HomeVideo;
 using BiliBiliAPI.Models;
+using Windows.UI.Core;
+using Microsoft.UI.Xaml.Input;
 
 namespace BiliStart.Views;
 /// <summary>
@@ -39,9 +41,19 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         IsFull = false;
         Timer.Tick += Timer_Tick;
         Timer.Start();
-        
+        this.SizeChanged += PlayerPage_SizeChanged;
+        process.AddHandler(UIElement.PointerReleasedEvent /*哪个事件*/, new PointerEventHandler(UIElement_OnPointerReleased) /*使用哪个函数处理*/, true /*如果在之前处理，是否还使用函数*/);
     }
 
+    private void UIElement_OnPointerReleased(object sender, PointerRoutedEventArgs e)
+    {
+        media.MediaPlayer.PlaybackSession.Position = TimeSpan.FromMilliseconds((sender as Slider)!.Value);
+    }
+
+    private void PlayerPage_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        TitleBar.Margin = new Thickness(BackButton.ActualWidth+5,0,0,0);
+    }
 
     public ILocalSettingsService LocalSettingsService
     {
@@ -207,11 +219,6 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     }
 
 
-
-    private void process_ManipulationCompleted(object sender, Microsoft.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
-    {
-        media.MediaPlayer.PlaybackSession.Position = TimeSpan.FromMilliseconds((sender as Slider)!.Value);
-    }
 
    
 }
