@@ -23,7 +23,7 @@ public partial class RankViewModel : ObservableRecipient
     {
         var result = await Video.GetTopVideo(cid: BiliBiliAPI.Cid.All, 3);
         _Items = result.Data.List.ToObservableCollection();
-        Tipshow.SendMessage(null, result.Data.Note);
+        Tipshow.SendMessage(result.Data.Note, Symbol.Dislike);
         Title = "排行榜";
         _NullPopup = Visibility.Collapsed;
         
@@ -95,14 +95,14 @@ public partial class RankViewModel : ObservableRecipient
             var valu2 =  int.Parse(value);
             var result = await Video.GetTopVideo(cid: valu2, 3);
             _Items = result.Data.List.ToObservableCollection();
-            Tipshow.SendMessage(null, result.Data.Note);
+            Tipshow.SendMessage(result.Data.Note, Symbol.Dislike);
             Title = "分区排行";
             _NullPopup = Visibility.Collapsed;
         }
         catch (Exception)
         {
             Title = "分区错误";
-            Tipshow.SendMessage(null, "当前分区无视频排行，请切换其他分区");
+            Tipshow.SendMessage("当前分区无视频排行，请切换其他分区",Symbol.Dislike);
             _NullPopup = Visibility.Visible;
             _TipMessage = "所选分区无内容";
         }

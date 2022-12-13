@@ -36,7 +36,7 @@ public static class RichTextBlockHelper
                     paragraph.Inlines.Add(hayperat);
                     hayperat.Click += (s, e) =>
                     {
-                        App.GetService<ITipShow>().SendMessage("此功能在开发中……", null);
+                        App.GetService<ITipShow>().SendMessage("此功能在开发中……",Symbol.Emoji);
                     };
                     break;
                 case "RICH_TEXT_NODE_TYPE_EMOJI":
@@ -49,7 +49,7 @@ public static class RichTextBlockHelper
                     paragraph.Inlines.Add(haypertopic);
                     haypertopic.Click += (s, e) =>
                     {
-                        App.GetService<ITipShow>().SendMessage("此功能在开发中……", null);
+                        App.GetService<ITipShow>().SendMessage("此功能在开发中……", Symbol.Emoji);
                     };
                     break;
                 case "RICH_TEXT_NODE_TYPE_LOTTERY":

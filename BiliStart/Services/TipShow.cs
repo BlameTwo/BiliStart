@@ -10,20 +10,16 @@ using Microsoft.UI.Xaml.Controls;
 namespace BiliStart.Services;
 public class TipShow : ITipShow
 {
-    private TeachingTip teachingTip;
-    public TeachingTip TipControl
+    private Panel _fatherPanel;
+    public Panel FatherPanel
     {
-        get =>teachingTip;
-        set => teachingTip = value;
+        get => _fatherPanel;
+        set => _fatherPanel = value;
     }
 
-
-    public async void SendMessage(string message, string title)
+    public async void SendMessage(string message, Symbol icon)
     {
-        teachingTip.Title = title;
-        teachingTip.Subtitle = message;
-        teachingTip.IsOpen = true;
-        await Task.Delay(TimeSpan.FromSeconds(2));
-        teachingTip.IsOpen = false;
+        BiliStart.UI.Controls.PopupDialog popup = new(message, FatherPanel, icon);
+        popup.ShowAPopup();
     }
 }

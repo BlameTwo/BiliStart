@@ -10,9 +10,9 @@ namespace BiliStart.ItemsViewModel;
 [INotifyPropertyChanged]
 public partial class HomeItemViewModel
 {
-    private BiliBiliAPI.Models.HomeVideo.Item Item;
+    private BiliBiliAPI.Models.HomeVideo.HomeDataItem Item;
 
-    public BiliBiliAPI.Models.HomeVideo.Item _Item
+    public BiliBiliAPI.Models.HomeVideo.HomeDataItem _Item
     {
         get => Item;
         set=>SetProperty(ref Item, value);

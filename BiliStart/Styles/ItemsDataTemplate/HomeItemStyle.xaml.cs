@@ -16,25 +16,20 @@ public sealed partial class HomeItemStyle : UserControl
     public HomeItemViewModel ViewModel{get; private set; }
 
 
-    public BiliBiliAPI.Models.HomeVideo.Item Item
+    public BiliBiliAPI.Models.HomeVideo.HomeDataItem Item
     {
-        get
-        {
-            return (BiliBiliAPI.Models.HomeVideo.Item)GetValue(ItemProperty);
-        }
-        set
-        {
-            SetValue(ItemProperty, value);
-        }
+        get=>(BiliBiliAPI.Models.HomeVideo.HomeDataItem)GetValue(ItemProperty);
+        
+        set =>SetValue(ItemProperty, value);
     }
 
     // Using a DependencyProperty as the backing store for Item.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty ItemProperty =
-        DependencyProperty.Register("Item", typeof(BiliBiliAPI.Models.HomeVideo.Item), typeof(HomeItemStyle), new PropertyMetadata(default(BiliBiliAPI.Models.HomeVideo.Item),new PropertyChangedCallback((s,e)=>OnChanged(s,e))));
+        DependencyProperty.Register("Item", typeof(BiliBiliAPI.Models.HomeVideo.HomeDataItem), typeof(HomeItemStyle), new PropertyMetadata(default(BiliBiliAPI.Models.HomeVideo.HomeDataItem),new PropertyChangedCallback((s,e)=>OnChanged(s,e))));
 
     private static void OnChanged(DependencyObject s, DependencyPropertyChangedEventArgs e)
     {
-        if(e.NewValue != null && e.NewValue is BiliBiliAPI.Models.HomeVideo.Item item)
+        if(e.NewValue != null && e.NewValue is BiliBiliAPI.Models.HomeVideo.HomeDataItem item)
         {
             (s as HomeItemStyle)!.ViewModel = new HomeItemViewModel() { _Item = item };
         }

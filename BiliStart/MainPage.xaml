@@ -8,12 +8,9 @@
     Tag="ึ๗าณ"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid x:Name="grid">
         <Frame
             x:Name="RootFrame"
-            x:FieldModifier="public" />
-        <TeachingTip
-            x:Name="ToggleThemeTeachingTip2"
             x:FieldModifier="public" />
     </Grid>
 </Page>

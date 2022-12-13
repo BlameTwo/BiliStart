@@ -92,7 +92,7 @@ public class AppNotificationService : IAppNotificationService
     public void CreateShow(string arguments,string PrimaryText, string SecondaryText, string Title, string SubTitle, string LeftImage = "")
     {
         if (!AppNotificationManager.IsSupported())
-            TipShow.SendMessage(null,"您的计算机不支持当前通知");
+            TipShow.SendMessage("您的计算机不支持当前通知", Symbol.Dislike);
         if (LeftImage != null)
         {
 

@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Page Update="Controls\PopupDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Styles.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -123,6 +123,7 @@ public partial class LoginDialogViewModel : ObservableRecipient
             case Checkenum.Yes:
                 Debug.WriteLine($"登录成功！返回值未:\n{result.Body}");
                 BiliBiliArgs.TokenSESSDATA = WebFormat.GoToken(result.Body);
+                BiliBiliArgs.TokenSESSDATA.LoginType = 0;
                 AccountSettings.Write(BiliBiliArgs.TokenSESSDATA);
                 timer.Stop();
                 timer.Tick -= Timer_Tick;
@@ -178,6 +179,7 @@ public partial class LoginDialogViewModel : ObservableRecipient
             c.TryGetValue("access_key", out token2!);
             token.Mid = mid; token.SECCDATA = token2;
             BiliBiliArgs.TokenSESSDATA = token;
+            BiliBiliArgs.TokenSESSDATA.LoginType = 1;
             AccountSettings.Write(BiliBiliArgs.TokenSESSDATA);
             WeakReferenceMessenger.Default.Send<LoginEvent>(new LoginEvent() { Event = LoginEventEnum.Login, Message = "用户登录"});
             App.IsLogin = true;

@@ -8,10 +8,10 @@ namespace BiliStart.Contracts.Services;
 /// </summary>
 public interface ITipShow
 {
-    void SendMessage(string message, string title);
+    void SendMessage(string message, Symbol icon);
 
-    TeachingTip TipControl
+    Panel FatherPanel
     {
-        get;set;    
+        get;set;
     }
 }

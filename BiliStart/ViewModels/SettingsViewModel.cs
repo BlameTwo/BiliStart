@@ -62,7 +62,7 @@ public partial class SettingsViewModel : ObservableRecipient
                     ApplicationLanguages.PrimaryLanguageOverride = "zh-CN";
                     break;
             }
-            TipShow.SendMessage("静态资源已经改变，请重启应用", "设置操作");
+            TipShow.SendMessage("静态资源已经改变，请重启应用", Symbol.Refresh);
         });
 
        

@@ -64,6 +64,7 @@
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\Dynamics\DefaultDynamicItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
+    <None Remove="Styles\ItemsDataTemplate\HotItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\MusicRankItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\MustWatchItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\RankItemStyle.xaml" />
@@ -119,6 +120,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\ItemsDataTemplate\HotItemStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\PGCPlayerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

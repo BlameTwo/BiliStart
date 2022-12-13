@@ -8,6 +8,7 @@
   <ItemGroup>
     <None Remove="Controls\BorderExpander.xaml" />
     <None Remove="Controls\ImageLoad.xaml" />
+    <None Remove="Controls\PopupDialog.xaml" />
     <None Remove="DanmakuControl.xaml" />
     <None Remove="NullContent.xaml" />
     <None Remove="Styles.xaml" />
@@ -46,5 +47,13 @@
     <Page Update="Controls\ImageLoad.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="Controls\PopupDialog.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Remove="Controls\PopupDialog.xaml" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,8 @@
+<!--  Copyright (c) Microsoft Corporation and Contributors.  -->
+<!--  Licensed under the MIT License.  -->
+
 <UserControl
-    x:Class="BiliStart.Styles.ItemsDataTemplate.HomeItemStyle"
+    x:Class="BiliStart.Styles.ItemsDataTemplate.HotItemStyle"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:behaviors="using:CommunityToolkit.WinUI.UI.Behaviors"
@@ -7,11 +10,12 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:local="using:BiliStart.Styles.ItemsDataTemplate"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:styleui="using:BiliStart.UI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI.UI"
-    Loaded="UserControl_Loaded"
     mc:Ignorable="d">
+
     <UserControl.Resources>
         <convert:CountForNumber x:Key="LookCount" />
     </UserControl.Resources>
@@ -45,19 +49,9 @@
                 VerticalAlignment="Bottom"
                 Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
                 CornerRadius="5">
-                <StackPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <FontIcon
-                        FontFamily="Segoe Fluent Icons"
-                        FontSize="13"
-                        Glyph="&#xE116;" />
-                    <TextBlock
-                        Margin="5,0,0,0"
-                        FontSize="13"
-                        Text="{x:Bind Item.Stat.View, Mode=OneWay, Converter={StaticResource LookCount}}" />
-                </StackPanel>
+                <TextBlock
+                    FontSize="12"
+                    Text="{x:Bind Item.PlayerCount, Mode=OneWay}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -80,15 +74,11 @@
                 VerticalAlignment="Bottom"
                 Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
                 CornerRadius="5">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon
-                        FontFamily="Segoe Fluent Icons"
-                        Glyph="&#xE19F;" />
-                    <TextBlock
-                        Margin="5,0,0,0"
-                        FontSize="13"
-                        Text="{x:Bind Item.Stat.View, Mode=OneWay, Converter={StaticResource LookCount}}" />
-                </StackPanel>
+                <TextBlock
+                    FontSize="{ThemeResource VideoTitle}"
+                    Text="{x:Bind Item.DurationText, Mode=OneWay}"
+                    TextTrimming="CharacterEllipsis"
+                    TextWrapping="Wrap" />
             </Border>
             <Border
                 Grid.Row="0"
@@ -101,11 +91,10 @@
                 <TextBlock
                     Margin="5"
                     FontSize="12"
-                    Text="{x:Bind Item.Owner.UpName, Mode=OneWay}"
+                    Text="{x:Bind Item.Desc, Mode=OneWay}"
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="Wrap" />
             </Border>
         </Grid>
     </Border>
-
 </UserControl>
