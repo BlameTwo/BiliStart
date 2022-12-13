@@ -178,7 +178,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             mediaborder.Margin = new Thickness(10);
             IsFull = false;
             App.MainWindow.SetTitleBar(TitleBar);
-            MoreColumn.Width = new GridLength(450, GridUnitType.Pixel);
+            MoreColumn.Width = new GridLength(350, GridUnitType.Pixel);
             bottommenu.Visibility = Visibility.Visible;
             mediaborder.CornerRadius = new CornerRadius(10);
             ViewModel.FullChanged(false);

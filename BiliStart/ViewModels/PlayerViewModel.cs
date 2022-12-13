@@ -2,8 +2,10 @@
 using System.Reflection.Metadata.Ecma335;
 using BiliBiliAPI.Models;
 using BiliBiliAPI.Models.Videos;
+using BiliBiliAPI.Video;
 using BiliStart.Contracts.Services;
 using BiliStart.Helpers;
+using BiliStart.Services;
 using BiliStart.ViewModels.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -15,16 +17,17 @@ using Windows.Media.Playback;
 namespace BiliStart.ViewModels;
 public partial class PlayerViewModel:ObservableRecipient
 {
-    public PlayerViewModel(ILocalSettingsService localSettingsService)
+    public PlayerViewModel(ILocalSettingsService localSettingsService,ITipShow tipShow)
     {
         _FullButtonText = "\uE740";
         LocalSettingsService = localSettingsService;
+        TipShow = tipShow;
     }
 
 
     public MediaPlayer NowMediaPlayer = new();
     public MediaSource? Source;
-
+    UserVideo UVideo = new();
 
     public PlayerArgs Args
     {
@@ -40,6 +43,30 @@ public partial class PlayerViewModel:ObservableRecipient
         set => SetProperty(ref _VideoContent, value);
     }
 
+    [RelayCommand]
+    public async void LikeVideo(bool islike)
+    {
+        TipShow.SendMessage
+            (
+            (await UVideo.LikeVideo(islike, this._VideoContent.Aid)).Data.TipText
+            ,Symbol.Message
+            );
+    }
+
+    [RelayCommand]
+    public async void GiveCoinsVideo(int coin)
+    {
+        var result =  await UVideo.CoinsVideo(coin,this._VideoContent.Aid);
+        TipShow.SendMessage($"{result.Message},{result.Data.Guide.Title}",Symbol.Message);
+    }
+
+    private bool _IsCoins;
+
+    public bool IsCoins
+    {
+        get => _IsCoins;
+        set => SetProperty(ref _IsCoins, value);
+    }
 
 
     private VideoInfo VideoInfo;
@@ -233,6 +260,10 @@ public partial class PlayerViewModel:ObservableRecipient
     }
 
     public ILocalSettingsService LocalSettingsService
+    {
+        get;
+    }
+    public ITipShow TipShow
     {
         get;
     }

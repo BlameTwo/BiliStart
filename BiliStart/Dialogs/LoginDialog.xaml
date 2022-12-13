@@ -39,7 +39,7 @@
                     Style="{ThemeResource AccentButtonStyle}" />
             </Grid>
         </PivotItem>
-        <PivotItem Header="账号密码">
+        <!--<PivotItem Header="账号密码">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -83,6 +83,6 @@
                     Click="{x:Bind ViewModel.LoginClick}"
                     Content="登录" />
             </Grid>
-        </PivotItem>
+        </PivotItem>-->
     </Pivot>
 </ContentDialog>

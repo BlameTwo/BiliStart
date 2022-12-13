@@ -2,14 +2,18 @@
     x:Class="BiliStart.Views.PlayerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:biliui="using:BiliStart.UI.Controls"
     xmlns:convert="using:BiliStart.Behaviors.Converter"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:data="using:BiliBiliAPI.Models.Videos"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d">
     <Page.Resources>
         <convert:PlayerSliderConvert x:Key="SliderConvert" />
+        <convert:CountForNumber x:Key="NumberConvert" />
     </Page.Resources>
     <Grid x:Name="grid">
         <Grid.RowDefinitions>
@@ -23,7 +27,7 @@
             <ColumnDefinition
                 x:Name="MoreColumn"
                 Width="3*"
-                MaxWidth="450" />
+                MaxWidth="350" />
         </Grid.ColumnDefinitions>
         <Grid
             x:Name="TitleBar"
@@ -144,14 +148,197 @@
                     SelectionChanged="{x:Bind ViewModel.ListView_SelectionChanged}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="data:Page">
-                            <TextBlock Text="{x:Bind Title, Mode=OneWay}" />
+                            <TextBlock
+                                Text="{x:Bind Title, Mode=OneWay}"
+                                ToolTipService.ToolTip="{x:Bind Title, Mode=OneWay}" />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </PivotItem>
-            <PivotItem
-                Content="Data"
-                Header="Data" />
+            <PivotItem Header="Data">
+                <ScrollViewer>
+                    <Grid Margin="0,15,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Image
+                            Height="200"
+                            Source="{x:Bind ViewModel.VideoContent.VideoImage, Mode=OneWay}"
+                            Stretch="Uniform" />
+                        <StackPanel
+                            Grid.Row="1"
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Stretch"
+                            Orientation="Horizontal">
+                            <Border
+                                Padding="5"
+                                VerticalAlignment="Center"
+                                Background="{ThemeResource ControlFillColorDefault}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon
+                                        VerticalAlignment="Center"
+                                        FontFamily="Segoe Fluent Icons"
+                                        FontSize="12"
+                                        Glyph="&#xE7B3;" />
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        FontSize="12"
+                                        Text="{x:Bind ViewModel.VideoContent.Stat.Views, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                                </StackPanel>
+                            </Border>
+                            <Border
+                                Margin="5,0,0,0"
+                                Padding="5"
+                                VerticalAlignment="Center"
+                                Background="{ThemeResource ControlFillColorDefault}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon
+                                        FontFamily="Segoe Fluent Icons"
+                                        FontSize="12"
+                                        Glyph="&#xE19F;" />
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        FontSize="12"
+                                        Text="{x:Bind ViewModel.VideoContent.Stat.Like, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                                </StackPanel>
+                            </Border>
+                            <Border
+                                Margin="5,0,0,0"
+                                Padding="5"
+                                VerticalAlignment="Center"
+                                Background="{ThemeResource ControlFillColorDefault}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon
+                                        FontFamily="Segoe Fluent Icons"
+                                        FontSize="12"
+                                        Glyph="&#xE7BC;" />
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        FontSize="12"
+                                        Text="{x:Bind ViewModel.VideoContent.Stat.DanMaku, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                                </StackPanel>
+                            </Border>
+                            <Border
+                                Margin="5,0,0,0"
+                                Padding="5"
+                                VerticalAlignment="Center"
+                                Background="{ThemeResource ControlFillColorDefault}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon
+                                        FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                        FontSize="12"
+                                        Glyph="&#xEDE3;" />
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        FontSize="12"
+                                        Text="{x:Bind ViewModel.VideoContent.Stat.coin, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                                </StackPanel>
+                            </Border>
+                            <Border
+                                Margin="5,0,0,0"
+                                Padding="5"
+                                VerticalAlignment="Center"
+                                Background="{ThemeResource ControlFillColorDefault}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon
+                                        FontFamily="Segoe Fluent Icons"
+                                        FontSize="12                                           "
+                                        Glyph="&#xE1CE;" />
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        FontSize="12"
+                                        Text="{x:Bind ViewModel.VideoContent.Stat.Favorite, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                                </StackPanel>
+                            </Border>
+                            <Border
+                                Margin="5,0,0,0"
+                                Padding="5"
+                                VerticalAlignment="Center"
+                                Background="{ThemeResource ControlFillColorDefault}"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon
+                                        FontFamily="Segoe Fluent Icons"
+                                        FontSize="12"
+                                        Glyph="&#xE120;" />
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        FontSize="12"
+                                        Text="{x:Bind ViewModel.VideoContent.Stat.Share, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        <Grid
+                            Grid.Row="2"
+                            Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <PersonPicture
+                                    Width="40"
+                                    Height="40"
+                                    ProfilePicture="{x:Bind ViewModel.VideoContent.Up.Face, Mode=OneWay}" />
+                                <TextBlock
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{x:Bind ViewModel.VideoContent.Up.Name, Mode=OneWay}" />
+                            </StackPanel>
+                            <ToggleButton
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon
+                                        FontFamily="Segoe Fluent Icons"
+                                        Glyph="&#xE109;" />
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Text="Like" />
+                                </StackPanel>
+
+                            </ToggleButton>
+                        </Grid>
+                        <StackPanel
+                            Grid.Row="3"
+                            Margin="0,10,0,0"
+                            VerticalAlignment="Top">
+                            <Border
+                                Padding="10"
+                                Background="{ThemeResource ControlFillColorDefault}"
+                                CornerRadius="10">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Text="{x:Bind ViewModel.VideoContent.Title, Mode=OneWay}"
+                                    TextWrapping="Wrap" />
+                            </Border>
+                            <Border
+                                Margin="0,10,0,0"
+                                Padding="10"
+                                Background="{ThemeResource ControlFillColorDefault}"
+                                CornerRadius="10">
+                                <TextBlock
+                                    Text="{x:Bind ViewModel.VideoContent.VideoDEsc, Mode=OneWay}"
+                                    TextTrimming="CharacterEllipsis"
+                                    TextWrapping="Wrap" />
+
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </PivotItem>
             <PivotItem
                 Content="Comment"
                 Header="Comment" />
@@ -167,7 +354,16 @@
             Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
             CornerRadius="5">
             <StackPanel Orientation="Horizontal">
-                <ToggleButton Margin="0">
+                <ToggleButton
+                    x:Name="LikeButton"
+                    Margin="0">
+                    <i:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Click">
+                            <core:InvokeCommandAction
+                                Command="{x:Bind ViewModel.LikeVideoCommand}"
+                                CommandParameter="{x:Bind LikeButton.IsChecked, Mode=TwoWay}" />
+                        </core:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
                     <StackPanel Orientation="Horizontal">
                         <FontIcon
                             FontFamily="Segoe Fluent Icons"
@@ -177,8 +373,9 @@
                             Margin="5,0,0,0"
                             Text="Like" />
                     </StackPanel>
+
                 </ToggleButton>
-                <ToggleButton Margin="5,0,0,0">
+                <Button Margin="5,0,0,0">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon
                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
@@ -188,7 +385,25 @@
                             Margin="5,0,0,0"
                             Text="Coins" />
                     </StackPanel>
-                </ToggleButton>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem
+                                Command="{x:Bind ViewModel.GiveCoinsVideoCommand}"
+                                Text="Give one">
+                                <MenuFlyoutItem.CommandParameter>
+                                    <x:Int32>1</x:Int32>
+                                </MenuFlyoutItem.CommandParameter>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem
+                                Command="{x:Bind ViewModel.GiveCoinsVideoCommand}"
+                                Text="Give two">
+                                <MenuFlyoutItem.CommandParameter>
+                                    <x:Int32>2</x:Int32>
+                                </MenuFlyoutItem.CommandParameter>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
                 <Button Margin="5,0,0,0">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon
@@ -223,10 +438,10 @@
             <VisualStateGroup x:Name="PlayState">
                 <VisualState x:Name="Width450">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600" />
+                        <AdaptiveTrigger MinWindowWidth="700" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="MoreColumn.Width" Value="450" />
+                        <Setter Target="MoreColumn.Width" Value="350" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Width460">
