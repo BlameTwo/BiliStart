@@ -22,6 +22,7 @@ public partial class PlayerViewModel:ObservableRecipient
         _FullButtonText = "\uE740";
         LocalSettingsService = localSettingsService;
         TipShow = tipShow;
+        IsLike= false;
     }
 
 
@@ -44,30 +45,38 @@ public partial class PlayerViewModel:ObservableRecipient
     }
 
     [RelayCommand]
-    public async void LikeVideo(bool islike)
+    public async void LikeVideo()
     {
+        IsLike = !IsLike;
+        var value = (await UVideo.LikeVideo(IsLike, this._VideoContent.Aid)).Data;
         TipShow.SendMessage
             (
-            (await UVideo.LikeVideo(islike, this._VideoContent.Aid)).Data.TipText
+            value.TipText
             ,Symbol.Message
             );
     }
+
 
     [RelayCommand]
     public async void GiveCoinsVideo(int coin)
     {
         var result =  await UVideo.CoinsVideo(coin,this._VideoContent.Aid);
+        if(result.Code == "0")
+        {
+            //投币成功
+            IsCoins = true;
+        }
         TipShow.SendMessage($"{result.Message},{result.Data.Guide.Title}",Symbol.Message);
     }
 
+
+
+
+    [ObservableProperty]
+    private bool _IsLike;
+
+    [ObservableProperty]
     private bool _IsCoins;
-
-    public bool IsCoins
-    {
-        get => _IsCoins;
-        set => SetProperty(ref _IsCoins, value);
-    }
-
 
     private VideoInfo VideoInfo;
 
@@ -151,7 +160,9 @@ public partial class PlayerViewModel:ObservableRecipient
         //初始化视频
         this.VideoPages = playerArgs.Content.Pages.ToObservableCollection();
         VideoContent = playerArgs.Content;
-        if(VideoContent.Pages.Count == 1)
+        IsLike = Convert.ToBoolean(VideoContent.ReqUser.Like);
+        this.IsCoins = Convert.ToBoolean(VideoContent.ReqUser.Coin);
+        if (VideoContent.Pages.Count == 1)
         {
             this.VI = (await Video.GetVideo(VideoContent, VideoIDType.AV, VideoContent.First_Cid)).Data;
             _Supports = VI.Support_Formats.ToObservableCollection();
@@ -190,8 +201,14 @@ public partial class PlayerViewModel:ObservableRecipient
         {
             if (item.ID == this.SelectFormats!.Quality)
             {
-                // hev 和 avc
+                // hev 和 avc，使用avc兜底，hev优先
                 if (item.Codecs.StartsWith("hev"))
+                {
+                    Source = await PlayerHelper.CreateMediaSourceAsync(item, VI.Dash.DashAudio[0]);
+                    NowMediaPlayer.SetMediaSource(Source!.AdaptiveMediaSource);
+                    break;
+                }
+                if (item.Codecs.StartsWith("avc"))
                 {
                     Source = await PlayerHelper.CreateMediaSourceAsync(item, VI.Dash.DashAudio[0]);
                     NowMediaPlayer.SetMediaSource(Source!.AdaptiveMediaSource);

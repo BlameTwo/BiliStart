@@ -4,4 +4,5 @@
     xmlns:convert="using:BiliStart.Behaviors.Converter">
 
     <convert:LevelNumberToPathConvert x:Key="LevelConvert" />
+    <convert:BoolConvert x:Key="BoolConvert" />
 </ResourceDictionary>

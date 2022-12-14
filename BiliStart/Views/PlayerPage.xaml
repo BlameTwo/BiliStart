@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:biliui="using:BiliStart.UI.Controls"
+    xmlns:commui="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:convert="using:BiliStart.Behaviors.Converter"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,6 +15,47 @@
     <Page.Resources>
         <convert:PlayerSliderConvert x:Key="SliderConvert" />
         <convert:CountForNumber x:Key="NumberConvert" />
+        <DataTemplate
+            x:Key="DefaultPlayerListTemplate"
+            x:DataType="data:Page">
+            <Border
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    Text="{x:Bind Title, Mode=OneWay}"
+                    TextTrimming="CharacterEllipsis"
+                    ToolTipService.ToolTip="{x:Bind Title, Mode=OneWay}" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate
+            x:Key="NumberPlayerListTemplate"
+            x:DataType="data:Page">
+            <TextBlock
+                Text="{x:Bind page, Mode=OneWay}"
+                ToolTipService.ToolTip="{x:Bind Title, Mode=OneWay}" />
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="DefaultPlayerListPanel">
+            <ItemsStackPanel Orientation="Vertical" />
+        </ItemsPanelTemplate>
+        <ItemsPanelTemplate x:Key="NumberPlayerListPanel">
+            <ItemsWrapGrid
+                HorizontalAlignment="Center"
+                Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+        <Style
+            x:Key="DefaultPlayerListItemStyle"
+            BasedOn="{StaticResource DefaultGridViewItemStyle}"
+            TargetType="GridViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+        <Style
+            x:Key="NumberPlayerListItemStyle"
+            BasedOn="{StaticResource DefaultGridViewItemStyle}"
+            TargetType="GridViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
     </Page.Resources>
     <Grid x:Name="grid">
         <Grid.RowDefinitions>
@@ -27,7 +69,7 @@
             <ColumnDefinition
                 x:Name="MoreColumn"
                 Width="3*"
-                MaxWidth="350" />
+                MaxWidth="330" />
         </Grid.ColumnDefinitions>
         <Grid
             x:Name="TitleBar"
@@ -142,21 +184,65 @@
                 xmlns:data="using:BiliBiliAPI.Models.Videos"
                 x:Name="PagePivotItem"
                 Header="PageList">
-                <ListView
-                    ItemsSource="{x:Bind ViewModel.VideoPages, Mode=OneWay}"
-                    SelectedIndex="{x:Bind ViewModel.PageSelectIndex, Mode=TwoWay}"
-                    SelectionChanged="{x:Bind ViewModel.ListView_SelectionChanged}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="data:Page">
-                            <TextBlock
-                                Text="{x:Bind Title, Mode=OneWay}"
-                                ToolTipService.ToolTip="{x:Bind Title, Mode=OneWay}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <CheckBox
+                        x:Name="IsNumber"
+                        HorizontalAlignment="Left"
+                        Content="Toggle display mod!" />
+                    <GridView
+                        x:Name="PlayerList"
+                        Grid.Row="1"
+                        ui:ScrollViewerExtensions.VerticalScrollBarMargin="0 0 -10 0"
+                        ItemTemplate="{ThemeResource DefaultPlayerListTemplate}"
+                        ItemsSource="{x:Bind ViewModel.VideoPages, Mode=OneWay}"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        SelectedIndex="{x:Bind ViewModel.PageSelectIndex, Mode=TwoWay}"
+                        SelectionChanged="{x:Bind ViewModel.ListView_SelectionChanged}">
+                        <i:Interaction.Behaviors>
+                            <core:DataTriggerBehavior Binding="{Binding ElementName=IsNumber, Path=IsChecked, Mode=OneWay, Converter={StaticResource BoolConvert}}">
+                                <core:DataTriggerBehavior.Value>
+                                    <x:Boolean>false</x:Boolean>
+                                </core:DataTriggerBehavior.Value>
+                                <core:ChangePropertyAction
+                                    PropertyName="ItemTemplate"
+                                    TargetObject="{Binding ElementName=PlayerList}"
+                                    Value="{ThemeResource DefaultPlayerListTemplate}" />
+                                <core:ChangePropertyAction
+                                    PropertyName="ItemContainerStyle"
+                                    TargetObject="{Binding ElementName=PlayerList}"
+                                    Value="{ThemeResource DefaultPlayerListItemStyle}" />
+                                <core:ChangePropertyAction
+                                    PropertyName="ItemsPanel"
+                                    TargetObject="{Binding ElementName=PlayerList}"
+                                    Value="{ThemeResource DefaultPlayerListPanel}" />
+                            </core:DataTriggerBehavior>
+                            <core:DataTriggerBehavior Binding="{Binding ElementName=IsNumber, Path=IsChecked, Mode=OneWay, Converter={StaticResource BoolConvert}}">
+                                <core:DataTriggerBehavior.Value>
+                                    <x:Boolean>true</x:Boolean>
+                                </core:DataTriggerBehavior.Value>
+                                <core:ChangePropertyAction
+                                    PropertyName="ItemTemplate"
+                                    TargetObject="{Binding ElementName=PlayerList}"
+                                    Value="{ThemeResource NumberPlayerListTemplate}" />
+                                <core:ChangePropertyAction
+                                    PropertyName="ItemContainerStyle"
+                                    TargetObject="{Binding ElementName=PlayerList}"
+                                    Value="{ThemeResource NumberPlayerListItemStyle}" />
+                                <core:ChangePropertyAction
+                                    PropertyName="ItemsPanel"
+                                    TargetObject="{Binding ElementName=PlayerList}"
+                                    Value="{ThemeResource NumberPlayerListPanel}" />
+                            </core:DataTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </GridView>
+                </Grid>
             </PivotItem>
             <PivotItem Header="Data">
-                <ScrollViewer>
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <Grid Margin="0,15,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -351,18 +437,32 @@
             Grid.Row="3"
             Margin="10,10"
             Padding="15"
-            Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
             CornerRadius="5">
             <StackPanel Orientation="Horizontal">
-                <ToggleButton
+                <biliui:ActionButton
                     x:Name="LikeButton"
-                    Margin="0">
+                    Margin="0"
+                    IsChecked="{x:Bind ViewModel.IsLike, Mode=OneWay}">
                     <i:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <core:InvokeCommandAction
-                                Command="{x:Bind ViewModel.LikeVideoCommand}"
-                                CommandParameter="{x:Bind LikeButton.IsChecked, Mode=TwoWay}" />
+                            <core:InvokeCommandAction Command="{x:Bind ViewModel.LikeVideoCommand}" />
                         </core:EventTriggerBehavior>
+                        <core:DataTriggerBehavior
+                            Binding="{x:Bind LikeButton.IsChecked, Mode=TwoWay}"
+                            Value="True">
+                            <core:ChangePropertyAction
+                                PropertyName="Style"
+                                TargetObject="{Binding ElementName=LikeButton}"
+                                Value="{ThemeResource AccentButtonStyle}" />
+                        </core:DataTriggerBehavior>
+                        <core:DataTriggerBehavior
+                            Binding="{x:Bind LikeButton.IsChecked, Mode=TwoWay}"
+                            Value="False">
+                            <core:ChangePropertyAction
+                                PropertyName="Style"
+                                TargetObject="{Binding ElementName=LikeButton}"
+                                Value="{ThemeResource DefaultButtonStyle}" />
+                        </core:DataTriggerBehavior>
                     </i:Interaction.Behaviors>
                     <StackPanel Orientation="Horizontal">
                         <FontIcon
@@ -373,9 +473,41 @@
                             Margin="5,0,0,0"
                             Text="Like" />
                     </StackPanel>
-
-                </ToggleButton>
-                <Button Margin="5,0,0,0">
+                    <!--<VisualStateManager.VisualStateGroups xmlns:trigger="using:BiliStart.Styles.TriggerStates">
+                        <VisualStateGroup x:Name="CheckedGroup">
+                            <VisualState x:Name="CheckState">
+                                <VisualState.StateTriggers>
+                                    <trigger:ActionButtonIsCheckedTrigger Checked="True" />
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Background" Value="{ThemeResource AccentFillColorDefaultBrush}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>-->
+                </biliui:ActionButton>
+                <biliui:ActionButton
+                    x:Name="CoinsButton"
+                    Margin="5,0,0,0"
+                    IsChecked="{x:Bind ViewModel.IsCoins, Mode=OneWay}">
+                    <i:Interaction.Behaviors>
+                        <core:DataTriggerBehavior
+                            Binding="{x:Bind CoinsButton.IsChecked, Mode=TwoWay}"
+                            Value="True">
+                            <core:ChangePropertyAction
+                                PropertyName="Style"
+                                TargetObject="{Binding ElementName=CoinsButton}"
+                                Value="{ThemeResource AccentButtonStyle}" />
+                        </core:DataTriggerBehavior>
+                        <core:DataTriggerBehavior
+                            Binding="{x:Bind CoinsButton.IsChecked, Mode=TwoWay}"
+                            Value="False">
+                            <core:ChangePropertyAction
+                                PropertyName="Style"
+                                TargetObject="{Binding ElementName=CoinsButton}"
+                                Value="{ThemeResource DefaultButtonStyle}" />
+                        </core:DataTriggerBehavior>
+                    </i:Interaction.Behaviors>
                     <StackPanel Orientation="Horizontal">
                         <FontIcon
                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
@@ -385,7 +517,7 @@
                             Margin="5,0,0,0"
                             Text="Coins" />
                     </StackPanel>
-                    <Button.Flyout>
+                    <biliui:ActionButton.Flyout>
                         <MenuFlyout>
                             <MenuFlyoutItem
                                 Command="{x:Bind ViewModel.GiveCoinsVideoCommand}"
@@ -402,8 +534,8 @@
                                 </MenuFlyoutItem.CommandParameter>
                             </MenuFlyoutItem>
                         </MenuFlyout>
-                    </Button.Flyout>
-                </Button>
+                    </biliui:ActionButton.Flyout>
+                </biliui:ActionButton>
                 <Button Margin="5,0,0,0">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon
@@ -416,7 +548,7 @@
                     </StackPanel>
                     <Button.Flyout>
                         <Flyout>
-                            <TextBlock Text="this is a Favourite" />
+                            <TextBlock Text="this is a Favourite list" />
                         </Flyout>
                     </Button.Flyout>
                 </Button>
@@ -433,7 +565,6 @@
             </StackPanel>
 
         </Border>
-
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="PlayState">
                 <VisualState x:Name="Width450">
