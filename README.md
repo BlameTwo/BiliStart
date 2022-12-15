@@ -1,13 +1,6 @@
 # BiliStart
-
-WindowAppSDK的Bilibili客户端
-
-| 设计模式     | 单例                                                                  |
-|:--------:|:-------------------------------------------------------------------:|
-| **框架模式** | MVVM松耦合                                                             |
-| **UI框架** | WinUI3                                                               |
-| **API库** | [BiliBiliAccount](https://github.com/BlameTwo/BiliBiliAccount.git)  |
-
+**WindowAppSDK的Bilibili客户端**
+<br/>
 如果您看到了这个项目，可以尝试clone下来，帮助我一起开发，又或者给一个Star？
 <br/>
 需要的环境如下：
