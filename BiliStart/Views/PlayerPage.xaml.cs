@@ -42,7 +42,17 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         Timer.Tick += Timer_Tick;
         Timer.Start();
         this.SizeChanged += PlayerPage_SizeChanged;
-        process.AddHandler(UIElement.PointerReleasedEvent /*哪个事件*/, new PointerEventHandler(UIElement_OnPointerReleased) /*使用哪个函数处理*/, true /*如果在之前处理，是否还使用函数*/);
+        process.AddHandler(UIElement.PointerReleasedEvent, new PointerEventHandler(UIElement_OnPointerReleased) , true );
+        Close.Completed += (s, e) =>
+        {
+            VideoData.Visibility = Visibility.Collapsed;
+            CloseStop.Begin();
+        };
+        Show.Completed += (s, e) =>
+        {
+            VideoData.Visibility = Visibility.Visible;
+            ShowStop.Begin();
+        };
     }
 
     private void UIElement_OnPointerReleased(object sender, PointerRoutedEventArgs e)
@@ -132,6 +142,18 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         this.media.SetMediaPlayer(ViewModel.NowMediaPlayer);
         //在这里订阅一个媒体加载完毕事件
         ViewModel.NowMediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
+        //这里搞一个主题更改
+        if (App.MainWindow.Content is FrameworkElement rootElement)
+        {
+            rootElement.ActualThemeChanged += (s, e) =>
+            {
+                //对颜色强制进行更改，ShellPage中的个人信息Flyout也有这样的问题，先略过。
+                if(this.Content is FrameworkElement rootElement2)
+                {
+                    rootElement2.RequestedTheme = rootElement.ActualTheme;
+                }
+            };
+        }
     }
 
 
@@ -217,8 +239,17 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             IsPlay = true;
         }
     }
-
-
-
-   
+    bool isopen = false;
+    private void ToggleButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (isopen)
+        {
+            Close.Begin();
+            isopen = !isopen;
+            return;
+        }
+        Show.Begin();
+        isopen = !isopen;
+        return;
+    }
 }

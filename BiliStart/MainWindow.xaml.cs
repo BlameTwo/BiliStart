@@ -1,6 +1,7 @@
 ﻿using BiliStart.Contracts.Services;
 using BiliStart.Helpers;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using System.Runtime.InteropServices; // For DllImport
 using WinRT; // required to support Window.As<ICompositionSupportsSystemBackdrop>()
 namespace BiliStart;
@@ -79,6 +80,7 @@ public sealed partial class MainWindow : Window
         WindowManager.SetMinHeightAndWidth(500, 400);
         WindowManager.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/icon.ico"));
         int build = Environment.OSVersion.Version.Build;
+        
         if (build >= 22000 && build < 22621)
         {
             SetBackdrop(BackdropType.Mica);

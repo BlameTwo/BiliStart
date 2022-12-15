@@ -8,13 +8,16 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:data="using:BiliBiliAPI.Models.Videos"
+    xmlns:favoritesdata="using:BiliBiliAPI.Models.User"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d">
     <Page.Resources>
-        <convert:PlayerSliderConvert x:Key="SliderConvert" />
-        <convert:CountForNumber x:Key="NumberConvert" />
+        <convert:PlayerSliderConvert
+            x:Key="SliderConvert" />
+        <convert:CountForNumber
+            x:Key="NumberConvert" />
         <DataTemplate
             x:Key="DefaultPlayerListTemplate"
             x:DataType="data:Page">
@@ -35,10 +38,13 @@
                 Text="{x:Bind page, Mode=OneWay}"
                 ToolTipService.ToolTip="{x:Bind Title, Mode=OneWay}" />
         </DataTemplate>
-        <ItemsPanelTemplate x:Key="DefaultPlayerListPanel">
-            <ItemsStackPanel Orientation="Vertical" />
+        <ItemsPanelTemplate
+            x:Key="DefaultPlayerListPanel">
+            <ItemsStackPanel
+                Orientation="Vertical" />
         </ItemsPanelTemplate>
-        <ItemsPanelTemplate x:Key="NumberPlayerListPanel">
+        <ItemsPanelTemplate
+            x:Key="NumberPlayerListPanel">
             <ItemsWrapGrid
                 HorizontalAlignment="Center"
                 Orientation="Horizontal" />
@@ -56,16 +62,70 @@
             TargetType="GridViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
+        <Storyboard
+            x:Name="Show">
+            <DoubleAnimation
+                EnableDependentAnimation="True"
+                Storyboard.TargetName="bottommenu"
+                Storyboard.TargetProperty="Height"
+                To="400"
+                Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase
+                        EasingMode="EaseInOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard
+            x:Name="Close">
+            <DoubleAnimation
+                EnableDependentAnimation="True"
+                Storyboard.TargetName="bottommenu"
+                Storyboard.TargetProperty="Height"
+                To="60"
+                Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase
+                        EasingMode="EaseInOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard
+            x:Name="ShowStop">
+            <DoubleAnimation
+                Storyboard.TargetName="VideoData"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+        </Storyboard>
+        <Storyboard
+            x:Name="CloseStop">
+            <DoubleAnimation
+                Storyboard.TargetName="VideoData"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2" />
+        </Storyboard>
     </Page.Resources>
-    <Grid x:Name="grid">
+    <Grid
+        x:Name="grid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition
+                x:Name="TitlebarRow"
+                Height="35" />
+            <RowDefinition
+                x:Name="MediaRow"
+                Height="*" />
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*" />
+            <ColumnDefinition
+                Width="7*" />
             <ColumnDefinition
                 x:Name="MoreColumn"
                 Width="3*"
@@ -99,10 +159,10 @@
         <Border
             x:Name="mediaborder"
             Grid.Row="1"
-            Grid.RowSpan="2"
             Margin="10"
             ui:UIElementExtensions.ClipToBounds="True"
             Background="Black"
+            Canvas.ZIndex="-1"
             CornerRadius="10">
             <MediaPlayerElement
                 x:Name="media"
@@ -111,7 +171,6 @@
         </Border>
         <Border
             Grid.Row="1"
-            Margin="5"
             Padding="10"
             VerticalAlignment="Bottom"
             CornerRadius="5">
@@ -121,14 +180,17 @@
                     Color="{ThemeResource SolidBackgroundFillColorBase}" />
             </Border.Background>
             <Grid
-                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom"
                 Canvas.ZIndex="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition
+                        Width="auto" />
                     <ColumnDefinition />
-                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition
+                        Width="auto" />
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid
+                    Grid.Column="0">
                     <Button
                         Click="Button_Click_1"
                         Content="Start/Pause" />
@@ -140,16 +202,22 @@
                     Maximum="{x:Bind ViewModel.MaxValue, Mode=OneWay}"
                     ThumbToolTipValueConverter="{ThemeResource SliderConvert}"
                     Value="{x:Bind ViewModel.SliderValue, Mode=OneWay}" />
-                <Grid Grid.Column="2">
-                    <StackPanel Orientation="Horizontal">
+                <Grid
+                    Grid.Column="2">
+                    <StackPanel
+                        Orientation="Horizontal">
                         <ComboBox
                             Grid.Row="1"
                             Grid.Column="1"
                             Margin="5,0,0,0">
-                            <ComboBoxItem Content="0.5" />
-                            <ComboBoxItem Content="1" />
-                            <ComboBoxItem Content="1.5" />
-                            <ComboBoxItem Content="2" />
+                            <ComboBoxItem
+                                Content="0.5" />
+                            <ComboBoxItem
+                                Content="1" />
+                            <ComboBoxItem
+                                Content="1.5" />
+                            <ComboBoxItem
+                                Content="2" />
                         </ComboBox>
                         <ComboBox
                             x:Name="Play_Suppout"
@@ -159,8 +227,10 @@
                             SelectedIndex="{x:Bind ViewModel._SupportIndex, Mode=TwoWay}"
                             SelectionChanged="{x:Bind ViewModel.Support_SelectionChanged}">
                             <ComboBox.ItemTemplate>
-                                <DataTemplate x:DataType="data:Support_Formats">
-                                    <TextBlock Text="{x:Bind New_description, Mode=OneWay}" />
+                                <DataTemplate
+                                    x:DataType="data:Support_Formats">
+                                    <TextBlock
+                                        Text="{x:Bind New_description, Mode=OneWay}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
@@ -186,7 +256,8 @@
                 Header="PageList">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
+                        <RowDefinition
+                            Height="auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <CheckBox
@@ -203,7 +274,8 @@
                         SelectedIndex="{x:Bind ViewModel.PageSelectIndex, Mode=TwoWay}"
                         SelectionChanged="{x:Bind ViewModel.ListView_SelectionChanged}">
                         <i:Interaction.Behaviors>
-                            <core:DataTriggerBehavior Binding="{Binding ElementName=IsNumber, Path=IsChecked, Mode=OneWay, Converter={StaticResource BoolConvert}}">
+                            <core:DataTriggerBehavior
+                                Binding="{Binding ElementName=IsNumber, Path=IsChecked, Mode=OneWay, Converter={StaticResource BoolConvert}}">
                                 <core:DataTriggerBehavior.Value>
                                     <x:Boolean>false</x:Boolean>
                                 </core:DataTriggerBehavior.Value>
@@ -220,7 +292,8 @@
                                     TargetObject="{Binding ElementName=PlayerList}"
                                     Value="{ThemeResource DefaultPlayerListPanel}" />
                             </core:DataTriggerBehavior>
-                            <core:DataTriggerBehavior Binding="{Binding ElementName=IsNumber, Path=IsChecked, Mode=OneWay, Converter={StaticResource BoolConvert}}">
+                            <core:DataTriggerBehavior
+                                Binding="{Binding ElementName=IsNumber, Path=IsChecked, Mode=OneWay, Converter={StaticResource BoolConvert}}">
                                 <core:DataTriggerBehavior.Value>
                                     <x:Boolean>true</x:Boolean>
                                 </core:DataTriggerBehavior.Value>
@@ -241,190 +314,6 @@
                     </GridView>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="Data">
-                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <Grid Margin="0,15,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Image
-                            Height="200"
-                            Source="{x:Bind ViewModel.VideoContent.VideoImage, Mode=OneWay}"
-                            Stretch="Uniform" />
-                        <StackPanel
-                            Grid.Row="1"
-                            Margin="0,10,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Stretch"
-                            Orientation="Horizontal">
-                            <Border
-                                Padding="5"
-                                VerticalAlignment="Center"
-                                Background="{ThemeResource ControlFillColorDefault}"
-                                CornerRadius="5">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        VerticalAlignment="Center"
-                                        FontFamily="Segoe Fluent Icons"
-                                        FontSize="12"
-                                        Glyph="&#xE7B3;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        FontSize="12"
-                                        Text="{x:Bind ViewModel.VideoContent.Stat.Views, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                                </StackPanel>
-                            </Border>
-                            <Border
-                                Margin="5,0,0,0"
-                                Padding="5"
-                                VerticalAlignment="Center"
-                                Background="{ThemeResource ControlFillColorDefault}"
-                                CornerRadius="5">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        FontFamily="Segoe Fluent Icons"
-                                        FontSize="12"
-                                        Glyph="&#xE19F;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        FontSize="12"
-                                        Text="{x:Bind ViewModel.VideoContent.Stat.Like, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                                </StackPanel>
-                            </Border>
-                            <Border
-                                Margin="5,0,0,0"
-                                Padding="5"
-                                VerticalAlignment="Center"
-                                Background="{ThemeResource ControlFillColorDefault}"
-                                CornerRadius="5">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        FontFamily="Segoe Fluent Icons"
-                                        FontSize="12"
-                                        Glyph="&#xE7BC;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        FontSize="12"
-                                        Text="{x:Bind ViewModel.VideoContent.Stat.DanMaku, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                                </StackPanel>
-                            </Border>
-                            <Border
-                                Margin="5,0,0,0"
-                                Padding="5"
-                                VerticalAlignment="Center"
-                                Background="{ThemeResource ControlFillColorDefault}"
-                                CornerRadius="5">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                        FontSize="12"
-                                        Glyph="&#xEDE3;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        FontSize="12"
-                                        Text="{x:Bind ViewModel.VideoContent.Stat.coin, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                                </StackPanel>
-                            </Border>
-                            <Border
-                                Margin="5,0,0,0"
-                                Padding="5"
-                                VerticalAlignment="Center"
-                                Background="{ThemeResource ControlFillColorDefault}"
-                                CornerRadius="5">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        FontFamily="Segoe Fluent Icons"
-                                        FontSize="12                                           "
-                                        Glyph="&#xE1CE;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        FontSize="12"
-                                        Text="{x:Bind ViewModel.VideoContent.Stat.Favorite, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                                </StackPanel>
-                            </Border>
-                            <Border
-                                Margin="5,0,0,0"
-                                Padding="5"
-                                VerticalAlignment="Center"
-                                Background="{ThemeResource ControlFillColorDefault}"
-                                CornerRadius="5">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        FontFamily="Segoe Fluent Icons"
-                                        FontSize="12"
-                                        Glyph="&#xE120;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        FontSize="12"
-                                        Text="{x:Bind ViewModel.VideoContent.Stat.Share, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
-                        <Grid
-                            Grid.Row="2"
-                            Margin="0,15,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <PersonPicture
-                                    Width="40"
-                                    Height="40"
-                                    ProfilePicture="{x:Bind ViewModel.VideoContent.Up.Face, Mode=OneWay}" />
-                                <TextBlock
-                                    Margin="10,0,0,0"
-                                    VerticalAlignment="Center"
-                                    Text="{x:Bind ViewModel.VideoContent.Up.Name, Mode=OneWay}" />
-                            </StackPanel>
-                            <ToggleButton
-                                Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon
-                                        FontFamily="Segoe Fluent Icons"
-                                        Glyph="&#xE109;" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        VerticalAlignment="Center"
-                                        Text="Like" />
-                                </StackPanel>
-
-                            </ToggleButton>
-                        </Grid>
-                        <StackPanel
-                            Grid.Row="3"
-                            Margin="0,10,0,0"
-                            VerticalAlignment="Top">
-                            <Border
-                                Padding="10"
-                                Background="{ThemeResource ControlFillColorDefault}"
-                                CornerRadius="10">
-                                <TextBlock
-                                    FontSize="15"
-                                    FontWeight="Bold"
-                                    Text="{x:Bind ViewModel.VideoContent.Title, Mode=OneWay}"
-                                    TextWrapping="Wrap" />
-                            </Border>
-                            <Border
-                                Margin="0,10,0,0"
-                                Padding="10"
-                                Background="{ThemeResource ControlFillColorDefault}"
-                                CornerRadius="10">
-                                <TextBlock
-                                    Text="{x:Bind ViewModel.VideoContent.VideoDEsc, Mode=OneWay}"
-                                    TextTrimming="CharacterEllipsis"
-                                    TextWrapping="Wrap" />
-
-                            </Border>
-                        </StackPanel>
-                    </Grid>
-                </ScrollViewer>
-            </PivotItem>
             <PivotItem
                 Content="Comment"
                 Header="Comment" />
@@ -434,46 +323,156 @@
         </Pivot>
         <Border
             x:Name="bottommenu"
-            Grid.Row="3"
-            Margin="10,10"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Height="400"
+            Margin="10,0"
             Padding="15"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Canvas.ZIndex="2"
             CornerRadius="5">
-            <StackPanel Orientation="Horizontal">
-                <biliui:ActionButton
-                    x:Name="LikeButton"
-                    Margin="0"
-                    IsChecked="{x:Bind ViewModel.IsLike, Mode=OneWay}">
-                    <i:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Click">
-                            <core:InvokeCommandAction Command="{x:Bind ViewModel.LikeVideoCommand}" />
-                        </core:EventTriggerBehavior>
-                        <core:DataTriggerBehavior
-                            Binding="{x:Bind LikeButton.IsChecked, Mode=TwoWay}"
-                            Value="True">
-                            <core:ChangePropertyAction
-                                PropertyName="Style"
-                                TargetObject="{Binding ElementName=LikeButton}"
-                                Value="{ThemeResource AccentButtonStyle}" />
-                        </core:DataTriggerBehavior>
-                        <core:DataTriggerBehavior
-                            Binding="{x:Bind LikeButton.IsChecked, Mode=TwoWay}"
-                            Value="False">
-                            <core:ChangePropertyAction
-                                PropertyName="Style"
-                                TargetObject="{Binding ElementName=LikeButton}"
-                                Value="{ThemeResource DefaultButtonStyle}" />
-                        </core:DataTriggerBehavior>
-                    </i:Interaction.Behaviors>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon
-                            FontFamily="Segoe Fluent Icons"
-                            FontSize="15"
-                            Glyph="&#xE19F;" />
+            <Border.Background>
+                <SolidColorBrush
+                    Color="{ThemeResource SolidBackgroundFillColorBase}" />
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition
+                        Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid
+                    x:Name="VideoData">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition
+                            Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Image
+                        MaxWidth="350"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Source="{x:Bind ViewModel.VideoContent.VideoImage, Mode=OneWay}" />
+                    <StackPanel
+                        Grid.Column="1"
+                        Orientation="Vertical">
                         <TextBlock
-                            Margin="5,0,0,0"
-                            Text="Like" />
+                            Margin="10,0,0,0"
+                            FontSize="25"
+                            FontWeight="Bold"
+                            Text="{x:Bind ViewModel.VideoContent.Title, Mode=OneWay}"
+                            TextTrimming="CharacterEllipsis" />
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <StackPanel
+                                Margin="15,5"
+                                Orientation="Horizontal">
+                                <FontIcon
+                                    FontFamily="Segoe Fluent Icons"
+                                    FontSize="17"
+                                    Glyph="&#xE116;" />
+                                <TextBlock
+                                    Margin="3,0,0,0"
+                                    FontSize="17"
+                                    Text="{x:Bind ViewModel.VideoContent.Stat.Views, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                            </StackPanel>
+
+                            <StackPanel
+                                Margin="5,5"
+                                Orientation="Horizontal">
+                                <FontIcon
+                                    FontFamily="Segoe Fluent Icons"
+                                    FontSize="17"
+                                    Glyph="&#xE7BC;" />
+                                <TextBlock
+                                    Margin="3,0,0,0"
+                                    FontSize="17"
+                                    Text="{x:Bind ViewModel.VideoContent.Stat.DanMaku, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                            </StackPanel>
+
+                            <StackPanel
+                                Margin="5,5"
+                                Orientation="Horizontal">
+                                <FontIcon
+                                    FontFamily="Segoe Fluent Icons"
+                                    FontSize="17"
+                                    Glyph="&#xE1CE;" />
+                                <TextBlock
+                                    Margin="3,0,0,0"
+                                    FontSize="17"
+                                    Text="{x:Bind ViewModel.VideoContent.Stat.Favorite, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Grid
+                            Margin="10,5,0,0"
+                            HorizontalAlignment="Stretch">
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <PersonPicture
+                                    Height="45"
+                                    ProfilePicture="{x:Bind ViewModel.VideoContent.Up.Face, Mode=OneWay}" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{x:Bind ViewModel.VideoContent.Up.Name}" />
+                            </StackPanel>
+                            <ToggleButton
+                                HorizontalAlignment="Right"
+                                Content="Like" />
+                        </Grid>
                     </StackPanel>
-                    <!--<VisualStateManager.VisualStateGroups xmlns:trigger="using:BiliStart.Styles.TriggerStates">
+                </Grid>
+                <Border
+                    Grid.Row="1">
+                    <StackPanel
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                        <biliui:ActionButton
+                            x:Name="LikeButton"
+                            Margin="0"
+                            IsChecked="{x:Bind ViewModel.IsLike, Mode=OneWay}">
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior
+                                    EventName="Click">
+                                    <core:InvokeCommandAction
+                                        Command="{x:Bind ViewModel.LikeVideoCommand}" />
+                                </core:EventTriggerBehavior>
+                                <core:DataTriggerBehavior
+                                    Binding="{x:Bind LikeButton.IsChecked, Mode=TwoWay}"
+                                    Value="True">
+                                    <core:ChangePropertyAction
+                                        PropertyName="Style"
+                                        TargetObject="{Binding ElementName=LikeButton}"
+                                        Value="{ThemeResource AccentButtonStyle}" />
+                                </core:DataTriggerBehavior>
+                                <core:DataTriggerBehavior
+                                    Binding="{x:Bind LikeButton.IsChecked, Mode=TwoWay}"
+                                    Value="False">
+                                    <core:ChangePropertyAction
+                                        PropertyName="Style"
+                                        TargetObject="{Binding ElementName=LikeButton}"
+                                        Value="{ThemeResource DefaultButtonStyle}" />
+                                </core:DataTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <FontIcon
+                                    FontFamily="Segoe Fluent Icons"
+                                    FontSize="15"
+                                    Glyph="&#xE19F;" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    Text="Like" />
+                            </StackPanel>
+                            <!--<VisualStateManager.VisualStateGroups xmlns:trigger="using:BiliStart.Styles.TriggerStates">
                         <VisualStateGroup x:Name="CheckedGroup">
                             <VisualState x:Name="CheckState">
                                 <VisualState.StateTriggers>
@@ -485,105 +484,242 @@
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateManager.VisualStateGroups>-->
-                </biliui:ActionButton>
-                <biliui:ActionButton
-                    x:Name="CoinsButton"
-                    Margin="5,0,0,0"
-                    IsChecked="{x:Bind ViewModel.IsCoins, Mode=OneWay}">
-                    <i:Interaction.Behaviors>
-                        <core:DataTriggerBehavior
-                            Binding="{x:Bind CoinsButton.IsChecked, Mode=TwoWay}"
-                            Value="True">
-                            <core:ChangePropertyAction
-                                PropertyName="Style"
-                                TargetObject="{Binding ElementName=CoinsButton}"
-                                Value="{ThemeResource AccentButtonStyle}" />
-                        </core:DataTriggerBehavior>
-                        <core:DataTriggerBehavior
-                            Binding="{x:Bind CoinsButton.IsChecked, Mode=TwoWay}"
-                            Value="False">
-                            <core:ChangePropertyAction
-                                PropertyName="Style"
-                                TargetObject="{Binding ElementName=CoinsButton}"
-                                Value="{ThemeResource DefaultButtonStyle}" />
-                        </core:DataTriggerBehavior>
-                    </i:Interaction.Behaviors>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon
-                            FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                            FontSize="15"
-                            Glyph="&#xEDE3;" />
-                        <TextBlock
+                        </biliui:ActionButton>
+                        <biliui:ActionButton
+                            x:Name="CoinsButton"
                             Margin="5,0,0,0"
-                            Text="Coins" />
-                    </StackPanel>
-                    <biliui:ActionButton.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem
-                                Command="{x:Bind ViewModel.GiveCoinsVideoCommand}"
-                                Text="Give one">
-                                <MenuFlyoutItem.CommandParameter>
-                                    <x:Int32>1</x:Int32>
-                                </MenuFlyoutItem.CommandParameter>
-                            </MenuFlyoutItem>
-                            <MenuFlyoutItem
-                                Command="{x:Bind ViewModel.GiveCoinsVideoCommand}"
-                                Text="Give two">
-                                <MenuFlyoutItem.CommandParameter>
-                                    <x:Int32>2</x:Int32>
-                                </MenuFlyoutItem.CommandParameter>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </biliui:ActionButton.Flyout>
-                </biliui:ActionButton>
-                <Button Margin="5,0,0,0">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon
-                            FontFamily="Segoe Fluent Icons"
-                            FontSize="15"
-                            Glyph="&#xE1CE;" />
-                        <TextBlock
+                            IsChecked="{x:Bind ViewModel.IsCoins, Mode=OneWay}">
+                            <i:Interaction.Behaviors>
+                                <core:DataTriggerBehavior
+                                    Binding="{x:Bind CoinsButton.IsChecked, Mode=TwoWay}"
+                                    Value="True">
+                                    <core:ChangePropertyAction
+                                        PropertyName="Style"
+                                        TargetObject="{Binding ElementName=CoinsButton}"
+                                        Value="{ThemeResource AccentButtonStyle}" />
+                                </core:DataTriggerBehavior>
+                                <core:DataTriggerBehavior
+                                    Binding="{x:Bind CoinsButton.IsChecked, Mode=TwoWay}"
+                                    Value="False">
+                                    <core:ChangePropertyAction
+                                        PropertyName="Style"
+                                        TargetObject="{Binding ElementName=CoinsButton}"
+                                        Value="{ThemeResource DefaultButtonStyle}" />
+                                </core:DataTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <FontIcon
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                    FontSize="15"
+                                    Glyph="&#xEDE3;" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    Text="Coins" />
+                            </StackPanel>
+                            <biliui:ActionButton.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem
+                                        Command="{x:Bind ViewModel.GiveCoinsVideoCommand}"
+                                        Text="Give one">
+                                        <MenuFlyoutItem.CommandParameter>
+                                            <x:Int32>1</x:Int32>
+                                        </MenuFlyoutItem.CommandParameter>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem
+                                        Command="{x:Bind ViewModel.GiveCoinsVideoCommand}"
+                                        Text="Give two">
+                                        <MenuFlyoutItem.CommandParameter>
+                                            <x:Int32>2</x:Int32>
+                                        </MenuFlyoutItem.CommandParameter>
+                                    </MenuFlyoutItem>
+                                </MenuFlyout>
+                            </biliui:ActionButton.Flyout>
+                        </biliui:ActionButton>
+                        <biliui:ActionButton
+                            x:Name="FavourtionButton"
                             Margin="5,0,0,0"
-                            Text="Favourite" />
-                    </StackPanel>
-                    <Button.Flyout>
-                        <Flyout>
-                            <TextBlock Text="this is a Favourite list" />
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
-                <ToggleButton Margin="5,0,0,0">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon
-                            FontFamily="Segoe Fluent Icons"
-                            Glyph="&#xEC92;" />
-                        <TextBlock
+                            IsChecked="{x:Bind ViewModel.IsFavourites, Mode=OneWay}">
+                            <i:Interaction.Behaviors>
+                                <core:DataTriggerBehavior
+                                    Binding="{x:Bind FavourtionButton.IsChecked, Mode=TwoWay}"
+                                    Value="True">
+                                    <core:ChangePropertyAction
+                                        PropertyName="Style"
+                                        TargetObject="{Binding ElementName=FavourtionButton}"
+                                        Value="{ThemeResource AccentButtonStyle}" />
+                                </core:DataTriggerBehavior>
+                                <core:DataTriggerBehavior
+                                    Binding="{x:Bind FavourtionButton.IsChecked, Mode=TwoWay}"
+                                    Value="False">
+                                    <core:ChangePropertyAction
+                                        PropertyName="Style"
+                                        TargetObject="{Binding ElementName=FavourtionButton}"
+                                        Value="{ThemeResource DefaultButtonStyle}" />
+                                </core:DataTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <FontIcon
+                                    FontFamily="Segoe Fluent Icons"
+                                    FontSize="15"
+                                    Glyph="&#xE1CE;" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    Text="Favourite" />
+                            </StackPanel>
+                            <biliui:ActionButton.Flyout>
+                                <Flyout
+                                    x:Name="flyout1">
+                                    <Flyout.FlyoutPresenterStyle>
+                                        <Style
+                                            TargetType="FlyoutPresenter">
+                                            <Setter Property="Background" Value="{ThemeResource AcrylicInAppFillColorDefaultBrush}" />
+                                            <Setter Property="CornerRadius" Value="10" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate
+                                                        TargetType="FlyoutPresenter">
+                                                        <Border
+                                                            Background="{TemplateBinding Background}"
+                                                            BackgroundSizing="InnerBorderEdge"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="{TemplateBinding CornerRadius}">
+                                                            <ScrollViewer
+                                                                x:Name="ScrollViewer"
+                                                                AutomationProperties.AccessibilityView="Raw"
+                                                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                                HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                                                VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                                                ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                                                <ContentPresenter
+                                                                    Margin="{TemplateBinding Padding}"
+                                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                    Content="{TemplateBinding Content}"
+                                                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                    ContentTransitions="{TemplateBinding ContentTransitions}" />
+                                                            </ScrollViewer>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Flyout.FlyoutPresenterStyle>
+                                    <ListView
+                                        x:Name="FavouriteLists"
+                                        HorizontalAlignment="Stretch"
+                                        ItemsSource="{x:Bind ViewModel.Favourites, Mode=OneWay}">
+                                        <ListView.ItemContainerStyle>
+                                            <Style
+                                                TargetType="ListViewItem">
+                                                <Setter Property="Template" Value="{ThemeResource FavouritesListViewTemplate}" />
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                                <Setter Property="Margin" Value="5" />
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <i:Interaction.Behaviors>
+                                            <core:EventTriggerBehavior
+                                                EventName="SelectionChanged">
+                                                <core:InvokeCommandAction
+                                                    Command="{x:Bind ViewModel.AddFavouriteCommand}"
+                                                    CommandParameter="{x:Bind FavouriteLists.SelectedItem, Mode=TwoWay}" />
+                                            </core:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate
+                                                x:DataType="favoritesdata:FavoritesDataList">
+                                                <Border
+                                                    x:Name="border"
+                                                    Padding="10"
+                                                    BorderThickness="1"
+                                                    CornerRadius="5">
+                                                    <i:Interaction.Behaviors>
+                                                        <core:DataTriggerBehavior
+                                                            Binding="{x:Bind FavState, Mode=OneWay}"
+                                                            Value="1">
+                                                            <core:ChangePropertyAction
+                                                                PropertyName="BorderBrush"
+                                                                TargetObject="{Binding ElementName=border}"
+                                                                Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                        </core:DataTriggerBehavior>
+                                                        <core:DataTriggerBehavior
+                                                            Binding="{x:Bind FavState, Mode=OneWay}"
+                                                            Value="0">
+                                                            <core:ChangePropertyAction
+                                                                PropertyName="BorderBrush"
+                                                                TargetObject="{Binding ElementName=border}"
+                                                                Value="{ThemeResource ControlFillColorDefault}" />
+                                                        </core:DataTriggerBehavior>
+                                                    </i:Interaction.Behaviors>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock
+                                                            x:Name="TItleName"
+                                                            Grid.Column="1"
+                                                            HorizontalAlignment="Right"
+                                                            Text="{x:Bind Media_Count, Mode=OneWay}" />
+                                                        <TextBlock
+                                                            HorizontalAlignment="Left"
+                                                            Text="{x:Bind Title, Mode=OneWay}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Flyout>
+                            </biliui:ActionButton.Flyout>
+                        </biliui:ActionButton>
+                        <ToggleButton
                             Margin="5,0,0,0"
-                            Text="AddTimeLook" />
+                            Click="ToggleButton_Click">
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <FontIcon
+                                    FontFamily="Segoe Fluent Icons"
+                                    Glyph="&#xEC92;" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    Text="AddTimeLook" />
+                            </StackPanel>
+                        </ToggleButton>
                     </StackPanel>
-                </ToggleButton>
-            </StackPanel>
+                </Border>
+            </Grid>
 
         </Border>
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="PlayState">
-                <VisualState x:Name="Width450">
+            <VisualStateGroup
+                x:Name="PlayState">
+                <VisualState
+                    x:Name="Width450">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="700" />
+                        <AdaptiveTrigger
+                            MinWindowWidth="700" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="MoreColumn.Width" Value="350" />
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="Width460">
+                <VisualState
+                    x:Name="Width460">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
+                        <AdaptiveTrigger
+                            MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="MoreColumn.Width" Value="0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
+
         </VisualStateManager.VisualStateGroups>
     </Grid>
+
 </Page>

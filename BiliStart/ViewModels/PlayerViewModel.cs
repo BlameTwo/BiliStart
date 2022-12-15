@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection.Metadata.Ecma335;
 using BiliBiliAPI.Models;
+using BiliBiliAPI.Models.User;
 using BiliBiliAPI.Models.Videos;
+using BiliBiliAPI.User;
 using BiliBiliAPI.Video;
 using BiliStart.Contracts.Services;
 using BiliStart.Helpers;
@@ -29,6 +31,7 @@ public partial class PlayerViewModel:ObservableRecipient
     public MediaPlayer NowMediaPlayer = new();
     public MediaSource? Source;
     UserVideo UVideo = new();
+    Users User = new();
 
     public PlayerArgs Args
     {
@@ -77,6 +80,7 @@ public partial class PlayerViewModel:ObservableRecipient
 
     [ObservableProperty]
     private bool _IsCoins;
+
 
     private VideoInfo VideoInfo;
 
@@ -155,11 +159,39 @@ public partial class PlayerViewModel:ObservableRecipient
         set=>SetProperty(ref _VideoPages, value);
     }
 
+    [ObservableProperty]
+    private ObservableCollection<FavoritesDataList> _Favourites;
+
+    [ObservableProperty]
+    private bool _IsFavourites;
+
+    [RelayCommand]
+    private async void AddFavourite(FavoritesDataList data)
+    {
+        if(data != null)
+        {
+            var result = await UVideo.AddOrDelFavorites(VideoContent.Aid, data.ID,!Convert.ToBoolean(int.Parse(data.FavState)));
+            //刷新收藏列表
+            Favourites = (await User.GetFavourites(VideoContent.Aid)).Data.List.ToObservableCollection();
+            foreach (var item in Favourites)
+            {
+                if (item.FavState == "1")
+                {
+                    IsFavourites = true;
+                    break;
+                }
+                IsFavourites = false;
+            }
+        }
+    }
+
+
     public async void InitVideo(ViewModels.Models.PlayerArgs playerArgs)
     {
         //初始化视频
         this.VideoPages = playerArgs.Content.Pages.ToObservableCollection();
         VideoContent = playerArgs.Content;
+        this.Favourites = (await User.GetFavourites(VideoContent.Aid)).Data.List.ToObservableCollection() ;
         IsLike = Convert.ToBoolean(VideoContent.ReqUser.Like);
         this.IsCoins = Convert.ToBoolean(VideoContent.ReqUser.Coin);
         if (VideoContent.Pages.Count == 1)
@@ -175,6 +207,8 @@ public partial class PlayerViewModel:ObservableRecipient
             PageSelectIndex = 0;
         }
     }
+
+
     public async void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var page = e.AddedItems[0] as BiliBiliAPI.Models.Videos.Page;
