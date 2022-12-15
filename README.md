@@ -24,6 +24,14 @@ WindowAppSDK的Bilibili客户端
 <br/>
 Template Studio for WinUI
 
+预览：
+![Home](preview/Home.png)
+<br/>
+
+![Home](preview/Dynamic.png)
+<br/>
+![Home](preview/PlayVideo.png)
+<br/>
 计划：
 
 - [x] 扫码登陆
