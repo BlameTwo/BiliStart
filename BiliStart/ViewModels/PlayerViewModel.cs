@@ -44,7 +44,18 @@ public partial class PlayerViewModel:ObservableRecipient
     public VideosContent VideoContent
     {
         get => _VideoContent;
-        set => SetProperty(ref _VideoContent, value);
+        set
+        {
+            SetProperty(ref _VideoContent, value);
+            if (value.VideoDEsc.Length > 25)
+            {
+                VideoDesc = value.VideoDEsc.Substring(0, 25);
+            }
+            else
+            {
+                VideoDesc = value.VideoDEsc;
+            }
+        }
     }
 
     [RelayCommand]
@@ -101,6 +112,8 @@ public partial class PlayerViewModel:ObservableRecipient
         set=>SetProperty(ref _MaxValue, value);
     }
 
+    [ObservableProperty]
+    private string _VideoDesc;
     
 
     private double _SliderValue;

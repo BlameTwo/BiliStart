@@ -68,7 +68,7 @@
                 EnableDependentAnimation="True"
                 Storyboard.TargetName="bottommenu"
                 Storyboard.TargetProperty="Height"
-                To="400"
+                To="300"
                 Duration="0:0:0.5">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase
@@ -82,7 +82,7 @@
                 EnableDependentAnimation="True"
                 Storyboard.TargetName="bottommenu"
                 Storyboard.TargetProperty="Height"
-                To="60"
+                To="62"
                 Duration="0:0:0.5">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase
@@ -325,7 +325,7 @@
             x:Name="bottommenu"
             Grid.Row="2"
             Grid.RowSpan="2"
-            Height="400"
+            Height="62"
             Margin="10,0"
             Padding="15"
             HorizontalAlignment="Stretch"
@@ -355,80 +355,82 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Image
-                        MaxWidth="350"
+                    <biliui:ImageLoad
+                        MaxWidth="250"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Source="{x:Bind ViewModel.VideoContent.VideoImage, Mode=OneWay}" />
-                    <StackPanel
+                        VerticalAlignment="Center"
+                        Source="{x:Bind ViewModel.VideoContent.VideoImage, Mode=OneWay}"
+                        Stretch="Uniform" />
+                    <Grid
                         Grid.Column="1"
-                        Orientation="Vertical">
+                        Margin="15,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                Height="auto" />
+                            <RowDefinition
+                                Height="auto" />
+                            <RowDefinition
+                                Height="auto" />
+                        </Grid.RowDefinitions>
                         <TextBlock
-                            Margin="10,0,0,0"
                             FontSize="25"
-                            FontWeight="Bold"
                             Text="{x:Bind ViewModel.VideoContent.Title, Mode=OneWay}"
                             TextTrimming="CharacterEllipsis" />
                         <StackPanel
-                            HorizontalAlignment="Center"
-                            Orientation="Horizontal">
-                            <StackPanel
-                                Margin="15,5"
-                                Orientation="Horizontal">
-                                <FontIcon
-                                    FontFamily="Segoe Fluent Icons"
-                                    FontSize="17"
-                                    Glyph="&#xE116;" />
-                                <TextBlock
-                                    Margin="3,0,0,0"
-                                    FontSize="17"
-                                    Text="{x:Bind ViewModel.VideoContent.Stat.Views, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                            </StackPanel>
-
-                            <StackPanel
-                                Margin="5,5"
-                                Orientation="Horizontal">
-                                <FontIcon
-                                    FontFamily="Segoe Fluent Icons"
-                                    FontSize="17"
-                                    Glyph="&#xE7BC;" />
-                                <TextBlock
-                                    Margin="3,0,0,0"
-                                    FontSize="17"
-                                    Text="{x:Bind ViewModel.VideoContent.Stat.DanMaku, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                            </StackPanel>
-
-                            <StackPanel
-                                Margin="5,5"
-                                Orientation="Horizontal">
-                                <FontIcon
-                                    FontFamily="Segoe Fluent Icons"
-                                    FontSize="17"
-                                    Glyph="&#xE1CE;" />
-                                <TextBlock
-                                    Margin="3,0,0,0"
-                                    FontSize="17"
-                                    Text="{x:Bind ViewModel.VideoContent.Stat.Favorite, Mode=OneWay, Converter={StaticResource NumberConvert}}" />
-                            </StackPanel>
-                        </StackPanel>
-                        <Grid
-                            Margin="10,5,0,0"
-                            HorizontalAlignment="Stretch">
+                            Grid.Row="1"
+                            Margin="0,10">
                             <StackPanel
                                 Orientation="Horizontal">
                                 <PersonPicture
-                                    Height="45"
-                                    ProfilePicture="{x:Bind ViewModel.VideoContent.Up.Face, Mode=OneWay}" />
+                                    Height="30"
+                                    ProfilePicture="{x:Bind ViewModel.VideoContent.Up.Face}" />
                                 <TextBlock
                                     Margin="5,0,0,0"
                                     VerticalAlignment="Center"
-                                    Text="{x:Bind ViewModel.VideoContent.Up.Name}" />
+                                    FontSize="15"
+                                    Text="{x:Bind ViewModel.VideoContent.Up.Name, Mode=OneWay}" />
+                                <ToggleButton
+                                    Margin="10,0,0,0"
+                                    Content="Like" />
                             </StackPanel>
-                            <ToggleButton
-                                HorizontalAlignment="Right"
-                                Content="Like" />
-                        </Grid>
-                    </StackPanel>
+                            <ItemsControl
+                                Margin="0,10,0,0"
+                                ItemsSource="{x:Bind ViewModel.VideoContent.Tag, Mode=OneWay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <commui:WrapPanel
+                                            Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border
+                                            Margin="1"
+                                            Padding="5"
+                                            Background="{ThemeResource ControlFillColorDefault}"
+                                            CornerRadius="5">
+                                            <TextBlock
+                                                FontSize="10"
+                                                Text="{Binding Name, Mode=OneWay}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <RichTextBlock
+                            Grid.Row="2"
+                            VerticalAlignment="Bottom"
+                            MaxLines="3"
+                            TextTrimming="CharacterEllipsis"
+                            TextWrapping="Wrap">
+                            <Paragraph>
+                                <Run
+                                    Text="{x:Bind ViewModel.VideoContent.VideoDEsc, Mode=OneWay}" />
+                            </Paragraph>
+
+                        </RichTextBlock>
+
+                    </Grid>
                 </Grid>
                 <Border
                     Grid.Row="1">
@@ -691,6 +693,26 @@
                         </ToggleButton>
                     </StackPanel>
                 </Border>
+                <Button
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    ToolTipService.ToolTip="Desc">
+                    <FontIcon
+                        FontFamily="Segoe Fluent Icons"
+                        Glyph="&#xE70A;" />
+                    <Button.Flyout>
+                        <Flyout>
+                            <RichTextBlock
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap">
+                                <Paragraph>
+                                    <Run
+                                        Text="{x:Bind ViewModel.VideoContent.VideoDEsc, Mode=OneWay}" />
+                                </Paragraph>
+                            </RichTextBlock>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
             </Grid>
 
         </Border>
