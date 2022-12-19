@@ -148,6 +148,9 @@ public partial class App : Application
 
             services.AddTransient<PGCPlayerPage>();
             services.AddTransient<PGCPlayerViewModel>();
+
+            services.AddTransient<VideoPlayerPage>();
+            services.AddTransient<VideoPlayerViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

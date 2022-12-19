@@ -36,6 +36,7 @@ public class PageService : IPageService
         Configure<MusicAllViewModel, MusicAllPage>();
         Configure<MustWatchViewModel, MustWatchPage>();
         
+        Configure<VideoPlayerViewModel, VideoPlayerPage>();
 
         //动态页面
         Configure<MyInfoViewModel,MyInfoPage>();  
@@ -57,8 +58,8 @@ public class PageService : IPageService
         return pageType;
     }
 
+    //2022.12.19，去除掉VM泛型约束
     public void Configure<VM, V>()
-        where VM : ObservableObject
         where V : Page
     {
         lock (_pages)

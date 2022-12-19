@@ -17,9 +17,6 @@ using Windows.UI.Core;
 using Microsoft.UI.Xaml.Input;
 
 namespace BiliStart.Views;
-/// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
-/// </summary>
 public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 {
 
@@ -78,6 +75,9 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         });
     }
 
+    bool IsFull;
+
+    bool IsPlay = false;
 
     DispatcherTimer Timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
@@ -92,6 +92,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     public void MediaClear()
     {
         Timer.Stop();
+        ViewModel.DanmuProcessTime.Stop();
         if (ViewModel.NowMediaPlayer != null)
         {
             ViewModel.NowMediaPlayer.MediaOpened -= MediaPlayer_MediaOpened;
@@ -128,20 +129,13 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     }
 
 
-
-
-    
-
-
-
-    bool IsPlay = false;
-
     private async void PlayerPage_Loaded(object sender, RoutedEventArgs e)
     {
        
         this.media.SetMediaPlayer(ViewModel.NowMediaPlayer);
         //在这里订阅一个媒体加载完毕事件
         ViewModel.NowMediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
+        ViewModel.DanmakuControl = this.Danmakulist;
         //这里搞一个主题更改
         if (App.MainWindow.Content is FrameworkElement rootElement)
         {
@@ -154,6 +148,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
                 }
             };
         }
+        
     }
 
 
@@ -177,13 +172,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         }
     }
 
-    public object OldContent
-    {
-        get;set;    
-    }
 
-    bool IsFull;
-    object oldtitbar;
 
 
     private void Button_Click(object sender, RoutedEventArgs e)
@@ -198,13 +187,13 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             Grid.SetRowSpan(mediaborder,2);
             media.Margin = new Thickness(5);
             mediaborder.Margin = new Thickness(10);
-            IsFull = false;
             App.MainWindow.SetTitleBar(TitleBar);
             MoreColumn.Width = new GridLength(350, GridUnitType.Pixel);
             bottommenu.Visibility = Visibility.Visible;
             mediaborder.CornerRadius = new CornerRadius(10);
             ViewModel.FullChanged(false);
             App.MainWindow.ExtendsContentIntoTitleBar = true;
+            IsFull = false;
         }
         else
         {
@@ -219,10 +208,10 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             media.Margin = new Thickness(0);
             MoreColumn.Width = new GridLength(0);
             bottommenu.Visibility = Visibility.Collapsed;
-            IsFull = true;
             mediaborder.CornerRadius = new CornerRadius(0);
             ViewModel.FullChanged(true);
             App.MainWindow.ExtendsContentIntoTitleBar = false;
+            IsFull = true;
         }
     }
 
@@ -252,4 +241,5 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         isopen = !isopen;
         return;
     }
+
 }

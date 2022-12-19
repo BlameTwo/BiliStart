@@ -1,8 +1,13 @@
 ﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:convert="using:BiliStart.Behaviors.Converter">
 
-    <convert:LevelNumberToPathConvert x:Key="LevelConvert" />
-    <convert:BoolConvert x:Key="BoolConvert" />
+    <convert:LevelNumberToPathConvert
+        x:Key="LevelConvert" />
+    <convert:BoolConvert
+        x:Key="BoolConvert" />
+    <convert:PlayerSliderConvert
+        x:Key="SliderConvert" />
+    <convert:CountForNumber
+        x:Key="NumberConvert" />
 </ResourceDictionary>

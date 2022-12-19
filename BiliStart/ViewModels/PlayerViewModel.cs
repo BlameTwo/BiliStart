@@ -1,17 +1,24 @@
 ﻿using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Reflection.Metadata.Ecma335;
 using BiliBiliAPI.Models;
 using BiliBiliAPI.Models.User;
 using BiliBiliAPI.Models.Videos;
 using BiliBiliAPI.User;
+using System.Linq;
 using BiliBiliAPI.Video;
 using BiliStart.Contracts.Services;
 using BiliStart.Helpers;
 using BiliStart.Services;
+using BiliStart.UI;
 using BiliStart.ViewModels.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Text;
+using Microsoft.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.VisualStudio.Services.Commerce;
 using Windows.Media.Core;
 using Windows.Media.Playback;
@@ -25,12 +32,19 @@ public partial class PlayerViewModel:ObservableRecipient
         LocalSettingsService = localSettingsService;
         TipShow = tipShow;
         IsLike= false;
+        this.NowDanmuList = new();
     }
 
+    
+    public DanmakuControl DanmakuControl
+    {
+        get;set;
+    }
 
+    public DispatcherTimer? DanmuProcessTime;
     public MediaPlayer NowMediaPlayer = new();
     public MediaSource? Source;
-    UserVideo UVideo = new();
+    UserVideo? UVideo = new();
     Users User = new();
 
     public PlayerArgs Args
@@ -39,30 +53,24 @@ public partial class PlayerViewModel:ObservableRecipient
     }
 
 
-    private VideosContent _VideoContent;
-
-    public VideosContent VideoContent
+    partial void OnVideoContentChanged(VideosContent value)
     {
-        get => _VideoContent;
-        set
+        if (value.VideoDEsc.Length > 25)
         {
-            SetProperty(ref _VideoContent, value);
-            if (value.VideoDEsc.Length > 25)
-            {
-                VideoDesc = value.VideoDEsc.Substring(0, 25);
-            }
-            else
-            {
-                VideoDesc = value.VideoDEsc;
-            }
+            VideoDesc = value.VideoDEsc.Substring(0, 25);
+        }
+        else
+        {
+            VideoDesc = value.VideoDEsc;
         }
     }
 
+    #region 命令区域
     [RelayCommand]
     public async void LikeVideo()
     {
         IsLike = !IsLike;
-        var value = (await UVideo.LikeVideo(IsLike, this._VideoContent.Aid)).Data;
+        var value = (await UVideo.LikeVideo(IsLike, VideoContent.Aid)).Data;
         TipShow.SendMessage
             (
             value.TipText
@@ -70,11 +78,10 @@ public partial class PlayerViewModel:ObservableRecipient
             );
     }
 
-
     [RelayCommand]
     public async void GiveCoinsVideo(int coin)
     {
-        var result =  await UVideo.CoinsVideo(coin,this._VideoContent.Aid);
+        var result =  await UVideo.CoinsVideo(coin,VideoContent.Aid);
         if(result.Code == "0")
         {
             //投币成功
@@ -83,107 +90,12 @@ public partial class PlayerViewModel:ObservableRecipient
         TipShow.SendMessage($"{result.Message},{result.Data.Guide.Title}",Symbol.Message);
     }
 
-
-
-
-    [ObservableProperty]
-    private bool _IsLike;
-
-    [ObservableProperty]
-    private bool _IsCoins;
-
-
-    private VideoInfo VideoInfo;
-
-    public VideoInfo _VIdeoInfo
-    {
-        get => VideoInfo;
-        set => SetProperty(ref VideoInfo, value);
-    }
-
-
-
-
-    private double _MaxValue;
-
-    public double MaxValue
-    {
-        get => _MaxValue;
-        set=>SetProperty(ref _MaxValue, value);
-    }
-
-    [ObservableProperty]
-    private string _VideoDesc;
-    
-
-    private double _SliderValue;
-
-    public double SliderValue
-    {
-        get => _SliderValue;
-        set => SetProperty(ref _SliderValue, value);
-    }
-
-
-
-
-    private string FullButtonText;
-
-    public string _FullButtonText
-    {
-        get => FullButtonText;
-        set => SetProperty(ref FullButtonText, value);
-    }
-
-    public void FullChanged(bool isfull)
-    {
-        switch (isfull)
-        {
-            case true:
-                _FullButtonText = "\uE73F";
-                break;
-            case false:
-                _FullButtonText = "\uE740";
-                break;
-        }
-    }
-
-    private ObservableCollection<Support_Formats> Supports;
-
-    /// <summary>
-    /// 分辨率列表
-    /// </summary>
-    public ObservableCollection<Support_Formats> _Supports
-    {
-        get => Supports;
-        set => SetProperty(ref Supports, value);
-    }
-    Support_Formats SelectFormats=null;
-    public readonly BiliBiliAPI.Video.Video Video = new();
-
-    public VideoInfo VI = null;
-
-
-    private ObservableCollection<BiliBiliAPI.Models.Videos.Page> _VideoPages;
-
-    public ObservableCollection<BiliBiliAPI.Models.Videos.Page> VideoPages
-    {
-        get => _VideoPages;
-        set=>SetProperty(ref _VideoPages, value);
-    }
-
-    [ObservableProperty]
-    private ObservableCollection<FavoritesDataList> _Favourites;
-
-    [ObservableProperty]
-    private bool _IsFavourites;
-
     [RelayCommand]
     private async void AddFavourite(FavoritesDataList data)
     {
-        if(data != null)
+        if (data != null)
         {
-            var result = await UVideo.AddOrDelFavorites(VideoContent.Aid, data.ID,!Convert.ToBoolean(int.Parse(data.FavState)));
+            var result = await UVideo.AddOrDelFavorites(VideoContent.Aid, data.ID, !Convert.ToBoolean(int.Parse(data.FavState)));
             //刷新收藏列表
             Favourites = (await User.GetFavourites(VideoContent.Aid)).Data.List.ToObservableCollection();
             foreach (var item in Favourites)
@@ -199,6 +111,79 @@ public partial class PlayerViewModel:ObservableRecipient
     }
 
 
+    [RelayCommand]
+    public void GoBack()
+    {
+        (App.MainWindow.Content as MainPage)!.RootFrame.GoBack();
+    }
+    #endregion
+
+
+
+    #region 属性定义区域
+
+    [ObservableProperty]
+    private string _VideoDesc;
+
+    [ObservableProperty]
+    private double _SliderValue;
+
+    [ObservableProperty]
+    private VideosContent _VideoContent;
+
+    [ObservableProperty]
+    private double _MaxValue;
+
+    [ObservableProperty]
+    private bool _IsLike;
+
+    [ObservableProperty]
+    private bool _IsCoins;
+
+    [ObservableProperty]
+    private string _FullButtonText;
+
+    [ObservableProperty]
+    private ObservableCollection<Support_Formats> _Supports;
+
+    [ObservableProperty]
+    private ObservableCollection<FavoritesDataList> _Favourites;
+
+    [ObservableProperty]
+    private bool _IsFavourites;
+
+    [ObservableProperty]
+    private int _SupportIndex;
+
+    [ObservableProperty]
+    private int _PageSelectIndex;
+
+    Support_Formats SelectFormats=null;
+    public readonly BiliBiliAPI.Video.Video Video = new();
+
+    [ObservableProperty]
+    private ObservableCollection<BiliBiliAPI.Models.Videos.Page> _VideoPages;
+
+    [ObservableProperty]
+    ObservableCollection<FormatDanmakuTextModel> _NowDanmuList;
+
+    public VideoInfo VI = null;
+
+    #endregion
+    public void FullChanged(bool isfull)
+    {
+        switch (isfull)
+        {
+            case true:
+                FullButtonText = "\uE73F";
+                break;
+            case false:
+                FullButtonText = "\uE740";
+                break;
+        }
+    }
+
+    BiliBiliAPI.Video.Danmaku Danmaku = new();
     public async void InitVideo(ViewModels.Models.PlayerArgs playerArgs)
     {
         //初始化视频
@@ -210,26 +195,111 @@ public partial class PlayerViewModel:ObservableRecipient
         if (VideoContent.Pages.Count == 1)
         {
             this.VI = (await Video.GetVideo(VideoContent, VideoIDType.AV, VideoContent.First_Cid)).Data;
-            _Supports = VI.Support_Formats.ToObservableCollection();
+            Supports = VI.Support_Formats.ToObservableCollection();
             //为一个播放列表直接播放。
-            _SupportIndex = -1;
+            SupportIndex = -1;
             RefershSupport();
         }
         else
         {
             PageSelectIndex = 0;
         }
-    }
 
+        NowMediaPlayer.MediaOpened += NowMediaPlayer_MediaOpened;
+    }
 
     public async void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var page = e.AddedItems[0] as BiliBiliAPI.Models.Videos.Page;
         VI = (await Video.GetVideo(VideoContent, VideoIDType.AV, page.Cid)).Data;
-        if(_Supports != null)_Supports.Clear();
-        _Supports = VI.Support_Formats.ToObservableCollection();
+        if(Supports != null)Supports.Clear();
+        Supports = VI.Support_Formats.ToObservableCollection();
         RefershSupport();
+        var danmu = await Danmaku.GetDanmakuTest(VideoPages[PageSelectIndex].Cid);
+        _NowDanmuList = (await Danmaku.GetFormatDanmakuText(danmu)).ToObservableCollection();
+        
+        
     }
+
+    public SolidColorBrush GetSolidColorBrush(string hex)
+    {
+        hex = hex.Replace("#", string.Empty);
+
+        bool existAlpha = hex.Length == 8;
+
+        if (!existAlpha && hex.Length != 6)
+        {
+            throw new ArgumentException("输入的hex不是有效颜色");
+        }
+
+        int n = 0;
+        byte a;
+        if (existAlpha)
+        {
+            n = 2;
+            a = (byte)ConvertHexToByte(hex, 0);
+        }
+        else
+        {
+            a = 0xFF;
+        }
+
+        var r = (byte)ConvertHexToByte(hex, n);
+        var g = (byte)ConvertHexToByte(hex, n + 2);
+        var b = (byte)ConvertHexToByte(hex, n + 4);
+        return new SolidColorBrush(Windows.UI.Color.FromArgb(a, r, g, b));
+    }
+
+    private static uint ConvertHexToByte(string hex, int n, int count = 2)
+    {
+        return Convert.ToUInt32(hex.Substring(n, count), 16);
+    }
+
+    private void DanmuProcessTime_Tick(object? sender, object e)
+    {
+        var nowpositon = NowMediaPlayer.PlaybackSession.Position.TotalSeconds;
+        var danmakulist =NowDanmuList.Where(p => p.Time > nowpositon && p.Time - nowpositon < 1).ToList();
+        foreach (var item in danmakulist)
+        {
+            var style = new DanmakuTextStyle()
+            {
+                Size = item.FontSize,
+                FontWeight = FontWeights.Bold,
+                FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("微软雅黑")
+            };
+            SolidColorBrush color = new SolidColorBrush();
+            var text = "";
+            try
+            {
+                text = "#" + System.Convert.ToString(System.Convert.ToInt32(item.Color.ToString()), 16);
+                style.Color = text != "令牌无效" ? GetSolidColorBrush(text) : new SolidColorBrush(Colors.White);
+            }
+            catch (Exception)
+            {
+                text = "令牌无效";
+            }
+            //增加弹幕
+            switch (item.DanmakuType)
+            {
+                case "5":
+                    DanmakuControl.CreateTopText(item.Text, style);
+                    break;
+                case "1":
+                    DanmakuControl.CreateScrollText(item.Text, style);
+                    break;
+                case "2":
+                    DanmakuControl.CreateScrollText(item.Text, style);
+                    break;
+                case "3":
+                    DanmakuControl.CreateScrollText(item.Text, style);
+                    break;
+                case "4":
+                    DanmakuControl.CreateBootomText(item.Text, style);
+                    break;
+            }
+        }
+    }
+
 
     public void Support_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -265,48 +335,53 @@ public partial class PlayerViewModel:ObservableRecipient
         }
     }
 
+    private void NowMediaPlayer_MediaOpened(MediaPlayer sender, object args)
+    {
+        App.MainWindow.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+        {
+            DanmuProcessTime = new DispatcherTimer();
+            DanmuProcessTime.Interval = new TimeSpan(0, 0, 1);
+            DanmuProcessTime.Tick += DanmuProcessTime_Tick;
+            DanmuProcessTime.Start();
+        });
+    }
+
     public async void RefershSupport()
     {
         switch (await LocalSettingsService.ReadSettingAsync<int>(BiliStart.Models.Settings.Player_Supper_Supper))
         {
             case 0:
-                _SupportIndex = GetSupportIndex("4K");
+                SupportIndex = GetSupportIndex("4K");
                 break;
             case 1:
-                _SupportIndex = GetSupportIndex("1080");
+                SupportIndex = GetSupportIndex("1080");
                 break;
             case 2:
-                _SupportIndex = GetSupportIndex("720");
+                SupportIndex = GetSupportIndex("720");
                 break;
         }
     }
 
-    private int _PageSelectIndex;
 
-    public int PageSelectIndex
-    {
-        get => _PageSelectIndex;
-        set =>SetProperty(ref _PageSelectIndex, value);
-    }
     
     int GetSupportIndex(string value)
     {
-        for (int i = 0; i < _Supports.Count; i++)
+        for (int i = 0; i < Supports.Count; i++)
         {
             switch (value)
             {
                 case "4K":
-                    if (_Supports[i].Quality == "120")
+                    if (Supports[i].Quality == "120")
                         return i;
                     else
                         continue;
                 case "1080":
-                    if (_Supports[i].Quality == "80")
+                    if (Supports[i].Quality == "80")
                         return i;
                     else
                         continue;
                 case "720":
-                    if (_Supports[i].Quality == "64")
+                    if (Supports[i].Quality == "64")
                         return i;
                     else
                         continue;
@@ -315,13 +390,7 @@ public partial class PlayerViewModel:ObservableRecipient
         return 1;
     }
 
-    private int SupportIndex;
 
-    public int _SupportIndex
-    {
-        get =>SupportIndex;
-        set => SetProperty(ref SupportIndex, value);
-    }
 
     public ILocalSettingsService LocalSettingsService
     {
@@ -330,11 +399,5 @@ public partial class PlayerViewModel:ObservableRecipient
     public ITipShow TipShow
     {
         get;
-    }
-
-    [RelayCommand]
-    public void GoBack()
-    {
-        (App.MainWindow.Content as MainPage)!.RootFrame.GoBack();
     }
 }

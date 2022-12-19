@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BiliStart.Contracts.Services;
 using BiliStart.ViewModels;
 using BiliStart.ViewModels.Models;
+using BiliStart.Views;
 using Microsoft.UI.Dispatching;
 
 namespace BiliStart.Services;

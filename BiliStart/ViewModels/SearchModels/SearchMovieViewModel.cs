@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using BiliBiliAPI.Models.Search;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 
 namespace BiliStart.ViewModels.SearchModels;
@@ -36,6 +37,7 @@ public class SearchMovieViewModel : SearchViewModelBase
         get => Item;
         set=>SetProperty(ref Item, value);
     }
+
 
     private Visibility visibility;
     public Visibility Popup_Visibility

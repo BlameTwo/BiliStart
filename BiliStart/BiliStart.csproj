@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <TargetFramework>net7.0-windows10.0.22000.0</TargetFramework>
 	  <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <RootNamespace>BiliStart</RootNamespace>
     <ApplicationIcon>Assets/icon.ico</ApplicationIcon>
@@ -71,6 +71,7 @@
     <None Remove="Styles\ItemsDataTemplate\SearchMovie_AnimationItem.xaml" />
     <None Remove="Styles\ItemsDataTemplate\SearchVideoItem.xaml" />
     <None Remove="Styles\ItemsDataTemplate\WeekItemStyle.xaml" />
+    <None Remove="Styles\Property.xaml" />
     <None Remove="Styles\Search\SearchAnimation.xaml" />
     <None Remove="Styles\Search\SearchMovie.xaml" />
     <None Remove="Styles\Search\SearchVideo.xaml" />
@@ -83,6 +84,7 @@
     <None Remove="Views\PlayerPage.xaml" />
     <None Remove="Views\SearchPage.xaml" />
     <None Remove="Views\TopMorePage.xaml" />
+    <None Remove="Views\VideoPlayerPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -120,6 +122,12 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\Property.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\VideoPlayerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\ItemsDataTemplate\HotItemStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
