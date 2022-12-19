@@ -1,21 +1,18 @@
 ﻿using BiliBiliAPI.Search;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BiliStart.ViewModels;
-public class SearchViewModelBase:ScrolViewModelBase
-    
-{
 
-    public Action<string> Changing;
-    public Action<string> Changed;
+public partial class SearchViewModelBase : ScrolViewModelBase
+{
+    public Action<string> Changed
+    {
+        get;set;
+    }
 
     public PublicSearch Search = new();
-    public SearchViewModelBase()
-    {
 
-    }
-    
     private string SearchKey;
+
 
     public string _SearchKey
     {
@@ -24,7 +21,6 @@ public class SearchViewModelBase:ScrolViewModelBase
         {
             if (!EqualityComparer<string?>.Default.Equals(SearchKey, value))
             {
-                OnSearchChanging(value);
                 OnPropertyChanging();
                 SearchKey = value;
                 OnSearchChanged(SearchKey);
@@ -33,10 +29,7 @@ public class SearchViewModelBase:ScrolViewModelBase
         }
     }
 
-    private void OnSearchChanging(string value)
-    {
-        Changing.Invoke(value);
-    }
+
     private void OnSearchChanged(string value)
     {
         Changed.Invoke(value);

@@ -123,7 +123,11 @@
                 <MediaPlayerElement
                     x:Name="media" Margin="5" />
                 <danmu:DanmakuControl
-                    x:Name="Danmakulist" />
+                    x:Name="Danmakulist">
+                    <danmu:DanmakuControl.DanmakuSize>
+                        <x:Int32>14</x:Int32>
+                    </danmu:DanmakuControl.DanmakuSize>
+                </danmu:DanmakuControl>
             </Grid>
         </Border>
         <Border

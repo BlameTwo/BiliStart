@@ -3,9 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using System;
 using System.Collections.Generic;
-
-
-
+using System.Threading.Tasks;
 
 namespace BiliStart.UI
 {
@@ -14,6 +12,12 @@ namespace BiliStart.UI
         public DanmakuControl()
         {
             this.InitializeComponent();
+            this.Loaded += DanmakuControl_Loaded;
+        }
+
+        private void DanmakuControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            topManager.TextHeight = DanmakuSize;
         }
 
         public List<Storyboard> ScrollBoards { get; set; } = new List<Storyboard>();
@@ -47,11 +51,43 @@ namespace BiliStart.UI
             }
         }
 
-        TopManager topManager;
+        TopManager topManager=new();
+
+
+
+
+        public int DanmakuSize
+        {
+            get
+            {
+                return (int)GetValue(DanmakuSizeProperty);
+            }
+            set
+            {
+                SetValue(DanmakuSizeProperty, value);
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for DanmakuSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DanmakuSizeProperty =
+            DependencyProperty.Register("DanmakuSize", typeof(int), typeof(DanmakuControl), new PropertyMetadata(0, (s, e) =>
+            {
+                if ((s as DanmakuControl).topManager == null)
+                {
+                    return;
+                }
+                else
+                {
+
+                    (s as DanmakuControl).topManager.TextHeight = (int)e.NewValue;
+                }
+            }));
+
+
 
         public void CreateScrollText(string Text, DanmakuTextStyle style)
         {
-            topManager = new TopManager(scroll.ActualHeight, style.Size);
+            topManager.MaxSlot = (int)(scroll.ActualHeight / DanmakuSize);
             int slot = topManager.getIdleSlot();
             if (slot > scroll.ActualHeight) slot = (int)style.Size;
             Storyboard storyboard = new Storyboard();
@@ -79,16 +115,14 @@ namespace BiliStart.UI
         public void CreateTopText(string Text, DanmakuTextStyle style)
         {
             Storyboard storyboard = new Storyboard();
-
             TextBlock text = CreateText(style, Text);
             text.HorizontalAlignment = HorizontalAlignment.Center;
             text.VerticalAlignment = VerticalAlignment.Top;
-
             RowDefinition row = new RowDefinition();
             top.RowDefinitions.Add(row);
             int toprow = top.RowDefinitions.Count == 0 ? 0 : top.RowDefinitions.Count - 1;
             Grid.SetRow(text, toprow);
-            DoubleAnimation doubleAnimation = new DoubleAnimation() { Duration = new Duration(TimeSpan.FromSeconds(4)) };
+            DoubleAnimation doubleAnimation = new DoubleAnimation() { Duration = new Duration(TimeSpan.FromSeconds(5)) };
             doubleAnimation.From = 1;
             doubleAnimation.To = 1;
             Storyboard.SetTarget(doubleAnimation, text);

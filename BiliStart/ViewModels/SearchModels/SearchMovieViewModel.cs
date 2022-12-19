@@ -9,7 +9,6 @@ public class SearchMovieViewModel : SearchViewModelBase
     public SearchMovieViewModel()
     {
         Changed = new Action<string>((str) => OnChanged(str));
-        Changing = new Action<string>((str) => OnChanging(str));
         Popup_Visibility = Visibility.Collapsed;
         AddData = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(async () => await adddata());
     }
@@ -23,11 +22,6 @@ public class SearchMovieViewModel : SearchViewModelBase
             Items.Add(item);
         }
         Index++;
-    }
-    string Key;
-    private void OnChanging(string str)
-    {
-
     }
 
     private ObservableCollection<Aniation_Movie_Item> Item;

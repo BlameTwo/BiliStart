@@ -8,7 +8,6 @@ public class SearchAnimationViewModel : SearchViewModelBase
     public SearchAnimationViewModel()
     {
         Changed = new Action<string>((str) => OnChanged(str));
-        Changing = new Action<string>((str) => OnChanging(str));
         AddData = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(async () => await adddata());
         Popup_Visibility = Visibility.Collapsed;
     }
@@ -23,6 +22,8 @@ public class SearchAnimationViewModel : SearchViewModelBase
         }
         Index++;
     }
+
+
     int Index = 1;
     private async void OnChanged(string str)
     {
@@ -60,8 +61,4 @@ public class SearchAnimationViewModel : SearchViewModelBase
         get => tipmessage; set => SetProperty(ref tipmessage, value);
     }
 
-    private void OnChanging(string str)
-    {
-    
-    }
 }

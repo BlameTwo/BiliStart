@@ -12,22 +12,20 @@ class TopManager
     public int MaxSlot
     {
         get;
-        private set;
+        set;
     }
 
     public double TextHeight
     {
         get;
-        private set;
+        set;
     }
 
     private bool[] mSlotStatusList;
     private ArrayList IdleRows;
 
-    public TopManager(double ContainerHeight, double TextHeight)
+    public TopManager()
     {
-        this.TextHeight = TextHeight;
-        MaxSlot = (int)(ContainerHeight / TextHeight);
         IdleRows = new ArrayList();
         mSlotStatusList = new bool[MaxSlot];
     }

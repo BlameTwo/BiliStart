@@ -19,11 +19,6 @@ public partial class SearchVideoViewModel:SearchViewModelBase
             OnSearchChanged(value:str);
         });
 
-        Changing = new Action<string>((str) =>
-        {
-            //搜索目标改变过程中………………
-        });
-
         AddData = new AsyncRelayCommand(async() => await adddata());
     }
     int Index = 1;
