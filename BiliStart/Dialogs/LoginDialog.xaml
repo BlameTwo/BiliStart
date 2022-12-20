@@ -1,88 +1,93 @@
 ﻿<ContentDialog
-    x:Class="BiliStart.Dialogs.LoginDialog"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:e="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:local="using:BiliStart.Dialogs"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="BiliStart.Dialogs.LoginDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="using:Microsoft.Xaml.Interactions.Core" xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:local="using:BiliStart.Dialogs" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     CloseButtonText="关闭"
     Closed="{x:Bind ViewModel.LoginClose}"
-    CornerRadius="10"
-    mc:Ignorable="d">
+    CornerRadius="10" mc:Ignorable="d">
     <i:Interaction.Behaviors>
-        <e:EventTriggerBehavior EventName="Loaded">
-            <e:InvokeCommandAction Command="{x:Bind ViewModel.RefQrCommand}" />
+        <e:EventTriggerBehavior
+            EventName="Loaded">
+            <e:InvokeCommandAction
+                Command="{x:Bind ViewModel.RefQrCommand}" />
         </e:EventTriggerBehavior>
     </i:Interaction.Behaviors>
 
     <Pivot
-        Grid.Row="1"
+        Grid.Row="1" Width="350"
         SelectionChanged="{x:Bind ViewModel.Pivot_SelectionChanged}">
-        <PivotItem Header="扫码登陆">
-            <Grid HorizontalAlignment="Center">
+        <PivotItem
+            Header="扫码登陆" Tag="QR">
+            <Grid
+                HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition
+                        Height="auto" />
                 </Grid.RowDefinitions>
                 <Image
-                    Width="160"
-                    Height="160"
+                    Width="160" Height="160"
                     Source="{x:Bind ViewModel._QRImage, Mode=OneWay}" />
                 <Button
-                    Grid.Row="1"
-                    Margin="0,10,0,0"
+                    Grid.Row="1" Margin="0,10,0,0"
                     HorizontalAlignment="Stretch"
                     Command="{x:Bind ViewModel.RefQrCommand}"
                     Content="刷新"
                     Style="{ThemeResource AccentButtonStyle}" />
             </Grid>
         </PivotItem>
-        <!--<PivotItem Header="账号密码">
-            <Grid>
+        <PivotItem
+            Header="手机验证" Tag="Phone">
+            <Grid
+                Margin="0,25,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition
+                        Height="auto" />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock
-                    Margin="0,15,0,5"
-                    FontFamily="等线"
-                    FontSize="15"
-                    FontWeight="Light"
-                    Text="账户：" />
+                <ComboBox
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{x:Bind ViewModel.CounityItems, Mode=OneWay}"
+                    SelectedIndex="0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <TextBox
-                    Grid.Row="1"
-                    PlaceholderText="输入账户名或者手机号"
-                    Text="{x:Bind ViewModel._User, Mode=TwoWay}" />
-                <TextBlock
-                    Grid.Row="2"
-                    Margin="0,15,0,5"
-                    FontFamily="等线"
-                    FontSize="15"
-                    FontWeight="Light"
-                    Text="密码：" />
-                <PasswordBox
-                    Grid.Row="3"
-                    Password="{x:Bind ViewModel._Password, Mode=TwoWay}"
-                    PasswordChar="⚪"
-                    PlaceholderText="密码内容" />
-                <WebView2
-                    Grid.RowSpan="5"
-                    Height="400"
-                    Loaded="{x:Bind ViewModel.WebViewLoad}"
-                    Visibility="Collapsed" />
+                    Grid.Row="1" Margin="0,10,0,0"
+                    HorizontalAlignment="Stretch" PlaceholderText="Phone"
+                    Text="{x:Bind ViewModel.Phone, Mode=OneWay}" />
+                <Grid
+                    Grid.Row="2" Margin="0,10,0,0"
+                    HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="8*" />
+                        <ColumnDefinition
+                            Width="4*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        PlaceholderText="Key"
+                        Text="{x:Bind ViewModel.Key, Mode=OneWay}" />
+                    <Button
+                        Grid.Column="1" HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Command="{x:Bind ViewModel.SendSMSCommand, Mode=OneWay}"
+                        Content="Refersh Code" />
+                </Grid>
                 <Button
-                    Grid.Row="4"
-                    Margin="0,10,0,0"
+                    Grid.Row="3" Margin="0,10,0,0"
                     HorizontalAlignment="Center"
-                    Click="{x:Bind ViewModel.LoginClick}"
-                    Content="登录" />
+                    Command="{x:Bind ViewModel.PhoneLoginCommand, Mode=OneWay}"
+                    Content="Login" />
             </Grid>
-        </PivotItem>-->
+        </PivotItem>
     </Pivot>
 </ContentDialog>
