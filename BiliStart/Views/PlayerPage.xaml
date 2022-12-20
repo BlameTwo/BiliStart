@@ -148,11 +148,20 @@
                     <ColumnDefinition
                         Width="auto" />
                 </Grid.ColumnDefinitions>
-                <Grid
-                    Grid.Column="0">
+                <StackPanel
+                    Grid.Column="0" Orientation="Horizontal">
                     <Button
-                        Click="Button_Click_1" Content="Start/Pause" />
-                </Grid>
+                        Click="Button_Click_1"
+                        Content="{x:Bind ViewModel.IsPlay, Mode=OneWay, Converter={StaticResource PlayerStateConvert}}"
+                        FontFamily="Segoe Fluent Icons" />
+                    <Button
+                        Margin="5,0,0,0"
+                        Command="{x:Bind ViewModel.NextPageCommand}">
+                        <FontIcon
+                            FontFamily="Segoe Fluent Icons" FontSize="15"
+                            Glyph="&#xE101;" />
+                    </Button>
+                </StackPanel>
                 <Slider
                     x:Name="process" Grid.Column="1"
                     Margin="10,0"
@@ -404,18 +413,6 @@
                                 <TextBlock
                                     Margin="5,0,0,0" Text="Like" />
                             </StackPanel>
-                            <!--<VisualStateManager.VisualStateGroups xmlns:trigger="using:BiliStart.Styles.TriggerStates">
-                        <VisualStateGroup x:Name="CheckedGroup">
-                            <VisualState x:Name="CheckState">
-                                <VisualState.StateTriggers>
-                                    <trigger:ActionButtonIsCheckedTrigger Checked="True" />
-                                </VisualState.StateTriggers>
-                                <VisualState.Setters>
-                                    <Setter Property="Background" Value="{ThemeResource AccentFillColorDefaultBrush}" />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateManager.VisualStateGroups>-->
                         </biliui:ActionButton>
                         <biliui:ActionButton
                             x:Name="CoinsButton" Margin="5,0,0,0"

@@ -10,4 +10,6 @@
         x:Key="SliderConvert" />
     <convert:CountForNumber
         x:Key="NumberConvert" />
+    <convert:PlayStateConvert
+        x:Key="PlayerStateConvert" />
 </ResourceDictionary>

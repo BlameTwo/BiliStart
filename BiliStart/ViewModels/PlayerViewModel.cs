@@ -24,21 +24,21 @@ using Windows.Media.Core;
 using Windows.Media.Playback;
 
 namespace BiliStart.ViewModels;
-public partial class PlayerViewModel:ObservableRecipient
+public partial class PlayerViewModel : ObservableRecipient
 {
-    public PlayerViewModel(ILocalSettingsService localSettingsService,ITipShow tipShow)
+    public PlayerViewModel(ILocalSettingsService localSettingsService, ITipShow tipShow)
     {
         _FullButtonText = "\uE740";
         LocalSettingsService = localSettingsService;
         TipShow = tipShow;
-        IsLike= false;
+        IsLike = false;
         this.NowDanmuList = new();
     }
 
-    
+
     public DanmakuControl DanmakuControl
     {
-        get;set;
+        get; set;
     }
 
     public DispatcherTimer? DanmuProcessTime;
@@ -49,7 +49,7 @@ public partial class PlayerViewModel:ObservableRecipient
 
     public PlayerArgs Args
     {
-        get;set;    
+        get; set;
     }
 
 
@@ -74,8 +74,24 @@ public partial class PlayerViewModel:ObservableRecipient
         TipShow.SendMessage
             (
             value.TipText
-            ,Symbol.Message
+            , Symbol.Message
             );
+    }
+
+    partial void OnIsPlayChanged(bool value)
+    {
+        if (value)
+        {
+            NowMediaPlayer.Play();
+            return;
+        }
+        NowMediaPlayer.Pause();
+    }
+
+    [RelayCommand(CanExecute = nameof(CanNext))]
+    public async void NextPage()
+    {
+        PageSelectIndex++;
     }
 
     [RelayCommand]
@@ -169,6 +185,20 @@ public partial class PlayerViewModel:ObservableRecipient
 
     public VideoInfo VI = null;
 
+    [ObservableProperty]
+    bool _IsPlay;
+
+    bool CanNext
+    {
+        get
+        {
+            if (this.VideoPages.Count == 1)
+                return false;
+            else
+                return true;
+        }
+    }
+
     #endregion
     public void FullChanged(bool isfull)
     {
@@ -207,6 +237,8 @@ public partial class PlayerViewModel:ObservableRecipient
 
         NowMediaPlayer.MediaOpened += NowMediaPlayer_MediaOpened;
     }
+
+    
 
     public async void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {

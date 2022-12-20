@@ -77,7 +77,6 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 
     bool IsFull;
 
-    bool IsPlay = false;
 
     DispatcherTimer Timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
@@ -167,8 +166,8 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
     {
         if(await LocalSettingsService.ReadSettingAsync<int>("Player_AutoStart") == 0)
         {
-            IsPlay = true;
             media.MediaPlayer.Play();
+            ViewModel.IsPlay = true;
         }
     }
 
@@ -215,19 +214,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         }
     }
 
-    private void Button_Click_1(object sender, RoutedEventArgs e)
-    {
-        if (IsPlay)
-        {
-            media.MediaPlayer.Pause();
-            IsPlay = false;
-        }
-        else
-        {
-            media.MediaPlayer.Play();
-            IsPlay = true;
-        }
-    }
+    
     bool isopen = false;
     private void ToggleButton_Click(object sender, RoutedEventArgs e)
     {
@@ -242,4 +229,8 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         return;
     }
 
+    private void Button_Click_1(object sender, RoutedEventArgs e)
+    {
+        ViewModel.IsPlay = !ViewModel.IsPlay;
+    }
 }
