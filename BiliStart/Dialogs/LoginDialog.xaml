@@ -47,12 +47,21 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-
                 <ComboBox
-                    HorizontalAlignment="Stretch"
+                    x:Name="CounityCombobox" HorizontalAlignment="Stretch"
                     ItemsSource="{x:Bind ViewModel.CounityItems, Mode=OneWay}"
                     SelectedIndex="0">
+                    <i:Interaction.Behaviors>
+                        <e:EventTriggerBehavior
+                            EventName="SelectionChanged">
+                            <!--  设置国家地区验证码命令  -->
+                            <e:InvokeCommandAction
+                                Command="{x:Bind ViewModel.SetCidCommand}"
+                                CommandParameter="{x:Bind CounityCombobox.SelectedItem, Mode=TwoWay}" />
+                        </e:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock
@@ -63,7 +72,7 @@
                 <TextBox
                     Grid.Row="1" Margin="0,10,0,0"
                     HorizontalAlignment="Stretch" PlaceholderText="Phone"
-                    Text="{x:Bind ViewModel.Phone, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.Phone, Mode=TwoWay}" />
                 <Grid
                     Grid.Row="2" Margin="0,10,0,0"
                     HorizontalAlignment="Stretch">
@@ -75,7 +84,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBox
                         PlaceholderText="Key"
-                        Text="{x:Bind ViewModel.Key, Mode=OneWay}" />
+                        Text="{x:Bind ViewModel.Key, Mode=TwoWay}" />
                     <Button
                         Grid.Column="1" HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -87,6 +96,10 @@
                     HorizontalAlignment="Center"
                     Command="{x:Bind ViewModel.PhoneLoginCommand, Mode=OneWay}"
                     Content="Login" />
+                <TextBlock
+                    Grid.Row="4" Margin="0,5,0,0"
+                    HorizontalAlignment="Center" Foreground="Red"
+                    Text="{x:Bind ViewModel.SMSTip, Mode=OneWay}" />
             </Grid>
         </PivotItem>
     </Pivot>

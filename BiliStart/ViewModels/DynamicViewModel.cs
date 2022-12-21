@@ -25,6 +25,7 @@ public partial class DynamicViewModel:ObservableRecipient
     public async Task Loaded()
     {
         var livevalues = (await Dynamic.GetDynamicUp_UpDateList()).Data;
+        if (livevalues == null) return;
         if (livevalues.LiveInfo != null)
         {
             LiveItems = new();

@@ -219,7 +219,7 @@ public partial class PlayerViewModel : ObservableRecipient
         //初始化视频
         this.VideoPages = playerArgs.Content.Pages.ToObservableCollection();
         VideoContent = playerArgs.Content;
-        this.Favourites = (await User.GetFavourites(VideoContent.Aid)).Data.List.ToObservableCollection() ;
+        this.Favourites = (await User.GetFavourites(VideoContent.Aid)).Data.List.ToObservableCollection() ?? new();
         IsLike = Convert.ToBoolean(VideoContent.ReqUser.Like);
         this.IsCoins = Convert.ToBoolean(VideoContent.ReqUser.Coin);
         if (VideoContent.Pages.Count == 1)
