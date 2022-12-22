@@ -22,6 +22,10 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.VisualStudio.Services.Commerce;
 using Windows.Media.Core;
 using Windows.Media.Playback;
+using BiliBiliAPI.Comment;
+using BiliBiliAPI.Models.Comment;
+using CommunityToolkit.WinUI.UI.Controls;
+using BiliStart.ItemsViewModel;
 
 namespace BiliStart.ViewModels;
 public partial class PlayerViewModel : ObservableRecipient
@@ -33,6 +37,9 @@ public partial class PlayerViewModel : ObservableRecipient
         TipShow = tipShow;
         IsLike = false;
         this.NowDanmuList = new();
+        ScrollLoad = new RelayCommand<ItemsControl>((arg) => Scroolload(arg));
+        AddData = new AsyncRelayCommand(() => CommentAdd());
+        CommentsLists = new();
     }
 
 
@@ -41,11 +48,14 @@ public partial class PlayerViewModel : ObservableRecipient
         get; set;
     }
 
+    
+
     public DispatcherTimer? DanmuProcessTime;
     public MediaPlayer NowMediaPlayer = new();
     public MediaSource? Source;
     UserVideo? UVideo = new();
     Users User = new();
+    VideoComment Comment { get; } = new();
 
     public PlayerArgs Args
     {
@@ -139,6 +149,9 @@ public partial class PlayerViewModel : ObservableRecipient
     #region 属性定义区域
 
     [ObservableProperty]
+    private ObservableCollection<CommentItemViewModel> _CommentsLists;
+
+    [ObservableProperty]
     private string _VideoDesc;
 
     [ObservableProperty]
@@ -188,6 +201,8 @@ public partial class PlayerViewModel : ObservableRecipient
     [ObservableProperty]
     bool _IsPlay;
 
+    int CommentIndex = 1;
+
     bool CanNext
     {
         get
@@ -234,11 +249,110 @@ public partial class PlayerViewModel : ObservableRecipient
         {
             PageSelectIndex = 0;
         }
-
+        var result = (await Comment.GetComment(this.VideoContent.Aid, CommentIndex)).Data.CommentLists.ToObservableCollection() ;
+        foreach (var item in result)
+        {
+            var lite = new CommentItemViewModel()
+            {
+                Action = item.Action,
+                Attr = item.Attr,
+                Content = item.Content,
+                Count = item.Count,
+                CreateTime = item.CreateTime,
+                Dialog = item.Dialog,
+                Fansgrade = item.Fansgrade,
+                ID = item.ID,
+                ID_Str = item.ID_Str,
+                Likes = item.Likes,
+                Mid = item.Mid,
+                Oid = item.Oid,
+                Parent = item.Parent,
+                Rcount = item.Rcount,
+                Root = item.Root,
+                State = item.State,
+                Type = item.Type,
+                Up = item.Up
+            };
+            CommentsLists.Add(lite);
+        }
         NowMediaPlayer.MediaOpened += NowMediaPlayer_MediaOpened;
+        CommentIndex++;
     }
 
-    
+
+    private async Task CommentAdd()
+    {
+        var result = (await Comment.GetComment(this.VideoContent.Aid, CommentIndex)).Data.CommentLists.ToObservableCollection();
+        foreach (var item in result)
+        {
+            var lite = new CommentItemViewModel()
+            {
+                Action = item.Action,
+                Attr = item.Attr,
+                Content = item.Content,
+                Count = item.Count,
+                CreateTime = item.CreateTime,
+                Dialog = item.Dialog,
+                Fansgrade = item.Fansgrade,
+                ID = item.ID,
+                ID_Str = item.ID_Str,
+                Likes = item.Likes,
+                Mid = item.Mid,
+                Oid = item.Oid,
+                Parent = item.Parent,
+                Rcount = item.Rcount,
+                Root = item.Root,
+                State = item.State,
+                Type = item.Type,
+                Up = item.Up
+            };
+            CommentsLists.Add(lite);
+        }
+        CommentIndex++;
+    }
+
+    private void Scroolload(ItemsControl? arg)
+    {
+        if (arg == null)
+            return;
+        var listview = VisualTreeHelper.GetChild(arg, 0) as ScrollViewer;
+        SV = listview;
+        SV!.ViewChanged += SV_ViewChanged;
+    }
+
+    private async void SV_ViewChanged(object? sender, ScrollViewerViewChangedEventArgs e)
+    {
+        SV.ViewChanged -= SV_ViewChanged;
+        var sv = sender as ScrollViewer;
+        var flage = sv.VerticalOffset + sv.ViewportHeight;
+
+        if (sv.ExtentHeight - flage < 5 && sv.ViewportHeight != 0)
+        {
+
+            await AddData.ExecuteAsync(null);
+        }
+
+        SV.ViewChanged += SV_ViewChanged;
+    }
+
+    /// <summary>
+    /// 滚动条滚动到极限后
+    /// </summary>
+    public AsyncRelayCommand AddData
+    {
+        get; set;
+    }
+
+    public RelayCommand<ItemsControl> ScrollLoad
+    {
+        get; set;
+    }
+    public ScrollViewer? SV
+    {
+        get;
+        set;
+    }
+
 
     public async void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {

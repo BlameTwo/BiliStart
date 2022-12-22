@@ -76,6 +76,7 @@
     <None Remove="Styles\Search\SearchMovie.xaml" />
     <None Remove="Styles\Search\SearchVideo.xaml" />
     <None Remove="Styles\ShellNavigationViewItem.xaml" />
+    <None Remove="Styles\VideoComment\Comment.xaml" />
     <None Remove="Styles\VideoGridViewItem.xaml" />
     <None Remove="Views\DynamicPage.xaml" />
     <None Remove="Views\HomePage.xaml" />
@@ -122,6 +123,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\VideoComment\Comment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\Property.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

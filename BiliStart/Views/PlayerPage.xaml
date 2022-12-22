@@ -4,9 +4,9 @@
     xmlns:commui="using:CommunityToolkit.WinUI.UI.Controls" xmlns:convert="using:BiliStart.Behaviors.Converter"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:danmu="using:BiliStart.UI" xmlns:data="using:BiliBiliAPI.Models.Videos"
-    xmlns:favoritesdata="using:BiliBiliAPI.Models.User" xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="using:CommunityToolkit.WinUI.UI"
-    mc:Ignorable="d">
+    xmlns:data1="using:BiliStart.Styles.VideoComment" xmlns:favoritesdata="using:BiliBiliAPI.Models.User"
+    xmlns:i="using:Microsoft.Xaml.Interactivity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI" mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate
             x:Key="DefaultPlayerListTemplate" x:DataType="data:Page">
@@ -273,7 +273,62 @@
                 </Grid>
             </PivotItem>
             <PivotItem
-                Content="Comment" Header="Comment" />
+                Header="Comment">
+                <ItemsControl
+                    x:Name="CommentControl"
+                    Background="{ThemeResource AccentAAFillColorDefaultBrush}"
+                    ItemsSource="{x:Bind ViewModel.CommentsLists, Mode=OneWay}">
+                    <i:Interaction.Behaviors>
+                        <core:EventTriggerBehavior
+                            EventName="Loaded">
+                            <core:InvokeCommandAction
+                                Command="{x:Bind ViewModel.ScrollLoad}"
+                                CommandParameter="{x:Bind CommentControl}" />
+                        </core:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <data1:Comment
+                                Data="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel
+                                Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.Style>
+                        <Style
+                            TargetType="ItemsControl">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate
+                                        TargetType="ItemsControl">
+                                        <ScrollViewer
+                                            AutomationProperties.AccessibilityView="Raw"
+                                            BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                            HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                            IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                            IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                            IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                            IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                            IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                            TabNavigation="{TemplateBinding TabNavigation}"
+                                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                            VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                            ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                            <ItemsPresenter
+                                                Padding="{TemplateBinding Padding}" />
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ItemsControl.Style>
+                </ItemsControl>
+            </PivotItem>
             <PivotItem
                 Content="More" Header="More" />
         </Pivot>
