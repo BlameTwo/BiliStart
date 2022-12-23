@@ -19,12 +19,16 @@
                     Height="45"
                     ProfilePicture="{x:Bind Data.Up.Cover, Mode=OneWay}" />
                 <TextBlock
-                    Margin="5,0,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True"
-                    RelativePanel.RightOf="face"
+                    x:Name="upname" Margin="5,0,0,0"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.RightOf="face"
                     Text="{x:Bind Data.Up.Name, Mode=OneWay}" />
+                <!--<TextBlock
+                    RelativePanel.RightOf="upname"
+                    Text="{x:Bind Data.ReplyControl.UpLike, Mode=OneWay}" />-->
             </RelativePanel>
             <ContentControl
-                x:Name="rich" Grid.Row="1" />
+                x:Name="rich" Grid.Row="1"
+                Margin="10" />
         </Grid>
     </Border>
 </UserControl>
