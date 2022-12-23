@@ -320,6 +320,7 @@
                                             VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
                                             ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
                                             <ItemsPresenter
+                                                Margin="0,0,15,0"
                                                 Padding="{TemplateBinding Padding}" />
                                         </ScrollViewer>
                                     </ControlTemplate>

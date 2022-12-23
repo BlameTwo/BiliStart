@@ -12,4 +12,10 @@
         x:Key="NumberConvert" />
     <convert:PlayStateConvert
         x:Key="PlayerStateConvert" />
+    <convert:LevelNumberToBrush
+        x:Key="LevelBrushConvert" />
+    <convert:NULLForVisibilityConvert
+        x:Key="NullToVisiblityConvert" />
+    <convert:BackNullForVisiblityConvert
+        x:Key="BackNullToVisiblityConvert" />
 </ResourceDictionary>

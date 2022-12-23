@@ -23,8 +23,6 @@ using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace BiliStart.Styles.VideoComment;
 public sealed partial class Comment : UserControl
@@ -37,7 +35,20 @@ public sealed partial class Comment : UserControl
 
     private void Comment_Loaded(object sender, RoutedEventArgs e)
     {
-        rich.Content = GetRichTextBlock;
+        var a  = GetRichTextBlock(true);
+        a.Loaded += (s, e) =>
+        {
+            if (s is RichTextBlock richTextBlock)
+            {
+                if (richTextBlock.ActualHeight == richTextBlock.MaxLines * richTextBlock.LineHeight)
+                {
+                    More.Visibility = Visibility.Visible;
+                    richtext2.Content = GetRichTextBlock(false);
+                }
+            }
+        };
+        rich.Content = a;
+        
     }
 
     public CommentItemViewModel ViewModel
@@ -58,12 +69,9 @@ public sealed partial class Comment : UserControl
         }
     }
 
-    RichTextBlock GetRichTextBlock
+    RichTextBlock GetRichTextBlock(bool maxline)
     {
-        get
-        {
-            {
-                string returntext = this.Data.Content.Message;
+        string returntext = this.Data.Content.Message;
                 RichTextBlock text = new RichTextBlock() { TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap };
                 Paragraph parag = new Paragraph();
 
@@ -106,20 +114,24 @@ public sealed partial class Comment : UserControl
                     }
                 }
                 #endregion
-                    return CommentFormat(returntext);
-            }
-        }
+                    return CommentFormat(returntext,maxline);
     }
 
-    public RichTextBlock CommentFormat(string text)
+    public RichTextBlock CommentFormat(string text,bool flage)
     {
 
-        var xaml = string.Format(@"<RichTextBlock HorizontalAlignment=""Stretch"" TextWrapping=""Wrap""  xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
-                                            xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:d=""http://schemas.microsoft.com/expression/blend/2008""
+        var xaml = string.Format(@"<RichTextBlock HorizontalAlignment=""Stretch"" 
+                                            xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
+                                            xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" 
+                                            xmlns:d=""http://schemas.microsoft.com/expression/blend/2008""
                                             xmlns:mc = ""http://schemas.openxmlformats.org/markup-compatibility/2006"" LineHeight=""20"">
                                           <Paragraph>{0}</Paragraph>
                                       </RichTextBlock>", text);
         var p = (RichTextBlock)XamlReader.Load(xaml);
+        if (flage)
+            p.MaxLines = 6;
+        p.TextWrapping = TextWrapping.Wrap;
+        p.TextTrimming = TextTrimming.CharacterEllipsis;
         return p;
     }
 

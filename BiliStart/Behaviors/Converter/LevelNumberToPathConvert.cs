@@ -4,10 +4,12 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Media;
 using Windows.Devices.PointOfService;
+using Windows.UI;
 
 namespace BiliStart.Behaviors.Converter;
 public class LevelNumberToPathConvert : IValueConverter
@@ -73,6 +75,38 @@ public class LevelNumberToPathConvert : IValueConverter
                 "<Geometry xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>"
                 + Level0 + "</Geometry>");
                 return geometry0;
+        }
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, string language) => throw new NotImplementedException();
+}
+
+public class LevelNumberToBrush : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, string language)
+    {
+        if(value == null)
+        {
+            return new SolidColorBrush(Colors.Gray);
+        }
+        var number = System.Convert.ToInt32(value);
+        switch (number)
+        {
+            case 0:
+                return new SolidColorBrush(Colors.Gray);
+            case 1:
+                return new SolidColorBrush(Colors.Gray);
+            case 2:
+                return new SolidColorBrush(new Windows.UI.Color() { R = 148, G = 224, B = 185, A = 255 });
+            case 3:
+                return new SolidColorBrush(new Windows.UI.Color() { R = 142, G = 213, B = 227, A = 255 });
+            case 4:
+                return new SolidColorBrush(new Windows.UI.Color() { R = 251, G = 181, B = 126, A = 255 });
+            case 5:
+                return new SolidColorBrush(new Windows.UI.Color() { R = 253, G = 109, B = 3, A = 255 });
+            case 6:
+                return new SolidColorBrush(Colors.Red);
+            default:
+                return new SolidColorBrush(Colors.Red);
         }
     }
     public object ConvertBack(object value, Type targetType, object parameter, string language) => throw new NotImplementedException();

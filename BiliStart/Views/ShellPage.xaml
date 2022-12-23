@@ -1,86 +1,65 @@
 ﻿<Page
-    x:Class="BiliStart.Views.ShellPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:acrylic="using:ABI.Microsoft.UI.Xaml.Media"
-    xmlns:animatedvisuals="using:ABI.Microsoft.UI.Xaml.Controls.AnimatedVisuals"
-    xmlns:convert="using:BiliStart.Behaviors.Converter"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:helpers="using:BiliStart.Helpers"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:media="using:ABI.Microsoft.UI.Xaml.Media"
-    Loaded="OnLoaded"
-    NavigationCacheMode="Required">
+    x:Class="BiliStart.Views.ShellPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:acrylic="using:ABI.Microsoft.UI.Xaml.Media"
+    xmlns:animatedvisuals="using:ABI.Microsoft.UI.Xaml.Controls.AnimatedVisuals" xmlns:convert="using:BiliStart.Behaviors.Converter"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="using:BiliStart.Helpers" xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:media="using:ABI.Microsoft.UI.Xaml.Media"
+    Loaded="OnLoaded" NavigationCacheMode="Required">
     <Page.Resources>
         <Flyout
             x:Name="flyout"
             FlyoutPresenterStyle="{ThemeResource DefaultFlyoutPresenterStyle}">
             <StackPanel>
                 <PersonPicture
-                    Width="50"
-                    Height="50"
+                    Width="50" Height="50"
                     ProfilePicture="{x:Bind ViewModel._LoginData.Face_Image, Mode=OneWay}" />
                 <Path
-                    Height="13"
-                    Margin="0,15,0,0"
+                    Height="13" Margin="0,15,0,0"
                     Data="{x:Bind ViewModel._LoginData.Exp.Level, Converter={StaticResource LevelConvert}, Mode=OneWay}"
-                    Fill="Red"
+                    Fill="{x:Bind ViewModel._LoginData.Exp.Level, Converter={StaticResource LevelBrushConvert}, Mode=OneWay}"
                     Stretch="Uniform" />
 
                 <TextBlock
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Center"
+                    Margin="0,5,0,0" HorizontalAlignment="Center"
                     FontSize="17"
                     Style="{ThemeResource BaseTextBlockStyle}"
                     Text="{x:Bind ViewModel._LoginData.Name, Mode=OneWay}" />
                 <ProgressBar
-                    x:Name="bar"
-                    Width="250"
-                    Height="10"
-                    HorizontalAlignment="Stretch"
+                    x:Name="bar" Width="250"
+                    Height="10" HorizontalAlignment="Stretch"
                     Maximum="{x:Bind ViewModel._LoginData.Exp.Next_Exp, Mode=OneWay}"
                     Value="{x:Bind ViewModel._LoginData.Exp.Current_Exp, Mode=OneWay}" />
                 <TextBlock
-                    Grid.Column="1"
-                    Margin="5,0,0,0"
+                    Grid.Column="1" Margin="5,0,0,0"
                     HorizontalAlignment="Center">
-                    <Run Text="{x:Bind bar.Value, Mode=OneWay}" />
-                    <Run Text="/" />
-                    <Run Text="{x:Bind bar.Maximum, Mode=OneWay}" />
+                    <Run
+                        Text="{x:Bind bar.Value, Mode=OneWay}" />
+                    <Run
+                        Text="/" />
+                    <Run
+                        Text="{x:Bind bar.Maximum, Mode=OneWay}" />
                 </TextBlock>
                 <Border
-                    Height="1"
-                    Margin="0,10,0,0"
+                    Height="1" Margin="0,10,0,0"
                     Background="#19808080" />
                 <HyperlinkButton
-                    x:Uid="Shell_Flyout_User_Center"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    FontSize="16" />
+                    x:Uid="Shell_Flyout_User_Center" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" FontSize="16" />
                 <HyperlinkButton
-                    x:Uid="Shell_Flyout_User_Message"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    FontSize="16" />
+                    x:Uid="Shell_Flyout_User_Message" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" FontSize="16" />
                 <HyperlinkButton
-                    x:Uid="Shell_Flyout_User_MyLike"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    FontSize="16" />
+                    x:Uid="Shell_Flyout_User_MyLike" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" FontSize="16" />
                 <HyperlinkButton
-                    x:Uid="Shell_Flyout_User_LastLook"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    FontSize="16" />
+                    x:Uid="Shell_Flyout_User_LastLook" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" FontSize="16" />
                 <Border
-                    Height="1"
-                    Margin="0,4"
+                    Height="1" Margin="0,4"
                     Background="#19808080" />
                 <HyperlinkButton
-                    x:Uid="Shell_Flyout_User_UnLogin"
-                    HorizontalAlignment="Stretch"
+                    x:Uid="Shell_Flyout_User_UnLogin" HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
                     Command="{x:Bind ViewModel.UnLogin}"
                     FontSize="16"
@@ -89,7 +68,8 @@
         </Flyout>
     </Page.Resources>
     <i:Interaction.Behaviors>
-        <core:EventTriggerBehavior EventName="Loaded">
+        <core:EventTriggerBehavior
+            EventName="Loaded">
             <core:InvokeCommandAction
                 Command="{x:Bind ViewModel.Loaded}"
                 CommandParameter="{x:Bind flyout}" />
@@ -100,40 +80,30 @@
         <Grid
             x:Name="AppTitleBar"
             Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
-            VerticalAlignment="Top"
-            x:FieldModifier="public"
-            Canvas.ZIndex="1"
-            IsHitTestVisible="True">
+            VerticalAlignment="Top" x:FieldModifier="public"
+            Canvas.ZIndex="1" IsHitTestVisible="True">
             <Image
-                Width="16"
-                Height="16"
-                HorizontalAlignment="Left"
-                Source="/Assets/icon.ico" />
+                Width="16" Height="16"
+                HorizontalAlignment="Left" Source="/Assets/icon.ico" />
             <TextBlock
-                x:Name="AppTitleBarText"
-                Margin="28,0,0,0"
+                x:Name="AppTitleBarText" Margin="28,0,0,0"
                 VerticalAlignment="Center"
                 Style="{StaticResource CaptionTextBlockStyle}"
                 TextWrapping="NoWrap" />
         </Grid>
         <NavigationView
-            x:Name="NavigationViewControl"
-            x:FieldModifier="public"
-            AlwaysShowHeader="False"
-            Background="Transparent"
-            DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
-            ExpandedModeThresholdWidth="1280"
+            x:Name="NavigationViewControl" x:FieldModifier="public"
+            AlwaysShowHeader="False" Background="Transparent"
+            DisplayModeChanged="NavigationViewControl_DisplayModeChanged" ExpandedModeThresholdWidth="1280"
             IsBackButtonVisible="Visible"
             IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
-            IsSettingsVisible="False"
-            OpenPaneLength="90"
+            IsSettingsVisible="False" OpenPaneLength="90"
             PaneDisplayMode="Left"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
             SizeChanged="NavigationViewControl_SizeChanged">
             <NavigationView.MenuItems>
                 <NavigationViewItem
-                    x:Uid="Shell_Home"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HomeViewModel"
+                    x:Uid="Shell_Home" helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.HomeViewModel"
                     Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
@@ -142,8 +112,7 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem
-                    x:Uid="TopMore_Hot"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.TopMoreViewModel"
+                    x:Uid="TopMore_Hot" helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.TopMoreViewModel"
                     Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
@@ -152,8 +121,7 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem
-                    x:Uid="Shell_Dynamic"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.DynamicViewModel"
+                    x:Uid="Shell_Dynamic" helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.DynamicViewModel"
                     Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
@@ -161,12 +129,12 @@
                             Glyph="&#xEC26;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItemHeader x:Uid="Shell_ItemHeader_Second" />
+                <NavigationViewItemHeader
+                    x:Uid="Shell_ItemHeader_Second" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem
-                    x:Uid="Shell_Setting"
-                    helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.SettingsViewModel"
+                    x:Uid="Shell_Setting" helpers:NavigationHelper.NavigateTo="BiliStart.ViewModels.SettingsViewModel"
                     Style="{StaticResource MyNaviagtionViewItem}">
                     <NavigationViewItem.Icon>
                         <FontIcon
@@ -177,54 +145,52 @@
             </NavigationView.FooterMenuItems>
             <NavigationView.PaneFooter>
                 <Button
-                    x:Name="userbutton"
-                    HorizontalAlignment="Center"
+                    x:Name="userbutton" HorizontalAlignment="Center"
                     Command="{x:Bind ViewModel.UserClick}"
                     CommandParameter="{x:Bind Name}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition
+                                Width="auto" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <PersonPicture
-                            Width="25"
-                            Height="25"
+                            Width="25" Height="25"
                             ProfilePicture="{x:Bind ViewModel._LoginData.Face_Image, Mode=OneWay}" />
                     </Grid>
                 </Button>
             </NavigationView.PaneFooter>
-            <Grid x:Name="grid">
+            <Grid
+                x:Name="grid">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
+                    <RowDefinition
+                        Height="auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="auto" />
                     </Grid.ColumnDefinitions>
                     <AutoSuggestBox
-                        x:Name="searchbox"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Search"
+                        x:Name="searchbox" HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top" AutomationProperties.Name="Search"
                         Canvas.ZIndex="5"
                         ItemsSource="{x:Bind ViewModel._SearchItems, Mode=OneWay}"
                         PlaceholderText="{x:Bind ViewModel._PlaceholderTextSearch, Mode=OneWay}"
-                        QueryIcon="Find"
-                        QuerySubmitted="searchbox_QuerySubmitted"
+                        QueryIcon="Find" QuerySubmitted="searchbox_QuerySubmitted"
                         TextChanged="searchbox_TextChanged" />
                     <Button
-                        Grid.Column="1"
-                        Margin="5,0,0,0">
-                        <SymbolIcon Symbol="Download" />
+                        Grid.Column="1" Margin="5,0,0,0">
+                        <SymbolIcon
+                            Symbol="Download" />
                     </Button>
                 </Grid>
                 <Frame
-                    x:Name="NavigationFrame"
-                    Grid.Row="1"
-                    Margin="0,10,0,0"
-                    Navigated="NavigationFrame_Navigated">
+                    x:Name="NavigationFrame" Grid.Row="1"
+                    Margin="0,10,0,0" Navigated="NavigationFrame_Navigated">
                     <Frame.ContentTransitions>
                         <TransitionCollection>
                             <NavigationThemeTransition>

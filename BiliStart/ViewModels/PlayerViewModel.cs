@@ -112,8 +112,8 @@ public partial class PlayerViewModel : ObservableRecipient
         {
             //投币成功
             IsCoins = true;
+            TipShow.SendMessage($"{result.Message},{result.Data.Guide.Title}", Symbol.Message);
         }
-        TipShow.SendMessage($"{result.Message},{result.Data.Guide.Title}",Symbol.Message);
     }
 
     [RelayCommand]
@@ -254,6 +254,7 @@ public partial class PlayerViewModel : ObservableRecipient
         {
             var lite = new CommentItemViewModel()
             {
+                ReplyControl = item.ReplyControl,
                 Action = item.Action,
                 Attr = item.Attr,
                 Content = item.Content,
@@ -272,6 +273,7 @@ public partial class PlayerViewModel : ObservableRecipient
                 State = item.State,
                 Type = item.Type,
                 Up = item.Up
+                , CardLabel= item.CardLabel,
             };
             CommentsLists.Add(lite);
         }
@@ -287,6 +289,7 @@ public partial class PlayerViewModel : ObservableRecipient
         {
             var lite = new CommentItemViewModel()
             {
+                ReplyControl= item.ReplyControl,
                 Action = item.Action,
                 Attr = item.Attr,
                 Content = item.Content,
