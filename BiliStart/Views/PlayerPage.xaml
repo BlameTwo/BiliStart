@@ -94,7 +94,7 @@
                 Width="7*" />
             <ColumnDefinition
                 x:Name="MoreColumn" Width="3*"
-                MaxWidth="330" />
+                MaxWidth="350" />
         </Grid.ColumnDefinitions>
         <Grid
             x:Name="TitleBar" Grid.ColumnSpan="2">

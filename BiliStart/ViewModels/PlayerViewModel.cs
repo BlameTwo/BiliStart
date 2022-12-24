@@ -252,64 +252,49 @@ public partial class PlayerViewModel : ObservableRecipient
         var result = (await Comment.GetComment(this.VideoContent.Aid, CommentIndex)).Data.CommentLists.ToObservableCollection() ;
         foreach (var item in result)
         {
-            var lite = new CommentItemViewModel()
-            {
-                ReplyControl = item.ReplyControl,
-                Action = item.Action,
-                Attr = item.Attr,
-                Content = item.Content,
-                Count = item.Count,
-                CreateTime = item.CreateTime,
-                Dialog = item.Dialog,
-                Fansgrade = item.Fansgrade,
-                ID = item.ID,
-                ID_Str = item.ID_Str,
-                Likes = item.Likes,
-                Mid = item.Mid,
-                Oid = item.Oid,
-                Parent = item.Parent,
-                Rcount = item.Rcount,
-                Root = item.Root,
-                State = item.State,
-                Type = item.Type,
-                Up = item.Up
-                , CardLabel= item.CardLabel,
-            };
-            CommentsLists.Add(lite);
+            
+            CommentsLists.Add(GetCommentItemViewModel(item));
         }
         NowMediaPlayer.MediaOpened += NowMediaPlayer_MediaOpened;
         CommentIndex++;
     }
 
+    CommentItemViewModel GetCommentItemViewModel(BiliBiliAPI.Models.Comment.Comments comment)
+    {
+       
+        var lite = new CommentItemViewModel()
+        {
+            ReplyControl = comment.ReplyControl,
+            Action = comment.Action,
+            Attr = comment.Attr,
+            Content = comment.Content,
+            Count = comment.Count,
+            CreateTime = comment.CreateTime,
+            Dialog = comment.Dialog,
+            Fansgrade = comment.Fansgrade,
+            ID = comment.ID,
+            ID_Str = comment.ID_Str,
+            Likes = comment.Likes,
+            Mid = comment.Mid,
+            Oid = comment.Oid,
+            Parent = comment.Parent,
+            Rcount = comment.Rcount,
+            Root = comment.Root,
+            State = comment.State,
+            Type = comment.Type,
+            Up = comment.Up,
+            CardLabel = comment.CardLabel,
+            CommentLists = comment.CommentLists,
+        };
+        return lite;
+    }
 
     private async Task CommentAdd()
     {
         var result = (await Comment.GetComment(this.VideoContent.Aid, CommentIndex)).Data.CommentLists.ToObservableCollection();
         foreach (var item in result)
         {
-            var lite = new CommentItemViewModel()
-            {
-                ReplyControl= item.ReplyControl,
-                Action = item.Action,
-                Attr = item.Attr,
-                Content = item.Content,
-                Count = item.Count,
-                CreateTime = item.CreateTime,
-                Dialog = item.Dialog,
-                Fansgrade = item.Fansgrade,
-                ID = item.ID,
-                ID_Str = item.ID_Str,
-                Likes = item.Likes,
-                Mid = item.Mid,
-                Oid = item.Oid,
-                Parent = item.Parent,
-                Rcount = item.Rcount,
-                Root = item.Root,
-                State = item.State,
-                Type = item.Type,
-                Up = item.Up
-            };
-            CommentsLists.Add(lite);
+            CommentsLists.Add(GetCommentItemViewModel(item));
         }
         CommentIndex++;
     }

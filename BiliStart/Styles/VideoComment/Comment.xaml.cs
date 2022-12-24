@@ -51,10 +51,6 @@ public sealed partial class Comment : UserControl
         
     }
 
-    public CommentItemViewModel ViewModel
-    {
-        get;set;
-    }
 
 
     public CommentItemViewModel Data
@@ -138,6 +134,5 @@ public sealed partial class Comment : UserControl
     // Using a DependencyProperty as the backing store for Data.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty DataProperty =
         DependencyProperty.Register("Data", typeof(CommentItemViewModel), typeof(Comment), new PropertyMetadata(null));
-
 
 }

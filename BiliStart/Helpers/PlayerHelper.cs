@@ -43,7 +43,7 @@ public static class PlayerHelper
                                       </Representation>
                                     </AdaptationSet>");
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(mpdStr)).AsInputStream();
-            var soure = await AdaptiveMediaSource.CreateFromStreamAsync(stream, new Uri(Video.BackupUrl[0]), "application/dash+xml", httpClient);
+            var soure = await AdaptiveMediaSource.CreateFromStreamAsync(stream, new Uri(Video.BaseUrl), "application/dash+xml", httpClient);
             var s = soure.Status;
             soure.MediaSource.DownloadRequested += (sender, args) =>
             {
