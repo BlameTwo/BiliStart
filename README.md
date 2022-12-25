@@ -1,4 +1,5 @@
 # BiliStart
+<br/>
 **WindowAppSDK的Bilibili客户端**
 <br/>
 如果您看到了这个项目，可以尝试clone下来，帮助我一起开发，又或者给一个Star？
@@ -16,7 +17,9 @@
 感谢WindowsAppSDK
 <br/>
 Template Studio for WinUI
-
+<br/>
+该项目的API在这里[BiliBiliAccount](https://github.com/BlameTwo/BiliBiliAccount.git)，在clone本项目的同时请引用该api项目，并修改BiliStart的项目文件应用其API项目即可。
+<br/>
 预览：
 ![Home](preview/Home.png)
 <br/>
