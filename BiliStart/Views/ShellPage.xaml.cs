@@ -124,4 +124,17 @@ public sealed partial class ShellPage : Page
     {
         ViewModel.UpDataList(sender.Text);
     }
+
+    private void Page_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        var result = e.GetCurrentPoint(this);
+        if(result.Properties.IsXButton2Pressed == true)
+        {
+            ViewModel.NavigationService.GoForward(AppNavigationViewsEnum.ShellFrame);
+        }
+        else if(result.Properties.IsXButton1Pressed== true)
+        {
+            ViewModel.NavigationService.GoBack(AppNavigationViewsEnum.ShellFrame);
+        }
+    }
 }

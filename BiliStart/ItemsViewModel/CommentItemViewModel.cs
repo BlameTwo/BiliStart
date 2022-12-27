@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BiliBiliAPI.Comment;
+using BiliBiliAPI.Grpc.Interface;
 using BiliBiliAPI.Models.Comment;
 using BiliStart.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;

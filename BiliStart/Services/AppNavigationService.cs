@@ -249,5 +249,36 @@ namespace BiliStart.Services
 
             return false;
         }
+
+        public bool GoForward(AppNavigationViewsEnum ob)
+        {
+            switch (ob)
+            {
+                case AppNavigationViewsEnum.HotListFrame:
+                    return CanForward(HotListFrame);
+                case AppNavigationViewsEnum.RootFrame:
+                    return CanForward(RootFrame);
+                case AppNavigationViewsEnum.ShellFrame:
+                    return CanForward(ShellFrame);
+                case AppNavigationViewsEnum.DynamicFrame:
+                    return CanForward(DynamicFrame);
+            }
+            return false;
+        }
+
+        private bool CanForward(Frame frame)
+        {
+            if (frame.CanGoForward)
+            {
+                var vmBeforeNavigation = frame.GetPageViewModel();
+                frame.GoForward();
+                if (vmBeforeNavigation is INavigationAware navigationAware)
+                {
+                    navigationAware.OnNavigatedFrom();
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }

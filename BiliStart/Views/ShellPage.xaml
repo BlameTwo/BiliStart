@@ -5,7 +5,8 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="using:BiliStart.Helpers" xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:media="using:ABI.Microsoft.UI.Xaml.Media"
-    Loaded="OnLoaded" NavigationCacheMode="Required">
+    Loaded="OnLoaded" NavigationCacheMode="Required"
+    PointerPressed="Page_PointerPressed">
     <Page.Resources>
         <Flyout
             x:Name="flyout"
@@ -55,6 +56,11 @@
                 <HyperlinkButton
                     x:Uid="Shell_Flyout_User_LastLook" HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center" FontSize="16" />
+                <HyperlinkButton
+                    x:Uid="Shell_Flyout_User_History" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Command="{x:Bind ViewModel.GoHistoryCommand, Mode=OneWay}"
+                    FontSize="16" />
                 <Border
                     Height="1" Margin="0,4"
                     Background="#19808080" />

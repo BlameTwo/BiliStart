@@ -1,12 +1,13 @@
 <Page
     x:Class="BiliStart.Views.PlayerPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:biliui="using:BiliStart.UI.Controls"
-    xmlns:commui="using:CommunityToolkit.WinUI.UI.Controls" xmlns:convert="using:BiliStart.Behaviors.Converter"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:danmu="using:BiliStart.UI" xmlns:data="using:BiliBiliAPI.Models.Videos"
-    xmlns:data1="using:BiliStart.Styles.VideoComment" xmlns:favoritesdata="using:BiliBiliAPI.Models.User"
-    xmlns:i="using:Microsoft.Xaml.Interactivity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="using:CommunityToolkit.WinUI.UI" mc:Ignorable="d">
+    xmlns:commui="using:CommunityToolkit.WinUI.UI.Controls" xmlns:controls="using:BiliStart.Styles.UserControls"
+    xmlns:convert="using:BiliStart.Behaviors.Converter" xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:danmu="using:BiliStart.UI"
+    xmlns:data="using:BiliBiliAPI.Models.Videos" xmlns:data1="using:BiliStart.Styles.VideoComment"
+    xmlns:favoritesdata="using:BiliBiliAPI.Models.User" xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="using:CommunityToolkit.WinUI.UI"
+    mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate
             x:Key="DefaultPlayerListTemplate" x:DataType="data:Page">
@@ -81,7 +82,7 @@
         x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition
-                x:Name="TitlebarRow" Height="35" />
+                x:Name="TitlebarRow" Height="auto" />
             <RowDefinition
                 x:Name="MediaRow" Height="*" />
             <RowDefinition
@@ -96,24 +97,13 @@
                 x:Name="MoreColumn" Width="3*"
                 MaxWidth="350" />
         </Grid.ColumnDefinitions>
-        <Grid
-            x:Name="TitleBar" Grid.ColumnSpan="2">
-            <TextBlock
-                x:Name="TitleBarText" Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                Style="{StaticResource CaptionTextBlockStyle}" />
-        </Grid>
-        <Button
-            x:Name="BackButton" Grid.Row="0"
-            Margin="5,0,0,0" HorizontalAlignment="Left"
-            VerticalAlignment="Center" Canvas.ZIndex="2"
-            Command="{x:Bind ViewModel.GoBackCommand}"
-            Style="{ThemeResource AccentButtonStyle}">
-            <FontIcon
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                FontFamily="Segoe Fluent Icons" FontSize="10"
-                Glyph="&#xE112;" />
-        </Button>
+        <controls:RootFrameTitleBar
+            x:Name="titlebar" VerticalContentAlignment="Center">
+            <controls:RootFrameTitleBar.Title>
+                <TextBlock
+                    x:Name="titletext" VerticalAlignment="Center" />
+            </controls:RootFrameTitleBar.Title>
+        </controls:RootFrameTitleBar>
         <Border
             x:Name="mediaborder" Grid.Row="1"
             Margin="10" ui:UIElementExtensions.ClipToBounds="True"

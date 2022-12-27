@@ -92,6 +92,10 @@ public partial class App : Application
             //window窗体管理服务
             services.AddSingleton<IWindowManager, Services.WindowManager>();
 
+            //导入grpc请求服务
+            services.AddSingleton<BiliBiliAPI.Grpc.Interface.IHttpProvider, BiliBiliAPI.Grpc.Service.HttpProvider>();
+            services.AddSingleton<BiliBiliAPI.Grpc.Interface.IDefaultRequestHeader, BiliBiliAPI.Grpc.Service.DefaultRequestHeader>();
+
             // 视图和视图模型
             services.AddSingleton<SettingsViewModel>();
             services.AddSingleton<SettingsPage>();
@@ -151,6 +155,9 @@ public partial class App : Application
 
             services.AddTransient<VideoPlayerPage>();
             services.AddTransient<VideoPlayerViewModel>();
+
+            services.AddTransient<HistoryPage>();
+            services.AddTransient<HistoryViewModel>();
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).

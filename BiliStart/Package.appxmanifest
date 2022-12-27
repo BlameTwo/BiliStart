@@ -10,8 +10,8 @@
   IgnorableNamespaces="uap rescap genTemplate">
   <Identity
     Name="2AF2F374-D1C3-4B77-9023-18C1B4FB4CCB"
-    Publisher="CN=30140"
-    Version="1.0.0.0" />
+    Publisher="CN=怪"
+    Version="0.0.1.0" />
 
   <Properties>
     <DisplayName>BiliStart</DisplayName>

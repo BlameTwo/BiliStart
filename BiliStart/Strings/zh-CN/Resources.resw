@@ -296,4 +296,16 @@
   <data name="Shell_Dynamic.Content" xml:space="preserve">
     <value>动态</value>
   </data>
+  <data name="Shell_Flyout_User_History.Content" xml:space="preserve">
+    <value>历史记录</value>
+  </data>
+  <data name="UserControls_Titlebar_BackButtton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>返回启动页</value>
+  </data>
+  <data name="RootFrameTitle_History.Text" xml:space="preserve">
+    <value>历史记录</value>
+  </data>
+  <data name="History_SelectText.Text" xml:space="preserve">
+    <value>筛选</value>
+  </data>
 </root>

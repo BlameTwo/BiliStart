@@ -34,11 +34,10 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         LocalSettingsService = App.GetService<ILocalSettingsService>(); 
         this.InitializeComponent();
         Loaded += PlayerPage_Loaded;
-        TitleBarText.Text = "AppDisplayName".GetLocalized();
+        titletext.Text = "AppDisplayName".GetLocalized();
         IsFull = false;
         Timer.Tick += Timer_Tick;
         Timer.Start();
-        this.SizeChanged += PlayerPage_SizeChanged;
         process.AddHandler(UIElement.PointerReleasedEvent, new PointerEventHandler(UIElement_OnPointerReleased) , true );
         Close.Completed += (s, e) =>
         {
@@ -57,10 +56,6 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
         media.MediaPlayer.PlaybackSession.Position = TimeSpan.FromMilliseconds((sender as Slider)!.Value);
     }
 
-    private void PlayerPage_SizeChanged(object sender, SizeChangedEventArgs e)
-    {
-        TitleBar.Margin = new Thickness(BackButton.ActualWidth+5,0,0,0);
-    }
 
     public ILocalSettingsService LocalSettingsService
     {
@@ -90,12 +85,11 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
 
     public void MediaClear()
     {
-        Timer.Stop();
         ViewModel.DanmuProcessTime.Stop();
+        Timer.Stop();
         if (ViewModel.NowMediaPlayer != null)
         {
             ViewModel.NowMediaPlayer.MediaOpened -= MediaPlayer_MediaOpened;
-
             ViewModel.NowMediaPlayer.Pause();
             ViewModel.NowMediaPlayer.Dispose();
         }
@@ -186,7 +180,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             Grid.SetRowSpan(mediaborder,2);
             media.Margin = new Thickness(5);
             mediaborder.Margin = new Thickness(10);
-            App.MainWindow.SetTitleBar(TitleBar);
+            titlebar.SetTitleBar(true);
             MoreColumn.Width = new GridLength(350, GridUnitType.Pixel);
             bottommenu.Visibility = Visibility.Visible;
             mediaborder.CornerRadius = new CornerRadius(10);
@@ -199,7 +193,7 @@ public sealed partial class PlayerPage : Microsoft.UI.Xaml.Controls.Page
             var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
             var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(hwnd));
             appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
-            App.MainWindow.SetTitleBar(null);
+            titlebar.SetTitleBar(false);
             Grid.SetRowSpan(mediaborder, 1);
             Grid.SetRow(mediaborder, 0);
             Grid.SetRowSpan(mediaborder, 2);

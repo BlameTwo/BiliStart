@@ -9,13 +9,12 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
     <PublishProfile>Properties\PublishProfiles\win10-$(Platform).pubxml</PublishProfile>
 	<ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
+	<Nullable>disable</Nullable>
 	<UseWinUI>true</UseWinUI>
 	  <DisableEmbeddedXbf>false</DisableEmbeddedXbf>
     <EnableMsixTooling>true</EnableMsixTooling>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>7EDB48A23BF3C468AFC5314C72316D7D68301721</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
@@ -28,7 +27,6 @@
 	
 	<UserSecretsId>3bee64af-6db6-4011-afe9-0d174acac722</UserSecretsId>
 	
-	
 	<DefaultLanguage>zh-cn</DefaultLanguage>
 	
 	<PlatformTarget>x86</PlatformTarget>
@@ -36,7 +34,10 @@
 	<ApplicationManifest>app.manifest</ApplicationManifest>
 	
 	<IsPublishable>False</IsPublishable>
-	  
+	
+	<PackageCertificateKeyFile>BiliStart_TemporaryKey.pfx</PackageCertificateKeyFile>
+	
+	<AppxPackageDir>D:\BiliStart\BiliStart\bin\</AppxPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\icon.ico" />
@@ -63,6 +64,7 @@
     <None Remove="Styles\Animations.xaml" />
     <None Remove="Styles\Converter.xaml" />
     <None Remove="Styles\Dynamics\DefaultDynamicItemStyle.xaml" />
+    <None Remove="Styles\ItemsDataTemplate\HistoryItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HomeItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\HotItemStyle.xaml" />
     <None Remove="Styles\ItemsDataTemplate\MusicRankItemStyle.xaml" />
@@ -76,9 +78,11 @@
     <None Remove="Styles\Search\SearchMovie.xaml" />
     <None Remove="Styles\Search\SearchVideo.xaml" />
     <None Remove="Styles\ShellNavigationViewItem.xaml" />
+    <None Remove="Styles\UserControls\RootFrameTitleBar.xaml" />
     <None Remove="Styles\VideoComment\Comment.xaml" />
     <None Remove="Styles\VideoGridViewItem.xaml" />
     <None Remove="Views\DynamicPage.xaml" />
+    <None Remove="Views\HistoryPage.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\HotPage.xaml" />
     <None Remove="Views\PGCPlayerPage.xaml" />
@@ -101,7 +105,6 @@
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Media" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Media" Version="7.1.2" />
-    <PackageReference Include="FFmpegInteropX" Version="1.1.0-pre38" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
@@ -123,6 +126,15 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Styles\ItemsDataTemplate\HistoryItemStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Styles\UserControls\RootFrameTitleBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\HistoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Styles\VideoComment\Comment.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

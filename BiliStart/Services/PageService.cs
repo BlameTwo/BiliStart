@@ -42,6 +42,8 @@ public class PageService : IPageService
         Configure<MyInfoViewModel,MyInfoPage>();  
 
         Configure<PGCPlayerViewModel, PGCPlayerPage>();
+
+        Configure<HistoryViewModel, HistoryPage>();
     }
 
     public Type GetPageType(string key)

@@ -101,6 +101,16 @@ public partial class ShellViewModel : ObservableRecipient, IRecipient<LoginEvent
 
     }
 
+    [RelayCommand]
+    async Task GoHistory()
+    {
+        BiliBiliAPI.Account.History.History history = new();
+        var result = await  history.GetHistory(new Cursor(),25, GetHistoryType.AV);
+        App.MainWindow.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+        {
+            NavigationService.NavigationTo(AppNavigationViewsEnum.RootFrame, typeof(HistoryViewModel).FullName!, result.Data.Tabs);
+        });
+    }
 
 
     private ObservableCollection<string> SearchItems;

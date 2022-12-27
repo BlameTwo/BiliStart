@@ -26,15 +26,17 @@ using BiliBiliAPI.Comment;
 using BiliBiliAPI.Models.Comment;
 using CommunityToolkit.WinUI.UI.Controls;
 using BiliStart.ItemsViewModel;
+using BiliBiliAPI.Grpc.Interface;
 
 namespace BiliStart.ViewModels;
 public partial class PlayerViewModel : ObservableRecipient
 {
-    public PlayerViewModel(ILocalSettingsService localSettingsService, ITipShow tipShow)
+    public PlayerViewModel(ILocalSettingsService localSettingsService, ITipShow tipShow,IHttpProvider httpProvider)
     {
         _FullButtonText = "\uE740";
         LocalSettingsService = localSettingsService;
         TipShow = tipShow;
+        HttpProvider = httpProvider;
         IsLike = false;
         this.NowDanmuList = new();
         ScrollLoad = new RelayCommand<ItemsControl>((arg) => Scroolload(arg));
@@ -531,6 +533,10 @@ public partial class PlayerViewModel : ObservableRecipient
         get;
     }
     public ITipShow TipShow
+    {
+        get;
+    }
+    public IHttpProvider HttpProvider
     {
         get;
     }
