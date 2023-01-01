@@ -37,7 +37,8 @@ Template Studio for WinUI
 
 - [x] 扫码登陆
 
-- [x] 账号密码登录
+- [x] ~~账号密码登录~~
+- [x] 短信验证码登录
 
 - [x] 首页
 
